@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import com.kf5.support.model.MessageStatus;
 import com.kf5.support.model.StatusCode;
@@ -18,13 +19,13 @@ import com.kf5.support.model.builder.KF5EntityBuilder;
 public class HttpRequest {
 
 	/**
-	 * GET请求当时
+	 * GET请求
 	 * @param url 请求地址
 	 * @param baseToken basic验证码
 	 * @return
 	 */
 	public static MessageStatus sendGetRequest(String url,String baseToken){
-		
+
 		MessageStatus messageStatus = new MessageStatus();
 		HttpURLConnection connection = null;
 		try {
@@ -40,8 +41,10 @@ public class HttpRequest {
 			connection.setDoInput(true);
 			connection.setConnectTimeout(10*1000);
 			connection.setRequestProperty("Authorization", "Basic "+baseToken);
+
 			// 建立实际的连接
 			connection.connect();
+			int resultCode = connection.getResponseCode();
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				messageStatus.setStatus(StatusCode.OK);
 				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getInputStream())));
@@ -68,7 +71,7 @@ public class HttpRequest {
 	 * @return
 	 */
 	public static MessageStatus sendDeleteRequest(String url,String baseToken){
-		
+
 		MessageStatus messageStatus = new MessageStatus();
 		HttpURLConnection connection = null;
 		try {
@@ -104,7 +107,7 @@ public class HttpRequest {
 		return messageStatus;
 	}
 
-	
+
 
 	/**
 	 * POST请求方式
@@ -114,7 +117,7 @@ public class HttpRequest {
 	 * @return
 	 */
 	public static MessageStatus sendPostRequest(String url,String baseToken,String param) {
-		
+
 		MessageStatus messageStatus = new MessageStatus();
 		DataOutputStream out = null;
 		HttpURLConnection connection = null;
@@ -144,6 +147,7 @@ public class HttpRequest {
 				messageStatus.setStatus(connection.getResponseCode());
 				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getErrorStream())));
 			}
+			System.out.println(messageStatus.getJsonObject().toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -163,8 +167,8 @@ public class HttpRequest {
 		return messageStatus;
 	}
 
-	
-	
+
+
 	/**
 	 * PUT请求当时
 	 * @param url 请求地址
@@ -173,7 +177,7 @@ public class HttpRequest {
 	 * @return
 	 */
 	public static MessageStatus sendPutRequest(String url,String baseToken,String param) {
-		
+
 		MessageStatus messageStatus = new MessageStatus();
 		DataOutputStream out = null;
 		HttpURLConnection connection = null;
@@ -203,6 +207,7 @@ public class HttpRequest {
 				messageStatus.setStatus(connection.getResponseCode());
 				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getErrorStream())));
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -221,7 +226,7 @@ public class HttpRequest {
 		}
 		return messageStatus;
 	}
-	
+
 	private static String getInputStream(InputStream stream) {
 		if (stream == null) {
 			return null;
@@ -244,7 +249,7 @@ public class HttpRequest {
 		}
 		return sb.toString();
 	}
-	
+
 	/**
 	 * 附件上传
 	 * @param url 上传附件地址
@@ -257,7 +262,6 @@ public class HttpRequest {
 
 		String BOUNDARY = java.util.UUID.randomUUID().toString();
 		String PREFIX = "--", LINEND = "\r\n";
-		String CHARSET = "UTF-8";
 
 		URL uri = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) uri.openConnection();
@@ -275,22 +279,14 @@ public class HttpRequest {
 		 * 写入附件数据
 		 */
 		if (file != null){
-				StringBuilder builder = new StringBuilder();
-				builder.append(PREFIX);
-				builder.append(BOUNDARY);
-				builder.append(LINEND);
-				builder.append("Content-Disposition: form-data; name=\"upload\";  filename=\"" + file.getName() + "\"" + LINEND);
-				builder.append("Content-Type: application/octet-stream; charset=" + CHARSET + LINEND);
-				builder.append(LINEND);
-				outStream.write(builder.toString().getBytes());
-				InputStream is = new FileInputStream(file);
-				byte[] buffer = new byte[1024];
-				int len = 0;
-				while ((len = is.read(buffer)) != -1) {
-					outStream.write(buffer, 0, len);
-				}
-				is.close();
-				outStream.write(LINEND.getBytes());
+			InputStream is = new FileInputStream(file);
+			byte[] buffer = new byte[1024];
+			int len = 0;
+			while ((len = is.read(buffer)) != -1) {
+				outStream.write(buffer, 0, len);
+			}
+			is.close();
+			outStream.write(LINEND.getBytes());
 		}
 
 		// 请求结束标志
@@ -309,5 +305,7 @@ public class HttpRequest {
 		conn.disconnect();
 		return result;
 	}
+
+
 
 }

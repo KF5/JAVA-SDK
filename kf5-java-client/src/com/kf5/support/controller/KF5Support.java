@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
-
 import com.kf5.support.internet.HttpRequest;
 import com.kf5.support.internet.KF5Interface;
 import com.kf5.support.model.Attachment;
@@ -34,6 +30,10 @@ import com.kf5.support.model.View;
 import com.kf5.support.model.ViewCount;
 import com.kf5.support.model.builder.EntityBuilder;
 import com.kf5.support.model.builder.KF5EntityBuilder;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 /**
  * 
  * @author chosen
@@ -472,7 +472,6 @@ public class KF5Support{
 	 * @return
 	 */
 	public Requester replyOrderByEndUser(String order_id,String jsonString){
-
 		checkHasId(order_id);
 		Requester requester = null;
 		try {
@@ -1831,6 +1830,7 @@ public class KF5Support{
 	 */
 	public Attachment uploadAttachment(String path){
 
+		
 		Attachment attachment = null;
 		try {
 			File file = new File(path);
