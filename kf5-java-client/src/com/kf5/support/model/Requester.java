@@ -5,39 +5,39 @@ import java.util.List;
 
 public class Requester {
 
-	private int id; // ¹¤µ¥±àºÅ£¬´´½¨¹¤µ¥Ê±ÏµÍ³×Ô¶¯·ÖÅä
+	private int id; // å·¥å•ç¼–å·ï¼Œåˆ›å»ºå·¥å•æ—¶ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //´Ë¹¤µ¥µÄurlµØÖ·
+	private String url; //æ­¤å·¥å•çš„urlåœ°å€
 	
-	private String title; //±êÌâ
+	private String title; //æ ‡é¢˜
 	
-	private String description; //µÚÒ»Ìõ¹¤µ¥»Ø¸´µÄÎÄ±¾ÄÚÈİ
+	private String description; //ç¬¬ä¸€æ¡å·¥å•å›å¤çš„æ–‡æœ¬å†…å®¹
 	
-	private String type; //ÀàĞÍ£º"problem", "incident", "question", "task"
+	private String type; //ç±»å‹ï¼š"problem", "incident", "question", "task"
 	
-	private String status; //×´Ì¬£º"new","open", "pending", "solved", "closed"
+	private String status; //çŠ¶æ€ï¼š"new","open", "pending", "solved", "closed"
 	
-	private String priority; //ÓÅÏÈ¼¶£º"low", "medium", "high", "urgent"
+	private String priority; //ä¼˜å…ˆçº§ï¼š"low", "medium", "high", "urgent"
 	
-	private String recipient; //ÓÊ¼ş¹¤µ¥µÄÔ­ÊÕ¼şÈËµØÖ·
+	private String recipient; //é‚®ä»¶å·¥å•çš„åŸæ”¶ä»¶äººåœ°å€
 	
-	private int requester_id;//·¢ÆğÈËid
+	private int requester_id;//å‘èµ·äººid
 	
-	private int assignee_id; //ÊÜÀí¿Í·şid
+	private int assignee_id; //å—ç†å®¢æœid
 	
-	private int organization_id; //·¢ÆğÈËËùÊô¹«Ë¾×éÖ¯id
+	private int organization_id; //å‘èµ·äººæ‰€å±å…¬å¸ç»„ç»‡id
 	
-	private int group_id; //ÊÜÀí¿Í·ş×éid
+	private int group_id; //å—ç†å®¢æœç»„id
 	
-	private String due_date; //task¹¤µ¥µÄ½ØÖ¹Ê±¼ä
+	private String due_date; //taskå·¥å•çš„æˆªæ­¢æ—¶é—´
 	
-	private String created_at; //´´½¨Ê±¼ä
+	private String created_at; //åˆ›å»ºæ—¶é—´
 	
-	private String updated_at; //×îºó¸üĞÂÊ±¼ä
+	private String updated_at; //æœ€åæ›´æ–°æ—¶é—´
 	
-	private String source; //¹¤µ¥À´Ô´
+	private String source; //å·¥å•æ¥æº
 	
-	private List<CustomField> customFields = new ArrayList<CustomField>(); //¹¤µ¥×Ô¶¨Òå×Ö¶Î
+	private List<CustomField> customFields = new ArrayList<CustomField>(); //å·¥å•è‡ªå®šä¹‰å­—æ®µ
 
 	public int getId() {
 		return id;

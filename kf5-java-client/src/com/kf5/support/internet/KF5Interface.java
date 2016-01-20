@@ -5,274 +5,274 @@ public class KF5Interface {
 	private final static String SERVER = "https://%1$s";
 	
 	/**
-	 * ¹¤µ¥£¨¿Í·ş£©Ïà¹Ø½Ó¿Ú
+	 * å·¥å•ï¼ˆå®¢æœï¼‰ç›¸å…³æ¥å£
 	 */
-	//¹¤µ¥ÁĞ±í
+	//å·¥å•åˆ—è¡¨
 	private final static String AGENT_ORDER_LIST = SERVER+"/apiv2/tickets.json";
-	//Ö¸¶¨¿Í·şÊÜÀíµÄ¹¤µ¥ÁĞ±í
+	//æŒ‡å®šå®¢æœå—ç†çš„å·¥å•åˆ—è¡¨
 	private final static String AGENT_ORDER_LIST_WITH_ID = SERVER+"/apiv2/users/%2$s/tickets.json";
-	//²é¿´¹¤µ¥
+	//æŸ¥çœ‹å·¥å•
 	private final static String AGENT_ORDER_DETAILS = SERVER+"/apiv2/tickets/%2$s.json";
-	//²é¿´¶à¸ö¹¤µ¥£¬×î¶à·µ»Ø100ÌõÊı¾İ
+	//æŸ¥çœ‹å¤šä¸ªå·¥å•ï¼Œæœ€å¤šè¿”å›100æ¡æ•°æ®
 	private final static String AGENT_MANY_ORDER = SERVER +"/apiv2/tickets/show_many.json?ids=";
-	//´´½¨¹¤µ¥
+	//åˆ›å»ºå·¥å•
 	private final static String AGENT_CREATE_ORDER = SERVER +"/apiv2/tickets.json";
-	//¸üĞÂ¹¤µ¥
+	//æ›´æ–°å·¥å•
 	private final static String AGENT_UPDATE_ORDER = SERVER +"/apiv2/tickets/%2$s.json";
-	//¸üĞÂ¶à¸ö¹¤µ¥
+	//æ›´æ–°å¤šä¸ªå·¥å•
 	private final static String AGENT_UPDATE_MANY_ORDERS = SERVER +"/apiv2/tickets/update_many.json?ids=";
-	//É¾³ı¹¤µ¥
+	//åˆ é™¤å·¥å•
 	private final static String AGENT_DELETE_ORDER = SERVER + "/apiv2/tickets/%2$s.json";
-	//É¾³ı¶à¸ö¹¤µ¥
+	//åˆ é™¤å¤šä¸ªå·¥å•
 	private final static String AGENT_DELETE_MANY_ORDERS = SERVER +"/apiv2/tickets/delete_many.json?ids=";
-	//¹¤µ¥±»¹ØÁªµÄÊÂÎñÁĞ±í
+	//å·¥å•è¢«å…³è”çš„äº‹åŠ¡åˆ—è¡¨
 	private final static String AGENT_ORDER_INCIDENTS_LIST = SERVER +"/apiv2/tickets/%2$s/incidents.json";
-	//¹ÊÕÏÀàĞÍµÄ¹¤µ¥ÁĞ±í
+	//æ•…éšœç±»å‹çš„å·¥å•åˆ—è¡¨
 	private final static String AGENT_ORDER_PROBLEM_LIST = SERVER +"/apiv2/tickets/problems.json";
-	//¹¤µ¥¿ÉÓÃµÄ¸±±¾ÓÃ»§
+	//å·¥å•å¯ç”¨çš„å‰¯æœ¬ç”¨æˆ·
 	private final static String AGENT_ORDER_COLLABORATORS = SERVER +"/apiv2/tickets/%2$s/collaborators.json";
 	
 	/**
-	 * ¹¤µ¥£¨ÆÕÍ¨ÓÃ»§£©Ïà¹Ø½Ó¿Ú
+	 * å·¥å•ï¼ˆæ™®é€šç”¨æˆ·ï¼‰ç›¸å…³æ¥å£
 	 */
 	
-	//¹¤µ¥ÇëÇóÁĞ±í
+	//å·¥å•è¯·æ±‚åˆ—è¡¨
 	private final static String REQUEST_ORDER_LIST = SERVER +"/apiv2/requests.json";
-	//×´Ì¬Ğ¡ÓÚÒÑ½â¾öµÄ¹¤µ¥
+	//çŠ¶æ€å°äºå·²è§£å†³çš„å·¥å•
 	private final static String REQUEST_ORDER_STATUS_OPEN = SERVER +"/apiv2/requests/open.json";
-	//×´Ì¬ÎªÒÑ½â¾öºÍÒÑ¹Ø±ÕµÄ¹¤µ¥
+	//çŠ¶æ€ä¸ºå·²è§£å†³å’Œå·²å…³é—­çš„å·¥å•
 	private final static String REQUEST_ORDER_STATUS_SOLVED = SERVER + "/apiv2/requests/solved.json";
-	//»ñÈ¡Ö¸¶¨ÓÃ»§µÄ¹¤µ¥ÇëÇó
+	//è·å–æŒ‡å®šç”¨æˆ·çš„å·¥å•è¯·æ±‚
 	private final static String REQUEST_ORDER_LIST_WITH_ID = SERVER + "/apiv2/users/%2$s/requests.json";
-	//»ñÈ¡Ö¸¶¨¹«Ë¾×éÖ¯µÄ¹¤µ¥ÇëÇó
+	//è·å–æŒ‡å®šå…¬å¸ç»„ç»‡çš„å·¥å•è¯·æ±‚
 	private final static String ORGANZIATION_ORDER_WITH_ID = SERVER + "/apiv2/organizations/%2$s/requests.json";
-	//ËÑË÷¹¤µ¥ÇëÇó
+	//æœç´¢å·¥å•è¯·æ±‚
 	private final static String SERCH_ORDER = SERVER +"/apiv2/requests/search.json?";
-	// ²é¿´¹¤µ¥ÇëÇó
+	// æŸ¥çœ‹å·¥å•è¯·æ±‚
 	private final static String REQUEST_VIEW_ORDER = SERVER + "/apiv2/requests/%2$s.json";
-	//´´½¨¹¤µ¥ÇëÇó
+	//åˆ›å»ºå·¥å•è¯·æ±‚
 	private final static String REQUEST_CREATE_ORDER = SERVER + "/apiv2/requests.json";
-	//»Ø¸´¹¤µ¥
+	//å›å¤å·¥å•
 	private final static String REQUESTER_REPLY_ORDER = SERVER +"/apiv2/requests/%2$s.json";
-	//¹¤µ¥»Ø¸´ÁĞ±í
+	//å·¥å•å›å¤åˆ—è¡¨
 	private final static String REQUESTER_COMMENT_LIST = SERVER + "/apiv2/requests/%2$s/comments.json";
-	//²é¿´Ö¸¶¨¹¤µ¥»Ø¸´
+	//æŸ¥çœ‹æŒ‡å®šå·¥å•å›å¤
 	private final static String REQUESTER_COMMENT_WITH_ID = SERVER +"/apiv2/requests/%2$s/comments/%3$s.json";
 	
 	/**
-	 * ¹¤µ¥»Ø¸´½Ó¿Ú
+	 * å·¥å•å›å¤æ¥å£
 	 */
-	//¹¤µ¥»Ø¸´ÁĞ±í
+	//å·¥å•å›å¤åˆ—è¡¨
 	private final static String ORDER_COMMENT_LIST = SERVER +"/apiv2/tickets/%2$s/comments.json";
 	
 	/**
-	 * ¹¤µ¥×Ô¶¨Òå×Ö¶Î½Ó¿Ú
+	 * å·¥å•è‡ªå®šä¹‰å­—æ®µæ¥å£
 	 */
 	
-	//¹¤µ¥×Ô¶¨Òå×Ö¶ÎÁĞ±í
+	//å·¥å•è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
 	private final static String TICKET_FIELD_LIST = SERVER +"/apiv2/ticket_fields.json";
-	//»ñÈ¡×´Ì¬ÎªÆô¶¯µÄ×Ô¶¨Òå×Ö¶ÎÁĞ±í
+	//è·å–çŠ¶æ€ä¸ºå¯åŠ¨çš„è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
 	private final static String TICKET_FIELD_LIST_ACTIVE = SERVER +"/apiv2/ticket_fields/active.json";
-	//²é¿´×Ô¶¨Òå×Ö¶Î
+	//æŸ¥çœ‹è‡ªå®šä¹‰å­—æ®µ
 	private final static String TICKET_FIELD_LIST_BY_ID = SERVER +"/apiv2/ticket_fields/%2$s.json";
-	//É¾³ı×Ô¶¨Òå×Ö¶Î
+	//åˆ é™¤è‡ªå®šä¹‰å­—æ®µ
 	private final static String DELETE_TICKET_FIELD = SERVER +"/apiv2/ticket_fields/%2$s.json";
 	
 	/**
-	 * ¹¤µ¥²é¿´·ÖÀà½Ó¿Ú
+	 * å·¥å•æŸ¥çœ‹åˆ†ç±»æ¥å£
 	 */
 
-	//¹¤µ¥²é¿´·ÖÀàÁĞ±í
+	//å·¥å•æŸ¥çœ‹åˆ†ç±»åˆ—è¡¨
 	private final static String VIEWS_ORDER_TYPE_LIST =SERVER+"/apiv2/views.json";
-	//»ñÈ¡¿ÉÓÃµÄ¹¤µ¥²é¿´·ÖÀà
+	//è·å–å¯ç”¨çš„å·¥å•æŸ¥çœ‹åˆ†ç±»
 	private final static String VIEWS_ORDER_TYPE_ACTIVE = SERVER +"/apiv2/views/active.json";
-	//»ñÈ¡Ö¸¶¨²é¿´·ÖÀà
+	//è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»
 	private final static String VIEW_ORDER_LIST_WITH_ID = SERVER+"/apiv2/views/%2$s.json";
-	//»ñÈ¡Ö¸¶¨²é¿´·ÖÀàÀïµÄ¹¤µ¥
+	//è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»é‡Œçš„å·¥å•
 	private final static String VIEW_TICKET_BY_ID = SERVER + "/apiv2/views/%2$s/tickets.json";
-	//»ñÈ¡Ö¸¶¨²é¿´·ÖÀàµÄ¹¤µ¥¸öÊı
+	//è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»çš„å·¥å•ä¸ªæ•°
 	private final static String VIEW_TICKET_COUNT = SERVER +"/apiv2/views/%2$s/count.json";
-	//»ñÈ¡¶à¸ö²é¿´·ÖÀàµÄ¹¤µ¥¸öÊı
+	//è·å–å¤šä¸ªæŸ¥çœ‹åˆ†ç±»çš„å·¥å•ä¸ªæ•°
 	private final static String VIEW_MANY_TICKET_COUNT = SERVER +"/apiv2/views/count_many.json?ids=";
 	
 	/**
-	 * ÓÃ»§½Ó¿Ú
+	 * ç”¨æˆ·æ¥å£
 	 */
-	//»ñÈ¡ÓÃ»§ÁĞ±í
+	//è·å–ç”¨æˆ·åˆ—è¡¨
 	private final static String USER_LIST = SERVER + "/apiv2/users.json";
-	//²é¿´Ö¸¶¨ÓÃ»§ĞÅÏ¢
+	//æŸ¥çœ‹æŒ‡å®šç”¨æˆ·ä¿¡æ¯
 	private final static String USER_INFO = SERVER +"/apiv2/users/%2$s.json";
-	//²é¿´×Ô¼ºµÄĞÅÏ¢
+	//æŸ¥çœ‹è‡ªå·±çš„ä¿¡æ¯
 	private final static String INFO_OF_MINE = SERVER +"/apiv2/users/me.json";
-	//»ñÈ¡¶à¸öÓÃ»§ĞÅÏ¢
+	//è·å–å¤šä¸ªç”¨æˆ·ä¿¡æ¯
 	private final static String INFO_OF_MANY = SERVER +"/apiv2/users/show_many.json?ids=";
-	//´´½¨ÓÃ»§ĞÅÏ¢
+	//åˆ›å»ºç”¨æˆ·ä¿¡æ¯
 	private final static String CREATE_USER_INFO = SERVER + "/apiv2/users.json";
-	//ºÏ²¢ÓÃ»§
+	//åˆå¹¶ç”¨æˆ·
 	private final static String MERGE_USER = SERVER +"/apiv2/users/%2$s/merge.json";
-	//ĞŞ¸ÄÓÃ»§ĞÅÏ¢
+	//ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
 	private final static String UPDATE_USER_INFO = SERVER +"/apiv2/users/%2$s.json";
-	//É¾³ıÓÃ»§
+	//åˆ é™¤ç”¨æˆ·
 	private final static String DELETE_USER = SERVER +"/apiv2/users/%2$s.json";
-	//ËÑË÷ÓÃ»§
+	//æœç´¢ç”¨æˆ·
 	private final static String SEARCH_USER = SERVER + "/apiv2/users/search.json?query=";
 
 	/**
-	 * ÓÃ»§×Ô¶¨Òå×Ö¶Î½Ó¿Ú
+	 * ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µæ¥å£
 	 */
 	
-	//ÓÃ»§×Ô¶¨Òå×Ö¶ÎÁĞ±í
+	//ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
 	private final static String USER_FIELDS = SERVER +"/apiv2/user_fields.json";
-	//»ñÈ¡×´Ì¬ÎªÆô¶¯µÄ×Ô¶¨ÒåµÄ×Ö¶ÎÁĞ±í
+	//è·å–çŠ¶æ€ä¸ºå¯åŠ¨çš„è‡ªå®šä¹‰çš„å­—æ®µåˆ—è¡¨
 	private final static String USER_FIELDS_ACTIVE = SERVER +"/apiv2/user_fields/active.json";
-	//²é¿´ÓÃ»§×Ô¶¨Òå×Ö¶Î
+	//æŸ¥çœ‹ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
 	private final static String USER_FIELDS_BY_ID = SERVER +"/apiv2/user_fields/%2$s.json";
-	//É¾³ıÓÃ»§×Ô¶¨Òå×Ö¶Î
+	//åˆ é™¤ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
 	private final static String DELETE_USER_FIELDS = SERVER + "/apiv2/user_fields/%2$s.json";
 	
 	/**
-	 * ¿Í·ş×é
+	 * å®¢æœç»„
 	 */
 	
-	//¿Í·ş×éÁĞ±í
+	//å®¢æœç»„åˆ—è¡¨
 	private final static String GROUP_LIST = SERVER +"/apiv2/groups.json";
-	//²é¿´¿Í·ş×é
+	//æŸ¥çœ‹å®¢æœç»„
 	private final static String GROUP_LIST_BY_ID = SERVER+"/apiv2/groups/%2$s.json";
-	//´´½¨¿Í·ş×é
+	//åˆ›å»ºå®¢æœç»„
 	private final static String CREATE_GROUP = SERVER +"/apiv2/groups.json";
-	//ĞŞ¸Ä¿Í·ş×é
+	//ä¿®æ”¹å®¢æœç»„
 	private final static String UPDATE_GROUP = SERVER +"/apiv2/groups/%2$s.json";
-	//É¾³ı¿Í·ş×é
+	//åˆ é™¤å®¢æœç»„
 	private final static String DELETE_GROUP = SERVER +"/apiv2/groups/%2$s.json";
 	
 	/**
-	 * ¹«Ë¾×éÖ¯½Ó¿Ú
+	 * å…¬å¸ç»„ç»‡æ¥å£
 	 */
-	//¹«Ë¾×éÖ¯ÁĞ±í
+	//å…¬å¸ç»„ç»‡åˆ—è¡¨
 	private final static String ORGANIZATION_LIST = SERVER +"/apiv2/organizations.json";
-	//²é¿´¹«Ë¾×éÖ¯
+	//æŸ¥çœ‹å…¬å¸ç»„ç»‡
 	private final static String VIEW_ORGANIZATION = SERVER +"/apiv2/organizations/%2$s.json";
-	//´´½¨¹«Ë¾×éÖ¯
+	//åˆ›å»ºå…¬å¸ç»„ç»‡
 	private final static String CREATE_ORGANIZATION = SERVER +"/apiv2/organizations.json";
-	//ĞŞ¸Ä¹«Ë¾×éÖ¯
+	//ä¿®æ”¹å…¬å¸ç»„ç»‡
 	private final static String UPDATE_ORGANIZATION = SERVER + "/apiv2/organizations/%2$s.json";
-	//É¾³ı¹«Ë¾×éÖ¯
+	//åˆ é™¤å…¬å¸ç»„ç»‡
 	private final static String DELETE_ORGANIZATION = SERVER +"/apiv2/organizations/%2$s.json";
 	
 	
 	
 	/**
-	 * ÎÄµµ·ÖÇø½Ó¿Ú
+	 * æ–‡æ¡£åˆ†åŒºæ¥å£
 	 */
-	//ÎÄµµ·ÖÇøÁĞ±í
+	//æ–‡æ¡£åˆ†åŒºåˆ—è¡¨
 	private final static String CATEGORIES_LIST = SERVER +"/apiv2/categories.json"; 
-	//²é¿´ÎÄµµ·ÖÇø
+	//æŸ¥çœ‹æ–‡æ¡£åˆ†åŒº
 	private final static String CATEGORIES_LIST_WITH_ID = SERVER +"/apiv2/categories/%2$s.json";
-	//´´½¨ÎÄµµ·ÖÇø
+	//åˆ›å»ºæ–‡æ¡£åˆ†åŒº
 	private final static String CREATE_CATEGORY = SERVER +"/apiv2/categories.json";
-	//ĞŞ¸ÄÎÄµµ·ÖÇø
+	//ä¿®æ”¹æ–‡æ¡£åˆ†åŒº
 	private final static String UPDATE_CATEGORY = SERVER +"/apiv2/categories/%2$s.json";
-	//É¾³ıÎÄµµ·ÖÇø
+	//åˆ é™¤æ–‡æ¡£åˆ†åŒº
 	private final static String DELETE_CATEGORY = SERVER +"/apiv2/categories/%2$s.json";
 	
 	/**
-	 * ÎÄµµ·ÖÀà½Ó¿Ú
+	 * æ–‡æ¡£åˆ†ç±»æ¥å£
 	 */
 	
-	//ÎÄµµ·ÖÀàÁĞ±í
+	//æ–‡æ¡£åˆ†ç±»åˆ—è¡¨
 	private final static String FORUMS_LIST = SERVER +"/apiv2/forums.json";
-	//²é¿´ÎÄµµ·ÖÀà
+	//æŸ¥çœ‹æ–‡æ¡£åˆ†ç±»
 	private final static String FORUMS_LIST_BY_ID = SERVER+"/apiv2/forums/%2$s.json";
-	//´´½¨ÎÄµµ·ÖÀà
+	//åˆ›å»ºæ–‡æ¡£åˆ†ç±»
 	private final static String CREATE_FORUM = SERVER +"/apiv2/forums.json";
-	//ĞŞ¸ÄÎÄµµ·ÖÀà
+	//ä¿®æ”¹æ–‡æ¡£åˆ†ç±»
 	private final static String UPDATE_FORUM = SERVER +"/apiv2/forums/%2$s.json";
-	//É¾³ıÎÄµµ·ÖÀà
+	//åˆ é™¤æ–‡æ¡£åˆ†ç±»
 	private final static String DELETE_FORUM = SERVER +"/apiv2/forums/%2$s.json";
 	
 	
 	/**
-	 * ÎÄµµ½Ó¿Ú
+	 * æ–‡æ¡£æ¥å£
 	 */
-	//ÎÄµµÁĞ±í
+	//æ–‡æ¡£åˆ—è¡¨
 	private final static String POST_LIST = SERVER+"/apiv2/posts.json";
-	//²é¿´ÎÄµµ
+	//æŸ¥çœ‹æ–‡æ¡£
 	private final static String POST_DETAIL = SERVER +"/apiv2/posts/%2$s.json";
-	//²é¿´¶à¸öÎÄµµ
+	//æŸ¥çœ‹å¤šä¸ªæ–‡æ¡£
 	private final static String POST_MANY = SERVER +"/apiv2/posts/show_many.json?ids=";
-	//ËÑË÷ÎÄµµ
+	//æœç´¢æ–‡æ¡£
 	private final static String SEARCH_POST = SERVER +"/apiv2/posts/search.json?query=";
-	//´´½¨ÎÄµµ
+	//åˆ›å»ºæ–‡æ¡£
 	private final static String CREATE_POST = SERVER +"/apiv2/posts.json";
-	//ĞŞ¸ÄÎÄµµ
+	//ä¿®æ”¹æ–‡æ¡£
 	private final static String UPDATE_POST = SERVER+"/apiv2/posts/%2$s.json";
-	//É¾³ıÎÄµµ
+	//åˆ é™¤æ–‡æ¡£
 	private final static String DELETE_POST = SERVER +"/apiv2/posts/%2$s.json";
-	//ÎÄµµ»Ø¸´ÁĞ±í
+	//æ–‡æ¡£å›å¤åˆ—è¡¨
 	private final static String POST_COMMENT_LIST = SERVER + "/apiv2/posts/%2$s/comments.json";
-	//²é¿´Ö¸¶¨ÎÄµµ»Ø¸´
+	//æŸ¥çœ‹æŒ‡å®šæ–‡æ¡£å›å¤
 	private final static String POST_COMMETN_BY_ID = SERVER +"/apiv2/posts/%2$s/comments/%3$s.json";
-	//»Ø¸´ÎÄµµ
+	//å›å¤æ–‡æ¡£
 	private final static String POST_REPLY = SERVER +"/apiv2/posts/%2$s/comments.json";
 	
 	/**
-	 * ÉçÇø»°Ìâ½Ó¿Ú
+	 * ç¤¾åŒºè¯é¢˜æ¥å£
 	 */
 	
-	//ÉçÇø»°ÌâÁĞ±í
+	//ç¤¾åŒºè¯é¢˜åˆ—è¡¨
 	private final static String TOPIC_LIST = SERVER +"/apiv2/topics.json";
-	//²é¿´ÉçÇø»°Ìâ
+	//æŸ¥çœ‹ç¤¾åŒºè¯é¢˜
 	private final static String TOPIC_BY_ID = SERVER +"/apiv2/topics/%2$s.json";
-	//´´½¨ÉçÇø»°Ìâ
+	//åˆ›å»ºç¤¾åŒºè¯é¢˜
 	private final static String TOPIC_CREATE = SERVER +"/apiv2/topics.json";
-	//ĞŞ¸ÄÉçÇø»°Ìâ
+	//ä¿®æ”¹ç¤¾åŒºè¯é¢˜
 	private final static String TOPIC_UPDATE = SERVER +"/apiv2/topics/%2$s.json";
-	//É¾³ıÉçÇø»°Ìâ
+	//åˆ é™¤ç¤¾åŒºè¯é¢˜
 	private final static String TOPIC_DELETE = SERVER +"/apiv2/topics/%2$s.json";
 	
 	/**
-	 * ÉçÇøÎÊÌâ½Ó¿Ú
+	 * ç¤¾åŒºé—®é¢˜æ¥å£
 	 */
-	//ÉçÇøÎÊÌâÁĞ±í
+	//ç¤¾åŒºé—®é¢˜åˆ—è¡¨
 	private final static String QUESTION_LIST =SERVER+"/apiv2/questions.json";
-	//²é¿´ÉçÇøÎÊÌâ
+	//æŸ¥çœ‹ç¤¾åŒºé—®é¢˜
 	private final static String QUESTION_BY_ID = SERVER +"/apiv2/questions/%2$s.json";
-	//´´½¨ÉçÇøÎÊÌâ
+	//åˆ›å»ºç¤¾åŒºé—®é¢˜
 	private final static String QUESTION_CREATE = SERVER +"/apiv2/questions.json";
-	//ĞŞ¸ÄÉçÇøÎÊÌâ
+	//ä¿®æ”¹ç¤¾åŒºé—®é¢˜
 	private final static String QUESTION_UPDATE = SERVER +"/apiv2/questions/%2$s.json";
-	//É¾³ıÉçÇøÎÊÌâ
+	//åˆ é™¤ç¤¾åŒºé—®é¢˜
 	private final static String QUESTION_DELETE = SERVER +"/apiv2/questions/%2$s.json";
-	//ÉçÇøÎÊÌâ»Ø¸´ÁĞ±í
+	//ç¤¾åŒºé—®é¢˜å›å¤åˆ—è¡¨
 	private final static String QUESTION_COMMENT_LIST = SERVER +"/apiv2/questions/%2$s/comments.json";
-	//²é¿´Ö¸¶¨ÉçÇøÎÊÌâ»Ø¸´
+	//æŸ¥çœ‹æŒ‡å®šç¤¾åŒºé—®é¢˜å›å¤
 	private final static String QUESTION_COMMENT_BY_ID = SERVER +"/apiv2/questions/%2$s/comments/%3$s.json";
-	//»Ø¸´ÉçÇøÎÊÌâ
+	//å›å¤ç¤¾åŒºé—®é¢˜
 	private final static String QUESTION_REPLY = SERVER +"/apiv2/questions/%2$s/comments.json";
 	
 	
 	
 	/**
-	 * ¸½¼ş½Ó¿Ú
+	 * é™„ä»¶æ¥å£
 	 */
 	
-	//ÉÏ´«¸½¼ş
+	//ä¸Šä¼ é™„ä»¶
 	private final static String ATTACHMENTS_UPLOAD = SERVER +"/apiv2/attachments.json?filename=%2$s";
-	//²é¿´¸½¼ş
+	//æŸ¥çœ‹é™„ä»¶
 	private final static String ATTACHMENT_VIEW = SERVER +"/apiv2/attachments/%2$s.json";
-	//É¾³ı¸½¼ş
+	//åˆ é™¤é™„ä»¶
 	private final static String ATTACHMENT_DELETE = SERVER +"/apiv2/attachments/%2$s.json";
 	
 	
 	/**
-	 * µ¼Èë½Ó¿Ú
+	 * å¯¼å…¥æ¥å£
 	 */
 	
-	//¹¤µ¥µ¼Èë
+	//å·¥å•å¯¼å…¥
 	private final static String ORDER_IMPORT = SERVER +"/apiv2/imports/tickets.json";
 
 	/**
-	 * µ¼³ö½Ó¿Ú
+	 * å¯¼å‡ºæ¥å£
 	 */
 	
 	private final static String ORDER_EXPORT = SERVER +"/apiv2/exports/tickets.json";
@@ -280,11 +280,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ¹¤µ¥¿ÉÓÃµÄ¸±±¾ÓÃ»§
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ¹¤µ¥id
+	 * å·¥å•å¯ç”¨çš„å‰¯æœ¬ç”¨æˆ·
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param id å·¥å•id
 	 * @return
 	 */
 	public static String getAgentOrderCollaborators(String domain,String id){
@@ -295,18 +295,18 @@ public class KF5Interface {
 	
 	
 	/**
-	 * µ¼³ö¹¤µ¥
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * ÇëÇó²ÎÊı£ºstart_time:Éè¶¨ÇëÇóµ¼³öµÄ¹¤µ¥´´½¨Ê±¼äµÄ¿ªÊ¼µã(Ê±¼ä´Á)
-	 * end_time:Éè¶¨ÇëÇóµ¼³öµÄ¹¤µ¥´´½¨Ê±¼äµÄ½áÊøµã(Ê±¼ä´Á)
-	 * order£ºIDÅÅĞò 'ASC' or 'DESC'
-	 * Ã¿Ò³×î¶à·µ»Ø500ÌõÊı¾İ
-	 * ×¢Òâ£ºÈô²»ÉèÖÃstart_time£¬Ä¬ÈÏµ¼³öend_timeÖ®Ç°´´½¨µÄ¹¤µ¥£»
-	 * Èô²»ÉèÖÃend_time£¬Ä¬ÈÏµ¼³ö´Óstart_timeÖÁµ±Ç°Ê±¼äÄÚ´´½¨µÄ¹¤µ¥;
-	 * Èô²»ÉèÖÃorder£¬Ä¬ÈÏµ¼³ö¹¤µ¥°´IDÕıĞòÅÅÁĞ¡£
-	 * urlÊ¾Àı£º https://{subdomain}.kf5.com/apiv2/exports/tickets.json?start_time=1425698858
-	 * @param domain Æ½Ì¨µØÖ·
+	 * å¯¼å‡ºå·¥å•
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * è¯·æ±‚å‚æ•°ï¼šstart_time:è®¾å®šè¯·æ±‚å¯¼å‡ºçš„å·¥å•åˆ›å»ºæ—¶é—´çš„å¼€å§‹ç‚¹(æ—¶é—´æˆ³)
+	 * end_time:è®¾å®šè¯·æ±‚å¯¼å‡ºçš„å·¥å•åˆ›å»ºæ—¶é—´çš„ç»“æŸç‚¹(æ—¶é—´æˆ³)
+	 * orderï¼šIDæ’åº 'ASC' or 'DESC'
+	 * æ¯é¡µæœ€å¤šè¿”å›500æ¡æ•°æ®
+	 * æ³¨æ„ï¼šè‹¥ä¸è®¾ç½®start_timeï¼Œé»˜è®¤å¯¼å‡ºend_timeä¹‹å‰åˆ›å»ºçš„å·¥å•ï¼›
+	 * è‹¥ä¸è®¾ç½®end_timeï¼Œé»˜è®¤å¯¼å‡ºä»start_timeè‡³å½“å‰æ—¶é—´å†…åˆ›å»ºçš„å·¥å•;
+	 * è‹¥ä¸è®¾ç½®orderï¼Œé»˜è®¤å¯¼å‡ºå·¥å•æŒ‰IDæ­£åºæ’åˆ—ã€‚
+	 * urlç¤ºä¾‹ï¼š https://{subdomain}.kf5.com/apiv2/exports/tickets.json?start_time=1425698858
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String orderExport(String domain){
@@ -314,15 +314,15 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * µ¼Èë¹¤µ¥
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * µ¼Èë½ÓÊÕÊı¾İÎªµ¥¸ö¹¤µ¥Êı¾İ£¬ÅúÁ¿µ¼ÈëÊ±ÇëÑ­»·µ÷ÓÃ½Ó¿Ú¡£Èç¹ûÔÚµ¼ÈëÊ±³ö´í£¬¿ÉÒÔ·½±ã´¦Àí³ö´íÊı¾İ
-	 * ¹¤µ¥ÔÚµ¼ÈëÊ±£¬´¥·¢Æ÷µÈÏµÍ³¹æÔò¶Ô¸ÃÌõ¹¤µ¥²»ÉúĞ§
-	 * µ¼ÈëÊ±ÔÊĞíÉèÖÃ¹¤µ¥µÄcreated_at,updated_atµÈÊ±¼ä×Ö¶Î
-	 * ÔÊĞíÉèÖÃ¹¤µ¥»Ø¸´commentsµÄ´´½¨Ê±¼äcreated_at, ×¢ÒâcommentsÊı¾İ±ØĞë°üº¬author_id,content×Ö¶ÎÖµ
-	 * ÇëÔÚµ¼ÈëÇ°È·ÈÏ¹¤µ¥¼°»Ø¸´ËùÉæ¼°µÄÓÃ»§È«²¿´æÔÚÓÚÔÆ¿Í·şÆ½Ì¨Àï£¬Èç¹ûÃ»ÓĞÇëµ÷ÓÃ ÓÃ»§½Ó¿Ú Users API ½øĞĞ´´½¨
-	 * @param domain Æ½Ì¨µØÖ·
+	 * å¯¼å…¥å·¥å•
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * å¯¼å…¥æ¥æ”¶æ•°æ®ä¸ºå•ä¸ªå·¥å•æ•°æ®ï¼Œæ‰¹é‡å¯¼å…¥æ—¶è¯·å¾ªç¯è°ƒç”¨æ¥å£ã€‚å¦‚æœåœ¨å¯¼å…¥æ—¶å‡ºé”™ï¼Œå¯ä»¥æ–¹ä¾¿å¤„ç†å‡ºé”™æ•°æ®
+	 * å·¥å•åœ¨å¯¼å…¥æ—¶ï¼Œè§¦å‘å™¨ç­‰ç³»ç»Ÿè§„åˆ™å¯¹è¯¥æ¡å·¥å•ä¸ç”Ÿæ•ˆ
+	 * å¯¼å…¥æ—¶å…è®¸è®¾ç½®å·¥å•çš„created_at,updated_atç­‰æ—¶é—´å­—æ®µ
+	 * å…è®¸è®¾ç½®å·¥å•å›å¤commentsçš„åˆ›å»ºæ—¶é—´created_at, æ³¨æ„commentsæ•°æ®å¿…é¡»åŒ…å«author_id,contentå­—æ®µå€¼
+	 * è¯·åœ¨å¯¼å…¥å‰ç¡®è®¤å·¥å•åŠå›å¤æ‰€æ¶‰åŠçš„ç”¨æˆ·å…¨éƒ¨å­˜åœ¨äºäº‘å®¢æœå¹³å°é‡Œï¼Œå¦‚æœæ²¡æœ‰è¯·è°ƒç”¨ ç”¨æˆ·æ¥å£ Users API è¿›è¡Œåˆ›å»º
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String importOrder(String domain){
@@ -330,11 +330,11 @@ public class KF5Interface {
 		return String.format(ORDER_IMPORT, domain);
 	}
 	/**
-	 * É¾³ı¸½¼ş
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ¸½¼şid
+	 * åˆ é™¤é™„ä»¶
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param id é™„ä»¶id
 	 * @return
 	 */
 	public static String deleteAttachment(String domain,String id){
@@ -342,11 +342,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´¸½¼ş
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * GETÇëÇó
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ¸½¼şid
+	 * æŸ¥çœ‹é™„ä»¶
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * GETè¯·æ±‚
+	 * @param domain å¹³å°åœ°å€
+	 * @param id é™„ä»¶id
 	 * @return
 	 */
 	public static String viewAttachment(String domain,String id){
@@ -355,12 +355,12 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ÉÏ´«¸½¼ş
-	 * POSTÇëÇó
-	 * ×¢Òâ£ºĞèÒªÔÚurlÀïÌí¼Ófilename²ÎÊıÀ´ÉèÖÃ¸½¼şÎÄ¼şÃû£¨Èç£º/apiv2/attachments.json?filename=test.jpg£©
-	 * Í¬Ò»¸ö¸½¼şÖ»ÄÜ¶ÔÓ¦Ò»¸ö¹¤µ¥»òÒ»¸ö¹¤µ¥»Ø¸´»òÒ»¸öÎÄµµ
-	 * ÇëÇóheaderÀïĞèÒªÉèÖÃ"Content-Type: application/binary"
-	 * @param domain Æ½Ì¨µØÖ·
+	 * ä¸Šä¼ é™„ä»¶
+	 * POSTè¯·æ±‚
+	 * æ³¨æ„ï¼šéœ€è¦åœ¨urlé‡Œæ·»åŠ filenameå‚æ•°æ¥è®¾ç½®é™„ä»¶æ–‡ä»¶åï¼ˆå¦‚ï¼š/apiv2/attachments.json?filename=test.jpgï¼‰
+	 * åŒä¸€ä¸ªé™„ä»¶åªèƒ½å¯¹åº”ä¸€ä¸ªå·¥å•æˆ–ä¸€ä¸ªå·¥å•å›å¤æˆ–ä¸€ä¸ªæ–‡æ¡£
+	 * è¯·æ±‚headeré‡Œéœ€è¦è®¾ç½®"Content-Type: application/binary"
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String uploadAttachment(String domain,String filename){
@@ -370,11 +370,11 @@ public class KF5Interface {
 	
 
 	/**
-	 * »Ø¸´ÉçÇøÎÊÌâ
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºend user
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param question_id ÎÊÌâid
+	 * å›å¤ç¤¾åŒºé—®é¢˜
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šend user
+	 * @param domain å¹³å°åœ°å€
+	 * @param question_id é—®é¢˜id
 	 * @return
 	 */
 	public static String replyQuestion(String domain,String question_id){
@@ -382,12 +382,12 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´Ö¸¶¨ÉçÇøÎÊÌâ»Ø¸´
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºend user
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param question_id ÎÊÌâid
-	 * @param id »Ø¸´id
+	 * æŸ¥çœ‹æŒ‡å®šç¤¾åŒºé—®é¢˜å›å¤
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šend user
+	 * @param domain å¹³å°åœ°å€
+	 * @param question_id é—®é¢˜id
+	 * @param id å›å¤id
 	 * @return
 	 */
 	public static String getQuestionCommentByID(String domain,String question_id,String id){
@@ -400,11 +400,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ÉçÇøÎÊÌâ»Ø¸´ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param question_id ÎÊÌâid
+	 * ç¤¾åŒºé—®é¢˜å›å¤åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param question_id é—®é¢˜id
 	 * @return
 	 */
 	public static String getQuestionCommentList(String domain,String question_id){
@@ -415,9 +415,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * É¾³ıÉçÇøÎÊÌâ
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
+	 * åˆ é™¤ç¤¾åŒºé—®é¢˜
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
 	 * @param domain
 	 * @param question_id
 	 * @return
@@ -429,9 +429,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ĞŞ¸ÄÉçÇøÎÊÌâ
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
+	 * ä¿®æ”¹ç¤¾åŒºé—®é¢˜
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
 	 * @param domain
 	 * @param question_id
 	 * @return
@@ -442,9 +442,9 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ´´½¨ÉçÇøÎÊÌâ
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
+	 * åˆ›å»ºç¤¾åŒºé—®é¢˜
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
 	 * @param domain
 	 * @return
 	 */
@@ -455,11 +455,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ²é¿´ÉçÇøÎÊÌâ
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param question_id ÎÊÌâid
+	 * æŸ¥çœ‹ç¤¾åŒºé—®é¢˜
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param question_id é—®é¢˜id
 	 * @return
 	 */
 	public static String getQuestionByID(String domain,String question_id){
@@ -468,9 +468,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ÉçÇøÎÊÌâÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
+	 * ç¤¾åŒºé—®é¢˜åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
 	 * @param domain
 	 * @return
 	 */
@@ -480,11 +480,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * É¾³ıÉçÇø»°Ìâ
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param topic_id »°Ìâid
+	 * åˆ é™¤ç¤¾åŒºè¯é¢˜
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param topic_id è¯é¢˜id
 	 * @return
 	 */
 	public static String deleteTopic(String domain,String topic_id){
@@ -493,11 +493,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ĞŞ¸ÄÉçÇø»°Ìâ
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param topic_id »°Ìâid
+	 * ä¿®æ”¹ç¤¾åŒºè¯é¢˜
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param topic_id è¯é¢˜id
 	 * @return 
 	 */
 	public static String updateTopic(String domain,String topic_id){
@@ -506,10 +506,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨ÉçÇø»°Ìâ
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºç¤¾åŒºè¯é¢˜
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createTopic(String domain){
@@ -522,9 +522,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ²é¿´ÉçÇø»°Ìâ
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
+	 * æŸ¥çœ‹ç¤¾åŒºè¯é¢˜
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
 	 * @param domain
 	 * @param topic_id
 	 * @return
@@ -535,10 +535,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ÉçÇø»°ÌâÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
+	 * ç¤¾åŒºè¯é¢˜åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getTopicList(String domain){
@@ -546,11 +546,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »Ø¸´ÎÄµµ
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param post_id ÎÄµµid
+	 * å›å¤æ–‡æ¡£
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param post_id æ–‡æ¡£id
 	 * @return
 	 */
 	public static String postReply(String domain,String post_id){
@@ -560,12 +560,12 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ²é¿´Ö¸¶¨ÎÄµµ»Ø¸´
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param post_id ÎÄµµid
-	 * @param id »Ø¸´id
+	 * æŸ¥çœ‹æŒ‡å®šæ–‡æ¡£å›å¤
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param post_id æ–‡æ¡£id
+	 * @param id å›å¤id
 	 * @return
 	 */
 	public static String getPostCommentByID(String domain,String post_id,String id){
@@ -576,11 +576,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ÎÄµµ»Ø¸´ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param post_id ÎÄµµid
+	 * æ–‡æ¡£å›å¤åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param post_id æ–‡æ¡£id
 	 * @return
 	 */
 	public static String getPostCommentList(String domain,String post_id){
@@ -588,11 +588,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * É¾³ıÎÄµµ
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param post_id ÎÄµµid
+	 * åˆ é™¤æ–‡æ¡£
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param post_id æ–‡æ¡£id
 	 * @return
 	 */
 	public static String deletePost(String domain,String post_id){
@@ -600,11 +600,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ĞŞ¸ÄÎÄµµ
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param post_id ÎÄµµid
+	 * ä¿®æ”¹æ–‡æ¡£
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param post_id æ–‡æ¡£id
 	 * @return
 	 */
 	public static String updatePost(String domain,String post_id){
@@ -614,10 +614,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨ÎÄµµ
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºæ–‡æ¡£
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createPost(String domain){
@@ -626,11 +626,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ËÑË÷ÎÄµµ
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domainÆ½Ì¨µØÖ·
-	 * @param key_word ËÑË÷¹Ø¼ü×Ö
+	 * æœç´¢æ–‡æ¡£
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domainå¹³å°åœ°å€
+	 * @param key_word æœç´¢å…³é”®å­—
 	 * @return
 	 */
 	public static String searchPost(String domain,String key_word){
@@ -638,11 +638,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´¶à¸öÎÄµµ
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param posts_id ¶à¸öÎÄµµid;¸ñÊ½Îª£º1,2,3
+	 * æŸ¥çœ‹å¤šä¸ªæ–‡æ¡£
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param posts_id å¤šä¸ªæ–‡æ¡£id;æ ¼å¼ä¸ºï¼š1,2,3
 	 * @return
 	 */
 	public static String getManyPosts(String domain,String posts_id){
@@ -651,11 +651,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´ÎÄµµ
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param post_id ÎÄµµid
+	 * æŸ¥çœ‹æ–‡æ¡£
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param post_id æ–‡æ¡£id
 	 * @return 
 	 */
 	public static String getPostDetail(String domain,String post_id){
@@ -663,10 +663,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡ÎÄµµÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–æ–‡æ¡£åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getPostList(String domain){
@@ -676,9 +676,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * É¾³ıÎÄµµ·ÖÀà
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
+	 * åˆ é™¤æ–‡æ¡£åˆ†ç±»
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
 	 * @param domain
 	 * @param forum_id
 	 * @return
@@ -689,11 +689,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ĞŞ¸ÄÎÄµµ·ÖÀà
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param forum_id ÎÄµµ·ÖÀàid
+	 * ä¿®æ”¹æ–‡æ¡£åˆ†ç±»
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param forum_id æ–‡æ¡£åˆ†ç±»id
 	 * @return
 	 */
 	public static String updateForum(String domain,String forum_id){
@@ -703,10 +703,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨ÎÄµµ·ÖÀà
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºæ–‡æ¡£åˆ†ç±»
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createForum(String domain){
@@ -715,11 +715,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´ÎÄµµ·ÖÀà
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param forum_id ÎÄµµ·ÖÀàid
+	 * æŸ¥çœ‹æ–‡æ¡£åˆ†ç±»
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param forum_id æ–‡æ¡£åˆ†ç±»id
 	 * @return
 	 */
 	public static String getForumByID(String domain,String forum_id){
@@ -727,9 +727,9 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡ÎÄµµ·ÖÇøÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
+	 * è·å–æ–‡æ¡£åˆ†åŒºåˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
 	 * @param domain
 	 * @return
 	 */
@@ -738,11 +738,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * É¾³ıÎÄµµ·ÖÇø
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param category_id ÎÄµµ·ÖÇøid
+	 * åˆ é™¤æ–‡æ¡£åˆ†åŒº
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param category_id æ–‡æ¡£åˆ†åŒºid
 	 * @return
 	 */
 	public static String deleteCategory(String domain,String category_id){
@@ -751,11 +751,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ĞŞ¸ÄÎÄµµ·ÖÇø
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param category_id ÎÄµµ·ÖÇøid
+	 * ä¿®æ”¹æ–‡æ¡£åˆ†åŒº
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param category_id æ–‡æ¡£åˆ†åŒºid
  	 * @return
 	 */
 	public static String updateCategory(String domain,String category_id){
@@ -765,10 +765,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨ÎÄµµ·ÖÇø
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºæ–‡æ¡£åˆ†åŒº
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createCategory(String domain){
@@ -776,11 +776,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´ÎÄµµ·ÖÇø
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param category_id ·ÖÇøid
+	 * æŸ¥çœ‹æ–‡æ¡£åˆ†åŒº
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
+	 * @param category_id åˆ†åŒºid
 	 * @return
 	 */
 	public static String getCategoryByID(String domain,String category_id){
@@ -788,10 +788,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡ÎÄµµ·ÖÇøÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–æ–‡æ¡£åˆ†åŒºåˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getCategoriesList(String domain){
@@ -803,11 +803,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * É¾³ı¹«Ë¾×éÖ¯
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param organization_id ¹«Ë¾×éÖ¯id
+	 * åˆ é™¤å…¬å¸ç»„ç»‡
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param organization_id å…¬å¸ç»„ç»‡id
 	 * @return
 	 */
 	public static String deleteOrganization(String domain,String organization_id){
@@ -818,11 +818,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ĞŞ¸Ä¹«Ë¾×éÖ¯
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param organization_id ¹«Ë¾×éÖ¯id
+	 * ä¿®æ”¹å…¬å¸ç»„ç»‡
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param organization_id å…¬å¸ç»„ç»‡id
 	 * @return
 	 */
 	public static String updateOrganization(String domain,String organization_id){
@@ -832,10 +832,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨¹«Ë¾×éÖ¯
-	 * POSTÇëÇó·½Ê½
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºå…¬å¸ç»„ç»‡
+	 * POSTè¯·æ±‚æ–¹å¼
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createOrganization(String domain){
@@ -845,11 +845,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´¹«Ë¾×éÖ¯
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagents
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param organization_id ¹«Ë¾×éÖ¯id
+	 * æŸ¥çœ‹å…¬å¸ç»„ç»‡
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagents
+	 * @param domain å¹³å°åœ°å€
+	 * @param organization_id å…¬å¸ç»„ç»‡id
 	 * @return
 	 */
 	public static String getOrganizationByID(String domain,String organization_id){
@@ -859,10 +859,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ¹«Ë¾×éÖ¯ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * å…¬å¸ç»„ç»‡åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getOrganizationList(String domain){
@@ -871,11 +871,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * É¾³ı¿Í·ş×é
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
- 	 * @param group_id ¿Í·ş×éid
+	 * åˆ é™¤å®¢æœç»„
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+ 	 * @param group_id å®¢æœç»„id
 	 * @return
 	 */
 	public static String deleteGroup(String domain,String group_id){
@@ -886,11 +886,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ĞŞ¸Ä¿Í·ş×é
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param group_id ¿Í·ş×éid
+	 * ä¿®æ”¹å®¢æœç»„
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param group_id å®¢æœç»„id
 	 * @return
 	 */
 	public static String updateGroup(String domain,String group_id){
@@ -902,9 +902,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨¿Í·ş×é
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
+	 * åˆ›å»ºå®¢æœç»„
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
 	 * @param domain
 	 * @return
 	 */
@@ -913,11 +913,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´¿Í·ş×é
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param group_id ¿Í·ş×éid
+	 * æŸ¥çœ‹å®¢æœç»„
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param group_id å®¢æœç»„id
 	 * @return
 	 */
 	public static String getGroupListByID(String domain,String group_id){
@@ -928,10 +928,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ¿Í·ş×éÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * å®¢æœç»„åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getGroupList(String domain){
@@ -941,11 +941,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * É¾³ıÓÃ»§×Ô¶¨Òå×Ö¶Î
-	 * DELETE×Ö¶Î
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ×Ö¶Îid
+	 * åˆ é™¤ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
+	 * DELETEå­—æ®µ
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param id å­—æ®µid
 	 * @return
 	 */
 	public static String deleteUserField(String domain,String id){
@@ -955,11 +955,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ²é¿´ÓÃ»§×Ô¶¨Òå×Ö¶Î
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagents
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ×Ö¶Îid
+	 * æŸ¥çœ‹ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagents
+	 * @param domain å¹³å°åœ°å€
+	 * @param id å­—æ®µid
 	 * @return
 	 */
 	public static String getUserFieldListByID(String domain,String id){
@@ -969,9 +969,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡×´Ì¬ÎªÆôÓÃµÄ×Ô¶¨Òå×Ö¶ÎÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagents
+	 * è·å–çŠ¶æ€ä¸ºå¯ç”¨çš„è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagents
 	 * @param domain
 	 * @return
 	 */
@@ -981,10 +981,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡×Ô¶¨Òå×Ö¶ÎÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagents
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagents
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getUserFieldList(String domain){
@@ -992,10 +992,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ËÑË÷ÓÃ»§
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * æœç´¢ç”¨æˆ·
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String searchUser(String domain){
@@ -1003,11 +1003,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * É¾³ıÓÃ»§
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param user_id ÓÃ»§id
+	 * åˆ é™¤ç”¨æˆ·
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param user_id ç”¨æˆ·id
 	 * @return
 	 */
 	public static String deleteUser(String domain,String user_id){
@@ -1015,11 +1015,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ĞŞ¸ÄÓÃ»§ĞÅÏ¢
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param user_id ÓÃ»§id
+	 * ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param user_id ç”¨æˆ·id
 	 * @return
 	 */
 	public static String updateUserInfo(String domain,String user_id){
@@ -1027,10 +1027,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ºÏ²¢ÓÃ»§
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * ×¢£ºURLÀïÖ¸¶¨idµÄÓÃ»§£¬½«»á±»ºÏ²¢µ½´«µİ²ÎÊıÖĞidËù´ú±íµÄÓÃ»§¡£ Ç°ÕßµÄÊı¾İÒ²»áºÏ²¢ÎªºóÕßµÄÊı¾İ£¬Ö®ºóÇ°Õß½«»á±»É¾³ı¡£ ±»ºÏ²¢µÄÓÃ»§£¬Ö»ÄÜÊÇÆÕÍ¨ÓÃ»§½ÇÉ«¡£
+	 * åˆå¹¶ç”¨æˆ·
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * æ³¨ï¼šURLé‡ŒæŒ‡å®šidçš„ç”¨æˆ·ï¼Œå°†ä¼šè¢«åˆå¹¶åˆ°ä¼ é€’å‚æ•°ä¸­idæ‰€ä»£è¡¨çš„ç”¨æˆ·ã€‚ å‰è€…çš„æ•°æ®ä¹Ÿä¼šåˆå¹¶ä¸ºåè€…çš„æ•°æ®ï¼Œä¹‹åå‰è€…å°†ä¼šè¢«åˆ é™¤ã€‚ è¢«åˆå¹¶çš„ç”¨æˆ·ï¼Œåªèƒ½æ˜¯æ™®é€šç”¨æˆ·è§’è‰²ã€‚
 	 * @param domain
 	 * @param user_id
 	 * @return
@@ -1042,10 +1042,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨ÓÃ»§ĞÅÏ¢
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºç”¨æˆ·ä¿¡æ¯
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createUserInfo(String domain){
@@ -1054,10 +1054,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 *»ñÈ¡¶à¸öÓÃ»§ĞÅÏ¢
-	 *GETÇëÇó
-	 *µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 *è·å–å¤šä¸ªç”¨æˆ·ä¿¡æ¯
+	 *GETè¯·æ±‚
+	 *è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getManyUsersInfo(String domain){
@@ -1065,10 +1065,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´×Ô¼ºµÄĞÅÏ¢
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param domain Æ½Ì¨µØÖ·
+	 * æŸ¥çœ‹è‡ªå·±çš„ä¿¡æ¯
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getMyInfo(String domain){
@@ -1078,11 +1078,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ²é¿´Ö¸¶¨ÓÃ»§ĞÅÏ¢
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param user_id ÓÃ»§id
+	 * æŸ¥çœ‹æŒ‡å®šç”¨æˆ·ä¿¡æ¯
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param user_id ç”¨æˆ·id
 	 * @return
 	 */
 	public static String getUserInfo(String domain,String user_id){
@@ -1090,10 +1090,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡ÓÃ»§ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£º agent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–ç”¨æˆ·åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼š agent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getUserList(String domain){
@@ -1102,10 +1102,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡¶à¸ö²é¿´·ÖÀàµÄ¹¤µ¥¸öÊı
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–å¤šä¸ªæŸ¥çœ‹åˆ†ç±»çš„å·¥å•ä¸ªæ•°
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getManyTicketCountByTypeIds(String domain){
@@ -1113,11 +1113,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨²é¿´·ÖÀàµÄ¹¤µ¥¸öÊı
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param type_id ·ÖÀàid
+	 * è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»çš„å·¥å•ä¸ªæ•°
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param type_id åˆ†ç±»id
 	 * @return
 	 */
 	public static String getTicketCountByTypeID(String domain,String type_id){
@@ -1127,11 +1127,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨²é¿´·ÖÀàÀïµÄ¹¤µ¥
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param type_id ·ÖÀàid
+	 * è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»é‡Œçš„å·¥å•
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param type_id åˆ†ç±»id
 	 * @return
 	 */
 	public static String getTicketListByTypeID(String domain,String type_id){
@@ -1141,10 +1141,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨²é¿´·ÖÀà
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @param id 
 	 * @return
 	 */
@@ -1153,10 +1153,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°¿Í»§¿ÉÓÃµÄ¹¤µ¥²é¿´·ÖÀà
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–å½“å‰å®¢æˆ·å¯ç”¨çš„å·¥å•æŸ¥çœ‹åˆ†ç±»
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getOrderTypeListActive(String domain){
@@ -1165,10 +1165,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡µ±Ç°¿Í»§µÄ¹¤µ¥²é¿´·ÖÀà
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–å½“å‰å®¢æˆ·çš„å·¥å•æŸ¥çœ‹åˆ†ç±»
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getOrderTypeList(String domain){
@@ -1177,9 +1177,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * É¾³ı×Ô¶¨Òå×Ö¶Î
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
+	 * åˆ é™¤è‡ªå®šä¹‰å­—æ®µ
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
 	 * @param domain
 	 * @param ticket_field_id
 	 * @return
@@ -1190,11 +1190,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´×Ô¶¨Òå×Ö¶Î
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagents
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param ticket_field_id ×Ô¶¨Òå×Ö¶Îid
+	 * æŸ¥çœ‹è‡ªå®šä¹‰å­—æ®µ
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagents
+	 * @param domain å¹³å°åœ°å€
+	 * @param ticket_field_id è‡ªå®šä¹‰å­—æ®µid
 	 * @return
 	 */
 	public static String getTicketFieldByID(String domain,String ticket_field_id){
@@ -1204,9 +1204,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡×´Ì¬ÎªÆô¶¯µÄ×Ô¶¨Òå×Ö¶ÎÁĞ±í
-	 * GETÇëÇó·½Ê½
-	 * µ÷ÓÃÈ¨ÏŞ£ºagents
+	 * è·å–çŠ¶æ€ä¸ºå¯åŠ¨çš„è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
+	 * GETè¯·æ±‚æ–¹å¼
+	 * è°ƒç”¨æƒé™ï¼šagents
 	 * @param domain
 	 * @return
 	 */
@@ -1216,9 +1216,9 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡¹¤µ¥×Ô¶¨Òå×Ö¶ÎÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagents
+	 * è·å–å·¥å•è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagents
 	 * @param domain
 	 * @return
 	 */
@@ -1230,11 +1230,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡¹¤µ¥»Ø¸´ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£º¿Í·ş
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param ticket_id ¹¤µ¥id
+	 * è·å–å·¥å•å›å¤åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šå®¢æœ
+	 * @param domain å¹³å°åœ°å€
+	 * @param ticket_id å·¥å•id
 	 * @return
 	 */
 	public static String getOrderCommentList(String domain,String ticket_id){
@@ -1245,12 +1245,12 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ²é¿´Ö¸¶¨µÄ¹¤µ¥»Ø¸´
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * GETÇëÇó
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param requester_id ¹¤µ¥·¢ÆğÈËid
-	 * @param id »Ø¸´id
+	 * æŸ¥çœ‹æŒ‡å®šçš„å·¥å•å›å¤
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * GETè¯·æ±‚
+	 * @param domain å¹³å°åœ°å€
+	 * @param requester_id å·¥å•å‘èµ·äººid
+	 * @param id å›å¤id
 	 * @return
 	 */
 	public static String getOrderCommentWithID(String domain,String requester_id,String id){
@@ -1259,12 +1259,12 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡¹¤µ¥»Ø¸´ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * °´´´½¨Ê±¼äÅÅĞò£¬¿ÉÒÔÌí¼ÓÅÅĞò²ÎÊı£¬sort_order:ÅÅĞò¹æÔò£¬¿ÉÑ¡Öµ£ºasc£¬desc£¨Ä¬ÈÏÎªasc£©£»
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param order_id ¹¤µ¥id
+	 * è·å–å·¥å•å›å¤åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * æŒ‰åˆ›å»ºæ—¶é—´æ’åºï¼Œå¯ä»¥æ·»åŠ æ’åºå‚æ•°ï¼Œsort_order:æ’åºè§„åˆ™ï¼Œå¯é€‰å€¼ï¼šascï¼Œdescï¼ˆé»˜è®¤ä¸ºascï¼‰ï¼›
+	 * @param domain å¹³å°åœ°å€
+	 * @param order_id å·¥å•id
 	 * @return
 	 */
 	public static String getCommentListByEndUser(String domain,String order_id){
@@ -1273,11 +1273,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »Ø¸´¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£º ÆÕÍ¨ÓÃ»§
-	 * PUTÇëÇó
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param order_id ¹¤µ¥id
+	 * å›å¤å·¥å•
+	 * è°ƒç”¨æƒé™ï¼š æ™®é€šç”¨æˆ·
+	 * PUTè¯·æ±‚
+	 * @param domain å¹³å°åœ°å€
+	 * @param order_id å·¥å•id
 	 * @return
 	 */
 	public static String replyOrderByEndUser(String domain,String order_id){
@@ -1287,10 +1287,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ´´½¨¹¤µ¥ÇëÇó
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºå·¥å•è¯·æ±‚
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createOrderByRequester(String domain){
@@ -1302,9 +1302,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ²é¿´¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * GETÇëÇó
+	 * æŸ¥çœ‹å·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * GETè¯·æ±‚
 	 * @param domain
 	 * @param id
 	 * @return
@@ -1315,10 +1315,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ËÑË÷¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * GETÇëÇó
-	 * ÇëÇó²ÎÊı£ºquery£º²éÑ¯¹Ø¼ü´Ê£¬Ä£ºı²éÑ¯¶à¸ö×Ö¶Î£»status£º×´Ì¬É¸Ñ¡Ìõ¼ş£»fieldvalue:×Ô¶¨Òå×Ö¶ÎÌõ¼ş£»
+	 * æœç´¢å·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * GETè¯·æ±‚
+	 * è¯·æ±‚å‚æ•°ï¼šqueryï¼šæŸ¥è¯¢å…³é”®è¯ï¼Œæ¨¡ç³ŠæŸ¥è¯¢å¤šä¸ªå­—æ®µï¼›statusï¼šçŠ¶æ€ç­›é€‰æ¡ä»¶ï¼›fieldvalue:è‡ªå®šä¹‰å­—æ®µæ¡ä»¶ï¼›
 	 * @param domain
 	 * @return
 	 */
@@ -1328,11 +1328,11 @@ public class KF5Interface {
 	
 
 	/**
-	 * »ñÈ¡Ö¸¶¨¹«Ë¾×éÖ¯µÄ¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£º¿Í·ş
-	 * GETÇëÇó
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param organization_id ¹«Ë¾×éÖ¯id
+	 * è·å–æŒ‡å®šå…¬å¸ç»„ç»‡çš„å·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šå®¢æœ
+	 * GETè¯·æ±‚
+	 * @param domain å¹³å°åœ°å€
+	 * @param organization_id å…¬å¸ç»„ç»‡id
 	 * @return
 	 */
 	public static String getOrganizationOrderList(String domain,String organization_id){
@@ -1341,11 +1341,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨ÓÃ»§µÄ¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£º¿Í·ş
-	 * GETÇëÇó
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param endUserId ÓÃ»§id
+	 * è·å–æŒ‡å®šç”¨æˆ·çš„å·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šå®¢æœ
+	 * GETè¯·æ±‚
+	 * @param domain å¹³å°åœ°å€
+	 * @param endUserId ç”¨æˆ·id
 	 * @return
 	 */
 	public static String getRequesterOrderListByID(String domain,String endUserId){
@@ -1355,10 +1355,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡×´Ì¬ÎªÒÑ½â¾öºÍÒÑ¹Ø±ÕµÄ¹¤µ¥
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–çŠ¶æ€ä¸ºå·²è§£å†³å’Œå·²å…³é—­çš„å·¥å•
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getRequesterOrderListStatusSolved(String domain){
@@ -1367,10 +1367,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡×´Ì¬Ğ¡ÓÚÒÑ½â¾öµÄ¹¤µ¥
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * @param domain Æ½Ì¨µØÖ·
+	 * è·å–çŠ¶æ€å°äºå·²è§£å†³çš„å·¥å•
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getRequesterOrderListStatusOpen(String domain){
@@ -1380,10 +1380,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ¹¤µ¥ÇëÇóÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºÆÕÍ¨ÓÃ»§
-	 * @param domain Æ½Ì¨µØÖ·
+	 * å·¥å•è¯·æ±‚åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šæ™®é€šç”¨æˆ·
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getRequesterOrderList(String domain){
@@ -1392,10 +1392,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ¹ÊÕÏÀàĞÍµÄ¹¤µ¥ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£º¿Í·ş
-	 * @param domain Æ½Ì¨µØÖ·
+	 * æ•…éšœç±»å‹çš„å·¥å•åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šå®¢æœ
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getProblemOrderList(String domain){
@@ -1404,11 +1404,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * ¹¤µ¥±»¹ØÁªµÄÊÂÎñÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£º¿Í·ş
-	 * GETÇëÇó
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ¹¤µ¥id
+	 * å·¥å•è¢«å…³è”çš„äº‹åŠ¡åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šå®¢æœ
+	 * GETè¯·æ±‚
+	 * @param domain å¹³å°åœ°å€
+	 * @param id å·¥å•id
 	 * @return
 	 */
 	public static String getAgentOrderIncidentList(String domain,String id){
@@ -1417,9 +1417,9 @@ public class KF5Interface {
 	
 	
 	/**
-	 * É¾³ı¶à¸ö¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£º¹ÜÀíÔ±
-	 * DELETEÇëÇó
+	 * åˆ é™¤å¤šä¸ªå·¥å•
+	 * è°ƒç”¨æƒé™ï¼šç®¡ç†å‘˜
+	 * DELETEè¯·æ±‚
 	 * @param domain
 	 * @return
 	 */
@@ -1430,11 +1430,11 @@ public class KF5Interface {
 	
 	
 	/**
-	 * É¾³ı¹¤µ¥
-	 * DELETEÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£º¹ÜÀíÔ±
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ¹¤µ¥id
+	 * åˆ é™¤å·¥å•
+	 * DELETEè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šç®¡ç†å‘˜
+	 * @param domain å¹³å°åœ°å€
+	 * @param id å·¥å•id
 	 * @return
 	 */
 	public static String deleteOrder(String domain,String id){
@@ -1443,10 +1443,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ¸üĞÂ¶à¸ö¹¤µ¥£¬Ò»´Î²Ù×÷×î¶à¸üĞÂ100¸ö¹¤µ¥
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£º¿Í·ş
-	 * @param domain Æ½Ì¨µØÖ·
+	 * æ›´æ–°å¤šä¸ªå·¥å•ï¼Œä¸€æ¬¡æ“ä½œæœ€å¤šæ›´æ–°100ä¸ªå·¥å•
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šå®¢æœ
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String updateManyOrders(String domain){
@@ -1457,10 +1457,10 @@ public class KF5Interface {
 	
 	
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§ËùÓĞµÄ¹¤µ¥ÁĞ±í
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain ÔÆ¿Í·şÆ½Ì¨µØÖ·
+	 * è·å–å½“å‰ç”¨æˆ·æ‰€æœ‰çš„å·¥å•åˆ—è¡¨
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain äº‘å®¢æœå¹³å°åœ°å€
 	 * @return
 	 */
 	public static String getOrderList(String domain){
@@ -1468,10 +1468,10 @@ public class KF5Interface {
 		return String.format(AGENT_ORDER_LIST, domain);
 	}
 	/**
-	 * ²é¿´Ö¸¶¨¿Í·şµÄÊÜÀí¹¤µ¥ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param assignee_id ÊÜÀí¿Í·şid
+	 * æŸ¥çœ‹æŒ‡å®šå®¢æœçš„å—ç†å·¥å•åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param domain å¹³å°åœ°å€
+	 * @param assignee_id å—ç†å®¢æœid
 	 * @return
 	 */
 	public static String getOrderListWithID(String domain,String assignee_id){
@@ -1479,11 +1479,11 @@ public class KF5Interface {
 		return String.format(AGENT_ORDER_LIST_WITH_ID, domain,assignee_id);
 	}
 	/**
-	 * ²é¿´¹¤µ¥
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ¹¤µ¥id
+	 * æŸ¥çœ‹å·¥å•
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param id å·¥å•id
 	 * @return
 	 */
 	public static String getOrderDetailByAgent(String domain,String id){
@@ -1492,11 +1492,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ²é¿´¶à¸ö¹¤µ¥£¬×î¶à·µ»Ø100ÌõÊı¾İ
-	 * GETÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param num ¹¤µ¥ÊıÁ¿
+	 * æŸ¥çœ‹å¤šä¸ªå·¥å•ï¼Œæœ€å¤šè¿”å›100æ¡æ•°æ®
+	 * GETè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param num å·¥å•æ•°é‡
 	 * @return
 	 */
 	public static String getAgentManyOrder(String domain){
@@ -1505,10 +1505,10 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ´´½¨¹¤µ¥
-	 * POSTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
+	 * åˆ›å»ºå·¥å•
+	 * POSTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
 	 * @return
 	 */
 	public static String createOrder(String domain){
@@ -1516,11 +1516,11 @@ public class KF5Interface {
 	}
 	
 	/**
-	 * ¸üĞÂ¹¤µ¥
-	 * PUTÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param id ¹¤µ¥id
+	 * æ›´æ–°å·¥å•
+	 * PUTè¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param domain å¹³å°åœ°å€
+	 * @param id å·¥å•id
 	 * @return
 	 */
 	public static String updateOrder(String domain,String id){

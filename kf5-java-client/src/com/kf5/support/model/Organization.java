@@ -5,21 +5,21 @@ import java.util.List;
 
 public class Organization {
 
-	private int id; //¹«Ë¾×éÖ¯id£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //å…¬å¸ç»„ç»‡idï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //×ÊÔ´url
+	private String url; //èµ„æºurl
 	
-	private String name; //×éÖ¯Ãû³Æ
+	private String name; //ç»„ç»‡åç§°
 	
-	private String domain; //ÓòÃûºó×º£¬¸ñÊ½Îª{domain}.com¡£´´½¨ÓÃ»§Ê±£¬ÓÃ»§ÓÊÏäÈôÆ¥ÅäÉÏdomain×Ö¶Î£¬Ôò×Ô¶¯¼ÓÈë×éÖ¯
+	private String domain; //åŸŸååç¼€ï¼Œæ ¼å¼ä¸º{domain}.comã€‚åˆ›å»ºç”¨æˆ·æ—¶ï¼Œç”¨æˆ·é‚®ç®±è‹¥åŒ¹é…ä¸Šdomainå­—æ®µï¼Œåˆ™è‡ªåŠ¨åŠ å…¥ç»„ç»‡
 	
-	private String desription; //×éÖ¯ÃèÊö
+	private String desription; //ç»„ç»‡æè¿°
 	
-	private int group_id; //·ÖÅä¹«Ë¾×éÖ¯µÄ¹¤µ¥¸øÖ¸¶¨¿Í·ş×é
+	private int group_id; //åˆ†é…å…¬å¸ç»„ç»‡çš„å·¥å•ç»™æŒ‡å®šå®¢æœç»„
 	
-	private String created_at; //×éÖ¯´´½¨Ê±¼ä
+	private String created_at; //ç»„ç»‡åˆ›å»ºæ—¶é—´
 	 
-	private List<OrganizationField> organizationFields = new ArrayList<OrganizationField>();//¹«Ë¾×éÖ¯×Ô¶¨Òå×Ö¶Î
+	private List<OrganizationField> organizationFields = new ArrayList<OrganizationField>();//å…¬å¸ç»„ç»‡è‡ªå®šä¹‰å­—æ®µ
 
 	public int getId() {
 		return id;

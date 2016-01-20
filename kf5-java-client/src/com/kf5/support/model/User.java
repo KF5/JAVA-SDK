@@ -5,53 +5,53 @@ import java.util.List;
 
 public class User {
 
-	private int id;//ÓÃ»§id£¬ÓĞÏµÍ³ÏµÍ³·ÖÅä
+	private int id;//ç”¨æˆ·idï¼Œæœ‰ç³»ç»Ÿç³»ç»Ÿåˆ†é…
 	
-	private String url; // ×ÊÔ´url
+	private String url; // èµ„æºurl
 	
-	private String email; // ÓÃ»§ÓÊÏä
+	private String email; // ç”¨æˆ·é‚®ç®±
 	
-	private String name; //ÓÃ»§êÇ³Æ
+	private String name; //ç”¨æˆ·æ˜µç§°
 	
-	private String agentDisplayName; //¿Í·ş´¦Àí¹¤µ¥Ê±ÏÔÊ¾Ãû³Æ
+	private String agentDisplayName; //å®¢æœå¤„ç†å·¥å•æ—¶æ˜¾ç¤ºåç§°
 	
-	private String role; //ÓÃ»§½ÇÉ«£¬¿ÉÑ¡Öµ:end_user,agent,admin
+	private String role; //ç”¨æˆ·è§’è‰²ï¼Œå¯é€‰å€¼:end_user,agent,admin
 	
-	private String phone;//ÓÃ»§ÊÖ»ú
+	private String phone;//ç”¨æˆ·æ‰‹æœº
 	
-	private boolean phoneBind; //ÊÖ»úÊÇ·ñ°ó¶¨
+	private boolean phoneBind; //æ‰‹æœºæ˜¯å¦ç»‘å®š
 	
-	private String signature; //¿Í·ş´¦Àí¹¤µ¥Ê±ÏÔÊ¾Ç©Ãû
+	private String signature; //å®¢æœå¤„ç†å·¥å•æ—¶æ˜¾ç¤ºç­¾å
 	
-	private String details; //ÏêÏ¸ĞÅÏ¢
+	private String details; //è¯¦ç»†ä¿¡æ¯
 	
-	private String notes; //ÓÃ»§ËµÃ÷
+	private String notes; //ç”¨æˆ·è¯´æ˜
 	
-	private int organizationId;//ÓÃ»§ËùÊô×éÖ¯id
+	private int organizationId;//ç”¨æˆ·æ‰€å±ç»„ç»‡id
 	
-	private String language;//ÓÃ»§µÄÆ«ºÃÓïÑÔ
+	private String language;//ç”¨æˆ·çš„åå¥½è¯­è¨€
 	
-	private String createdAt;//´´½¨Ê±¼ä
+	private String createdAt;//åˆ›å»ºæ—¶é—´
 	
-	private String updatedAt;//×îºó¸üĞÂÊ±¼ä
+	private String updatedAt;//æœ€åæ›´æ–°æ—¶é—´
 	
-	private String lastLoginAt;//×î½üµÇÂ¼Ê±¼ä
+	private String lastLoginAt;//æœ€è¿‘ç™»å½•æ—¶é—´
 	
-	private String status; //ÓÃ»§×´Ì¬£¬¿ÉÑ¡Öµ£ºsuspendedÔİÍ£,activeÕı³£,unverifiedÎ´ÉóºË
+	private String status; //ç”¨æˆ·çŠ¶æ€ï¼Œå¯é€‰å€¼ï¼šsuspendedæš‚åœ,activeæ­£å¸¸,unverifiedæœªå®¡æ ¸
 	
-	private String photo; //ÓÃ»§Í·ÏñÍ¼Æ¬µÄurlµØÖ·
+	private String photo; //ç”¨æˆ·å¤´åƒå›¾ç‰‡çš„urlåœ°å€
 	
-	private boolean modetator; //¿Í·şÎÄµµÈ¨ÏŞ£¬true±íÊ¾ÄÜ±à¼­ÎÄµµ
+	private boolean modetator; //å®¢æœæ–‡æ¡£æƒé™ï¼Œtrueè¡¨ç¤ºèƒ½ç¼–è¾‘æ–‡æ¡£
 	
-	private boolean publicComments; //¿Í·ş»Ø¸´¹¤µ¥È¨ÏŞ£¬falseÎªÖ»ÄÜË½ÃÜ»Ø¸´
+	private boolean publicComments; //å®¢æœå›å¤å·¥å•æƒé™ï¼Œfalseä¸ºåªèƒ½ç§å¯†å›å¤
 	
-	private String ticketRestriction;//¿Í·şÊÜÀí¹¤µ¥È¨ÏŞ£¬all±íÊ¾¿ÉÒÔÊÜÀíËùÓĞ¹¤µ¥£¬groups±íÊ¾Ö»ÄÜÊÜÀí¿Í·ş×éµÄ¹¤µ¥£¬assigned±íÊ¾Ö»ÄÜÊÜÀí·ÖÅäµÄ¹¤µ¥
+	private String ticketRestriction;//å®¢æœå—ç†å·¥å•æƒé™ï¼Œallè¡¨ç¤ºå¯ä»¥å—ç†æ‰€æœ‰å·¥å•ï¼Œgroupsè¡¨ç¤ºåªèƒ½å—ç†å®¢æœç»„çš„å·¥å•ï¼Œassignedè¡¨ç¤ºåªèƒ½å—ç†åˆ†é…çš„å·¥å•
 	
-	private boolean managePeople; //¿Í·ş¹ÜÀíÓÃ»§È¨ÏŞ£¬true±íÊ¾¿ÉÒÔ¹ÜÀíÓÃ»§
+	private boolean managePeople; //å®¢æœç®¡ç†ç”¨æˆ·æƒé™ï¼Œtrueè¡¨ç¤ºå¯ä»¥ç®¡ç†ç”¨æˆ·
 	
-	private int customRoleId; //¿Í·şËùÊôµÄ×Ô¶¨Òå½ÇÉ«id£¬¸ß¼¶·şÎñÄ£Ê½²ÅÓĞ´Ë¹¦ÄÜ¡£ÈôÖµ²»Îª¿Õ£¬ÄÇÃ´ÉÏÃæµÄ¿Í·şÈ¨ÏŞ×Ö¶Î²»ÔÙÆğ×÷ÓÃ£¬È¨ÏŞ°´ÕÕcustom_roleÀïµÄÉèÖÃÉúĞ§
+	private int customRoleId; //å®¢æœæ‰€å±çš„è‡ªå®šä¹‰è§’è‰²idï¼Œé«˜çº§æœåŠ¡æ¨¡å¼æ‰æœ‰æ­¤åŠŸèƒ½ã€‚è‹¥å€¼ä¸ä¸ºç©ºï¼Œé‚£ä¹ˆä¸Šé¢çš„å®¢æœæƒé™å­—æ®µä¸å†èµ·ä½œç”¨ï¼Œæƒé™æŒ‰ç…§custom_roleé‡Œçš„è®¾ç½®ç”Ÿæ•ˆ
 	
-	private List<UserFiled> userFileds = new ArrayList<UserFiled>();//ÓÃ»§×Ô¶¨Òå×Ö¶Î
+	private List<UserFiled> userFileds = new ArrayList<UserFiled>();//ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
 
 	public int getId() {
 		return id;

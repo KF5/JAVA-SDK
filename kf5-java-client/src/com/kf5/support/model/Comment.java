@@ -5,21 +5,21 @@ import java.util.List;
 
 public class Comment {
 
-	private int id; //»Ø¸´id£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //å›å¤idï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String  content; //¹¤µ¥»Ø¸´ÎÄ±¾ÄÚÈİ
+	private String  content; //å·¥å•å›å¤æ–‡æœ¬å†…å®¹
 	
-	private String html_content; //¹¤µ¥»Ø¸´htmlÄÚÈİ
+	private String html_content; //å·¥å•å›å¤htmlå†…å®¹
 	
-	private boolean isPublic; //Ë½ÃÜĞÔ£¬falseÔòÖ»ÓĞ¿Í·ş¿É¼û
+	private boolean isPublic; //ç§å¯†æ€§ï¼Œfalseåˆ™åªæœ‰å®¢æœå¯è§
 	
-	private String created_at; //»Ø¸´µÄÊ±¼ä
+	private String created_at; //å›å¤çš„æ—¶é—´
 	
-	private int author_id; //»Ø¸´µÄÓÃ»§id
+	private int author_id; //å›å¤çš„ç”¨æˆ·id
 	
-	private String author_name; // »Ø¸´µÄÓÃ»§Ãû³Æ
+	private String author_name; // å›å¤çš„ç”¨æˆ·åç§°
 	
-	private List<Attachment> listAttachments = new ArrayList<Attachment>(); //¸½¼ş
+	private List<Attachment> listAttachments = new ArrayList<Attachment>(); //é™„ä»¶
 
 	public int getId() {
 		return id;

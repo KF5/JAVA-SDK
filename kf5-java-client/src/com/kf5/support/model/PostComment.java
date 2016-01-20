@@ -2,15 +2,15 @@ package com.kf5.support.model;
 
 public class PostComment {
 
-	private int id; //»Ø¸´id
+	private int id; //å›å¤id
 	
-	private String content; //»Ø¸´ÄÚÈİ
+	private String content; //å›å¤å†…å®¹
 	
-	private int author_id; // »Ø¸´×÷ÕßµÄid
+	private int author_id; // å›å¤ä½œè€…çš„id
 	
-	private String created_at; // ´´½¨Ê±¼ä
+	private String created_at; // åˆ›å»ºæ—¶é—´
 	
-	private String updated_at; //×îºóĞŞ¸ÄÊ±¼ä
+	private String updated_at; //æœ€åä¿®æ”¹æ—¶é—´
 
 	public int getId() {
 		return id;

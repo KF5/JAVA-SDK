@@ -1,4 +1,4 @@
-package com.kf5.support.example;
+锘縫ackage com.kf5.support.example;
 
 import com.kf5.support.controller.KF5Support;
 
@@ -7,21 +7,20 @@ public class Test {
 	public static void main(String[] args) {
 
 		KF5Support kf5Support = new KF5Support();
-		//		kf5Support.initWithApiToken("xxxxx.kf5.com", "xxxxx@qq.com", "xxxxxx");
-		kf5Support.initWithApiToken("xxxxx.kf5.com", "xxxx@qq.com", "xxxxxx");
+		kf5Support.initWithApiToken("yitb.kf5.com", "tanqinghua@kjy.com", "1da3457430ab722a7ff9fbc3d379d3");
 		//		kf5Support.getAgentOrderList();
-		//		kf5Support.getAgentOrderListWithID("258");
-		//		kf5Support.getAgentTicketDetail("32");
+		//				kf5Support.getAgentOrderListWithID("258");
+		//		kf5Support.getAgentTicketDetail("32");S
 		//		kf5Support.getAgentManyTickets("32,1");
 		//		kf5Support.createAgentOrder("{ticket:{title: \"Let's create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//		kf5Support.updateAgentOrder("2279","{ticket:{title: \"你在哪里\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//		kf5Support.updateManyAgentOrder("1", "{\"ticket\": {\"title\": \"我是你大爷\"}}");
+		//		kf5Support.updateAgentOrder("2279","{ticket:{title: \"浣犲湪鍝噷\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
+		//		kf5Support.updateManyAgentOrder("1", "{\"ticket\": {\"title\": \"鎴戞槸浣犲ぇ鐖穃"}}");
 		//		kf5Support.deleteAgentOrder("2279");
 		//		kf5Support.deleteManyAgentOrders("2282,2280");
 		//		kf5Support.getAgentOrderCollaborators("1");
 		//		kf5Support.getAgentOrderIncidentList("32");
 		//		kf5Support.getAgentOrderProblemList();
-		//		kf5Support.getRequesterOrderList();
+		//		kf5Support.getRequesterOrderList();	
 		//		kf5Support.getRequesterOrderListStatusOpen();
 		//		kf5Support.getRequesterOrderListStatusSolved();
 		//		kf5Support.getRequesterOrderListByID("586");
@@ -29,13 +28,13 @@ public class Test {
 		//		kf5Support.searchOrderByEndUser("status=open");
 		//		kf5Support.getOrderDetailByEndUser("288");
 		//		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"被雷焦的新工单标题\",\"comment\": {\"content\": \"大家好，我是一条新工单?\"}}}");
-		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"反正很奇怪\",\"custom_fields\":[],\"description\":\"真的很奇怪\",\"title\":\"不吃药萌萌哒\",\"requester_id\":0,\"id\":0,\"group_id\":0}}}");
-		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"custom_fields\":[],\"description\":\"图图寂寞哦\",\"title\":\"不吃药萌萌哒\",\"requester_id\":0,\"id\":0,\"group_id\":0}}");
-		//		kf5Support.getCommentListByEndUser("288");
+		//		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"琚浄鐒︾殑鏂板伐鍗曟爣棰榎",\"comment\": {\"content\": \"澶у濂斤紝鎴戞槸涓�鏉℃柊宸ュ崟?\"}}}");
+		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"浣犲ぇ鐖穃",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
+		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"浣犲ぇ鐖穃",\"comment\": {\"content\": \"鍙嶆寰堝鎬猏",\"custom_fields\":[],\"description\":\"鐪熺殑寰堝鎬猏",\"title\":\"涓嶅悆鑽悓钀屽搾\",\"requester_id\":0,\"id\":0,\"group_id\":0}}}");
+		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"custom_fields\":[],\"description\":\"鍥惧浘瀵傚癁鍝",\"title\":\"涓嶅悆鑽悓钀屽搾\",\"requester_id\":0,\"id\":0,\"group_id\":0}}");
+		kf5Support.getCommentListByEndUser("14406");
 		//		kf5Support.getOrderCommentWithID(null, "205586");
-		//		kf5Support.getOrderCommentList("32");
+		//		kf5Support.getOrderCommentList("32");	
 		//		kf5Support.getTicketFieldList();
 		//		kf5Support.getTicketFieldListActive();
 		//		kf5Support.getTicketFieldByID("103");
@@ -50,9 +49,9 @@ public class Test {
 		//		kf5Support.getUserInfo("123");
 		//		kf5Support.getMyInfo();
 		//		kf5Support.getManyUsersInfo("123,122");
-		//		kf5Support.createUserInfo("{\"user\": {\"name\": \"liuming\", \"email\": \"liuming135@qq.com\"}}");//测试创建已存在用户的bug
+		//		kf5Support.createUserInfo("{\"user\": {\"name\": \"liuming\", \"email\": \"liuming135@qq.com\"}}");//娴嬭瘯鍒涘缓宸插瓨鍦ㄧ敤鎴风殑bug
 		//		kf5Support.mergeUser("589280", "{\"user\": {\"id\": 123}}");
-		//		kf5Support.updateUserInfo("10556", "{\"user\": {\"name\": \"你大爷\"}}");
+		//		kf5Support.updateUserInfo("10556", "{\"user\": {\"name\": \"浣犲ぇ鐖穃"}}");
 		//		kf5Support.deleteUser("10961");
 		//		kf5Support.searchUser("123");
 		//		kf5Support.getUserFieldList();
@@ -67,37 +66,37 @@ public class Test {
 		//		kf5Support.getOrganizationList();
 		//		kf5Support.getOrganizationByID("55");
 		//		kf5Support.createOrganization("{\"organization\": {\"name\": \"My Organization\"}}");
-		//		kf5Support.updateOrganization("16004","{\"organization\": {\"description\": \"呵呵，来修改一下\"}}");
+		//		kf5Support.updateOrganization("16004","{\"organization\": {\"description\": \"鍛靛懙锛屾潵淇敼涓�涓媆"}}");
 		//		kf5Support.deleteOrganization("19845");
 		//		kf5Support.getTopicList();
 		//		kf5Support.getTopicByID("11593");
 		//		kf5Support.createTopic("{\"topic\": {\"title\": \"this is topic title\",\"description\": \"description123465\"}}");
-		//		kf5Support.updateTopic("11784", "{\"topic\": {\"title\": \"新标题\"}}");
+		//		kf5Support.updateTopic("11784", "{\"topic\": {\"title\": \"鏂版爣棰榎"}}");
 		//		kf5Support.deleteTopic("11784");
 		//		kf5Support.getQuestionList();
 		//		kf5Support.getQuestionByID("2617");
-		//		kf5Support.createQuestion("{\"question\": {\"title\": \"我是你大爷\",\"topic_id\": 8881,\"content\": \"this is content\"}}");
-		//		kf5Support.updateQuestion("3301", "{\"question\": {\"title\": \"修改标题\"}}");
+		//		kf5Support.createQuestion("{\"question\": {\"title\": \"鎴戞槸浣犲ぇ鐖穃",\"topic_id\": 8881,\"content\": \"this is content\"}}");
+		//		kf5Support.updateQuestion("3301", "{\"question\": {\"title\": \"淇敼鏍囬\"}}");
 		//		kf5Support.deleteQuestion("3292");
 		//		kf5Support.getQuestionCommentList("3207");
 		//		kf5Support.getQuestionCommentByID("3207", "2715");
-		//		kf5Support.replyQuestion("3207", "{\"request\": {\"comment\": {\"content\": \"我是你大爷\"}}}");
+		//		kf5Support.replyQuestion("3207", "{\"request\": {\"comment\": {\"content\": \"鎴戞槸浣犲ぇ鐖穃"}}}");
 		//		kf5Support.getCategoriesList();
 		//		kf5Support.getCategoryByID("12268");
 		//		kf5Support.createCategory("{\"category\": {\"title\": \"post category\",\"content\": \"this is content\"}}");
-		//		kf5Support.updateCategory("12268", "{\"category\": {\"title\": \"商户合作1\"}}");
+		//		kf5Support.updateCategory("12268", "{\"category\": {\"title\": \"鍟嗘埛鍚堜綔1\"}}");
 		//		kf5Support.deleteCategory("13546");
 		//		kf5Support.getForumList();
 		//		kf5Support.getForumByID("40537");
 		//		kf5Support.createForum("{\"forum\": {\"title\": \"this is forums title\",\"category_id\": \"10232\",\"content\": \"this is content\",\"role_view\": \"all\"}}");
-		//		kf5Support.updateForum("53112", "{\"forum\": {\"title\": \"呵呵\"}}");
+		//		kf5Support.updateForum("53112", "{\"forum\": {\"title\": \"鍛靛懙\"}}");
 		//		kf5Support.deleteForum("53112");
 		//		kf5Support.getPostList();
 		//		kf5Support.getPostByID("75491");
 		//		kf5Support.getManyPosts("75491,70879,70873");
 		//		kf5Support.searchPost("7");
 		//		kf5Support.createPost("{\"post\": {\"title\": \"this is post title\",\"forum_id\":47630,\"content\": \"this is content\"}}");
-		//		kf5Support.updatePost("76180", "{\"post\": {\"title\": \"修改文档\"}}");
+		//		kf5Support.updatePost("76180", "{\"post\": {\"title\": \"淇敼鏂囨。\"}}");
 		//		kf5Support.deletePost("75584");
 		//		kf5Support.getPostCommentList("70873");
 		//		kf5Support.getPostCommentByID("70873", "3896");

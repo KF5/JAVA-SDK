@@ -2,19 +2,19 @@ package com.kf5.support.model;
 
 public class Forum {
 
-	private int id; //ÎÄµµ·ÖÀàid£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //æ–‡æ¡£åˆ†ç±»idï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //×ÊÔ´url
+	private String url; //èµ„æºurl
 	
-	private int category_id; //¸Ã·ÖÀàËùÊôµÄÎÄµµ·ÖÇøid
+	private int category_id; //è¯¥åˆ†ç±»æ‰€å±çš„æ–‡æ¡£åˆ†åŒºid
 	
-	private String title; //ÎÄµµ·ÖÀàÃû³Æ
+	private String title; //æ–‡æ¡£åˆ†ç±»åç§°
 	
-	private String content; //ÎÄµµ·ÖÀàÃèÊö
+	private String content; //æ–‡æ¡£åˆ†ç±»æè¿°
 	
-	private String role_view; //ÎÄµµ·ÖÀà²é¿´È¨ÏŞ, ¿ÉÑ¡Öµ:all,logged_in,agent
+	private String role_view; //æ–‡æ¡£åˆ†ç±»æŸ¥çœ‹æƒé™, å¯é€‰å€¼:all,logged_in,agent
 	
-	private int sort; //ÎÄµµ·ÖÀàÇ°Ì¨ÏÔÊ¾Ë³Ğò
+	private int sort; //æ–‡æ¡£åˆ†ç±»å‰å°æ˜¾ç¤ºé¡ºåº
 
 	public int getId() {
 		return id;

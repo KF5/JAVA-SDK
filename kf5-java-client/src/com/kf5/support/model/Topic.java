@@ -2,17 +2,17 @@ package com.kf5.support.model;
 
 public class Topic {
 
-	private int id; //社区话题id，由系统自动分配
+	private int id; //绀惧尯璇濋id锛岀敱绯荤粺鑷姩鍒嗛厤
 	
-	private String url; //资源url
+	private String url; //璧勬簮url
 	
-	private String title; //社区话题名称
+	private String title; //绀惧尯璇濋鍚嶇О
 	
-	private String decription; //社区话题描述
+	private String decription; //绀惧尯璇濋鎻忚堪
 	
-	private int sort; //社区话题前台显示顺序
+	private int sort; //绀惧尯璇濋鍓嶅彴鏄剧ず椤哄簭
 	
-	private String created_at; //创建时间
+	private String created_at; //鍒涘缓鏃堕棿
 
 	public int getId() {
 		return id;

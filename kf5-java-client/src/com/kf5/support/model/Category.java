@@ -2,17 +2,17 @@ package com.kf5.support.model;
 
 public class Category {
 
-	private int id; //文档分区id，由系统自动分配
+	private int id; //鏂囨。鍒嗗尯id锛岀敱绯荤粺鑷姩鍒嗛厤
 	
-	private String url; //资源url
+	private String url; //璧勬簮url
 	
-	private String title; //文档分区名称
+	private String title; //鏂囨。鍒嗗尯鍚嶇О
 	
-	private String content; //文档分区描述
+	private String content; //鏂囨。鍒嗗尯鎻忚堪
 	
-	private int display_limit; //该分区在前台显示的每个分类的下的文档数量
+	private int display_limit; //璇ュ垎鍖哄湪鍓嶅彴鏄剧ず鐨勬瘡涓垎绫荤殑涓嬬殑鏂囨。鏁伴噺
 	
-	private int sort; //文档分区前台显示顺序
+	private int sort; //鏂囨。鍒嗗尯鍓嶅彴鏄剧ず椤哄簭
 
 	public int getId() {
 		return id;

@@ -2,17 +2,17 @@ package com.kf5.support.model;
 
 public class View {
 
-	private int id; //²é¿´·ÖÀàid£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //æŸ¥çœ‹åˆ†ç±»idï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //×ÊÔ´url
+	private String url; //èµ„æºurl
 	
-	private String title; //²é¿´·ÖÀàÃû³Æ
+	private String title; //æŸ¥çœ‹åˆ†ç±»åç§°
 	
-	private boolean active; //²é¿´·ÖÀàÊÇ·ñÆôÓÃ
+	private boolean active; //æŸ¥çœ‹åˆ†ç±»æ˜¯å¦å¯ç”¨
 	
-	private String created_at; //²é¿´·ÖÀà´´½¨Ê±¼ä
+	private String created_at; //æŸ¥çœ‹åˆ†ç±»åˆ›å»ºæ—¶é—´
 	
-	private int slas_id ; //ÈôÊÇslas²é¿´·ÖÀà£¬´Ë×Ö¶Î»á´øÓĞÖµ
+	private int slas_id ; //è‹¥æ˜¯slasæŸ¥çœ‹åˆ†ç±»ï¼Œæ­¤å­—æ®µä¼šå¸¦æœ‰å€¼
 	
 
 	public int getSlas_id() {

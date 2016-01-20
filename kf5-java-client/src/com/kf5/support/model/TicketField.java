@@ -6,33 +6,33 @@ import java.util.List;
 public class TicketField {
 
 	
-	private int id; //¹¤µ¥×Ö¶Îid£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //å·¥å•å­—æ®µidï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //µ±Ç°×ÊÔ´url
+	private String url; //å½“å‰èµ„æºurl
 	
-	private String name; //¹¤µ¥×Ö¶ÎµÄÃû³Æ£¬¸ñÊ½Îª"field_{id}"
+	private String name; //å·¥å•å­—æ®µçš„åç§°ï¼Œæ ¼å¼ä¸º"field_{id}"
 	
-	private String type; //×Ö¶ÎÀàĞÍ
+	private String type; //å­—æ®µç±»å‹
 	
-	private String agent_title; //×Ö¶Î¶Ô¿Í·şµÄÏÔÊ¾Ãû³Æ
+	private String agent_title; //å­—æ®µå¯¹å®¢æœçš„æ˜¾ç¤ºåç§°
 	
-	private boolean agent_required; //¿Í·şÔÚ´¦Àí¹¤µ¥Ê±ÊÇ·ñ±ØÌî
+	private boolean agent_required; //å®¢æœåœ¨å¤„ç†å·¥å•æ—¶æ˜¯å¦å¿…å¡«
 	
-	private boolean enduser_visible; //ÆÕÍ¨ÓÃ»§Ìá½»¹¤µ¥Ê±ÄÜ·ñ¿´µ½×Ö¶Î
+	private boolean enduser_visible; //æ™®é€šç”¨æˆ·æäº¤å·¥å•æ—¶èƒ½å¦çœ‹åˆ°å­—æ®µ
 	
-	private String  enduser_title; //×Ö¶Î¶ÔÆÕÍ¨ÓÃ»§µÄÏÔÊ¾Ãû³Æ
+	private String  enduser_title; //å­—æ®µå¯¹æ™®é€šç”¨æˆ·çš„æ˜¾ç¤ºåç§°
 	
-	private boolean enduser_editable;  //ÆÕÍ¨ÓÃ»§ÊÇ·ñÄÜ±à¼­´Ë×Ö¶Î
+	private boolean enduser_editable;  //æ™®é€šç”¨æˆ·æ˜¯å¦èƒ½ç¼–è¾‘æ­¤å­—æ®µ
 	
-	private String enduser_description ; //¶ÔÆÕÍ¨ÓÃ»§ÏÔÊ¾µÄ×Ö¶ÎËµÃ÷
+	private String enduser_description ; //å¯¹æ™®é€šç”¨æˆ·æ˜¾ç¤ºçš„å­—æ®µè¯´æ˜
 	
-	private boolean enduser_required; //¿Í·şÔÚÌá½»¹¤µ¥Ê±ÊÇ·ñ±ØÌî
+	private boolean enduser_required; //å®¢æœåœ¨æäº¤å·¥å•æ—¶æ˜¯å¦å¿…å¡«
 	
-	private boolean active; //×Ö¶ÎÊÇ·ñÆôÓÃ
+	private boolean active; //å­—æ®µæ˜¯å¦å¯ç”¨
 	 
-	private String regexp_for_validation; //ÕıÔòÆ¥Åä×Ö¶ÎµÄ±í´ïÊ½
+	private String regexp_for_validation; //æ­£åˆ™åŒ¹é…å­—æ®µçš„è¡¨è¾¾å¼
 	
-	private List<CustomFieldOption> customFieldOptions = new ArrayList<>(); //ÏÂÀ­²Ëµ¥×Ö¶ÎµÄÑ¡ÏîÊı×é
+	private List<CustomFieldOption> customFieldOptions = new ArrayList<>(); //ä¸‹æ‹‰èœå•å­—æ®µçš„é€‰é¡¹æ•°ç»„
 
 	public int getId() {
 		return id;

@@ -19,9 +19,9 @@ import com.kf5.support.model.builder.KF5EntityBuilder;
 public class HttpRequest {
 
 	/**
-	 * GETÇëÇó
-	 * @param url ÇëÇóµØÖ·
-	 * @param baseToken basicÑéÖ¤Âë
+	 * GETè¯·æ±‚
+	 * @param url è¯·æ±‚åœ°å€
+	 * @param baseToken basicéªŒè¯ç 
 	 * @return
 	 */
 	public static MessageStatus sendGetRequest(String url,String baseToken){
@@ -30,9 +30,9 @@ public class HttpRequest {
 		HttpURLConnection connection = null;
 		try {
 			URL realUrl = new URL(url);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 			connection = (HttpURLConnection) realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			connection.setRequestMethod("GET");
 			connection.setRequestProperty("connection", "Keep-Alive");
 			connection.setRequestProperty("Content-Type","application/json");
@@ -42,9 +42,8 @@ public class HttpRequest {
 			connection.setConnectTimeout(10*1000);
 			connection.setRequestProperty("Authorization", "Basic "+baseToken);
 
-			// ½¨Á¢Êµ¼ÊµÄÁ¬½Ó
+			// å»ºç«‹å®é™…çš„è¿æ¥
 			connection.connect();
-			int resultCode = connection.getResponseCode();
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				messageStatus.setStatus(StatusCode.OK);
 				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getInputStream())));
@@ -60,14 +59,17 @@ public class HttpRequest {
 				connection.disconnect();
 			}
 		}
+		
+//		System.out.println(messageStatus.getJsonObject().toString());
+		
 		return messageStatus;
 	}
 
 
 	/**
-	 * DELETEÇëÇó·½Ê½
-	 * @param url ÇëÇóµØÖ·
-	 * @param baseToken basicÑéÖ¤Âë
+	 * DELETEè¯·æ±‚æ–¹å¼
+	 * @param url è¯·æ±‚åœ°å€
+	 * @param baseToken basicéªŒè¯ç 
 	 * @return
 	 */
 	public static MessageStatus sendDeleteRequest(String url,String baseToken){
@@ -76,9 +78,9 @@ public class HttpRequest {
 		HttpURLConnection connection = null;
 		try {
 			URL realUrl = new URL(url);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 			connection = (HttpURLConnection) realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			connection.setRequestMethod("DELETE");
 			connection.setRequestProperty("connection", "Keep-Alive");
 			connection.setRequestProperty("Content-Type","application/json");
@@ -87,7 +89,7 @@ public class HttpRequest {
 			connection.setDoInput(true);
 			connection.setConnectTimeout(10*1000);
 			connection.setRequestProperty("Authorization", "Basic "+baseToken);
-			// ½¨Á¢Êµ¼ÊµÄÁ¬½Ó
+			// å»ºç«‹å®é™…çš„è¿æ¥
 			connection.connect();
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				messageStatus.setStatus(StatusCode.OK);
@@ -110,10 +112,10 @@ public class HttpRequest {
 
 
 	/**
-	 * POSTÇëÇó·½Ê½
-	 * @param url ÇëÇóµØÖ·
-	 * @param baseToken basicÑéÖ¤Âë
-	 * @param param Ìá½»²ÎÊı£¬²ÎÊı¸ñÊ½Îªjson¸ñÊ½
+	 * POSTè¯·æ±‚æ–¹å¼
+	 * @param url è¯·æ±‚åœ°å€
+	 * @param baseToken basicéªŒè¯ç 
+	 * @param param æäº¤å‚æ•°ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼
 	 * @return
 	 */
 	public static MessageStatus sendPostRequest(String url,String baseToken,String param) {
@@ -123,9 +125,9 @@ public class HttpRequest {
 		HttpURLConnection connection = null;
 		try {
 			URL realUrl = new URL(url);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 			connection = (HttpURLConnection) realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("connection", "Keep-Alive");
 			connection.setRequestProperty("Content-Type","application/json");
@@ -134,7 +136,7 @@ public class HttpRequest {
 			connection.setDoInput(true);
 			connection.setConnectTimeout(10*1000);
 			connection.setRequestProperty("Authorization", "Basic "+baseToken);
-			// ½¨Á¢Êµ¼ÊµÄÁ¬½Ó
+			// å»ºç«‹å®é™…çš„è¿æ¥
 			connection.connect();
 			out = new DataOutputStream(connection.getOutputStream());
 			out.write(param.getBytes("utf-8"));
@@ -151,7 +153,7 @@ public class HttpRequest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊäÈëÁ÷
+		// ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å…¥æµ
 		finally {
 			try {
 				if (out != null) {
@@ -170,10 +172,10 @@ public class HttpRequest {
 
 
 	/**
-	 * PUTÇëÇóµ±Ê±
-	 * @param url ÇëÇóµØÖ·
-	 * @param baseToken basicÑéÖ¤Âë
-	 * @param param Ìá½»²ÎÊı£¬²ÎÊı¸ñÊ½Îªjson¸ñÊ½
+	 * PUTè¯·æ±‚å½“æ—¶
+	 * @param url è¯·æ±‚åœ°å€
+	 * @param baseToken basicéªŒè¯ç 
+	 * @param param æäº¤å‚æ•°ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼
 	 * @return
 	 */
 	public static MessageStatus sendPutRequest(String url,String baseToken,String param) {
@@ -183,9 +185,9 @@ public class HttpRequest {
 		HttpURLConnection connection = null;
 		try {
 			URL realUrl = new URL(url);
-			// ´ò¿ªºÍURLÖ®¼äµÄÁ¬½Ó
+			// æ‰“å¼€å’ŒURLä¹‹é—´çš„è¿æ¥
 			connection = (HttpURLConnection) realUrl.openConnection();
-			// ÉèÖÃÍ¨ÓÃµÄÇëÇóÊôĞÔ
+			// è®¾ç½®é€šç”¨çš„è¯·æ±‚å±æ€§
 			connection.setRequestMethod("PUT");
 			connection.setRequestProperty("connection", "Keep-Alive");
 			connection.setRequestProperty("Content-Type","application/json");
@@ -194,7 +196,7 @@ public class HttpRequest {
 			connection.setDoInput(true);
 			connection.setConnectTimeout(10*1000);
 			connection.setRequestProperty("Authorization", "Basic "+baseToken);
-			// ½¨Á¢Êµ¼ÊµÄÁ¬½Ó
+			// å»ºç«‹å®é™…çš„è¿æ¥
 			connection.connect();
 			out = new DataOutputStream(connection.getOutputStream());
 			out.write(param.getBytes("utf-8"));
@@ -211,7 +213,7 @@ public class HttpRequest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// Ê¹ÓÃfinally¿éÀ´¹Ø±ÕÊäÈëÁ÷
+		// ä½¿ç”¨finallyå—æ¥å…³é—­è¾“å…¥æµ
 		finally {
 			try {
 				if (out != null) {
@@ -251,12 +253,12 @@ public class HttpRequest {
 	}
 
 	/**
-	 * ¸½¼şÉÏ´«
-	 * @param url ÉÏ´«¸½¼şµØÖ·
-	 * @param file ĞèÒªÉÏ´«µÄÎÄ¼ş
-	 * @param baseToken basicÑéÖ¤Âë
+	 * é™„ä»¶ä¸Šä¼ 
+	 * @param url ä¸Šä¼ é™„ä»¶åœ°å€
+	 * @param file éœ€è¦ä¸Šä¼ çš„æ–‡ä»¶
+	 * @param baseToken basicéªŒè¯ç 
 	 * @return
-	 * @throws IOException Òì³£´¦Àí
+	 * @throws IOException å¼‚å¸¸å¤„ç†
 	 */
 	public static String uploadAttachment(String url, File file,String baseToken) throws IOException {
 
@@ -265,10 +267,10 @@ public class HttpRequest {
 
 		URL uri = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) uri.openConnection();
-		conn.setReadTimeout(10 * 1000); // »º´æµÄ×î³¤Ê±¼ä
-		conn.setDoInput(true);// ÔÊĞíÊäÈë
-		conn.setDoOutput(true);// ÔÊĞíÊä³ö
-		conn.setUseCaches(false); // ²»ÔÊĞíÊ¹ÓÃ»º´æ
+		conn.setReadTimeout(10 * 1000); // ç¼“å­˜çš„æœ€é•¿æ—¶é—´
+		conn.setDoInput(true);// å…è®¸è¾“å…¥
+		conn.setDoOutput(true);// å…è®¸è¾“å‡º
+		conn.setUseCaches(false); // ä¸å…è®¸ä½¿ç”¨ç¼“å­˜
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("connection", "keep-alive");
 		conn.setRequestProperty("Charsert", "UTF-8");
@@ -276,7 +278,7 @@ public class HttpRequest {
 		conn.setRequestProperty("Authorization", "Basic "+baseToken);
 		DataOutputStream outStream = new DataOutputStream(conn.getOutputStream());
 		/**
-		 * Ğ´Èë¸½¼şÊı¾İ
+		 * å†™å…¥é™„ä»¶æ•°æ®
 		 */
 		if (file != null){
 			InputStream is = new FileInputStream(file);
@@ -289,11 +291,11 @@ public class HttpRequest {
 			outStream.write(LINEND.getBytes());
 		}
 
-		// ÇëÇó½áÊø±êÖ¾
+		// è¯·æ±‚ç»“æŸæ ‡å¿—
 		byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINEND).getBytes();
 		outStream.write(end_data);
 		outStream.flush();
-		// µÃµ½ÏìÓ¦Âë
+		// å¾—åˆ°å“åº”ç 
 		int res = conn.getResponseCode();
 		String result = "";
 		if (res == HttpURLConnection.HTTP_OK || res == HttpURLConnection.HTTP_CREATED) {

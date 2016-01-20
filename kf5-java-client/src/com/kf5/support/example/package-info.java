@@ -4,6 +4,6 @@
 /**
  * @author chosen
  *
- * @version ´´½¨Ê±¼ä£º2015Äê9ÔÂ1ÈÕ  ÉÏÎç10:06:12
+ * @version åˆ›å»ºæ—¶é—´ï¼š2015å¹´9æœˆ1æ—¥  ä¸Šåˆ10:06:12
  */
 package com.kf5.support.example;

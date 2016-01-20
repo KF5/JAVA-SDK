@@ -2,11 +2,11 @@ package com.kf5.support.model;
 
 public class ViewCount {
 
-	private int view_id; //分类id
+	private int view_id; //鍒嗙被id
 	
-	private String url; //对应资源url
+	private String url; //瀵瑰簲璧勬簮url
 	
-	private int count; //工单数量
+	private int count; //宸ュ崟鏁伴噺
 
 	public int getView_id() {
 		return view_id;

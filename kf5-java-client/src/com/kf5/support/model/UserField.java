@@ -5,21 +5,21 @@ import java.util.List;
 
 public class UserField {
 
-	private int id; //ÓÃ»§×Ö¶Îid£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //ç”¨æˆ·å­—æ®µidï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //µ±Ç°×ÊÔ´url
+	private String url; //å½“å‰èµ„æºurl
 	
-	private String name; //ÓÃ»§×Ö¶ÎµÄÃû³Æ£¬¸ñÊ½Îª"field_{id}"
+	private String name; //ç”¨æˆ·å­—æ®µçš„åç§°ï¼Œæ ¼å¼ä¸º"field_{id}"
 	
-	private String type; //	×Ö¶ÎÀàĞÍ
+	private String type; //	å­—æ®µç±»å‹
 	
-	private String title; //×Ö¶ÎµÄÏÔÊ¾Ãû³Æ
+	private String title; //å­—æ®µçš„æ˜¾ç¤ºåç§°
 	
-	private String description; //×Ö¶ÎµÄÏÔÊ¾ËµÃ÷
+	private String description; //å­—æ®µçš„æ˜¾ç¤ºè¯´æ˜
 	
-	private boolean active; //×Ö¶ÎÊÇ·ñÆôÓÃ
+	private boolean active; //å­—æ®µæ˜¯å¦å¯ç”¨
 	
-	private List<CustomFieldOption> customFieldOptions = new ArrayList<CustomFieldOption>(); //ÏÂÀ­²Ëµ¥×Ö¶ÎµÄÑ¡ÏîÊı×é
+	private List<CustomFieldOption> customFieldOptions = new ArrayList<CustomFieldOption>(); //ä¸‹æ‹‰èœå•å­—æ®µçš„é€‰é¡¹æ•°ç»„
 
 	public int getId() {
 		return id;

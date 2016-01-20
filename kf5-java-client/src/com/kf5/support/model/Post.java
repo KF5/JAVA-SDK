@@ -5,33 +5,33 @@ import java.util.List;
 
 public class Post {
 
-	private int id; // ÎÄµµid£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; // æ–‡æ¡£idï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //×ÊÔ´url
+	private String url; //èµ„æºurl
 	
-	private int forum_id; //¸ÃÎÄµµËùÊôµÄÎÄµµ·ÖÀà
+	private int forum_id; //è¯¥æ–‡æ¡£æ‰€å±çš„æ–‡æ¡£åˆ†ç±»
 	
-	private String title; //ÎÄµµÃû³Æ
+	private String title; //æ–‡æ¡£åç§°
 	
-	private String content; //ÎÄµµÄÚÈİ
+	private String content; //æ–‡æ¡£å†…å®¹
 	
-	private int author_id; //ÎÄµµ´´½¨Õß
+	private int author_id; //æ–‡æ¡£åˆ›å»ºè€…
 	
-	private boolean disable_comments;// ÊÇ·ñ¹Ø±ÕÆÀÂÛ
+	private boolean disable_comments;// æ˜¯å¦å…³é—­è¯„è®º
 	
-	private boolean is_home; //ÊÇ·ñ·ÅÖÃÊ×Ò³
+	private boolean is_home; //æ˜¯å¦æ”¾ç½®é¦–é¡µ
 	
-	private boolean is_highlight;//ÊÇ·ñ¸ßÁÁ
+	private boolean is_highlight;//æ˜¯å¦é«˜äº®
 	
-	private boolean is_top; //ÊÇ·ñÖÃ¶¥
+	private boolean is_top; //æ˜¯å¦ç½®é¡¶
 	
-	private boolean is_draft;//ÊÇ·ñÎª²İ¸å
+	private boolean is_draft;//æ˜¯å¦ä¸ºè‰ç¨¿
 	
-	private String created_at;//´´½¨Ê±¼ä
+	private String created_at;//åˆ›å»ºæ—¶é—´
 	
-	private String updated_at;//×îºó¸üĞÂÊ±¼ä
+	private String updated_at;//æœ€åæ›´æ–°æ—¶é—´
 	
-	private List<Attachment> attachments = new ArrayList<Attachment>();//¸½¼şÁĞ±í
+	private List<Attachment> attachments = new ArrayList<Attachment>();//é™„ä»¶åˆ—è¡¨
 
 	public int getId() {
 		return id;

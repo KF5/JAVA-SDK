@@ -4,56 +4,56 @@ import java.util.List;
 
 
 /**
- * ¹¤µ¥(¿Í·ş)model
+ * å·¥å•(å®¢æœ)model
  * @author chosen
  *
- * @version ´´½¨Ê±¼ä£º2015Äê9ÔÂ1ÈÕ  ÏÂÎç2:07:04
+ * @version åˆ›å»ºæ—¶é—´ï¼š2015å¹´9æœˆ1æ—¥  ä¸‹åˆ2:07:04
  */
 public class Ticket {
 
-	private int id; //´´½¨¹¤µ¥Ê±ÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //åˆ›å»ºå·¥å•æ—¶ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	 
-	private String url; // ´Ë¹¤µ¥µÄurlµØÖ·
+	private String url; // æ­¤å·¥å•çš„urlåœ°å€
 	
-	private String title; // ±êÌâ
+	private String title; // æ ‡é¢˜
 	
-	private String description; // ¹¤µ¥ÃèÊö£¬¼´µÚÒ»Ìõ¹¤µ¥»Ø¸´µÄÎÄ±¾ÄÚÈİ
+	private String description; // å·¥å•æè¿°ï¼Œå³ç¬¬ä¸€æ¡å·¥å•å›å¤çš„æ–‡æœ¬å†…å®¹
 	
-	private String type; // ÀàĞÍ£º"problem", "incident", "question", "task"
+	private String type; // ç±»å‹ï¼š"problem", "incident", "question", "task"
 	
-	private String status; // ×´Ì¬£º"new","open", "pending", "solved", "closed"
+	private String status; // çŠ¶æ€ï¼š"new","open", "pending", "solved", "closed"
 	
-	private String priority; // ÓÅÏÈ¼¶£º"low", "medium", "high", "urgent"
+	private String priority; // ä¼˜å…ˆçº§ï¼š"low", "medium", "high", "urgent"
 	
-	private String recipient; // ÓÊ¼ş¹¤µ¥µÄÔ­ÊÕ¼şÈËµØÖ·
+	private String recipient; // é‚®ä»¶å·¥å•çš„åŸæ”¶ä»¶äººåœ°å€
 	
-	private int requesterId; // ·¢ÆğÈËid
+	private int requesterId; // å‘èµ·äººid
 	
-	private int organizationId; // ·¢ÆğÈËËùÊô¹«Ë¾×éÖ¯id
+	private int organizationId; // å‘èµ·äººæ‰€å±å…¬å¸ç»„ç»‡id
 	
-	private int assigneeId;// ÊÜÀí¿Í·şid
+	private int assigneeId;// å—ç†å®¢æœid
 	
-	private int groupId; // ÊÜÀí¿Í·ş×éid
+	private int groupId; // å—ç†å®¢æœç»„id
 	
-	private int problemId; // incident¹¤µ¥Ëù¹ØÁªµÄproblem¹¤µ¥µÄid
+	private int problemId; // incidentå·¥å•æ‰€å…³è”çš„problemå·¥å•çš„id
 	
-	private long dueDate; // task¹¤µ¥µÄ½ØÖ¹Ê±¼ä
+	private long dueDate; // taskå·¥å•çš„æˆªæ­¢æ—¶é—´
 	
-	private String createdAt; // ´´½¨Ê±¼ä
+	private String createdAt; // åˆ›å»ºæ—¶é—´
 	
-	private String updatedAt; // ×îºó¸üĞÂÊ±¼ä
+	private String updatedAt; // æœ€åæ›´æ–°æ—¶é—´
 	
-	private String assigneedAt;//Ê×´Î±»ÊÜÀíÊ±¼ä
+	private String assigneedAt;//é¦–æ¬¡è¢«å—ç†æ—¶é—´
 	
-	private String resolvedAt; //¹¤µ¥±»½â¾öÊ±¼ä
+	private String resolvedAt; //å·¥å•è¢«è§£å†³æ—¶é—´
 	
-	private String closedAt;//¹¤µ¥±»¹Ø±ÕÊ±¼ä
+	private String closedAt;//å·¥å•è¢«å…³é—­æ—¶é—´
 	
-	private String source; //¹¤µ¥À´Ô´£º"web", "tab", "chat", "email","mobile", "weibo", "api"
+	private String source; //å·¥å•æ¥æºï¼š"web", "tab", "chat", "email","mobile", "weibo", "api"
 	
-	private String satisfactionRating; // ÂúÒâ¶ÈÆÀ¼Û
+	private String satisfactionRating; // æ»¡æ„åº¦è¯„ä»·
 	
-	private List<CustomField> listCustomFields; //¹¤µ¥×Ô¶¨Òå×Ö¶Î
+	private List<CustomField> listCustomFields; //å·¥å•è‡ªå®šä¹‰å­—æ®µ
 
 	public int getId() {
 		return id;

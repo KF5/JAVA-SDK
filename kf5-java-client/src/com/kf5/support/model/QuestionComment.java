@@ -2,15 +2,15 @@ package com.kf5.support.model;
 
 public class QuestionComment {
 
-	private int id; //评论id
+	private int id; //璇勮id
 	 
-	private String content; //评论内容
+	private String content; //璇勮鍐呭
 	
-	private int author_id;//作者id
+	private int author_id;//浣滆�卛d
 	
-	private String created_at; //创建时间
+	private String created_at; //鍒涘缓鏃堕棿
 	 
-	private String updated_at; // 修改时间
+	private String updated_at; // 淇敼鏃堕棿
 
 	public int getId() {
 		return id;

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.kf5.support.internet.HttpRequest;
 import com.kf5.support.internet.KF5Interface;
@@ -38,7 +39,7 @@ import net.sf.json.JSONObject;
  * 
  * @author chosen
  *
- * @version ´´½¨Ê±¼ä£º2015Äê8ÔÂ31ÈÕ  ÉÏÎç11:43:59
+ * @version åˆ›å»ºæ—¶é—´ï¼š2015å¹´8æœˆ31æ—¥  ä¸Šåˆ11:43:59
  */
 public class KF5Support{
 
@@ -53,10 +54,10 @@ public class KF5Support{
 	private String baseToken;
 
 	/**
-	 * Ê¹ÓÃÓÊÏäºÍÃÜÂë½øĞĞÑéÖ¤
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param username µÇÂ¼ÓÊÏä
-	 * @param password ÃÜÂë
+	 * ä½¿ç”¨é‚®ç®±å’Œå¯†ç è¿›è¡ŒéªŒè¯
+	 * @param domain å¹³å°åœ°å€
+	 * @param username ç™»å½•é‚®ç®±
+	 * @param password å¯†ç 
 	 */
 	public void initWithPassword(String domain,String username,String password){
 		this.domain = domain;
@@ -66,10 +67,10 @@ public class KF5Support{
 		this.baseToken =new String(Base64.getEncoder().encode(code.getBytes()));
 	}
 	/**
-	 * Ê¹ÓÃÓÊÏäºÍÆ½Ì¨¿ª·ÅapiµÄÍ¨ĞÅÃØÔ¿½øĞĞÑéÖ¤
-	 * @param domain Æ½Ì¨µØÖ·
-	 * @param username µÇÂ¼ÓÊÏä
-	 * @param apiToken Í¨ĞÅÃØÔ¿£¬¾ßÌåÎ»ÖÃÔÚ£ºÏµÍ³ÉèÖÃ¡ª¡ª>api½Ó¿Ú¡ª¡ª>Í¨ĞÅÃØÔ¿
+	 * ä½¿ç”¨é‚®ç®±å’Œå¹³å°å¼€æ”¾apiçš„é€šä¿¡ç§˜é’¥è¿›è¡ŒéªŒè¯
+	 * @param domain å¹³å°åœ°å€
+	 * @param username ç™»å½•é‚®ç®±
+	 * @param apiToken é€šä¿¡ç§˜é’¥ï¼Œå…·ä½“ä½ç½®åœ¨ï¼šç³»ç»Ÿè®¾ç½®â€”â€”>apiæ¥å£â€”â€”>é€šä¿¡ç§˜é’¥
 	 */
 	public void initWithApiToken(String domain,String username,String apiToken){
 
@@ -83,7 +84,7 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡¿Í·şËùÓĞµÄ¹¤µ¥ÁĞ±í
+	 * è·å–å®¢æœæ‰€æœ‰çš„å·¥å•åˆ—è¡¨
 	 * @return
 	 */
 	public List<Ticket> getAgentOrderList(){
@@ -99,8 +100,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡Ö¸¶¨¿Í·şÊÜÀíµÄ¹¤µ¥ÁĞ±í
-	 * @param assignee_id ÊÜÀí¿Í·şid
+	 * è·å–æŒ‡å®šå®¢æœå—ç†çš„å·¥å•åˆ—è¡¨
+	 * @param assignee_id å—ç†å®¢æœid
 	 * @return
 	 */
 	public List<Ticket> getAgentOrderListWithID(String assignee_id){
@@ -117,8 +118,8 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´¹¤µ¥(¿Í·ş)ÏêÇé
-	 * @param id ¹¤µ¥id
+	 * æŸ¥çœ‹å·¥å•(å®¢æœ)è¯¦æƒ…
+	 * @param id å·¥å•id
 	 * @return
 	 */
 	public Ticket getAgentTicketDetail(String order_id){
@@ -133,8 +134,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´(¿Í·ş)¶à¸ö¹¤µ¥£¬×î¶à·µ»Ø100ÌõÊı¾İ
-	 * @param ids ²ÎÊı¸ñÊ½Îª£º 32£¬1£¬3
+	 * æŸ¥çœ‹(å®¢æœ)å¤šä¸ªå·¥å•ï¼Œæœ€å¤šè¿”å›100æ¡æ•°æ®
+	 * @param ids å‚æ•°æ ¼å¼ä¸ºï¼š 32ï¼Œ1ï¼Œ3
 	 * 
 	 * @return
 	 */
@@ -151,9 +152,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ´´½¨¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£º¿Í·ş
-	 * @param jsonString ²ÎÊı¸ñÊ½Îªjson×Ö·û´®¸ñÊ½£¬²ÎÊı¸ñÊ½ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/tickets/ÖĞ´´½¨¹¤µ¥²ÎÊıÊ¾Àı
+	 * åˆ›å»ºå·¥å•
+	 * è°ƒç”¨æƒé™ï¼šå®¢æœ
+	 * @param jsonString å‚æ•°æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼ï¼Œå‚æ•°æ ¼å¼è¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/tickets/ä¸­åˆ›å»ºå·¥å•å‚æ•°ç¤ºä¾‹
 	 * 
 	 */
 	public Ticket createAgentOrder(String jsonString){
@@ -173,10 +174,10 @@ public class KF5Support{
 
 
 	/**
-	 * ¸üĞÂ¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param order_id ¹¤µ¥id
-	 * @param jsonString ¸üĞÂÄÚÈİ ²ÎÊı¸ñÊ½Îªjson×Ö·û´®¸ñÊ½£¬²ÎÊı¸ñÊ½ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/tickets/ÖĞ¸üĞÂ¹¤µ¥²ÎÊıÊ¾Àı
+	 * æ›´æ–°å·¥å•
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param order_id å·¥å•id
+	 * @param jsonString æ›´æ–°å†…å®¹ å‚æ•°æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼ï¼Œå‚æ•°æ ¼å¼è¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/tickets/ä¸­æ›´æ–°å·¥å•å‚æ•°ç¤ºä¾‹
 	 * @return
 	 */
 	public Ticket updateAgentOrder(String order_id,String jsonString){
@@ -197,10 +198,10 @@ public class KF5Support{
 
 
 	/**
-	 * ¸üĞÂ¶à¸ö¹¤µ¥£¨ÅúÁ¿¸üĞÂ£©
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param ids ¹¤µ¥Ëù¶ÔÓ¦µÄid£¬²ÎÊı¸ñÊ½Îª1£¬2£¬3
-	 * @param jsonString ¸üĞÂÄÚÈİ£¬²ÎÊı¸ñÊ½Îªjson×Ö·û´®¸ñÊ½£¬²ÎÊı¸ñÊ½ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/tickets/ÖĞ¸üĞÂ¶à¸ö¹¤µ¥²ÎÊıÊ¾Àı
+	 * æ›´æ–°å¤šä¸ªå·¥å•ï¼ˆæ‰¹é‡æ›´æ–°ï¼‰
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param ids å·¥å•æ‰€å¯¹åº”çš„idï¼Œå‚æ•°æ ¼å¼ä¸º1ï¼Œ2ï¼Œ3
+	 * @param jsonString æ›´æ–°å†…å®¹ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼ï¼Œå‚æ•°æ ¼å¼è¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/tickets/ä¸­æ›´æ–°å¤šä¸ªå·¥å•å‚æ•°ç¤ºä¾‹
 	 */
 	public void updateManyAgentOrder(String ids,String jsonString){
 		checkHasId(ids);
@@ -214,9 +215,9 @@ public class KF5Support{
 
 
 	/**
-	 * É¾³ıÄ³¸ö¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param id ¹¤µ¥id
+	 * åˆ é™¤æŸä¸ªå·¥å•
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param id å·¥å•id
 	 */
 	public void deleteAgentOrder(String id){
 		checkHasId(id);
@@ -224,9 +225,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ÅúÁ¿É¾³ı¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param ids ÅúÁ¿É¾³ıµÄ¹¤µ¥id£¬²ÎÊı¸ñÊ½Îª£º1,2,3,4
+	 * æ‰¹é‡åˆ é™¤å·¥å•
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param ids æ‰¹é‡åˆ é™¤çš„å·¥å•idï¼Œå‚æ•°æ ¼å¼ä¸ºï¼š1,2,3,4
 	 */
 	public void deleteManyAgentOrders(String ids){
 		checkHasId(ids);
@@ -234,9 +235,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡¹¤µ¥¿ÉÓÃµÄ¸±±¾ÓÃ»§
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param order_id ¹¤µ¥id
+	 * è·å–å·¥å•å¯ç”¨çš„å‰¯æœ¬ç”¨æˆ·
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param order_id å·¥å•id
 	 */
 	public List<User> getAgentOrderCollaborators(String order_id){
 		checkHasId(order_id);
@@ -253,9 +254,9 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡¹¤µ¥±»¹ØÁªµÄÊÂÎïÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param order_id ¹¤µ¥id
+	 * è·å–å·¥å•è¢«å…³è”çš„äº‹ç‰©åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param order_id å·¥å•id
 	 */
 	public List<Ticket> getAgentOrderIncidentList(String order_id){
 		checkHasId(order_id);
@@ -270,8 +271,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡¹ÊÕÏÀàĞÍµÄ¹¤µ¥ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
+	 * è·å–æ•…éšœç±»å‹çš„å·¥å•åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šagent
 	 * @return
 	 */
 	public List<Ticket> getAgentOrderProblemList(){
@@ -289,8 +290,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡µ±Ç°ÓÃ»§µÄ¹¤µ¥ÇëÇóÁĞ±í£¬¼´·¢ÆğÈËÎªµ±Ç°ÓÃ»§µÄ¹¤µ¥,Ä¬ÈÏ°´¹¤µ¥±àºÅÉıĞòÅÅÁĞ
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
+	 * è·å–å½“å‰ç”¨æˆ·çš„å·¥å•è¯·æ±‚åˆ—è¡¨ï¼Œå³å‘èµ·äººä¸ºå½“å‰ç”¨æˆ·çš„å·¥å•,é»˜è®¤æŒ‰å·¥å•ç¼–å·å‡åºæ’åˆ—
+	 * è°ƒç”¨æƒé™ï¼šend_user
 	 * @return
 	 */
 	public List<Requester> getRequesterOrderList(){
@@ -310,8 +311,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡×´Ì¬Ğ¡ÓÚÒÑ½â¾öµÄ¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
+	 * è·å–çŠ¶æ€å°äºå·²è§£å†³çš„å·¥å•
+	 * è°ƒç”¨æƒé™ï¼šend_user
 	 * @return
 	 */
 	public List<Requester> getRequesterOrderListStatusOpen(){
@@ -331,8 +332,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡×´Ì¬ÎªÒÑ½â¾öºÍÒÑ¹Ø±ÕµÄ¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
+	 * è·å–çŠ¶æ€ä¸ºå·²è§£å†³å’Œå·²å…³é—­çš„å·¥å•
+	 * è°ƒç”¨æƒé™ï¼šend_user
 	 * @return
 	 */
 	public List<Requester> getRequesterOrderListStatusSolved(){
@@ -351,9 +352,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡ÓÃ»§µÄ¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param user_id ÓÃ»§id
+	 * è·å–ç”¨æˆ·çš„å·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param user_id ç”¨æˆ·id
 	 * @return
 	 */
 	public List<Ticket> getRequesterOrderListByID(String user_id){
@@ -373,9 +374,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡Ö¸¶¨ÓÃ»§µÄ¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param organization_id ¹«Ë¾×éÖ¯id
+	 * è·å–æŒ‡å®šç”¨æˆ·çš„å·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param organization_id å…¬å¸ç»„ç»‡id
 	 * @return
 	 */
 	public List<Requester> getOrganizationOrderList(String organization_id){
@@ -397,11 +398,11 @@ public class KF5Support{
 
 
 	/**
-	 * ËÑË÷¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
-	 * query:²éÑ¯¹Ø¼ü´Ê£¬Ä£ºı²éÑ¯¶à¸ö×Ö¶Î
-	 * status£º×´Ì¬É¸Ñ¡Ìõ¼ş
-	 * fieldvalue£º×Ô¶¨Òå×Ö¶ÎÌõ¼ş
+	 * æœç´¢å·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šend_user
+	 * query:æŸ¥è¯¢å…³é”®è¯ï¼Œæ¨¡ç³ŠæŸ¥è¯¢å¤šä¸ªå­—æ®µ
+	 * statusï¼šçŠ¶æ€ç­›é€‰æ¡ä»¶
+	 * fieldvalueï¼šè‡ªå®šä¹‰å­—æ®µæ¡ä»¶
 	 * @param keys
 	 */
 	public List<Requester> searchOrderByEndUser(String keys){
@@ -422,9 +423,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´¹¤µ¥ÏêÇé
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
-	 * @param order_id ¹¤µ¥id
+	 * æŸ¥çœ‹å·¥å•è¯¦æƒ…
+	 * è°ƒç”¨æƒé™ï¼šend_user
+	 * @param order_id å·¥å•id
 	 * @return
 	 */
 	public Requester getOrderDetailByEndUser(String order_id){
@@ -441,9 +442,9 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨¹¤µ¥ÇëÇó
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
-	 * @param jsonString ²ÎÊı¸ñÊ½Îªjson×Ö·û´®¸ñÊ½£¬²ÎÊı¸ñÊ½ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/requests/ÖĞ´´½¨¹¤µ¥²ÎÊıÊ¾Àı
+	 * åˆ›å»ºå·¥å•è¯·æ±‚
+	 * è°ƒç”¨æƒé™ï¼šend_user
+	 * @param jsonString å‚æ•°æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼ï¼Œå‚æ•°æ ¼å¼è¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/requests/ä¸­åˆ›å»ºå·¥å•å‚æ•°ç¤ºä¾‹
 	 * @return
 	 */
 	public Requester createOrderByEndUser(String jsonString){
@@ -465,10 +466,10 @@ public class KF5Support{
 
 
 	/**
-	 * »Ø¸´¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
-	 * @param order_id ¹¤µ¥id
-	 * @param jsonString ²ÎÊı¸ñÊ½Îªjson×Ö·û´®¸ñÊ½£¬²ÎÊı¸ñÊ½ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/requests/ÖĞ»Ø¸´¹¤µ¥²ÎÊıÊ¾Àı
+	 * å›å¤å·¥å•
+	 * è°ƒç”¨æƒé™ï¼šend_user
+	 * @param order_id å·¥å•id
+	 * @param jsonString å‚æ•°æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼ï¼Œå‚æ•°æ ¼å¼è¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/requests/ä¸­å›å¤å·¥å•å‚æ•°ç¤ºä¾‹
 	 * @return
 	 */
 	public Requester replyOrderByEndUser(String order_id,String jsonString){
@@ -489,9 +490,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´¹¤µ¥»Ø¸´ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºend_user
-	 * @param order_id ¹¤µ¥id
+	 * æŸ¥çœ‹å·¥å•å›å¤åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šend_user
+	 * @param order_id å·¥å•id
 	 */
 	public List<Comment> getCommentListByEndUser(String order_id){
 
@@ -502,6 +503,13 @@ public class KF5Support{
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			JSONArray jsonArray = KF5EntityBuilder.safeArray(jsonObject, KF5Fields.COMMENTS);
 			comments = EntityBuilder.buildComments(jsonArray);
+//			for (int i = 0; i < comments.size(); i++) {
+//				Comment comment = comments.get(i);
+//				List<Attachment> attachments = comment.getListAttachments();
+//				for (int j = 0; j < attachments.size(); j++) {
+//					System.out.println(attachments.get(j).getContent_url());
+//				}
+//			}
 			int count = KF5EntityBuilder.safeInt(jsonObject, KF5Fields.COUNT);
 			int next_page = KF5EntityBuilder.safeInt(jsonObject, KF5Fields.NEXT_PAGE);
 			int previous_page = KF5EntityBuilder.safeInt(jsonObject, KF5Fields.PREVIOUS_PAGE);
@@ -511,10 +519,10 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´Ö¸¶¨¹¤µ¥»Ø¸´
-	 * µ÷ÓÃÈ¨ÏŞ £ºend_user
-	 * @param requester_id ¹¤µ¥·¢ÆğÈËid
-	 * @param id »Ø¸´id
+	 * æŸ¥çœ‹æŒ‡å®šå·¥å•å›å¤
+	 * è°ƒç”¨æƒé™ ï¼šend_user
+	 * @param requester_id å·¥å•å‘èµ·äººid
+	 * @param id å›å¤id
 	 */
 	public Comment getOrderCommentWithID(String requester_id,String id){
 
@@ -529,9 +537,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ¹¤µ¥»Ø¸´ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param order_id ¹¤µ¥id
+	 * å·¥å•å›å¤åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param order_id å·¥å•id
 	 */
 	public List<Comment> getOrderCommentList(String order_id){
 
@@ -550,8 +558,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡¹¤µ¥×Ô¶¨Òå×Ö¶ÎÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
+	 * è·å–å·¥å•è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šagent
 	 */
 	public List<TicketField> getTicketFieldList(){
 
@@ -570,7 +578,7 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡×´Ì¬ÎªÆôÓÃµÄ×Ô¶¨Òå×Ö¶ÎÁĞ±í
+	 * è·å–çŠ¶æ€ä¸ºå¯ç”¨çš„è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
 	 * @return
 	 */
 	public List<TicketField> getTicketFieldListActive(){
@@ -591,9 +599,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´×Ô¶¨Òå×Ö¶Î
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param ticket_field_id ×Ô¶¨Òå×Ö¶Îid
+	 * æŸ¥çœ‹è‡ªå®šä¹‰å­—æ®µ
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param ticket_field_id è‡ªå®šä¹‰å­—æ®µid
 	 */
 	public TicketField getTicketFieldByID(String ticket_field_id){
 
@@ -609,8 +617,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * É¾³ı×Ô¶¨Òå×Ö¶Î
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
+	 * åˆ é™¤è‡ªå®šä¹‰å­—æ®µ
+	 * è°ƒç”¨æƒé™ï¼šadmin
 	 * @param ticket_field_id
 	 */
 	public void deleteTicketFieldByID(String ticket_field_id){
@@ -622,8 +630,8 @@ public class KF5Support{
 
 
 	/**
-	 * ¹¤µ¥²é¿´·ÖÀàÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
+	 * å·¥å•æŸ¥çœ‹åˆ†ç±»åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šagent
 	 */
 	public List<View> getOrderTypeList(){
 
@@ -641,8 +649,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´µ±Ç°¿Í·ş¿ÉÓÃµÄ¹¤µ¥²é¿´·ÖÀà
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
+	 * æŸ¥çœ‹å½“å‰å®¢æœå¯ç”¨çš„å·¥å•æŸ¥çœ‹åˆ†ç±»
+	 * è°ƒç”¨æƒé™ï¼šagent
 	 * @return
 	 */
 	public List<View> getOrderTypeListActive(){
@@ -662,9 +670,9 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡Ö¸¶¨²é¿´·ÖÀà
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param type_id ·ÖÀàid
+	 * è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param type_id åˆ†ç±»id
 	 * @return
 	 */
 	public View getOrderTypeByID(String type_id){
@@ -680,9 +688,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡Ö¸¶¨²é¿´·ÖÀàÀïµÄ¹¤µ¥
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param type_id ·ÖÀàid
+	 * è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»é‡Œçš„å·¥å•
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param type_id åˆ†ç±»id
 	 */
 	public List<Ticket> getTicketListByTypeID(String type_id){
 
@@ -701,9 +709,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡Ö¸¶¨²é¿´·ÖÀàµÄ¹¤µ¥¸öÊı
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
-	 * @param type_id ·ÖÀàid
+	 * è·å–æŒ‡å®šæŸ¥çœ‹åˆ†ç±»çš„å·¥å•ä¸ªæ•°
+	 * è°ƒç”¨æƒé™ï¼šagent
+	 * @param type_id åˆ†ç±»id
 	 */
 	public ViewCount getTicketCountByTypeID(String type_id){
 
@@ -717,8 +725,8 @@ public class KF5Support{
 		return viewCount;
 	}
 	/**
-	 * »ñÈ¡¶à¸ö²é¿´·ÖÀàµÄ¹¤µ¥¸öÊı
-	 * @param ids ¶à¸ö·ÖÀàid; Èç£º1,2,3,4
+	 * è·å–å¤šä¸ªæŸ¥çœ‹åˆ†ç±»çš„å·¥å•ä¸ªæ•°
+	 * @param ids å¤šä¸ªåˆ†ç±»id; å¦‚ï¼š1,2,3,4
 	 */
 	public List<ViewCount> getManyTicketCountByTypeIds(String ids){
 
@@ -735,8 +743,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡ÓÃ»§ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ: agent
+	 * è·å–ç”¨æˆ·åˆ—è¡¨
+	 * è°ƒç”¨æƒé™: agent
 	 */
 	public List<User> getUserList(){
 
@@ -755,8 +763,8 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´Ö¸¶¨ÓÃ»§ĞÅÏ¢
-	 * @param user_id ÓÃ»§id
+	 * æŸ¥çœ‹æŒ‡å®šç”¨æˆ·ä¿¡æ¯
+	 * @param user_id ç”¨æˆ·id
 	 * @return
 	 */
 	public User getUserInfo(String user_id){
@@ -772,8 +780,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´×Ô¼ºµÄĞÅÏ¢
-	 * µ÷ÓÃÈ¨ÏŞ: all
+	 * æŸ¥çœ‹è‡ªå·±çš„ä¿¡æ¯
+	 * è°ƒç”¨æƒé™: all
 	 * @return
 	 */
 	public User getMyInfo(){
@@ -788,9 +796,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡¶à¸öÓÃ»§ĞÅÏ¢
-	 * µ÷ÓÃÈ¨ÏŞ:agent
-	 * @param user_ids ¶à¸öÓÃ»§id£»¸ñÊ½Ê¾ÀıÎª£º1,2,36,6
+	 * è·å–å¤šä¸ªç”¨æˆ·ä¿¡æ¯
+	 * è°ƒç”¨æƒé™:agent
+	 * @param user_ids å¤šä¸ªç”¨æˆ·idï¼›æ ¼å¼ç¤ºä¾‹ä¸ºï¼š1,2,36,6
 	 * @return
 	 */
 	public List<User> getManyUsersInfo(String user_ids){
@@ -811,9 +819,9 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨ÓÃ»§ĞÅÏ¢
-	 * µ÷ÓÃÈ¨ÏŞ:agent
-	 * @param jsonString ²ÎÊı¸ñÊ½Îªjson×Ö·û´®£¬¾ßÌåÊ¾ÀıÇë²Î¿¼http://developer.kf5.com/restapi/users/ÖĞµÄ´´½¨ÓÃ»§ĞÅÏ¢
+	 * åˆ›å»ºç”¨æˆ·ä¿¡æ¯
+	 * è°ƒç”¨æƒé™:agent
+	 * @param jsonString å‚æ•°æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²ï¼Œå…·ä½“ç¤ºä¾‹è¯·å‚è€ƒhttp://developer.kf5.com/restapi/users/ä¸­çš„åˆ›å»ºç”¨æˆ·ä¿¡æ¯
 	 */
 	public User createUserInfo(String jsonString){
 
@@ -833,11 +841,11 @@ public class KF5Support{
 
 
 	/**
-	 * ºÏ²¢ÓÃ»§
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param user_id ±»ºÏ²¢µÄÓÃ»§id;
-	 * @param jsonString ĞèÒªÓëÖ®ºÏ²¢µÄÓÃ»§ÄÚÈİ£¬¸ñÊ½Îªjson×Ö·û´®¸ñÊ½¡£
-	 * URLÀïÖ¸¶¨idµÄÓÃ»§£¬½«»á±»ºÏ²¢µ½´«µİ²ÎÊıÖĞidËù´ú±íµÄÓÃ»§¡£ Ç°ÕßµÄÊı¾İÒ²»áºÏ²¢ÎªºóÕßµÄÊı¾İ£¬Ö®ºóÇ°Õß½«»á±»É¾³ı¡£ ±»ºÏ²¢µÄÓÃ»§£¬Ö»ÄÜÊÇÆÕÍ¨ÓÃ»§½ÇÉ«¡£
+	 * åˆå¹¶ç”¨æˆ·
+	 * è°ƒç”¨æƒé™:admin
+	 * @param user_id è¢«åˆå¹¶çš„ç”¨æˆ·id;
+	 * @param jsonString éœ€è¦ä¸ä¹‹åˆå¹¶çš„ç”¨æˆ·å†…å®¹ï¼Œæ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼ã€‚
+	 * URLé‡ŒæŒ‡å®šidçš„ç”¨æˆ·ï¼Œå°†ä¼šè¢«åˆå¹¶åˆ°ä¼ é€’å‚æ•°ä¸­idæ‰€ä»£è¡¨çš„ç”¨æˆ·ã€‚ å‰è€…çš„æ•°æ®ä¹Ÿä¼šåˆå¹¶ä¸ºåè€…çš„æ•°æ®ï¼Œä¹‹åå‰è€…å°†ä¼šè¢«åˆ é™¤ã€‚ è¢«åˆå¹¶çš„ç”¨æˆ·ï¼Œåªèƒ½æ˜¯æ™®é€šç”¨æˆ·è§’è‰²ã€‚
 	 */
 	public User mergeUser(String user_id,String jsonString){
 
@@ -858,10 +866,10 @@ public class KF5Support{
 
 
 	/**
-	 * ĞŞ¸ÄÓÃ»§ĞÅÏ¢
-	 * µ÷ÓÃÈ¨ÏŞ:agent
-	 * @param user_id ÓÃ»§id
-	 * @param jsonString ĞŞ¸ÄÄÚÈİ ²ÎÊı¸ñÊ½Îªjson×Ö·û´®£¬¾ßÌåÊ¾ÀıÏê¼û£ºhttp://developer.kf5.com/restapi/users/ ĞŞ¸ÄÓÃ»§ĞÅÏ¢
+	 * ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
+	 * è°ƒç”¨æƒé™:agent
+	 * @param user_id ç”¨æˆ·id
+	 * @param jsonString ä¿®æ”¹å†…å®¹ å‚æ•°æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²ï¼Œå…·ä½“ç¤ºä¾‹è¯¦è§ï¼šhttp://developer.kf5.com/restapi/users/ ä¿®æ”¹ç”¨æˆ·ä¿¡æ¯
 	 */
 	public User updateUserInfo(String user_id,String jsonString){
 
@@ -881,9 +889,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * É¾³ıÓÃ»§
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param user_id ÓÃ»§id
+	 * åˆ é™¤ç”¨æˆ·
+	 * è°ƒç”¨æƒé™:admin
+	 * @param user_id ç”¨æˆ·id
 	 */
 	public void deleteUser(String user_id){
 
@@ -892,9 +900,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ËÑË÷ÓÃ»§
-	 * µ÷ÓÃÈ¨ÏŞ:agent
-	 * @param key ËÑË÷¹Ø¼ü×Ö
+	 * æœç´¢ç”¨æˆ·
+	 * è°ƒç”¨æƒé™:agent
+	 * @param key æœç´¢å…³é”®å­—
 	 * @return
 	 */
 	public List<User> searchUser(String key){
@@ -914,8 +922,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡ÓÃ»§×Ô¶¨Òå×Ö¶Î
-	 * µ÷ÓÃÈ¨ÏŞ:agent
+	 * è·å–ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
+	 * è°ƒç”¨æƒé™:agent
 	 * @return
 	 */
 	public List<UserField> getUserFieldList(){
@@ -932,8 +940,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡×´Ì¬ÎªÆôÓÃµÄ×Ô¶¨Òå×Ö¶ÎÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ:agent
+	 * è·å–çŠ¶æ€ä¸ºå¯ç”¨çš„è‡ªå®šä¹‰å­—æ®µåˆ—è¡¨
+	 * è°ƒç”¨æƒé™:agent
 	 * @return
 	 */
 	public List<UserField> getUserFieldActiveList(){
@@ -950,8 +958,8 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´ÓÃ»§×Ô¶¨Òå×Ö¶Î
-	 * @param user_field_id ÓÃ»§×Ô¶¨Òå×Ö¶Îid
+	 * æŸ¥çœ‹ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
+	 * @param user_field_id ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µid
 	 * @return
 	 */
 	public UserField getUserFieldListByID(String user_field_id){
@@ -969,9 +977,9 @@ public class KF5Support{
 
 
 	/**
-	 * É¾³ıÓÃ»§×Ô¶¨Òå×Ö¶Î
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param user_field_id ÓÃ»§×Ô¶¨Òå×Ö¶Îid
+	 * åˆ é™¤ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µ
+	 * è°ƒç”¨æƒé™:admin
+	 * @param user_field_id ç”¨æˆ·è‡ªå®šä¹‰å­—æ®µid
 	 */
 	public void deleteUserField(String user_field_id){
 
@@ -981,8 +989,8 @@ public class KF5Support{
 
 
 	/**
-	 * ¿Í·ş×éÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºagent
+	 * å®¢æœç»„åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šagent
 	 */
 	public List<Group> getGroupList(){
 
@@ -997,9 +1005,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´¿Í·ş×é
-	 * µ÷ÓÃÈ¨ÏŞ:agent
-	 * @param group_id ¿Í·ş×éid
+	 * æŸ¥çœ‹å®¢æœç»„
+	 * è°ƒç”¨æƒé™:agent
+	 * @param group_id å®¢æœç»„id
 	 * @return
 	 */
 	public Group getGroupListByID(String group_id){
@@ -1017,8 +1025,8 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨¿Í·ş×é
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
+	 * åˆ›å»ºå®¢æœç»„
+	 * è°ƒç”¨æƒé™ï¼šadmin
 	 * @param jsonString
 	 * @return
 	 */
@@ -1038,10 +1046,10 @@ public class KF5Support{
 	}
 
 	/**
-	 * ĞŞ¸Ä¿Í·ş×é
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param group_id ¿Í·ş×éid
-	 * @param jsonString ĞŞ¸ÄÄÚÈİ,²ÎÊı¸ñÊ½Îªjson£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/groups/ÖĞĞŞ¸Ä¿Í·ş×é
+	 * ä¿®æ”¹å®¢æœç»„
+	 * è°ƒç”¨æƒé™:admin
+	 * @param group_id å®¢æœç»„id
+	 * @param jsonString ä¿®æ”¹å†…å®¹,å‚æ•°æ ¼å¼ä¸ºjsonï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/groups/ä¸­ä¿®æ”¹å®¢æœç»„
 	 * @return
 	 */
 	public Group updateGroup(String group_id,String jsonString){
@@ -1059,9 +1067,9 @@ public class KF5Support{
 
 
 	/**
-	 * É¾³ı¿Í·ş×é
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param group_id ¿Í·ş×éid
+	 * åˆ é™¤å®¢æœç»„
+	 * è°ƒç”¨æƒé™:admin
+	 * @param group_id å®¢æœç»„id
 	 */
 	public void deleteGroup(String group_id){
 		checkHasId(group_id);
@@ -1070,8 +1078,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡¹«Ë¾×éÖ¯ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ:agent
+	 * è·å–å…¬å¸ç»„ç»‡åˆ—è¡¨
+	 * è°ƒç”¨æƒé™:agent
 	 */
 	public List<Organization> getOrganizationList(){
 
@@ -1089,9 +1097,9 @@ public class KF5Support{
 	} 
 
 	/**
-	 * ²é¿´¹«Ë¾×éÖ¯
-	 * µ÷ÓÃÈ¨ÏŞ:agent
-	 * @param organization_id ¹«Ë¾×éÖ¯id
+	 * æŸ¥çœ‹å…¬å¸ç»„ç»‡
+	 * è°ƒç”¨æƒé™:agent
+	 * @param organization_id å…¬å¸ç»„ç»‡id
 	 * @return
 	 */
 	public Organization getOrganizationByID(String organization_id){
@@ -1107,9 +1115,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ´´½¨¹«Ë¾×éÖ¯
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param jsonString Ìá½»ÄÚÈİ£¬²ÎÊı¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/organizations/ÖĞ´´½¨¹«Ë¾×éÖ¯
+	 * åˆ›å»ºå…¬å¸ç»„ç»‡
+	 * è°ƒç”¨æƒé™:admin
+	 * @param jsonString æäº¤å†…å®¹ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/organizations/ä¸­åˆ›å»ºå…¬å¸ç»„ç»‡
 	 * @return
 	 */
 	public Organization createOrganization(String jsonString){
@@ -1123,10 +1131,10 @@ public class KF5Support{
 	}
 
 	/**
-	 * ĞŞ¸Ä¹«Ë¾×éÖ¯
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param organization_id ¹«Ë¾×éÖ¯id
-	 * @param jsonString ĞŞ¸ÄµÄÄÚÈİ£¬²ÎÊı¸ñÊ½Îªjson¡£ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/organizations/ÖĞĞŞ¸Ä¹«Ë¾×éÖ¯
+	 * ä¿®æ”¹å…¬å¸ç»„ç»‡
+	 * è°ƒç”¨æƒé™:admin
+	 * @param organization_id å…¬å¸ç»„ç»‡id
+	 * @param jsonString ä¿®æ”¹çš„å†…å®¹ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonã€‚è¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/organizations/ä¸­ä¿®æ”¹å…¬å¸ç»„ç»‡
 	 * @return
 	 */
 	public Organization updateOrganization(String organization_id,String jsonString){
@@ -1149,9 +1157,9 @@ public class KF5Support{
 
 
 	/**
-	 * É¾³ı¹«Ë¾×éÖ¯
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param organization_id ¹«Ë¾×éÖ¯id
+	 * åˆ é™¤å…¬å¸ç»„ç»‡
+	 * è°ƒç”¨æƒé™:admin
+	 * @param organization_id å…¬å¸ç»„ç»‡id
 	 */
 	public void deleteOrganization(String organization_id){
 
@@ -1162,8 +1170,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡ÉçÇø»°ÌâÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ:all
+	 * è·å–ç¤¾åŒºè¯é¢˜åˆ—è¡¨
+	 * è°ƒç”¨æƒé™:all
 	 */
 	public List<Topic> getTopicList(){
 
@@ -1182,9 +1190,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´ÉçÇø»°Ìâ
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param topic_id »°Ìâid
+	 * æŸ¥çœ‹ç¤¾åŒºè¯é¢˜
+	 * è°ƒç”¨æƒé™:all
+	 * @param topic_id è¯é¢˜id
 	 * @return
 	 */
 	public Topic getTopicByID(String topic_id){
@@ -1201,9 +1209,9 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨ÉçÇø»°Ìâ
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param jsonString ÉçÇø»°ÌâÄÚÈİ£¬²ÎÊı¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/topics/ÖĞ´´½¨ÉçÇø»°Ìâ
+	 * åˆ›å»ºç¤¾åŒºè¯é¢˜
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param jsonString ç¤¾åŒºè¯é¢˜å†…å®¹ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/topics/ä¸­åˆ›å»ºç¤¾åŒºè¯é¢˜
 	 * @return
 	 */
 	public Topic createTopic(String jsonString){
@@ -1224,10 +1232,10 @@ public class KF5Support{
 
 
 	/**
-	 * ĞŞ¸ÄÉçÇø»°Ìâ
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param topic_id »°Ìâid
-	 * @param jsonString ĞŞ¸ÄÄÚÈİ£¬ÄÚÈİ¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/topics/ÖĞĞŞ¸ÄÉçÇø»°Ìâ
+	 * ä¿®æ”¹ç¤¾åŒºè¯é¢˜
+	 * è°ƒç”¨æƒé™:admin
+	 * @param topic_id è¯é¢˜id
+	 * @param jsonString ä¿®æ”¹å†…å®¹ï¼Œå†…å®¹æ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/topics/ä¸­ä¿®æ”¹ç¤¾åŒºè¯é¢˜
 	 * @return
 	 */
 	public Topic updateTopic(String topic_id,String jsonString){
@@ -1248,10 +1256,10 @@ public class KF5Support{
 	}
 
 	/**
-	 * É¾³ıÉçÇø»°Ìâ
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * ×¢Òâ£ºµ÷ÓÃ¸ÃAPI×ÊÔ´»áÍ¬Ê±É¾³ı¸ÃÉçÇø»°ÌâÏÂµÄËùÓĞÉçÇøÎÊÌâ
-	 * @param topic_id ÉçÇø»°Ìâid
+	 * åˆ é™¤ç¤¾åŒºè¯é¢˜
+	 * è°ƒç”¨æƒé™:admin
+	 * æ³¨æ„ï¼šè°ƒç”¨è¯¥APIèµ„æºä¼šåŒæ—¶åˆ é™¤è¯¥ç¤¾åŒºè¯é¢˜ä¸‹çš„æ‰€æœ‰ç¤¾åŒºé—®é¢˜
+	 * @param topic_id ç¤¾åŒºè¯é¢˜id
 	 */
 	public void deleteTopic(String topic_id){
 		
@@ -1261,8 +1269,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡ÉçÇøÎÊÌâÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
+	 * è·å–ç¤¾åŒºé—®é¢˜åˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šall
 	 */
 	public List<Question> getQuestionList(){
 
@@ -1281,9 +1289,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´ÉçÇøÎÊÌâ
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param question_id ÉçÇøÎÊÌâid
+	 * æŸ¥çœ‹ç¤¾åŒºé—®é¢˜
+	 * è°ƒç”¨æƒé™:all
+	 * @param question_id ç¤¾åŒºé—®é¢˜id
 	 * @return
 	 */
 	public Question getQuestionByID(String question_id){
@@ -1301,10 +1309,10 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨ÉçÇøÎÊÌâ
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * ×¢Òâ£º»°Ìâid²»ÄÜÎª¿Õ
-	 * @param jsonString ´´½¨ÎÊÌâÄÚÈİ£¬¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/questions/ÖĞ´´½¨ÉçÇøÎÊÌâ
+	 * åˆ›å»ºç¤¾åŒºé—®é¢˜
+	 * è°ƒç”¨æƒé™:all
+	 * æ³¨æ„ï¼šè¯é¢˜idä¸èƒ½ä¸ºç©º
+	 * @param jsonString åˆ›å»ºé—®é¢˜å†…å®¹ï¼Œæ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/questions/ä¸­åˆ›å»ºç¤¾åŒºé—®é¢˜
 	 * @return
 	 */
 	public Question createQuestion(String jsonString){
@@ -1326,10 +1334,10 @@ public class KF5Support{
 
 
 	/**
-	 * ĞŞ¸ÄÉçÇøÎÊÌâ
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param question_id ÉçÇøÎÊÌâid
-	 * @param jsonString ĞŞ¸ÄÄÚÈİ£¬¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/questions/ÖĞĞŞ¸ÄÉçÇøÎÊÌâ
+	 * ä¿®æ”¹ç¤¾åŒºé—®é¢˜
+	 * è°ƒç”¨æƒé™:admin
+	 * @param question_id ç¤¾åŒºé—®é¢˜id
+	 * @param jsonString ä¿®æ”¹å†…å®¹ï¼Œæ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/questions/ä¸­ä¿®æ”¹ç¤¾åŒºé—®é¢˜
 	 * @return
 	 */
 	public Question updateQuestion(String question_id,String jsonString){
@@ -1350,9 +1358,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * É¾³ıÉçÇøÎÊÌâ
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param question_id ÉçÇøÎÊÌâid
+	 * åˆ é™¤ç¤¾åŒºé—®é¢˜
+	 * è°ƒç”¨æƒé™:admin
+	 * @param question_id ç¤¾åŒºé—®é¢˜id
 	 */
 	public void deleteQuestion(String question_id){
 
@@ -1362,9 +1370,9 @@ public class KF5Support{
 
 
 	/**
-	 * »ñµÃÎÊÌâ»Ø¸´ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param question_id ÉçÇøÎÊÌâid
+	 * è·å¾—é—®é¢˜å›å¤åˆ—è¡¨
+	 * è°ƒç”¨æƒé™:all
+	 * @param question_id ç¤¾åŒºé—®é¢˜id
 	 */
 	public List<QuestionComment> getQuestionCommentList(String question_id){
 
@@ -1383,10 +1391,10 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´Ö¸¶¨ÉçÇøÎÊÌâ»Ø¸´
-	 * µ÷ÓÃÈ¨ÏŞ:end_user
-	 * @param question_id ÎÊÌâid
-	 * @param comment_id ÎÊÌâ»Ø¸´id
+	 * æŸ¥çœ‹æŒ‡å®šç¤¾åŒºé—®é¢˜å›å¤
+	 * è°ƒç”¨æƒé™:end_user
+	 * @param question_id é—®é¢˜id
+	 * @param comment_id é—®é¢˜å›å¤id
 	 * @return
 	 */
 	public QuestionComment getQuestionCommentByID(String question_id,String comment_id){
@@ -1404,10 +1412,10 @@ public class KF5Support{
 
 
 	/**
-	 * »Ø¸´ÉçÇøÎÊÌâ
-	 * µ÷ÓÃÈ¨ÏŞ:end_user
-	 * @param question_id ÉçÇøÎÊÌâid
-	 * @param jsonString »Ø¸´ÄÚÈİ£¬²ÎÊı¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/questions/ÖĞ»Ø¸´ÉçÇøÎÊÌâ
+	 * å›å¤ç¤¾åŒºé—®é¢˜
+	 * è°ƒç”¨æƒé™:end_user
+	 * @param question_id ç¤¾åŒºé—®é¢˜id
+	 * @param jsonString å›å¤å†…å®¹ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/questions/ä¸­å›å¤ç¤¾åŒºé—®é¢˜
 	 * @return
 	 */
 	public List<QuestionComment> replyQuestion(String question_id,String jsonString){
@@ -1432,8 +1440,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * ÎÄµµ·ÖÇøÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
+	 * æ–‡æ¡£åˆ†åŒºåˆ—è¡¨
+	 * è°ƒç”¨æƒé™ï¼šall
 	 * @return
 	 */
 	public List<Category> getCategoriesList(){
@@ -1453,9 +1461,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´ÎÄµµ·ÖÇø
-	 * µ÷ÓÃÈ¨ÏŞ£ºall
-	 * @param category_id ÎÄµµ·ÖÇøid
+	 * æŸ¥çœ‹æ–‡æ¡£åˆ†åŒº
+	 * è°ƒç”¨æƒé™ï¼šall
+	 * @param category_id æ–‡æ¡£åˆ†åŒºid
 	 * @return
 	 */
 	public Category getCategoryByID(String category_id){
@@ -1475,9 +1483,9 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨ÎÄµµ·ÖÇø
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param jsonString Ìá½»µÄÄÚÈİ;¸ñÊ½Îªjson×Ö·û´®¸ñÊ½,ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/categories/ÖĞ´´½¨ÎÄµµ·ÖÇø
+	 * åˆ›å»ºæ–‡æ¡£åˆ†åŒº
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param jsonString æäº¤çš„å†…å®¹;æ ¼å¼ä¸ºjsonå­—ç¬¦ä¸²æ ¼å¼,è¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/categories/ä¸­åˆ›å»ºæ–‡æ¡£åˆ†åŒº
 	 * @return
 	 */
 	public Category createCategory(String jsonString){
@@ -1498,10 +1506,10 @@ public class KF5Support{
 	}
 
 	/**
-	 * ĞŞ¸ÄÎÄµµ·ÖÇø
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param category_id ÎÄµµ·ÖÇøid
-	 * @param jsonString ĞŞ¸ÄÄÚÈİ;²ÎÊı¸ñÊ½Îªjson¸ñÊ½;ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/categories/ĞŞ¸ÄÎÄµµ·ÖÇø
+	 * ä¿®æ”¹æ–‡æ¡£åˆ†åŒº
+	 * è°ƒç”¨æƒé™:admin
+	 * @param category_id æ–‡æ¡£åˆ†åŒºid
+	 * @param jsonString ä¿®æ”¹å†…å®¹;å‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼;è¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/categories/ä¿®æ”¹æ–‡æ¡£åˆ†åŒº
 	 * @return
 	 */
 	public Category updateCategory(String category_id,String jsonString){
@@ -1522,8 +1530,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * É¾³ıÎÄµµ·ÖÇø
-	 * µ÷ÓÃÈ¨ÏŞ: admin
+	 * åˆ é™¤æ–‡æ¡£åˆ†åŒº
+	 * è°ƒç”¨æƒé™: admin
 	 * @param category_id
 	 */
 	public void deleteCategory(String category_id){
@@ -1534,8 +1542,8 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡ÎÄµµ·ÖÀàÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ:all
+	 * è·å–æ–‡æ¡£åˆ†ç±»åˆ—è¡¨
+	 * è°ƒç”¨æƒé™:all
 	 */
 	public List<Forum> getForumList(){
 
@@ -1553,9 +1561,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´ÎÄµµ·ÖÀà
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param forum_id ÎÄµµ·ÖÀàid
+	 * æŸ¥çœ‹æ–‡æ¡£åˆ†ç±»
+	 * è°ƒç”¨æƒé™:all
+	 * @param forum_id æ–‡æ¡£åˆ†ç±»id
 	 * @return
 	 */
 	public Forum getForumByID(String forum_id){
@@ -1572,9 +1580,9 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨ÎÄµµ·ÖÀà
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param jsonString ²ÎÊı¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/forums/ÖĞ´´½¨ÎÄµµ·ÖÀà
+	 * åˆ›å»ºæ–‡æ¡£åˆ†ç±»
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param jsonString å‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/forums/ä¸­åˆ›å»ºæ–‡æ¡£åˆ†ç±»
 	 */
 	public Forum createForum(String jsonString){
 
@@ -1594,10 +1602,10 @@ public class KF5Support{
 	}
 
 	/**
-	 * ĞŞ¸ÄÎÄµµ·ÖÀà
-	 * µ÷ÓÃÈ¨ÏŞ : admin
-	 * @param forum_id  ÎÄµµ·ÖÀàid
-	 * @param jsonString ²ÎÊı¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/forums/ÖĞĞŞ¸ÄÎÄµµ·ÖÀà
+	 * ä¿®æ”¹æ–‡æ¡£åˆ†ç±»
+	 * è°ƒç”¨æƒé™ : admin
+	 * @param forum_id  æ–‡æ¡£åˆ†ç±»id
+	 * @param jsonString å‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/forums/ä¸­ä¿®æ”¹æ–‡æ¡£åˆ†ç±»
 	 * @return
 	 */
 	public Forum updateForum(String forum_id,String jsonString){
@@ -1618,9 +1626,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * É¾³ıÎÄµµ·ÖÀà
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param forum_id ÎÄµµ·ÖÀàid
+	 * åˆ é™¤æ–‡æ¡£åˆ†ç±»
+	 * è°ƒç”¨æƒé™:admin
+	 * @param forum_id æ–‡æ¡£åˆ†ç±»id
 	 */
 	public void deleteForum(String forum_id){
 
@@ -1629,8 +1637,8 @@ public class KF5Support{
 	}
 
 	/**
-	 * »ñÈ¡ÕıÊ½ÎÄµµÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ:all
+	 * è·å–æ­£å¼æ–‡æ¡£åˆ—è¡¨
+	 * è°ƒç”¨æƒé™:all
 	 */
 	public List<Post> getPostList(){
 
@@ -1649,9 +1657,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´ÎÄµµ
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param post_id ÎÄµµid 
+	 * æŸ¥çœ‹æ–‡æ¡£
+	 * è°ƒç”¨æƒé™:all
+	 * @param post_id æ–‡æ¡£id 
 	 * @return
 	 */
 	public Post getPostByID(String post_id){
@@ -1668,9 +1676,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´¶à¸öÎÄµµ
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param posts_ids ¶à¸öÎÄµµid;¸ñÊ½Îª:1,2,3
+	 * æŸ¥çœ‹å¤šä¸ªæ–‡æ¡£
+	 * è°ƒç”¨æƒé™:all
+	 * @param posts_ids å¤šä¸ªæ–‡æ¡£id;æ ¼å¼ä¸º:1,2,3
 	 * @return
 	 */
 	public List<Post> getManyPosts(String posts_ids){
@@ -1688,9 +1696,9 @@ public class KF5Support{
 
 
 	/**
-	 * ËÑË÷ÎÄµµ
-	 * µ÷ÓÃÈ¨ÏŞ: all
-	 * @param key_word ËÑË÷¹Ø¼ü×Ö
+	 * æœç´¢æ–‡æ¡£
+	 * è°ƒç”¨æƒé™: all
+	 * @param key_word æœç´¢å…³é”®å­—
 	 * @return
 	 */
 	public List<Post> searchPost(String key_word){
@@ -1710,9 +1718,9 @@ public class KF5Support{
 
 
 	/**
-	 * ´´½¨ÎÄµµ
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param jsonString ´´½¨ÎÄµµµÄÄÚÈİ£»¸ñÊ½Îªjson£¬²ÎÊı¸ñÊ½ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/posts/ÖĞ´´½¨ÎÄµµ
+	 * åˆ›å»ºæ–‡æ¡£
+	 * è°ƒç”¨æƒé™:admin
+	 * @param jsonString åˆ›å»ºæ–‡æ¡£çš„å†…å®¹ï¼›æ ¼å¼ä¸ºjsonï¼Œå‚æ•°æ ¼å¼è¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/posts/ä¸­åˆ›å»ºæ–‡æ¡£
 	 */
 	public Post createPost(String jsonString){
 		
@@ -1732,10 +1740,10 @@ public class KF5Support{
 
 
 	/**
-	 * ĞŞ¸ÄÎÄµµ
-	 * µ÷ÓÃÈ¨ÏŞ£ºadmin
-	 * @param post_id ÎÄµµid
-	 * @param jsonString ĞŞ¸ÄÎÄµµµÄÄÚÈİ;¸ñÊ½Îªjson£¬²ÎÊı¸ñÊ½ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/posts/ÖĞĞŞ¸ÄÎÄµµ
+	 * ä¿®æ”¹æ–‡æ¡£
+	 * è°ƒç”¨æƒé™ï¼šadmin
+	 * @param post_id æ–‡æ¡£id
+	 * @param jsonString ä¿®æ”¹æ–‡æ¡£çš„å†…å®¹;æ ¼å¼ä¸ºjsonï¼Œå‚æ•°æ ¼å¼è¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/posts/ä¸­ä¿®æ”¹æ–‡æ¡£
 	 * @return
 	 */
 	public Post updatePost(String post_id,String jsonString){
@@ -1751,9 +1759,9 @@ public class KF5Support{
 	}
 
 	/**
-	 * É¾³ıÎÄµµ
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * @param post_id ÎÄµµid
+	 * åˆ é™¤æ–‡æ¡£
+	 * è°ƒç”¨æƒé™:admin
+	 * @param post_id æ–‡æ¡£id
 	 */
 	public void deletePost(String post_id){
 		
@@ -1763,9 +1771,9 @@ public class KF5Support{
 
 
 	/**
-	 * »ñÈ¡ÎÄµµ»Ø¸´ÁĞ±í
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param post_id ÎÄµµid
+	 * è·å–æ–‡æ¡£å›å¤åˆ—è¡¨
+	 * è°ƒç”¨æƒé™:all
+	 * @param post_id æ–‡æ¡£id
 	 */
 	public List<PostComment> getPostCommentList(String post_id){
 
@@ -1784,10 +1792,10 @@ public class KF5Support{
 	}
 
 	/**
-	 * ²é¿´Ö¸¶¨ÎÄµµ»Ø¸´
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param post_id ÎÄµµid
-	 * @param id »Ø¸´id
+	 * æŸ¥çœ‹æŒ‡å®šæ–‡æ¡£å›å¤
+	 * è°ƒç”¨æƒé™:all
+	 * @param post_id æ–‡æ¡£id
+	 * @param id å›å¤id
 	 */
 	public PostComment getPostCommentByID(String post_id,String id){
 
@@ -1803,10 +1811,10 @@ public class KF5Support{
 
 
 	/**
-	 * »Ø¸´ÎÄµµ
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param post_id ÎÄµµid
-	 * @param jsonString »Ø¸´ÄÚÈİ;²ÎÊı¸ñÊ½Îªjson¸ñÊ½£¬ÏêÇéÇë¼û£ºhttp://developer.kf5.com/restapi/posts/ÖĞ»Ø¸´ÎÄµµ
+	 * å›å¤æ–‡æ¡£
+	 * è°ƒç”¨æƒé™:all
+	 * @param post_id æ–‡æ¡£id
+	 * @param jsonString å›å¤å†…å®¹;å‚æ•°æ ¼å¼ä¸ºjsonæ ¼å¼ï¼Œè¯¦æƒ…è¯·è§ï¼šhttp://developer.kf5.com/restapi/posts/ä¸­å›å¤æ–‡æ¡£
 	 * @return
 	 */
 	public PostComment postReply(String post_id,String jsonString){
@@ -1823,9 +1831,9 @@ public class KF5Support{
 
 
 	/**
-	 * ÉÏ´«¸½¼ş
-	 * µ÷ÓÃÈ¨ÏŞ:all
-	 * @param path ¸½¼şÂ·¾¶
+	 * ä¸Šä¼ é™„ä»¶
+	 * è°ƒç”¨æƒé™:all
+	 * @param path é™„ä»¶è·¯å¾„
 	 * @return
 	 */
 	public Attachment uploadAttachment(String path){
@@ -1847,9 +1855,9 @@ public class KF5Support{
 
 
 	/**
-	 * ²é¿´¸½¼ş
-	 * µ÷ÓÃÈ¨ÏŞ: all
-	 * @param attachment_id ¸½¼şid
+	 * æŸ¥çœ‹é™„ä»¶
+	 * è°ƒç”¨æƒé™: all
+	 * @param attachment_id é™„ä»¶id
 	 * @return
 	 */
 	public Attachment viewAttachment(String attachment_id){
@@ -1866,9 +1874,9 @@ public class KF5Support{
 
 
 	/**
-	 * É¾³ı¸½¼ş
-	 * µ÷ÓÃÈ¨ÏŞ:agent
-	 * @param attachment_id ¸½¼şid
+	 * åˆ é™¤é™„ä»¶
+	 * è°ƒç”¨æƒé™:agent
+	 * @param attachment_id é™„ä»¶id
 	 */
 	public void deleteAttachment(String attachment_id){
 		checkHasId(attachment_id);
@@ -1877,15 +1885,15 @@ public class KF5Support{
 
 
 	/**
-	 * ¹¤µ¥µ¼Èë
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * ×¢Òâ:µ¼Èë½ÓÊÕÊı¾İÎªµ¥¸ö¹¤µ¥Êı¾İ£¬ÅúÁ¿µ¼ÈëÊ±ÇëÑ­»·µ÷ÓÃ½Ó¿Ú¡£Èç¹ûÔÚµ¼ÈëÊ±³ö´í£¬¿ÉÒÔ·½±ã´¦Àí³ö´íÊı¾İ
-	 * ¹¤µ¥ÔÚµ¼ÈëÊ±£¬´¥·¢Æ÷µÈÏµÍ³¹æÔò¶Ô¸ÃÌõ¹¤µ¥²»ÉúĞ§
-	 * µ¼ÈëÊ±ÔÊĞíÉèÖÃ¹¤µ¥µÄcreated_at,updated_atµÈÊ±¼ä×Ö¶Î
-	 * ÔÊĞíÉèÖÃ¹¤µ¥»Ø¸´commentsµÄ´´½¨Ê±¼äcreated_at, ×¢ÒâcommentsÊı¾İ±ØĞë°üº¬author_id,content×Ö¶ÎÖµ
-	 * ÇëÔÚµ¼ÈëÇ°È·ÈÏ¹¤µ¥¼°»Ø¸´ËùÉæ¼°µÄÓÃ»§È«²¿´æÔÚÓÚÔÆ¿Í·şÆ½Ì¨Àï£¬Èç¹ûÃ»ÓĞÇëµ÷ÓÃ ÓÃ»§½Ó¿Ú Users API ½øĞĞ´´½¨
-	 * ÁË½â¸ü¶à¹ØÓÚ¹¤µ¥µÄ²Ù×÷Çë¿´ ¹¤µ¥(¿Í·ş) ½Ó¿Ú Tickets API
-	 * @param jsonString Ìá½»µÄ¹¤µ¥ÄÚÈİ£¬²ÎÊı¸ñÊ½Îªjson£¬ÏêÇéÇë¼ûhttp://developer.kf5.com/restapi/imports/ÖĞ¹¤µ¥µ¼Èë
+	 * å·¥å•å¯¼å…¥
+	 * è°ƒç”¨æƒé™:admin
+	 * æ³¨æ„:å¯¼å…¥æ¥æ”¶æ•°æ®ä¸ºå•ä¸ªå·¥å•æ•°æ®ï¼Œæ‰¹é‡å¯¼å…¥æ—¶è¯·å¾ªç¯è°ƒç”¨æ¥å£ã€‚å¦‚æœåœ¨å¯¼å…¥æ—¶å‡ºé”™ï¼Œå¯ä»¥æ–¹ä¾¿å¤„ç†å‡ºé”™æ•°æ®
+	 * å·¥å•åœ¨å¯¼å…¥æ—¶ï¼Œè§¦å‘å™¨ç­‰ç³»ç»Ÿè§„åˆ™å¯¹è¯¥æ¡å·¥å•ä¸ç”Ÿæ•ˆ
+	 * å¯¼å…¥æ—¶å…è®¸è®¾ç½®å·¥å•çš„created_at,updated_atç­‰æ—¶é—´å­—æ®µ
+	 * å…è®¸è®¾ç½®å·¥å•å›å¤commentsçš„åˆ›å»ºæ—¶é—´created_at, æ³¨æ„commentsæ•°æ®å¿…é¡»åŒ…å«author_id,contentå­—æ®µå€¼
+	 * è¯·åœ¨å¯¼å…¥å‰ç¡®è®¤å·¥å•åŠå›å¤æ‰€æ¶‰åŠçš„ç”¨æˆ·å…¨éƒ¨å­˜åœ¨äºäº‘å®¢æœå¹³å°é‡Œï¼Œå¦‚æœæ²¡æœ‰è¯·è°ƒç”¨ ç”¨æˆ·æ¥å£ Users API è¿›è¡Œåˆ›å»º
+	 * äº†è§£æ›´å¤šå…³äºå·¥å•çš„æ“ä½œè¯·çœ‹ å·¥å•(å®¢æœ) æ¥å£ Tickets API
+	 * @param jsonString æäº¤çš„å·¥å•å†…å®¹ï¼Œå‚æ•°æ ¼å¼ä¸ºjsonï¼Œè¯¦æƒ…è¯·è§http://developer.kf5.com/restapi/imports/ä¸­å·¥å•å¯¼å…¥
 	 */
 	public Ticket importOrder(String jsonString){
 
@@ -1906,16 +1914,16 @@ public class KF5Support{
 
 
 	/**
-	 * ¹¤µ¥µ¼³ö
-	 * µ÷ÓÃÈ¨ÏŞ:admin
-	 * ÇëÇó²ÎÊı:start_time:Éè¶¨ÇëÇóµ¼³öµÄ¹¤µ¥´´½¨Ê±¼äµÄ¿ªÊ¼µã(Ê±¼ä´Á)
-	 * end_time:Éè¶¨ÇëÇóµ¼³öµÄ¹¤µ¥´´½¨Ê±¼äµÄ½áÊøµã(Ê±¼ä´Á)
-	 * order£ºIDÅÅĞò 'ASC' or 'DESC'
-	 * Ã¿Ò³×î¶à·µ»Ø500ÌõÊı¾İ
-	 * ×¢Òâ:Èô²»ÉèÖÃstart_time£¬Ä¬ÈÏµ¼³öend_timeÖ®Ç°´´½¨µÄ¹¤µ¥£»
-	 * Èô²»ÉèÖÃend_time£¬Ä¬ÈÏµ¼³ö´Óstart_timeÖÁµ±Ç°Ê±¼äÄÚ´´½¨µÄ¹¤µ¥;
-	 * Èô²»ÉèÖÃorder£¬Ä¬ÈÏµ¼³ö¹¤µ¥°´IDÕıĞòÅÅÁĞ¡£
-	 * @param param ÇëÇó²ÎÊı£¬Èç£ºstart_time=1425698858&end_time=1455698858&order=ASC
+	 * å·¥å•å¯¼å‡º
+	 * è°ƒç”¨æƒé™:admin
+	 * è¯·æ±‚å‚æ•°:start_time:è®¾å®šè¯·æ±‚å¯¼å‡ºçš„å·¥å•åˆ›å»ºæ—¶é—´çš„å¼€å§‹ç‚¹(æ—¶é—´æˆ³)
+	 * end_time:è®¾å®šè¯·æ±‚å¯¼å‡ºçš„å·¥å•åˆ›å»ºæ—¶é—´çš„ç»“æŸç‚¹(æ—¶é—´æˆ³)
+	 * orderï¼šIDæ’åº 'ASC' or 'DESC'
+	 * æ¯é¡µæœ€å¤šè¿”å›500æ¡æ•°æ®
+	 * æ³¨æ„:è‹¥ä¸è®¾ç½®start_timeï¼Œé»˜è®¤å¯¼å‡ºend_timeä¹‹å‰åˆ›å»ºçš„å·¥å•ï¼›
+	 * è‹¥ä¸è®¾ç½®end_timeï¼Œé»˜è®¤å¯¼å‡ºä»start_timeè‡³å½“å‰æ—¶é—´å†…åˆ›å»ºçš„å·¥å•;
+	 * è‹¥ä¸è®¾ç½®orderï¼Œé»˜è®¤å¯¼å‡ºå·¥å•æŒ‰IDæ­£åºæ’åˆ—ã€‚
+	 * @param param è¯·æ±‚å‚æ•°ï¼Œå¦‚ï¼šstart_time=1425698858&end_time=1455698858&order=ASC
 	 */
 	public List<Ticket> orderExport(String param){
 		

@@ -4,7 +4,7 @@ package com.kf5.support.model;
  * 
  * @author chosen
  *
- * @version ´´½¨Ê±¼ä£º2015Äê8ÔÂ31ÈÕ  ÏÂÎç5:09:37
+ * @version åˆ›å»ºæ—¶é—´ï¼š2015å¹´8æœˆ31æ—¥  ä¸‹åˆ5:09:37
  */
 public interface SearchResultEntity {
 

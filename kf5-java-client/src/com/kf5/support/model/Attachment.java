@@ -2,17 +2,17 @@ package com.kf5.support.model;
 
 public class Attachment {
 
-	private int id; //¸½¼şid£¬ÓÉÏµÍ³×Ô¶¯·ÖÅä
+	private int id; //é™„ä»¶idï¼Œç”±ç³»ç»Ÿè‡ªåŠ¨åˆ†é…
 	
-	private String url; //×ÊÔ´url
+	private String url; //èµ„æºurl
 	
-	private String name; //¸½¼şÃû³Æ
+	private String name; //é™„ä»¶åç§°
 	
-	private int size; //¸½¼ş´óĞ¡
+	private int size; //é™„ä»¶å¤§å°
 	
-	private String content_url; //¸½¼ş»ñÈ¡µØÖ·£¬¼´ÏÂÔØµØÖ·
+	private String content_url; //é™„ä»¶è·å–åœ°å€ï¼Œå³ä¸‹è½½åœ°å€
 	
-	private String token; //¸½¼şµÄtoken£¬Æ¾½ètoken¿ÉÒÔ½«¸½¼ş°ó¶¨µ½¹¤µ¥»Ø¸´µÈ×ÊÔ´
+	private String token; //é™„ä»¶çš„tokenï¼Œå‡­å€Ÿtokenå¯ä»¥å°†é™„ä»¶ç»‘å®šåˆ°å·¥å•å›å¤ç­‰èµ„æº
 
 	public int getId() {
 		return id;
