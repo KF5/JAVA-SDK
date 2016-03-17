@@ -148,7 +148,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<User> buildUsers(JSONArray jsonArray){
 
-		List<User> users = new ArrayList<>();
+		List<User> users = new ArrayList<User>();
 		if (jsonArray != null ) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -231,7 +231,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<Comment> buildComments(JSONArray jsonArray){
 
-		List<Comment> comments = new ArrayList<>();
+		List<Comment> comments = new ArrayList<Comment>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -262,7 +262,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		JSONArray optionArray = safeArray(jsonObject, KF5Fields.CUSTOM_FIELD_OPTIONS);
 		if (optionArray != null ) {
 			int size = optionArray.size();
-			List<CustomFieldOption> list = new ArrayList<>();
+			List<CustomFieldOption> list = new ArrayList<CustomFieldOption>();
 			for (int i = 0; i < size; i++) {
 				JSONObject itemObject = optionArray.getJSONObject(i);
 				list.add(buildCustomFieldOption(itemObject));
@@ -284,7 +284,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<TicketField> buildTicketFields(JSONArray jsonArray){
 
-		List<TicketField> list = new ArrayList<>();
+		List<TicketField> list = new ArrayList<TicketField>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -309,7 +309,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 	}
 
 	public static List<View> buildViews(JSONArray jsonArray){
-		List<View> views = new ArrayList<>();
+		List<View> views = new ArrayList<View>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -332,7 +332,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<ViewCount> buildViewCounts(JSONArray jsonArray){
 
-		List<ViewCount> viewCounts = new ArrayList<>();
+		List<ViewCount> viewCounts = new ArrayList<ViewCount>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -390,7 +390,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<Agent> buildAgents(JSONArray jsonArray){
 
-		List<Agent> list = new ArrayList<>();
+		List<Agent> list = new ArrayList<Agent>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -415,7 +415,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<Group> buildGroups(JSONArray jsonArray){
 
-		List<Group> list = new ArrayList<>();
+		List<Group> list = new ArrayList<Group>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -468,7 +468,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<Forum> buildForums(JSONArray jsonArray){
 
-		List<Forum> list = new ArrayList<>();
+		List<Forum> list = new ArrayList<Forum>();
 
 		if (jsonArray != null) {
 			int size = jsonArray.size();
@@ -539,7 +539,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<Post> buildPosts(JSONArray jsonArray){
 
-		List<Post> list = new ArrayList<>();
+		List<Post> list = new ArrayList<Post>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -643,7 +643,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	public static List<Topic> buildTopics(JSONArray jsonArray){
 
-		List<Topic> list = new ArrayList<>();
+		List<Topic> list = new ArrayList<Topic>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {

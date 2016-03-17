@@ -59,9 +59,9 @@ public class HttpRequest {
 				connection.disconnect();
 			}
 		}
-		
-//		System.out.println(messageStatus.getJsonObject().toString());
-		
+
+		System.out.println(messageStatus.getJsonObject().toString());
+
 		return messageStatus;
 	}
 

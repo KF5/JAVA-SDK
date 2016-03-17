@@ -2,9 +2,7 @@ package com.kf5.support.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import com.kf5.support.internet.HttpRequest;
 import com.kf5.support.internet.KF5Interface;
@@ -31,6 +29,7 @@ import com.kf5.support.model.View;
 import com.kf5.support.model.ViewCount;
 import com.kf5.support.model.builder.EntityBuilder;
 import com.kf5.support.model.builder.KF5EntityBuilder;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONException;
@@ -64,7 +63,7 @@ public class KF5Support{
 		this.username = username;
 		this.password = password;
 		String code = this.username+":"+this.password;
-		this.baseToken =new String(Base64.getEncoder().encode(code.getBytes()));
+		this.baseToken =Base64.encode(code.getBytes());
 	}
 	/**
 	 * 使用邮箱和平台开放api的通信秘钥进行验证
@@ -78,7 +77,7 @@ public class KF5Support{
 		this.username = username;
 		this.token = apiToken;
 		String code = this.username+"/token:"+this.token;
-		this.baseToken = new String(Base64.getEncoder().encode(code.getBytes()));
+		this.baseToken =Base64.encode(code.getBytes());
 	}
 
 
@@ -503,13 +502,13 @@ public class KF5Support{
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			JSONArray jsonArray = KF5EntityBuilder.safeArray(jsonObject, KF5Fields.COMMENTS);
 			comments = EntityBuilder.buildComments(jsonArray);
-//			for (int i = 0; i < comments.size(); i++) {
-//				Comment comment = comments.get(i);
-//				List<Attachment> attachments = comment.getListAttachments();
-//				for (int j = 0; j < attachments.size(); j++) {
-//					System.out.println(attachments.get(j).getContent_url());
-//				}
-//			}
+			//			for (int i = 0; i < comments.size(); i++) {
+			//				Comment comment = comments.get(i);
+			//				List<Attachment> attachments = comment.getListAttachments();
+			//				for (int j = 0; j < attachments.size(); j++) {
+			//					System.out.println(attachments.get(j).getContent_url());
+			//				}
+			//			}
 			int count = KF5EntityBuilder.safeInt(jsonObject, KF5Fields.COUNT);
 			int next_page = KF5EntityBuilder.safeInt(jsonObject, KF5Fields.NEXT_PAGE);
 			int previous_page = KF5EntityBuilder.safeInt(jsonObject, KF5Fields.PREVIOUS_PAGE);
@@ -676,7 +675,7 @@ public class KF5Support{
 	 * @return
 	 */
 	public View getOrderTypeByID(String type_id){
-		
+
 		checkHasId(type_id);
 		View view = null;
 		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.getOrderTypeListByID(domain,type_id), baseToken);
@@ -802,7 +801,7 @@ public class KF5Support{
 	 * @return
 	 */
 	public List<User> getManyUsersInfo(String user_ids){
-		
+
 		checkHasId(user_ids);
 		List<User> users = null;
 		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.getManyUsersInfo(domain)+user_ids, baseToken);
@@ -1196,7 +1195,7 @@ public class KF5Support{
 	 * @return
 	 */
 	public Topic getTopicByID(String topic_id){
-		
+
 		checkHasId(topic_id);
 		Topic topic = null;
 		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.getTopicByID(domain, topic_id), baseToken);
@@ -1239,7 +1238,7 @@ public class KF5Support{
 	 * @return
 	 */
 	public Topic updateTopic(String topic_id,String jsonString){
-		
+
 		checkHasId(topic_id);
 		Topic topic = null;
 		try {
@@ -1262,7 +1261,7 @@ public class KF5Support{
 	 * @param topic_id 社区话题id
 	 */
 	public void deleteTopic(String topic_id){
-		
+
 		checkHasId(topic_id);
 		HttpRequest.sendDeleteRequest(KF5Interface.deleteTopic(domain, topic_id), baseToken);
 	}
@@ -1513,7 +1512,7 @@ public class KF5Support{
 	 * @return
 	 */
 	public Category updateCategory(String category_id,String jsonString){
-		
+
 		checkHasId(category_id);
 		Category category = null;
 		try {
@@ -1682,7 +1681,7 @@ public class KF5Support{
 	 * @return
 	 */
 	public List<Post> getManyPosts(String posts_ids){
-		
+
 		checkHasId(posts_ids);
 		List<Post> list = null;
 		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.getManyPosts(domain,posts_ids), baseToken);
@@ -1702,7 +1701,7 @@ public class KF5Support{
 	 * @return
 	 */
 	public List<Post> searchPost(String key_word){
-		
+
 		List<Post> list = null;
 		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.searchPost(domain,key_word), baseToken);
 		if (messageStatus.getStatus() == StatusCode.OK) {
@@ -1723,7 +1722,7 @@ public class KF5Support{
 	 * @param jsonString 创建文档的内容；格式为json，参数格式详情请见http://developer.kf5.com/restapi/posts/中创建文档
 	 */
 	public Post createPost(String jsonString){
-		
+
 		Post post = null;
 		try {
 			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createPost(domain), baseToken, JSONObject.fromObject(jsonString).toString());
@@ -1764,7 +1763,7 @@ public class KF5Support{
 	 * @param post_id 文档id
 	 */
 	public void deletePost(String post_id){
-		
+
 		checkHasId(post_id);
 		HttpRequest.sendDeleteRequest(KF5Interface.deletePost(domain, post_id), baseToken);
 	}
@@ -1838,7 +1837,7 @@ public class KF5Support{
 	 */
 	public Attachment uploadAttachment(String path){
 
-		
+
 		Attachment attachment = null;
 		try {
 			File file = new File(path);
@@ -1908,7 +1907,7 @@ public class KF5Support{
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		
+
 		return ticket;
 	}
 
@@ -1926,7 +1925,7 @@ public class KF5Support{
 	 * @param param 请求参数，如：start_time=1425698858&end_time=1455698858&order=ASC
 	 */
 	public List<Ticket> orderExport(String param){
-		
+
 		List<Ticket> list = null;
 		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.orderExport(domain)+param, baseToken);
 		if (messageStatus.getStatus() == StatusCode.OK) {
@@ -1943,7 +1942,7 @@ public class KF5Support{
 	}
 
 	private static void checkHasId(String... ids){
-		
+
 		if (ids != null) {
 			int size = ids.length;
 			for (int i = 0; i < size; i++) {
@@ -1954,7 +1953,7 @@ public class KF5Support{
 		}else {
 			throw new IllegalArgumentException("id can not be null");
 		}
-		
+
 	}
-	
+
 }

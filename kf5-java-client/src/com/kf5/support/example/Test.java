@@ -1,4 +1,4 @@
-﻿package com.kf5.support.example;
+package com.kf5.support.example;
 
 import com.kf5.support.controller.KF5Support;
 
@@ -7,7 +7,8 @@ public class Test {
 	public static void main(String[] args) {
 
 		KF5Support kf5Support = new KF5Support();
-		kf5Support.initWithApiToken("yitb.kf5.com", "tanqinghua@kjy.com", "1da3457430ab722a7ff9fbc3d379d3");
+		//				kf5Support.initWithApiToken("tianxiang.kf5.com", "123456789@qq.com", "71662da0ac6xxxxxb4d5f0137a");
+//		kf5Support.initWithPassword("tianxiang.kf5.com", "123456789@qq.com", "xxxxxxxx");
 		//		kf5Support.getAgentOrderList();
 		//				kf5Support.getAgentOrderListWithID("258");
 		//		kf5Support.getAgentTicketDetail("32");S
@@ -20,7 +21,7 @@ public class Test {
 		//		kf5Support.getAgentOrderCollaborators("1");
 		//		kf5Support.getAgentOrderIncidentList("32");
 		//		kf5Support.getAgentOrderProblemList();
-		//		kf5Support.getRequesterOrderList();	
+//		kf5Support.getRequesterOrderList();	
 		//		kf5Support.getRequesterOrderListStatusOpen();
 		//		kf5Support.getRequesterOrderListStatusSolved();
 		//		kf5Support.getRequesterOrderListByID("586");
@@ -32,11 +33,11 @@ public class Test {
 		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
 		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"反正很奇怪\",\"custom_fields\":[],\"description\":\"真的很奇怪\",\"title\":\"不吃药萌萌哒\",\"requester_id\":0,\"id\":0,\"group_id\":0}}}");
 		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"custom_fields\":[],\"description\":\"图图寂寞哦\",\"title\":\"不吃药萌萌哒\",\"requester_id\":0,\"id\":0,\"group_id\":0}}");
-		kf5Support.getCommentListByEndUser("14406");
+		//		kf5Support.getCommentListByEndUser("14406");
 		//		kf5Support.getOrderCommentWithID(null, "205586");
 		//		kf5Support.getOrderCommentList("32");	
-		//		kf5Support.getTicketFieldList();
-		//		kf5Support.getTicketFieldListActive();
+//				kf5Support.getTicketFieldList();
+//				kf5Support.getTicketFieldListActive();
 		//		kf5Support.getTicketFieldByID("103");
 		//		kf5Support.deleteTicketFieldByID("4183");
 		//		kf5Support.getOrderTypeList();
@@ -47,7 +48,7 @@ public class Test {
 		//		kf5Support.getManyTicketCountByTypeIds("284859,241284");
 		//		kf5Support.getUserList();
 		//		kf5Support.getUserInfo("123");
-		//		kf5Support.getMyInfo();
+				kf5Support.getMyInfo();
 		//		kf5Support.getManyUsersInfo("123,122");
 		//		kf5Support.createUserInfo("{\"user\": {\"name\": \"liuming\", \"email\": \"liuming135@qq.com\"}}");//测试创建已存在用户的bug
 		//		kf5Support.mergeUser("589280", "{\"user\": {\"id\": 123}}");
@@ -101,7 +102,7 @@ public class Test {
 		//		kf5Support.getPostCommentList("70873");
 		//		kf5Support.getPostCommentByID("70873", "3896");
 		//		kf5Support.postReply("70873", "{\"post_comment\": {\"content\": \"this is api test content\"}}");
-		kf5Support.uploadAttachment("D://456.jpg");
+		//		kf5Support.uploadAttachment("D://456.jpg");
 		//		kf5Support.viewAttachment("225709");
 		//		kf5Support.deleteAttachment("223997");
 		//		kf5Support.importOrder("{\"ticket\": {\"requester_id\":586,\"title\": \"Help\", \"comments\": [{ \"author_id\": 563265, \"content\": \"This is a comment\"}]}}");

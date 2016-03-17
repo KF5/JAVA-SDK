@@ -32,7 +32,7 @@ public class TicketField {
 	 
 	private String regexp_for_validation; //正则匹配字段的表达式
 	
-	private List<CustomFieldOption> customFieldOptions = new ArrayList<>(); //下拉菜单字段的选项数组
+	private List<CustomFieldOption> customFieldOptions = new ArrayList<CustomFieldOption>(); //下拉菜单字段的选项数组
 
 	public int getId() {
 		return id;
