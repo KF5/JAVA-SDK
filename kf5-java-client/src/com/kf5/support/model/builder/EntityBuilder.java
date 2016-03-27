@@ -3,8 +3,8 @@ package com.kf5.support.model.builder;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
+import org.kf5.support.fastjson.JSONArray;
+import org.kf5.support.fastjson.JSONObject;
 
 import com.kf5.support.model.Agent;
 import com.kf5.support.model.Attachment;

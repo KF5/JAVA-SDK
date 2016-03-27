@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.kf5.support.fastjson.JSONArray;
+import org.kf5.support.fastjson.JSONException;
+import org.kf5.support.fastjson.JSONObject;
+
 import com.kf5.support.internet.HttpRequest;
 import com.kf5.support.internet.KF5Interface;
 import com.kf5.support.model.Attachment;
@@ -31,9 +35,7 @@ import com.kf5.support.model.builder.EntityBuilder;
 import com.kf5.support.model.builder.KF5EntityBuilder;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
+
 /**
  * 
  * @author chosen
@@ -63,7 +65,8 @@ public class KF5Support{
 		this.username = username;
 		this.password = password;
 		String code = this.username+":"+this.password;
-		this.baseToken =Base64.encode(code.getBytes());
+//		this.baseToken =new String(Base64.getEncoder().encode(code.getBytes()));
+		this.baseToken = Base64.encode(code.getBytes());
 	}
 	/**
 	 * 使用邮箱和平台开放api的通信秘钥进行验证
@@ -77,7 +80,8 @@ public class KF5Support{
 		this.username = username;
 		this.token = apiToken;
 		String code = this.username+"/token:"+this.token;
-		this.baseToken =Base64.encode(code.getBytes());
+//		this.baseToken =new String(Base64.getEncoder().encode(code.getBytes()));
+		this.baseToken = Base64.encode(code.getBytes());
 	}
 
 
@@ -159,7 +163,7 @@ public class KF5Support{
 	public Ticket createAgentOrder(String jsonString){
 		Ticket ticket = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createOrder(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createOrder(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				ticket = EntityBuilder.buildTicket(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.TICKET));
@@ -183,7 +187,7 @@ public class KF5Support{
 		checkHasId(order_id);
 		Ticket ticket = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateOrder(domain, order_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateOrder(domain, order_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				ticket = EntityBuilder.buildTicket(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.TICKET));
@@ -205,7 +209,7 @@ public class KF5Support{
 	public void updateManyAgentOrder(String ids,String jsonString){
 		checkHasId(ids);
 		try {
-			HttpRequest.sendPutRequest(KF5Interface.updateManyOrders(domain)+ids, baseToken, JSONObject.fromObject(jsonString).toString());
+			HttpRequest.sendPutRequest(KF5Interface.updateManyOrders(domain)+ids, baseToken, JSONObject.parse(jsonString).toString());
 		} catch (JSONException e) {
 			// TODO: handle exception
 			throw new JSONException(jsonString+"cannot be converted to jsonobject");
@@ -450,7 +454,7 @@ public class KF5Support{
 
 		Requester requester = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createOrderByRequester(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createOrderByRequester(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				requester = EntityBuilder.buildRequester(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.REQUEST));
@@ -475,7 +479,7 @@ public class KF5Support{
 		checkHasId(order_id);
 		Requester requester = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.replyOrderByEndUser(domain,order_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.replyOrderByEndUser(domain,order_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				requester = EntityBuilder.buildRequester(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.REQUEST));
@@ -826,7 +830,7 @@ public class KF5Support{
 
 		User user = null ;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createUserInfo(domain),baseToken,JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createUserInfo(domain),baseToken,JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				user = EntityBuilder.buildUser(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.USER));
@@ -851,7 +855,7 @@ public class KF5Support{
 		checkHasId(user_id);
 		User user = null; 
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.mergeUser(domain, user_id), baseToken,JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.mergeUser(domain, user_id), baseToken,JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				user = EntityBuilder.buildUser(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.USER));
@@ -875,7 +879,7 @@ public class KF5Support{
 		checkHasId(user_id);
 		User user = null; 
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateUserInfo(domain, user_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateUserInfo(domain, user_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				user = EntityBuilder.buildUser(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.USER));
@@ -1033,7 +1037,7 @@ public class KF5Support{
 
 		Group group = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createGroup(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createGroup(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				group = EntityBuilder.buildGroup(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.GROUP));
@@ -1055,7 +1059,7 @@ public class KF5Support{
 
 		checkHasId(group_id);
 		Group group = null;
-		MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateGroup(domain, group_id), baseToken, JSONObject.fromObject(jsonString).toString());
+		MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateGroup(domain, group_id), baseToken, JSONObject.parse(jsonString).toString());
 		if (messageStatus.getStatus() == StatusCode.OK) {
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			group = EntityBuilder.buildGroup(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.GROUP));
@@ -1121,7 +1125,7 @@ public class KF5Support{
 	 */
 	public Organization createOrganization(String jsonString){
 		Organization organization = null;
-		MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createOrganization(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+		MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createOrganization(domain), baseToken, JSONObject.parse(jsonString).toString());
 		if (messageStatus.getStatus() == StatusCode.OK) {
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			organization = EntityBuilder.buildOrganization(KF5EntityBuilder.getJsonObject(jsonObject, KF5Fields.ORGANIZATION));
@@ -1141,7 +1145,7 @@ public class KF5Support{
 		checkHasId(organization_id);
 		Organization organization = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateOrganization(domain, organization_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateOrganization(domain, organization_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				organization = EntityBuilder.buildOrganization(KF5EntityBuilder.getJsonObject(jsonObject, KF5Fields.ORGANIZATION));
@@ -1217,7 +1221,7 @@ public class KF5Support{
 
 		Topic topic = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createTopic(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createTopic(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				topic = EntityBuilder.buildTopic(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.TOPIC));
@@ -1242,7 +1246,7 @@ public class KF5Support{
 		checkHasId(topic_id);
 		Topic topic = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateTopic(domain, topic_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateTopic(domain, topic_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				topic = EntityBuilder.buildTopic(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.TOPIC));
@@ -1318,7 +1322,7 @@ public class KF5Support{
 
 		Question question = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createQuestion(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createQuestion(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				question = EntityBuilder.buildQuestion(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.QUESTION));
@@ -1344,7 +1348,7 @@ public class KF5Support{
 		checkHasId(question_id);
 		Question question = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateQuestion(domain, question_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateQuestion(domain, question_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				question = EntityBuilder.buildQuestion(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.QUESTION));
@@ -1422,7 +1426,7 @@ public class KF5Support{
 		checkHasId(question_id);
 		List<QuestionComment> list = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.replyQuestion(domain, question_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.replyQuestion(domain, question_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				JSONArray jsonArray = KF5EntityBuilder.safeArray(jsonObject, KF5Fields.QUESTION_COMMENTS);
@@ -1491,7 +1495,7 @@ public class KF5Support{
 
 		Category category = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createCategory(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createCategory(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				category = EntityBuilder.buildCategory(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.CATEGORY));
@@ -1516,7 +1520,7 @@ public class KF5Support{
 		checkHasId(category_id);
 		Category category = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateCategory(domain,category_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateCategory(domain,category_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				category = EntityBuilder.buildCategory(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.CATEGORY));
@@ -1587,7 +1591,7 @@ public class KF5Support{
 
 		Forum forum = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createForum(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createForum(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				forum = EntityBuilder.buildForum(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.FORUM));
@@ -1612,7 +1616,7 @@ public class KF5Support{
 		checkHasId(forum_id);
 		Forum forum = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateForum(domain,forum_id), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updateForum(domain,forum_id), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				forum = EntityBuilder.buildForum(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.FORUM));
@@ -1725,7 +1729,7 @@ public class KF5Support{
 
 		Post post = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createPost(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.createPost(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				post = EntityBuilder.buildPost(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.POST));
@@ -1749,7 +1753,7 @@ public class KF5Support{
 
 		checkHasId(post_id);
 		Post post = null;
-		MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updatePost(domain,post_id), baseToken, JSONObject.fromObject(jsonString).toString());
+		MessageStatus messageStatus = HttpRequest.sendPutRequest(KF5Interface.updatePost(domain,post_id), baseToken, JSONObject.parse(jsonString).toString());
 		if (messageStatus.getStatus() == StatusCode.OK) {
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			post = EntityBuilder.buildPost(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.POST));
@@ -1820,7 +1824,7 @@ public class KF5Support{
 
 		checkHasId(post_id);
 		PostComment postComment = null;
-		MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.postReply(domain, post_id), baseToken, JSONObject.fromObject(jsonString).toString());
+		MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.postReply(domain, post_id), baseToken, JSONObject.parse(jsonString).toString());
 		if (messageStatus.getStatus() == StatusCode.OK) {
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			postComment = EntityBuilder.buildPostComment(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.POST_COMMENT));
@@ -1898,7 +1902,7 @@ public class KF5Support{
 
 		Ticket ticket = null;
 		try {
-			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.importOrder(domain), baseToken, JSONObject.fromObject(jsonString).toString());
+			MessageStatus messageStatus = HttpRequest.sendPostRequest(KF5Interface.importOrder(domain), baseToken, JSONObject.parse(jsonString).toString());
 			if (messageStatus.getStatus() == StatusCode.OK) {
 				JSONObject jsonObject = messageStatus.getJsonObject();
 				ticket = EntityBuilder.buildTicket(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.TICKET));

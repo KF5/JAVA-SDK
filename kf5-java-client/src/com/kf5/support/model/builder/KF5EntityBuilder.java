@@ -1,10 +1,11 @@
 package com.kf5.support.model.builder;
 
+import org.kf5.support.fastjson.JSONArray;
+import org.kf5.support.fastjson.JSONException;
+import org.kf5.support.fastjson.JSONObject;
+
 import com.kf5.support.model.ItemType;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
 
 public class KF5EntityBuilder {
 	
@@ -12,7 +13,6 @@ public class KF5EntityBuilder {
 	public static Object buildEntityByType(ItemType type,JSONObject object) throws JSONException{
 		
 		Object obj = null;
-		JSONObject current = null;
 		switch (type) {
 		case TICKET:
 			obj = EntityBuilder.buildTicket(object);
@@ -31,7 +31,7 @@ public class KF5EntityBuilder {
 	public static String safeGet(JSONObject object, String field)
 			throws JSONException {
 		
-		if (object.has(field)) {
+		if (object.containsKey(field)) {
 			return object.getString(field);
 		} else {
 			return null;
@@ -42,7 +42,7 @@ public class KF5EntityBuilder {
 	public static JSONObject safeObject(JSONObject object, String field)
 			throws JSONException {
 
-		if (object.has(field)) {
+		if (object.containsKey(field)) {
 			try {
 				return object.getJSONObject(field);
 			} catch (Exception e) {
@@ -56,7 +56,7 @@ public class KF5EntityBuilder {
 	
 	public static JSONObject getJsonObject(JSONObject object, String fledsString) throws JSONException{
 		
-		if (object.has(fledsString)) {
+		if (object.containsKey(fledsString)) {
 			
 			return object.getJSONObject(fledsString);
 		}
@@ -66,7 +66,7 @@ public class KF5EntityBuilder {
 	public static JSONObject safeObject(String result){
 		
 		try {
-			return JSONObject.fromObject(result);
+			return JSONObject.parseObject(result);
 		} catch (JSONException e) {
 			// TODO: handle exception
 		}
@@ -76,7 +76,7 @@ public class KF5EntityBuilder {
 
 	public static JSONArray safeArray(JSONObject object, String field)
 			throws JSONException {
-		if (object.has(field)) {
+		if (object.containsKey(field)) {
 			return object.getJSONArray(field);
 		} else {
 			return null;
@@ -85,7 +85,7 @@ public class KF5EntityBuilder {
 
 	protected static Float safeFloat(JSONObject object, String field)
 			throws JSONException {
-		if (object.has(field)) {
+		if (object.containsKey(field)) {
 			try {
 				return Float.parseFloat(object.getString(field));
 			} catch (NumberFormatException e) {
@@ -98,7 +98,7 @@ public class KF5EntityBuilder {
 
 	public static Integer safeInt(JSONObject object, String field)
 			throws JSONException {
-		if (object!=null&&object.has(field)) {
+		if (object!=null&&object.containsKey(field)) {
 			try {
 				return Integer.parseInt(object.getString(field));
 			} catch (NumberFormatException e) {
@@ -111,7 +111,7 @@ public class KF5EntityBuilder {
 
 	protected static Long safeLong(JSONObject object, String field)
 			throws JSONException {
-		if (object.has(field)) {
+		if (object.containsKey(field)) {
 			try {
 				return Long.parseLong(object.getString(field));
 			} catch (NumberFormatException e) {
@@ -124,7 +124,7 @@ public class KF5EntityBuilder {
 
 	protected static Boolean safeBoolean(JSONObject object, String field)
 			throws JSONException {
-		if (object.has(field)) {
+		if (object.containsKey(field)) {
 			return Boolean.parseBoolean(object.getString(field));
 		} else {
 			return Boolean.FALSE;

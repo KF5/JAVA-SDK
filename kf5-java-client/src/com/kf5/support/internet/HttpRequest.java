@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Map;
 
 import com.kf5.support.model.MessageStatus;
 import com.kf5.support.model.StatusCode;
@@ -59,9 +58,7 @@ public class HttpRequest {
 				connection.disconnect();
 			}
 		}
-
-		System.out.println(messageStatus.getJsonObject().toString());
-
+		
 		return messageStatus;
 	}
 

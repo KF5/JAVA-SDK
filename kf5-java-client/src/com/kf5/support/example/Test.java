@@ -7,9 +7,13 @@ public class Test {
 	public static void main(String[] args) {
 
 		KF5Support kf5Support = new KF5Support();
-		//				kf5Support.initWithApiToken("tianxiang.kf5.com", "123456789@qq.com", "71662da0ac6xxxxxb4d5f0137a");
-//		kf5Support.initWithPassword("tianxiang.kf5.com", "123456789@qq.com", "xxxxxxxx");
-		//		kf5Support.getAgentOrderList();
+		//				kf5Support.initWithApiToken("tianxiang.kf5.com", "123456789@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
+		kf5Support.initWithApiToken("tianxiang.kf5.com", "123456789@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
+		//		kf5Support.initWithApiToken("itojoy.kf5.com", "sujinde@itojoy.com", "7513f8c7201731fa760b21047ea8a3");
+		//		kf5Support.initWithApiToken("yitb.kf5.com", "tanqinghua@kjy.com", "1da3457430ab722a7ff9fbc3d379d3");
+		//		kf5Support.initWithApiToken("joymay.kf5.com", "384069799@qq.com", "7ea5b368d18af18486aea611e7dd1b");
+		//		kf5Support.initWithPassword("tianxiang.kf5.com", "123456789@qq.com", "111111");
+//				kf5Support.getAgentOrderList();
 		//				kf5Support.getAgentOrderListWithID("258");
 		//		kf5Support.getAgentTicketDetail("32");S
 		//		kf5Support.getAgentManyTickets("32,1");
@@ -21,7 +25,7 @@ public class Test {
 		//		kf5Support.getAgentOrderCollaborators("1");
 		//		kf5Support.getAgentOrderIncidentList("32");
 		//		kf5Support.getAgentOrderProblemList();
-//		kf5Support.getRequesterOrderList();	
+				kf5Support.getRequesterOrderList();	
 		//		kf5Support.getRequesterOrderListStatusOpen();
 		//		kf5Support.getRequesterOrderListStatusSolved();
 		//		kf5Support.getRequesterOrderListByID("586");
@@ -36,8 +40,8 @@ public class Test {
 		//		kf5Support.getCommentListByEndUser("14406");
 		//		kf5Support.getOrderCommentWithID(null, "205586");
 		//		kf5Support.getOrderCommentList("32");	
-//				kf5Support.getTicketFieldList();
-//				kf5Support.getTicketFieldListActive();
+		//		kf5Support.getTicketFieldList();
+		//		kf5Support.getTicketFieldListActive();
 		//		kf5Support.getTicketFieldByID("103");
 		//		kf5Support.deleteTicketFieldByID("4183");
 		//		kf5Support.getOrderTypeList();
@@ -48,7 +52,7 @@ public class Test {
 		//		kf5Support.getManyTicketCountByTypeIds("284859,241284");
 		//		kf5Support.getUserList();
 		//		kf5Support.getUserInfo("123");
-				kf5Support.getMyInfo();
+		//		kf5Support.getMyInfo();
 		//		kf5Support.getManyUsersInfo("123,122");
 		//		kf5Support.createUserInfo("{\"user\": {\"name\": \"liuming\", \"email\": \"liuming135@qq.com\"}}");//测试创建已存在用户的bug
 		//		kf5Support.mergeUser("589280", "{\"user\": {\"id\": 123}}");
@@ -102,7 +106,7 @@ public class Test {
 		//		kf5Support.getPostCommentList("70873");
 		//		kf5Support.getPostCommentByID("70873", "3896");
 		//		kf5Support.postReply("70873", "{\"post_comment\": {\"content\": \"this is api test content\"}}");
-		//		kf5Support.uploadAttachment("D://456.jpg");
+//		kf5Support.uploadAttachment("D://456.jpg");
 		//		kf5Support.viewAttachment("225709");
 		//		kf5Support.deleteAttachment("223997");
 		//		kf5Support.importOrder("{\"ticket\": {\"requester_id\":586,\"title\": \"Help\", \"comments\": [{ \"author_id\": 563265, \"content\": \"This is a comment\"}]}}");

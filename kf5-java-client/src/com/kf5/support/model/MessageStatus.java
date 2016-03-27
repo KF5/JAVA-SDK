@@ -1,6 +1,6 @@
 package com.kf5.support.model;
 
-import net.sf.json.JSONObject;
+import org.kf5.support.fastjson.JSONObject;
 
 public class MessageStatus {
 	
