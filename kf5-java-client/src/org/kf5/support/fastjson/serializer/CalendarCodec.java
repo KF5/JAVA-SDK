@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.kf5.support.fastjson.parser.DefaultJSONParser;
 import org.kf5.support.fastjson.parser.JSONToken;
+import org.kf5.support.fastjson.parser.deserializer.DateDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.ObjectDeserializer;
 import org.kf5.support.fastjson.util.IOUtils;
 
@@ -92,7 +93,7 @@ public class CalendarCodec implements ObjectSerializer, ObjectDeserializer {
 
     @SuppressWarnings("unchecked")
     public <T> T deserialze(DefaultJSONParser parser, Type type, Object fieldName) {
-        Object value = DateCodec.instance.deserialze(parser, type, fieldName);
+        Object value = DateDeserializer.instance.deserialze(parser, type, fieldName);
 
         if (value instanceof Calendar) {
             return (T) value;

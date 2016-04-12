@@ -41,8 +41,6 @@ public class ASMDeserializerFactory implements Opcodes {
 
     private final ASMClassLoader                classLoader;
 
-    private final Map<String, Class<?>> classMap = new HashMap<String, Class<?>>();
-
     private final AtomicLong                    seed     = new AtomicLong();
 
     public String getGenClassName(Class<?> clazz) {
@@ -106,20 +104,12 @@ public class ASMDeserializerFactory implements Opcodes {
             }
         }
 
-        Class<?> exampleClass = defineClassPublic(className, code, 0, code.length);
+        Class<?> exampleClass = classLoader.defineClassPublic(className, code, 0, code.length);
 
         Constructor<?> constructor = exampleClass.getConstructor(ParserConfig.class, Class.class);
         Object instance = constructor.newInstance(config, clazz);
 
         return (ObjectDeserializer) instance;
-    }
-
-    private Class<?> defineClassPublic(String name, byte[] b, int off, int len){
-        if(classMap.containsKey(name)){
-            return classMap.get(name);
-        } else {
-            return classLoader.defineClassPublic(name, b, off, len);
-        }
     }
 
     void _setFlag(MethodVisitor mw, Context context, int i) {
@@ -614,13 +604,6 @@ public class ASMDeserializerFactory implements Opcodes {
 
         _setContext(context, mw);
         mw.visitVarInsn(ALOAD, context.var("instance"));
-        
-        Method buildMethod = context.getBeanInfo().getBuildMethod();
-        if (buildMethod != null) {
-            mw.visitMethodInsn(INVOKEVIRTUAL, getType(context.getInstClass()), buildMethod.getName(),
-                    "()" + getDesc(buildMethod.getReturnType()));
-        }
-        
         mw.visitInsn(ARETURN);
 
         mw.visitLabel(reset_);
@@ -663,13 +646,11 @@ public class ASMDeserializerFactory implements Opcodes {
     }
 
     private void _createInstance(Context context, MethodVisitor mw) {
-        DeserializeBeanInfo beanInfo = context.getBeanInfo();
-        Constructor<?> defaultConstructor = beanInfo.getDefaultConstructor();
+        Constructor<?> defaultConstructor = context.getBeanInfo().getDefaultConstructor();
         if (Modifier.isPublic(defaultConstructor.getModifiers())) {
-            mw.visitTypeInsn(NEW, getType(context.getInstClass()));
+            mw.visitTypeInsn(NEW, getType(context.getClazz()));
             mw.visitInsn(DUP);
-            
-            mw.visitMethodInsn(INVOKESPECIAL, getType(defaultConstructor.getDeclaringClass()), "<init>", "()V");
+            mw.visitMethodInsn(INVOKESPECIAL, getType(context.getClazz()), "<init>", "()V");
 
             mw.visitVarInsn(ASTORE, context.var("instance"));
         } else {
@@ -677,7 +658,7 @@ public class ASMDeserializerFactory implements Opcodes {
             mw.visitVarInsn(ALOAD, 1);
             mw.visitMethodInsn(INVOKESPECIAL, "com/alibaba/fastjson/parser/deserializer/ASMJavaBeanDeserializer", "createInstance",
                                "(Lcom/alibaba/fastjson/parser/DefaultJSONParser;)Ljava/lang/Object;");
-            mw.visitTypeInsn(CHECKCAST, getType(context.getInstClass())); // cast
+            mw.visitTypeInsn(CHECKCAST, getType(context.getClazz())); // cast
             mw.visitVarInsn(ASTORE, context.var("instance"));
         }
     }
@@ -722,7 +703,7 @@ public class ASMDeserializerFactory implements Opcodes {
             mw.visitVarInsn(ALOAD, context.var("instance"));
             mw.visitVarInsn(LLOAD, context.var(fieldInfo.getName() + "_asm", 2));
             if (fieldInfo.getMethod() != null) {
-                mw.visitMethodInsn(INVOKEVIRTUAL, getType(context.getInstClass()), fieldInfo.getMethod().getName(),
+                mw.visitMethodInsn(INVOKEVIRTUAL, getType(context.getClazz()), fieldInfo.getMethod().getName(),
                                    getDesc(fieldInfo.getMethod()));
                 if (!fieldInfo.getMethod().getReturnType().equals(Void.TYPE)) {
                     mw.visitInsn(POP);
@@ -1222,7 +1203,7 @@ public class ASMDeserializerFactory implements Opcodes {
 
         byte[] code = cw.toByteArray();
 
-        Class<?> exampleClass = defineClassPublic(className, code, 0, code.length);
+        Class<?> exampleClass = classLoader.defineClassPublic(className, code, 0, code.length);
 
         Constructor<?> constructor = exampleClass.getConstructor(ParserConfig.class, Class.class, FieldInfo.class);
         Object instance = constructor.newInstance(mapping, clazz, fieldInfo);
@@ -1263,15 +1244,6 @@ public class ASMDeserializerFactory implements Opcodes {
 
         public Class<?> getClazz() {
             return clazz;
-        }
-        
-        public Class<?> getInstClass() {
-            Class<?> instClass = beanInfo.getBuilderClass();
-            if (instClass == null) {
-                instClass = clazz;
-            }
-            
-            return instClass;
         }
 
         public int getVariantCount() {
@@ -1366,9 +1338,9 @@ public class ASMDeserializerFactory implements Opcodes {
                                           , "(Lcom/alibaba/fastjson/parser/DefaultJSONParser;Ljava/lang/reflect/Type;)Ljava/lang/Object;",
                                           null, null);
 
-        mw.visitTypeInsn(NEW, getType(context.getInstClass()));
+        mw.visitTypeInsn(NEW, getType(context.getClazz()));
         mw.visitInsn(DUP);
-        mw.visitMethodInsn(INVOKESPECIAL, getType(context.getInstClass()), "<init>", "()V");
+        mw.visitMethodInsn(INVOKESPECIAL, getType(context.getClazz()), "<init>", "()V");
 
         mw.visitInsn(ARETURN);
         mw.visitMaxs(3, 3);

@@ -7,12 +7,9 @@ public class Test {
 	public static void main(String[] args) {
 
 		KF5Support kf5Support = new KF5Support();
-		//				kf5Support.initWithApiToken("tianxiang.kf5.com", "123456789@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
-		kf5Support.initWithApiToken("tianxiang.kf5.com", "123456789@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
-		//		kf5Support.initWithApiToken("itojoy.kf5.com", "sujinde@itojoy.com", "7513f8c7201731fa760b21047ea8a3");
-		//		kf5Support.initWithApiToken("yitb.kf5.com", "tanqinghua@kjy.com", "1da3457430ab722a7ff9fbc3d379d3");
-		//		kf5Support.initWithApiToken("joymay.kf5.com", "384069799@qq.com", "7ea5b368d18af18486aea611e7dd1b");
-		//		kf5Support.initWithPassword("tianxiang.kf5.com", "123456789@qq.com", "111111");
+		//				kf5Support.initWithApiToken("tixxxxg.kf5.com", "12xxx9@qq.com", "716xxx62da0ac6bxxxd5f0137a");
+		kf5Support.initWithApiToken("xxx.kf5.com", "123xxx89@qq.com", "716xxxx62da0acxxf0137a");
+
 //				kf5Support.getAgentOrderList();
 		//				kf5Support.getAgentOrderListWithID("258");
 		//		kf5Support.getAgentTicketDetail("32");S

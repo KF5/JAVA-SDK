@@ -99,7 +99,7 @@ public enum Feature {
     DisableSpecialKeyDetect
     ;
 
-    Feature(){
+    private Feature(){
         mask = (1 << ordinal());
     }
 

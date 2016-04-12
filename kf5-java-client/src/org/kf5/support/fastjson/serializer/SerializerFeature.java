@@ -127,14 +127,9 @@ public enum SerializerFeature {
      * @since 1.2.6
      */
     BrowserSecure,
-    
-    /**
-     * @since 1.2.7
-     */
-    IgnoreNonFieldGetter
     ;
 
-    SerializerFeature(){
+    private SerializerFeature(){
         mask = (1 << ordinal());
     }
 

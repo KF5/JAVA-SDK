@@ -49,7 +49,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.TreeMap;
@@ -67,14 +66,19 @@ import java.util.regex.Pattern;
 import org.kf5.support.fastjson.JSONArray;
 import org.kf5.support.fastjson.JSONException;
 import org.kf5.support.fastjson.JSONObject;
-import org.kf5.support.fastjson.annotation.JSONField;
 import org.kf5.support.fastjson.annotation.JSONType;
 import org.kf5.support.fastjson.asm.ASMException;
 import org.kf5.support.fastjson.parser.deserializer.ASMDeserializerFactory;
 import org.kf5.support.fastjson.parser.deserializer.ASMJavaBeanDeserializer;
+import org.kf5.support.fastjson.parser.deserializer.ArrayDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.ArrayListTypeFieldDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.AutowiredObjectDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.BooleanFieldDeserializer;
+import org.kf5.support.fastjson.parser.deserializer.CharArrayDeserializer;
+import org.kf5.support.fastjson.parser.deserializer.ClassDerializer;
+import org.kf5.support.fastjson.parser.deserializer.CollectionDeserializer;
+import org.kf5.support.fastjson.parser.deserializer.DateDeserializer;
+import org.kf5.support.fastjson.parser.deserializer.DateFormatDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.DefaultFieldDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.EnumDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.FieldDeserializer;
@@ -85,40 +89,42 @@ import org.kf5.support.fastjson.parser.deserializer.JavaBeanDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.JavaObjectDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.Jdk8DateCodec;
 import org.kf5.support.fastjson.parser.deserializer.LongFieldDeserializer;
+import org.kf5.support.fastjson.parser.deserializer.MapDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.NumberDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.ObjectDeserializer;
-import org.kf5.support.fastjson.parser.deserializer.OptionalCodec;
 import org.kf5.support.fastjson.parser.deserializer.SqlDateDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.StackTraceElementDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.StringFieldDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.ThrowableDeserializer;
 import org.kf5.support.fastjson.parser.deserializer.TimeDeserializer;
-import org.kf5.support.fastjson.serializer.AtomicCodec;
-import org.kf5.support.fastjson.serializer.AwtCodec;
+import org.kf5.support.fastjson.parser.deserializer.TimestampDeserializer;
+import org.kf5.support.fastjson.serializer.AtomicIntegerArrayCodec;
+import org.kf5.support.fastjson.serializer.AtomicLongArrayCodec;
 import org.kf5.support.fastjson.serializer.BigDecimalCodec;
 import org.kf5.support.fastjson.serializer.BigIntegerCodec;
 import org.kf5.support.fastjson.serializer.BooleanCodec;
 import org.kf5.support.fastjson.serializer.CalendarCodec;
-import org.kf5.support.fastjson.serializer.CharArrayCodec;
 import org.kf5.support.fastjson.serializer.CharacterCodec;
 import org.kf5.support.fastjson.serializer.CharsetCodec;
-import org.kf5.support.fastjson.serializer.ClassCodec;
-import org.kf5.support.fastjson.serializer.CollectionCodec;
+import org.kf5.support.fastjson.serializer.ColorCodec;
 import org.kf5.support.fastjson.serializer.CurrencyCodec;
-import org.kf5.support.fastjson.serializer.DateCodec;
-import org.kf5.support.fastjson.serializer.DateFormatCodec;
 import org.kf5.support.fastjson.serializer.FileCodec;
 import org.kf5.support.fastjson.serializer.FloatCodec;
+import org.kf5.support.fastjson.serializer.FontCodec;
 import org.kf5.support.fastjson.serializer.InetAddressCodec;
 import org.kf5.support.fastjson.serializer.InetSocketAddressCodec;
 import org.kf5.support.fastjson.serializer.IntegerCodec;
+import org.kf5.support.fastjson.serializer.LocaleCodec;
 import org.kf5.support.fastjson.serializer.LongCodec;
-import org.kf5.support.fastjson.serializer.MapCodec;
-import org.kf5.support.fastjson.serializer.MiscCodec;
-import org.kf5.support.fastjson.serializer.ObjectArrayCodec;
+import org.kf5.support.fastjson.serializer.PatternCodec;
+import org.kf5.support.fastjson.serializer.PointCodec;
+import org.kf5.support.fastjson.serializer.RectangleCodec;
 import org.kf5.support.fastjson.serializer.ReferenceCodec;
 import org.kf5.support.fastjson.serializer.StringCodec;
 import org.kf5.support.fastjson.serializer.TimeZoneCodec;
+import org.kf5.support.fastjson.serializer.URICodec;
+import org.kf5.support.fastjson.serializer.URLCodec;
+import org.kf5.support.fastjson.serializer.UUIDCodec;
 import org.kf5.support.fastjson.util.ASMUtils;
 import org.kf5.support.fastjson.util.DeserializeBeanInfo;
 import org.kf5.support.fastjson.util.FieldInfo;
@@ -129,7 +135,6 @@ import org.kf5.support.fastjson.util.ServiceLoader;
  * @author wenshao[szujobs@hotmail.com]
  */
 public class ParserConfig {
-    public final static String DENY_PROPERTY = "fastjson.parser.deny";
 
     public static ParserConfig getGlobalInstance() {
         return global;
@@ -144,15 +149,8 @@ public class ParserConfig {
     private boolean                                         asmEnable        = !ASMUtils.isAndroid();
 
     protected final SymbolTable                             symbolTable      = new SymbolTable();
-    
-    protected ClassLoader                                   defaultClassLoader;
 
     protected ASMDeserializerFactory                        asmFactory;
-    
-    private static boolean                                  awtError         = false;
-    private static boolean                                  jdk8Error        = false;
-    
-    private List<String>                                    denyList         = new ArrayList<String>();
     
     public ParserConfig() {
         this(null, null);
@@ -222,26 +220,26 @@ public class ParserConfig {
         primitiveClasses.add(java.sql.Time.class);
         primitiveClasses.add(java.sql.Timestamp.class);
 
-        derializers.put(SimpleDateFormat.class, DateFormatCodec.instance);
-        derializers.put(java.sql.Timestamp.class, SqlDateDeserializer.instance_timestamp);
+        derializers.put(SimpleDateFormat.class, DateFormatDeserializer.instance);
+        derializers.put(java.sql.Timestamp.class, TimestampDeserializer.instance);
         derializers.put(java.sql.Date.class, SqlDateDeserializer.instance);
         derializers.put(java.sql.Time.class, TimeDeserializer.instance);
-        derializers.put(java.util.Date.class, DateCodec.instance);
+        derializers.put(java.util.Date.class, DateDeserializer.instance);
         derializers.put(Calendar.class, CalendarCodec.instance);
 
         derializers.put(JSONObject.class, JSONObjectDeserializer.instance);
         derializers.put(JSONArray.class, JSONArrayDeserializer.instance);
 
-        derializers.put(Map.class, MapCodec.instance);
-        derializers.put(HashMap.class, MapCodec.instance);
-        derializers.put(LinkedHashMap.class, MapCodec.instance);
-        derializers.put(TreeMap.class, MapCodec.instance);
-        derializers.put(ConcurrentMap.class, MapCodec.instance);
-        derializers.put(ConcurrentHashMap.class, MapCodec.instance);
+        derializers.put(Map.class, MapDeserializer.instance);
+        derializers.put(HashMap.class, MapDeserializer.instance);
+        derializers.put(LinkedHashMap.class, MapDeserializer.instance);
+        derializers.put(TreeMap.class, MapDeserializer.instance);
+        derializers.put(ConcurrentMap.class, MapDeserializer.instance);
+        derializers.put(ConcurrentHashMap.class, MapDeserializer.instance);
 
-        derializers.put(Collection.class, CollectionCodec.instance);
-        derializers.put(List.class, CollectionCodec.instance);
-        derializers.put(ArrayList.class, CollectionCodec.instance);
+        derializers.put(Collection.class, CollectionDeserializer.instance);
+        derializers.put(List.class, CollectionDeserializer.instance);
+        derializers.put(ArrayList.class, CollectionDeserializer.instance);
 
         derializers.put(Object.class, JavaObjectDeserializer.instance);
         derializers.put(String.class, StringCodec.instance);
@@ -265,8 +263,8 @@ public class ParserConfig {
         derializers.put(Double.class, NumberDeserializer.instance);
         derializers.put(boolean.class, BooleanCodec.instance);
         derializers.put(Boolean.class, BooleanCodec.instance);
-        derializers.put(Class.class, ClassCodec.instance);
-        derializers.put(char[].class, CharArrayCodec.instance);
+        derializers.put(Class.class, ClassDerializer.instance);
+        derializers.put(char[].class, CharArrayDeserializer.instance);
 
         derializers.put(AtomicBoolean.class, BooleanCodec.instance);
         derializers.put(AtomicInteger.class, IntegerCodec.instance);
@@ -276,22 +274,22 @@ public class ParserConfig {
         derializers.put(WeakReference.class, ReferenceCodec.instance);
         derializers.put(SoftReference.class, ReferenceCodec.instance);
 
-        derializers.put(UUID.class, MiscCodec.instance);
+        derializers.put(UUID.class, UUIDCodec.instance);
         derializers.put(TimeZone.class, TimeZoneCodec.instance);
-        derializers.put(Locale.class, MiscCodec.instance);
+        derializers.put(Locale.class, LocaleCodec.instance);
         derializers.put(Currency.class, CurrencyCodec.instance);
         derializers.put(InetAddress.class, InetAddressCodec.instance);
         derializers.put(Inet4Address.class, InetAddressCodec.instance);
         derializers.put(Inet6Address.class, InetAddressCodec.instance);
         derializers.put(InetSocketAddress.class, InetSocketAddressCodec.instance);
         derializers.put(File.class, FileCodec.instance);
-        derializers.put(URI.class, MiscCodec.instance);
-        derializers.put(URL.class, MiscCodec.instance);
-        derializers.put(Pattern.class, MiscCodec.instance);
+        derializers.put(URI.class, URICodec.instance);
+        derializers.put(URL.class, URLCodec.instance);
+        derializers.put(Pattern.class, PatternCodec.instance);
         derializers.put(Charset.class, CharsetCodec.instance);
         derializers.put(Number.class, NumberDeserializer.instance);
-        derializers.put(AtomicIntegerArray.class, AtomicCodec.instance);
-        derializers.put(AtomicLongArray.class, AtomicCodec.instance);
+        derializers.put(AtomicIntegerArray.class, AtomicIntegerArrayCodec.instance);
+        derializers.put(AtomicLongArray.class, AtomicLongArrayCodec.instance);
         derializers.put(StackTraceElement.class, StackTraceElementDeserializer.instance);
 
         derializers.put(Serializable.class, JavaObjectDeserializer.instance);
@@ -299,55 +297,30 @@ public class ParserConfig {
         derializers.put(Comparable.class, JavaObjectDeserializer.instance);
         derializers.put(Closeable.class, JavaObjectDeserializer.instance);
 
-        if (!awtError) {
-            try {
-                derializers.put(Class.forName("java.awt.Point"), AwtCodec.instance);
-                derializers.put(Class.forName("java.awt.Font"), AwtCodec.instance);
-                derializers.put(Class.forName("java.awt.Rectangle"), AwtCodec.instance);
-                derializers.put(Class.forName("java.awt.Color"), AwtCodec.instance);
-            } catch (Throwable e) {
-                // skip
-                awtError = true;
-            }
+        try {
+            derializers.put(Class.forName("java.awt.Point"), PointCodec.instance);
+            derializers.put(Class.forName("java.awt.Font"), FontCodec.instance);
+            derializers.put(Class.forName("java.awt.Rectangle"), RectangleCodec.instance);
+            derializers.put(Class.forName("java.awt.Color"), ColorCodec.instance);
+        } catch (Throwable e) {
+            // skip
         }
         
-        if (!jdk8Error) {
-            try {
-                derializers.put(Class.forName("java.time.LocalDateTime"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.LocalDate"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.LocalTime"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.ZonedDateTime"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.OffsetDateTime"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.OffsetTime"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.ZoneOffset"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.ZoneRegion"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.ZoneId"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.Period"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.Duration"), Jdk8DateCodec.instance);
-                derializers.put(Class.forName("java.time.Instant"), Jdk8DateCodec.instance);
-                
-                derializers.put(Class.forName("java.util.Optional"), OptionalCodec.instance);
-                derializers.put(Class.forName("java.util.OptionalDouble"), OptionalCodec.instance);
-                derializers.put(Class.forName("java.util.OptionalInt"), OptionalCodec.instance);
-                derializers.put(Class.forName("java.util.OptionalLong"), OptionalCodec.instance);
-            } catch (Throwable e) {
-                // skip
-                jdk8Error = true;
-            }
-        }
-        
-        addDeny("java.lang.Thread");
-        configFromPropety(System.getProperties());
-    }
-    
-    public void configFromPropety(Properties properties) {
-        String property = properties.getProperty(DENY_PROPERTY);
-        if (property != null && property.length() > 0) {
-            String[] items = property.split(",");
-            for (int i = 0; i < items.length; ++i) {
-                String item = items[i];
-                this.addDeny(item);
-            }
+        try {
+            derializers.put(Class.forName("java.time.LocalDateTime"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.LocalDate"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.LocalTime"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.ZonedDateTime"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.OffsetDateTime"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.OffsetTime"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.ZoneOffset"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.ZoneRegion"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.ZoneId"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.Period"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.Duration"), Jdk8DateCodec.instance);
+            derializers.put(Class.forName("java.time.Instant"), Jdk8DateCodec.instance);
+        } catch (Throwable e) {
+            
         }
     }
 
@@ -421,15 +394,6 @@ public class ParserConfig {
         if (derializer != null) {
             return derializer;
         }
-        
-        for (int i = 0; i < denyList.size(); ++i) {
-            String deny = denyList.get(i);
-            String className = clazz.getName();
-            className = className.replace('$', '.');
-            if (className.startsWith(deny)) {
-                throw new JSONException("parser deny : " + className);
-            }
-        }
 
         final ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         try {
@@ -451,14 +415,14 @@ public class ParserConfig {
         if (clazz.isEnum()) {
             derializer = new EnumDeserializer(clazz);
         } else if (clazz.isArray()) {
-            derializer = ObjectArrayCodec.instance;
+            derializer = ArrayDeserializer.instance;
         } else if (clazz == Set.class || clazz == HashSet.class || clazz == Collection.class || clazz == List.class
                    || clazz == ArrayList.class) {
-            derializer = CollectionCodec.instance;
+            derializer = CollectionDeserializer.instance;
         } else if (Collection.class.isAssignableFrom(clazz)) {
-            derializer = CollectionCodec.instance;
+            derializer = CollectionDeserializer.instance;
         } else if (Map.class.isAssignableFrom(clazz)) {
-            derializer = MapCodec.instance;
+            derializer = MapDeserializer.instance;
         } else if (Throwable.class.isAssignableFrom(clazz)) {
             derializer = new ThrowableDeserializer(this, clazz);
         } else {
@@ -473,10 +437,7 @@ public class ParserConfig {
     public ObjectDeserializer createJavaBeanDeserializer(Class<?> clazz, Type type) {
         boolean asmEnable = this.asmEnable;
         if (asmEnable) {
-            Class<?> superClass = DeserializeBeanInfo.getBuilderClass(clazz);
-            if (superClass == null) {
-                superClass = clazz;
-            }
+            Class<?> superClass = clazz;
 
             for (;;) {
                 if (!Modifier.isPublic(superClass.getModifiers())) {
@@ -508,14 +469,12 @@ public class ParserConfig {
                 asmEnable = false;
             }
             DeserializeBeanInfo beanInfo = DeserializeBeanInfo.computeSetters(clazz, type);
-            
-            
-            if (asmEnable && beanInfo.getFieldList().size() > 200) {
+            if (beanInfo.getFieldList().size() > 200) {
                 asmEnable = false;
             }
 
             Constructor<?> defaultConstructor = beanInfo.getDefaultConstructor();
-            if (asmEnable && defaultConstructor == null && !clazz.isInterface()) {
+            if (defaultConstructor == null && !clazz.isInterface()) {
                 asmEnable = false;
             }
 
@@ -538,11 +497,6 @@ public class ParserConfig {
                 if (!ASMUtils.checkName(fieldInfo.getMember().getName())) {
                     asmEnable = false;
                 }
-                
-                JSONField annotation = fieldInfo.getAnnotation(JSONField.class);
-                if (annotation != null && !ASMUtils.checkName(annotation.name())) {
-                	asmEnable = false;
-				}
             }
         }
 
@@ -551,7 +505,7 @@ public class ParserConfig {
                 asmEnable = false;
             }
         }
-        
+
         if (!asmEnable) {
             return new JavaBeanDeserializer(this, clazz, type);
         }
@@ -570,15 +524,11 @@ public class ParserConfig {
         }
     }
 
-    public FieldDeserializer createFieldDeserializer(ParserConfig mapping, DeserializeBeanInfo beanInfo, FieldInfo fieldInfo) {
+    public FieldDeserializer createFieldDeserializer(ParserConfig mapping, Class<?> clazz, FieldInfo fieldInfo) {
         boolean asmEnable = this.asmEnable;
 
-        Class<?> clazz = beanInfo.getClazz();
         if (asmEnable) {
-            Class<?> superClass = beanInfo.getBuilderClass();
-            if (superClass == null) {
-                superClass = clazz;
-            }
+            Class<?> superClass = clazz;
 
             for (;;) {
                 if (!Modifier.isPublic(superClass.getModifiers())) {
@@ -592,7 +542,7 @@ public class ParserConfig {
                 }
             }
         }
-        
+
         if (fieldInfo.getFieldClass() == Class.class) {
             asmEnable = false;
         }
@@ -688,18 +638,4 @@ public class ParserConfig {
         }
     }
 
-    public ClassLoader getDefaultClassLoader() {
-        return defaultClassLoader;
-    }
-    
-    public void setDefaultClassLoader(ClassLoader defaultClassLoader) {
-        this.defaultClassLoader = defaultClassLoader;
-    }
-    
-    public void addDeny(String name) {
-        if (name == null || name.length() == 0) {
-            return;
-        }
-        this.denyList.add(name);
-    }
 }

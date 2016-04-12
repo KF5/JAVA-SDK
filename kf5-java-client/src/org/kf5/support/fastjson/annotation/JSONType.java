@@ -29,6 +29,4 @@ public @interface JSONType {
     boolean alphabetic() default true;
     
     Class<?> mappingTo() default Void.class;
-    
-    Class<?> builder() default Void.class;
 }

@@ -26,7 +26,6 @@ public class FieldInfo implements Comparable<FieldInfo> {
     private final Class<?> declaringClass;
     private boolean        getOnly = false;
     private int            serialzeFeatures;
-    private String         label = "";
     
     public FieldInfo(String name, Class<?> declaringClass, Class<?> fieldClass, Type fieldType, Field field){
         this(name, declaringClass, fieldClass, fieldType, field, 0, 0);
@@ -50,16 +49,9 @@ public class FieldInfo implements Comparable<FieldInfo> {
     public FieldInfo(String name, Method method, Field field){
         this(name, method, field, null, null);
     }
-    
-    public FieldInfo(String name, Method method, Field field, int ordinal, int serialzeFeatures){
-        this(name, method, field, ordinal, serialzeFeatures, null);
-    }
 
-    public FieldInfo(String name, Method method, Field field, int ordinal, int serialzeFeatures, String label){
+    public FieldInfo(String name, Method method, Field field, int ordinal, int serialzeFeatures){
         this(name, method, field, null, null, ordinal, serialzeFeatures);
-        if (label != null && label.length() > 0) {
-            this.label = label;
-        }
     }
 
     public FieldInfo(String name, Method method, Field field, Class<?> clazz, Type type){
@@ -84,9 +76,8 @@ public class FieldInfo implements Comparable<FieldInfo> {
         Type fieldType;
         Class<?> fieldClass;
         if (method != null) {
-        	Class<?>[] types;
-            if ((types = method.getParameterTypes()).length == 1) {
-                fieldClass = types[0];
+            if (method.getParameterTypes().length == 1) {
+                fieldClass = method.getParameterTypes()[0];
                 fieldType = method.getGenericParameterTypes()[0];
             } else {
                 fieldClass = method.getReturnType();
@@ -123,13 +114,8 @@ public class FieldInfo implements Comparable<FieldInfo> {
         this.fieldType = genericFieldType;
         this.fieldClass = fieldClass;
     }
-    
-    
-    public String getLabel() {
-        return label;
-    }
 
-    public static Type getFieldType(final Class<?> clazz, final Type type, Type fieldType) {
+    public static Type getFieldType(Class<?> clazz, Type type, Type fieldType) {
         if (clazz == null || type == null) {
             return fieldType;
         }
@@ -153,11 +139,10 @@ public class FieldInfo implements Comparable<FieldInfo> {
         if (fieldType instanceof TypeVariable) {
             ParameterizedType paramType = (ParameterizedType) TypeUtils.getGenericParamType(type);
             Class<?> parameterizedClass = TypeUtils.getClass(paramType);
-            final TypeVariable<?> typeVar = (TypeVariable<?>) fieldType;
-            
-            TypeVariable<?>[] typeVariables = parameterizedClass.getTypeParameters();
-            for (int i = 0; i < typeVariables.length; ++i) {
-                if (typeVariables[i].getName().equals(typeVar.getName())) {
+            TypeVariable<?> typeVar = (TypeVariable<?>) fieldType;
+
+            for (int i = 0; i < parameterizedClass.getTypeParameters().length; ++i) {
+                if (parameterizedClass.getTypeParameters()[i].getName().equals(typeVar.getName())) {
                     fieldType = paramType.getActualTypeArguments()[i];
                     return fieldType;
                 }
@@ -169,23 +154,16 @@ public class FieldInfo implements Comparable<FieldInfo> {
 
             Type[] arguments = parameterizedFieldType.getActualTypeArguments();
             boolean changed = false;
-            TypeVariable<?>[] typeVariables = null;
-            Type[] actualTypes = null;
             for (int i = 0; i < arguments.length; ++i) {
                 Type feildTypeArguement = arguments[i];
                 if (feildTypeArguement instanceof TypeVariable) {
                     TypeVariable<?> typeVar = (TypeVariable<?>) feildTypeArguement;
 
                     if (type instanceof ParameterizedType) {
-                        if (typeVariables == null) {
-                        	typeVariables = clazz.getTypeParameters();							
-						}
-                        for (int j = 0; j < typeVariables.length; ++j) {
-                            if (typeVariables[j].getName().equals(typeVar.getName())) {
-                            	if (actualTypes == null) {
-									actualTypes = ((ParameterizedType) type).getActualTypeArguments();
-								}
-                                arguments[i] = actualTypes[j];
+                        ParameterizedType parameterizedType = (ParameterizedType) type;
+                        for (int j = 0; j < clazz.getTypeParameters().length; ++j) {
+                            if (clazz.getTypeParameters()[j].getName().equals(typeVar.getName())) {
+                                arguments[i] = parameterizedType.getActualTypeArguments()[j];
                                 changed = true;
                             }
                         }
@@ -246,7 +224,7 @@ public class FieldInfo implements Comparable<FieldInfo> {
         return name;
     }
 
-    public String getQualifiedName() {
+    public String gerQualifiedName() {
         Member member = getMember();
         return member.getDeclaringClass().getName() + "." + member.getName();
     }
@@ -266,18 +244,6 @@ public class FieldInfo implements Comparable<FieldInfo> {
     public Field getField() {
         return field;
     }
-    
-    protected Class<?> getDeclaredClass() {
-        if (this.method != null) {
-            return this.method.getDeclaringClass();
-        }
-        
-        if (this.field != null) {
-            return this.field.getDeclaringClass();
-        }
-        
-        return null;
-    }
 
     public int compareTo(FieldInfo o) {
         if (this.ordinal < o.ordinal) {
@@ -288,58 +254,7 @@ public class FieldInfo implements Comparable<FieldInfo> {
             return 1;
         }
 
-        int result = this.name.compareTo(o.name);
-        
-        if (result != 0) {
-            return result;
-        }
-        
-        Class<?> thisDeclaringClass = this.getDeclaredClass();
-        Class<?> otherDeclaringClass = o.getDeclaredClass();
-        
-        if (thisDeclaringClass != null && otherDeclaringClass != null && thisDeclaringClass != otherDeclaringClass) {
-            if (thisDeclaringClass.isAssignableFrom(otherDeclaringClass)) {
-                return -1;
-            }
-            
-            if (otherDeclaringClass.isAssignableFrom(thisDeclaringClass)) {
-                return 1;
-            }
-        }
-        
-        if (this.isSameType() && !o.isSameType()) {
-            return 1;
-        }
-        
-        if (o.isSameType() && !this.isSameType()) {
-            return -1;
-        }
-        
-        if (o.fieldClass.isPrimitive() && !this.fieldClass.isPrimitive()) {
-            return 1;
-        }
-        
-        if (this.fieldClass.isPrimitive() && !o.fieldClass.isPrimitive()) {
-            return -1;
-        }
-        
-        if (o.fieldClass.getName().startsWith("java.") && !this.fieldClass.getName().startsWith("java.")) {
-            return 1;
-        }
-        
-        if (this.fieldClass.getName().startsWith("java.") && !o.fieldClass.getName().startsWith("java.")) {
-            return -1;
-        }
-        
-        return this.fieldClass.getName().compareTo(o.fieldClass.getName());
-    }
-    
-    private boolean isSameType() {
-        if (this.field != null) {
-            return this.field.getType() == fieldClass;
-        }
-        
-        return false;
+        return this.name.compareTo(o.name);
     }
 
     public <T extends Annotation> T getAnnotation(Class<T> annotationClass) {

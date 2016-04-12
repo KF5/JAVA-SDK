@@ -112,18 +112,8 @@ public class JSONArray extends JSON implements List<Object>, Cloneable, RandomAc
         return list.add(e);
     }
 
-    public JSONArray fluentAdd(Object e) {
-        list.add(e);
-        return this;
-    }
-
     public boolean remove(Object o) {
         return list.remove(o);
-    }
-
-    public JSONArray fluentRemove(Object o) {
-        list.remove(o);
-        return this;
     }
 
     public boolean containsAll(Collection<?> c) {
@@ -134,85 +124,32 @@ public class JSONArray extends JSON implements List<Object>, Cloneable, RandomAc
         return list.addAll(c);
     }
 
-    public JSONArray fluentAddAll(Collection<? extends Object> c) {
-        list.addAll(c);
-        return this;
-    }
-
     public boolean addAll(int index, Collection<? extends Object> c) {
         return list.addAll(index, c);
-    }
-
-    public JSONArray fluentAddAll(int index, Collection<? extends Object> c) {
-        list.addAll(index, c);
-        return this;
     }
 
     public boolean removeAll(Collection<?> c) {
         return list.removeAll(c);
     }
 
-    public JSONArray fluentRemoveAll(Collection<?> c) {
-        list.removeAll(c);
-        return this;
-    }
-
     public boolean retainAll(Collection<?> c) {
         return list.retainAll(c);
-    }
-
-    public JSONArray fluentRetainAll(Collection<?> c) {
-        list.retainAll(c);
-        return this;
     }
 
     public void clear() {
         list.clear();
     }
 
-    public JSONArray fluentClear() {
-        list.clear();
-        return this;
-    }
-
     public Object set(int index, Object element) {
-        if (index == -1) {
-            list.add(element);
-            return null;
-        }
-        
-        if (list.size() <= index) {
-            for (int i = list.size(); i < index; ++i) {
-                list.add(null);
-            }
-            list.add(element);
-            return null;
-        }
-        
         return list.set(index, element);
-    }
-
-    public JSONArray fluentSet(int index, Object element) {
-        set(index, element);
-        return this;
     }
 
     public void add(int index, Object element) {
         list.add(index, element);
     }
 
-    public JSONArray fluentAdd(int index, Object element) {
-        list.add(index, element);
-        return this;
-    }
-
     public Object remove(int index) {
         return list.remove(index);
-    }
-
-    public JSONArray fluentRemove(int index) {
-        list.remove(index);
-        return this;
     }
 
     public int indexOf(Object o) {

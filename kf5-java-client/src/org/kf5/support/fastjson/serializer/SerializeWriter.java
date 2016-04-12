@@ -561,12 +561,8 @@ public final class SerializeWriter extends Writer {
     }
 
     public void writeLongAndChar(long i, char c) throws IOException {
-        boolean needQuotationMark = needQuotationMark(i);
         if (i == Long.MIN_VALUE) {
-            if (needQuotationMark)
-                write("\"-9223372036854775808\"");
-            else
-                write("-9223372036854775808");
+            write("-9223372036854775808");
             write(c);
             return;
         }
@@ -574,8 +570,6 @@ public final class SerializeWriter extends Writer {
         int size = (i < 0) ? IOUtils.stringSize(-i) + 1 : IOUtils.stringSize(i);
 
         int newcount0 = count + size;
-        if (needQuotationMark)
-            newcount0 += 2;
         int newcount1 = newcount0 + 1;
 
         if (newcount1 > buf.length) {
@@ -587,62 +581,33 @@ public final class SerializeWriter extends Writer {
             expandCapacity(newcount1);
         }
 
-        if (needQuotationMark) {
-            buf[count] = '"';
-            IOUtils.getChars(i, newcount0 - 1, buf);
-            buf[newcount0 - 1] = '"';
-        } else
-            IOUtils.getChars(i, newcount0, buf);
-
+        IOUtils.getChars(i, newcount0, buf);
         buf[newcount0] = c;
 
         count = newcount1;
     }
 
-    private boolean needQuotationMark(long val) {
-        if (isEnabled(SerializerFeature.BrowserCompatible) && !isEnabled(SerializerFeature.WriteClassName))
-            return (val > 9007199254740991L || val < -9007199254740991L);
-        else
-            return false;
-    }
-
     public void writeLong(long i) {
-        boolean needQuotationMark = needQuotationMark(i);
         if (i == Long.MIN_VALUE) {
-            if (needQuotationMark)
-                write("\"-9223372036854775808\"");
-            else
-                write("-9223372036854775808");
+            write("-9223372036854775808");
             return;
         }
 
         int size = (i < 0) ? IOUtils.stringSize(-i) + 1 : IOUtils.stringSize(i);
 
         int newcount = count + size;
-        if (needQuotationMark)
-            newcount += 2;
         if (newcount > buf.length) {
             if (writer == null) {
                 expandCapacity(newcount);
             } else {
                 char[] chars = new char[size];
                 IOUtils.getChars(i, size, chars);
-                if (needQuotationMark) {
-                    write('"');
-                    write(chars, 0, chars.length);
-                    write('"');
-                } else
-                    write(chars, 0, chars.length);
+                write(chars, 0, chars.length);
                 return;
             }
         }
 
-        if (needQuotationMark) {
-            buf[count] = '"';
-            IOUtils.getChars(i, newcount - 1, buf);
-            buf[newcount - 1] = '"';
-        } else
-            IOUtils.getChars(i, newcount, buf);
+        IOUtils.getChars(i, newcount, buf);
 
         count = newcount;
     }
@@ -1507,7 +1472,7 @@ public final class SerializeWriter extends Writer {
         buf[count - 1] = '\"';
     }
 
-    static boolean isSpecial(char ch, int features) {
+    final static boolean isSpecial(char ch, int features) {
         // if (ch > ']') {
         // return false;
         // }

@@ -11,10 +11,6 @@ import org.kf5.support.fastjson.parser.JSONToken;
 import org.kf5.support.fastjson.parser.deserializer.ObjectDeserializer;
 
 public class ASMUtils {
-
-    public static final String JAVA_VM_NAME = System.getProperty("java.vm.name");
-    
-    public static final boolean IS_ANDROID = isAndroid(JAVA_VM_NAME);
 	
     public static boolean isAndroid(String vmName) {
         if (vmName == null) { // default is false
@@ -29,17 +25,17 @@ public class ASMUtils {
     }
 
     public static boolean isAndroid() {
-        return IS_ANDROID;
+        return isAndroid(System.getProperty("java.vm.name"));
     }
 
     public static String getDesc(Method method) {
-    	Class<?>[] types = method.getParameterTypes();
-        StringBuilder buf = new StringBuilder((types.length + 1) << 4);
-        buf.append('(');
+        StringBuffer buf = new StringBuffer();
+        buf.append("(");
+        java.lang.Class<?>[] types = method.getParameterTypes();
         for (int i = 0; i < types.length; ++i) {
             buf.append(getDesc(types[i]));
         }
-        buf.append(')');
+        buf.append(")");
         buf.append(getDesc(method.getReturnType()));
         return buf.toString();
     }
@@ -60,7 +56,7 @@ public class ASMUtils {
         } else {
             if (!parameterType.isPrimitive()) {
                 String clsName = parameterType.getName();
-                return clsName.replace('.', '/'); // 直接基于字符串替换，不使用正则替换
+                return clsName.replaceAll("\\.", "/");
             } else {
                 return getPrimitiveLetter(parameterType);
             }

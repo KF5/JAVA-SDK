@@ -36,7 +36,7 @@ public final class JSONScanner extends JSONLexerBase {
 
     private final String text;
     
-    private static boolean isAndroid = ASMUtils.isAndroid();
+    private boolean isAndroid = ASMUtils.isAndroid();
 
     public JSONScanner(String input){
         this(input, JSON.DEFAULT_PARSER_FEATURE);
@@ -62,8 +62,7 @@ public final class JSONScanner extends JSONLexerBase {
         return text.charAt(index);
     }
 
-
-    public final char doNext() {
+    public final char next() {
         return ch = charAt(++bp);
     }
 
@@ -131,7 +130,7 @@ public final class JSONScanner extends JSONLexerBase {
         return matchStat;
     }
 
-    static boolean charArrayCompare(String src, int offset, char[] dest) {
+    static final boolean charArrayCompare(String src, int offset, char[] dest) {
         final int destLen = dest.length;
         if (destLen + offset > src.length()) {
             return false;
@@ -401,17 +400,6 @@ public final class JSONScanner extends JSONLexerBase {
             ch = charAt(bp += 19);
 
             token = JSONToken.LITERAL_ISO8601_DATE;
-                        
-            if (dot == 'Z') {// UTC
-                // bugfix https://github.com/alibaba/fastjson/issues/376
-                if (calendar.getTimeZone().getRawOffset() != 0) {
-                    String[] timeZoneIDs = TimeZone.getAvailableIDs(0);// 没有+ 和 - 默认相对0
-                    if (timeZoneIDs.length > 0) {
-                        TimeZone timeZone = TimeZone.getTimeZone(timeZoneIDs[0]);
-                        calendar.setTimeZone(timeZone);
-                    }
-                }
-            }
             return true;
         }
 
@@ -933,9 +921,6 @@ public final class JSONScanner extends JSONLexerBase {
 
             if (ch == ']') {
                 ch = charAt(index++);
-                while (isWhitespace(ch)) {
-                    ch = charAt(index++);    
-                }
                 break;
             }
 
@@ -950,11 +935,6 @@ public final class JSONScanner extends JSONLexerBase {
             return list;
         } else if (ch == '}') {
             ch = charAt(bp);
-            while (isWhitespace(ch)) {
-                ch = charAt(index++);  
-                bp = index;
-            }
-            
             if (ch == ',') {
                 token = JSONToken.COMMA;
                 this.ch = charAt(++bp);

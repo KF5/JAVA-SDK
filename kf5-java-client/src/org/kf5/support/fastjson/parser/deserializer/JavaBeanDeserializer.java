@@ -1,7 +1,6 @@
 package org.kf5.support.fastjson.parser.deserializer;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -87,7 +86,7 @@ public class JavaBeanDeserializer implements ObjectDeserializer {
     }
 
     public FieldDeserializer createFieldDeserializer(ParserConfig mapping, Class<?> clazz, FieldInfo fieldInfo) {
-        return mapping.createFieldDeserializer(mapping, beanInfo, fieldInfo);
+        return mapping.createFieldDeserializer(mapping, clazz, fieldInfo);
     }
 
     public Object createInstance(DefaultJSONParser parser, Type type) {
@@ -219,7 +218,7 @@ public class JavaBeanDeserializer implements ObjectDeserializer {
             }
 
             if (lexer.token() != JSONToken.LBRACE && lexer.token() != JSONToken.COMMA) {
-                StringBuilder buf = new StringBuilder(72) // 单线程换StringBuilder，并设置初始化容量，避免内部逐步扩容开销
+                StringBuffer buf = (new StringBuffer()) //
                 .append("syntax error, expect {, actual ") //
                 .append(lexer.tokenName()) //
                 .append(", pos ") //
@@ -312,7 +311,7 @@ public class JavaBeanDeserializer implements ObjectDeserializer {
                             continue;
                         }
 
-                        Class<?> userType = TypeUtils.loadClass(typeName, parser.getConfig().getDefaultClassLoader());
+                        Class<?> userType = TypeUtils.loadClass(typeName);
                         ObjectDeserializer deserizer = parser.getConfig().getDeserializer(userType);
                         return (T) deserizer.deserialze(parser, userType, fieldName);
                     } else {
@@ -386,7 +385,7 @@ public class JavaBeanDeserializer implements ObjectDeserializer {
                 }
             }
 
-            return (T) handleBuilder(object);
+            return (T) object;
         } finally {
             if (childContext != null) {
                 childContext.setObject(object);
@@ -394,29 +393,21 @@ public class JavaBeanDeserializer implements ObjectDeserializer {
             parser.setContext(context);
         }
     }
-    
-    private Object handleBuilder(Object obj) {
-        Method buildMethod = beanInfo.getBuildMethod();
-        if (buildMethod == null) {
-            return obj;
-        }
-        
-        
-        Object builtObj;
-        try {
-            builtObj = buildMethod.invoke(obj);
-        } catch (Exception e) {
-            throw new JSONException("build object error", e);
-        }
-        
-        return builtObj;
-    }
-    
+
     public boolean parseField(DefaultJSONParser parser, String key, Object object, Type objectType,
                               Map<String, Object> fieldValues) {
         JSONLexer lexer = parser.getLexer(); // xxx
 
-        FieldDeserializer fieldDeserializer = smartMatch(key);
+        FieldDeserializer fieldDeserializer = feildDeserializerMap.get(key);
+
+        if (fieldDeserializer == null) {
+            for (Map.Entry<String, FieldDeserializer> entry : feildDeserializerMap.entrySet()) {
+                if (entry.getKey().equalsIgnoreCase(key)) {
+                    fieldDeserializer = entry.getValue();
+                    break;
+                }
+            }
+        }
 
         if (fieldDeserializer == null) {
             parseExtra(parser, object, key);
@@ -429,36 +420,6 @@ public class JavaBeanDeserializer implements ObjectDeserializer {
         fieldDeserializer.parseField(parser, object, objectType, fieldValues);
 
         return true;
-    }
-
-    public FieldDeserializer smartMatch(String key) {
-        FieldDeserializer fieldDeserializer = feildDeserializerMap.get(key);
-
-        if (fieldDeserializer == null) {
-            for (Map.Entry<String, FieldDeserializer> entry : feildDeserializerMap.entrySet()) {
-                if (entry.getKey().equalsIgnoreCase(key)) {
-                    fieldDeserializer = entry.getValue();
-                    break;
-                }
-            }
-        }
-        
-        if (fieldDeserializer == null) {
-            if (key.indexOf('_') != -1) {
-                String key2 = key.replaceAll("_", "");
-                fieldDeserializer = feildDeserializerMap.get(key2);
-                
-                if (fieldDeserializer == null) {
-                    for (Map.Entry<String, FieldDeserializer> entry : feildDeserializerMap.entrySet()) {
-                        if (entry.getKey().equalsIgnoreCase(key2)) {
-                            fieldDeserializer = entry.getValue();
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return fieldDeserializer;
     }
 
     void parseExtra(DefaultJSONParser parser, Object object, String key) {
