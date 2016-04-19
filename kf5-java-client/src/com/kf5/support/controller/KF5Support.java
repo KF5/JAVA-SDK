@@ -342,7 +342,7 @@ public class KF5Support{
 	public List<Requester> getRequesterOrderListStatusSolved(){
 
 		List<Requester> requesters = null;
-		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.getRequesterOrderListStatusOpen(domain), baseToken);
+		MessageStatus messageStatus = HttpRequest.sendGetRequest(KF5Interface.getRequesterOrderListStatusSolved(domain), baseToken);
 		if (messageStatus.getStatus() == StatusCode.OK) {
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			JSONArray jsonArray = KF5EntityBuilder.safeArray(jsonObject, KF5Fields.REQUESTS);

@@ -1,113 +1,260 @@
-package com.kf5.support.example;
-
-import com.kf5.support.controller.KF5Support;
-
-public class Test {
-
-	public static void main(String[] args) {
-
-		KF5Support kf5Support = new KF5Support();
-		//				kf5Support.initWithApiToken("tixxxxg.kf5.com", "12xxx9@qq.com", "716xxx62da0ac6bxxxd5f0137a");
-		kf5Support.initWithApiToken("xxx.kf5.com", "123xxx89@qq.com", "716xxxx62da0acxxf0137a");
-
-//				kf5Support.getAgentOrderList();
-		//				kf5Support.getAgentOrderListWithID("258");
-		//		kf5Support.getAgentTicketDetail("32");S
-		//		kf5Support.getAgentManyTickets("32,1");
-		//		kf5Support.createAgentOrder("{ticket:{title: \"Let's create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//		kf5Support.updateAgentOrder("2279","{ticket:{title: \"你在哪里\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//		kf5Support.updateManyAgentOrder("1", "{\"ticket\": {\"title\": \"我是你大爷\"}}");
-		//		kf5Support.deleteAgentOrder("2279");
-		//		kf5Support.deleteManyAgentOrders("2282,2280");
-		//		kf5Support.getAgentOrderCollaborators("1");
-		//		kf5Support.getAgentOrderIncidentList("32");
-		//		kf5Support.getAgentOrderProblemList();
-				kf5Support.getRequesterOrderList();	
-		//		kf5Support.getRequesterOrderListStatusOpen();
-		//		kf5Support.getRequesterOrderListStatusSolved();
-		//		kf5Support.getRequesterOrderListByID("586");
-		//		kf5Support.getOrganizationOrderList("17783");
-		//		kf5Support.searchOrderByEndUser("status=open");
-		//		kf5Support.getOrderDetailByEndUser("288");
-		//		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"被雷焦的新工单标题\",\"comment\": {\"content\": \"大家好，我是一条新工单?\"}}}");
-		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
-		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"反正很奇怪\",\"custom_fields\":[],\"description\":\"真的很奇怪\",\"title\":\"不吃药萌萌哒\",\"requester_id\":0,\"id\":0,\"group_id\":0}}}");
-		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"custom_fields\":[],\"description\":\"图图寂寞哦\",\"title\":\"不吃药萌萌哒\",\"requester_id\":0,\"id\":0,\"group_id\":0}}");
-		//		kf5Support.getCommentListByEndUser("14406");
-		//		kf5Support.getOrderCommentWithID(null, "205586");
-		//		kf5Support.getOrderCommentList("32");	
-		//		kf5Support.getTicketFieldList();
-		//		kf5Support.getTicketFieldListActive();
-		//		kf5Support.getTicketFieldByID("103");
-		//		kf5Support.deleteTicketFieldByID("4183");
-		//		kf5Support.getOrderTypeList();
-		//		kf5Support.getOrderTypeListActive();
-		//		kf5Support.getOrderTypeByID("241284");
-		//		kf5Support.getTicketListByTypeID("284859");
-		//		kf5Support.getTicketCountByTypeID("284859");
-		//		kf5Support.getManyTicketCountByTypeIds("284859,241284");
-		//		kf5Support.getUserList();
-		//		kf5Support.getUserInfo("123");
-		//		kf5Support.getMyInfo();
-		//		kf5Support.getManyUsersInfo("123,122");
-		//		kf5Support.createUserInfo("{\"user\": {\"name\": \"liuming\", \"email\": \"liuming135@qq.com\"}}");//测试创建已存在用户的bug
-		//		kf5Support.mergeUser("589280", "{\"user\": {\"id\": 123}}");
-		//		kf5Support.updateUserInfo("10556", "{\"user\": {\"name\": \"你大爷\"}}");
-		//		kf5Support.deleteUser("10961");
-		//		kf5Support.searchUser("123");
-		//		kf5Support.getUserFieldList();
-		//		kf5Support.getUserFieldActiveList();
-		//		kf5Support.getUserFieldListByID("35");
-		//		kf5Support.deleteUserField("1");
-		//		kf5Support.getGroupList();
-		//		kf5Support.getGroupListByID("13436");
-		//		kf5Support.createGroup("{\"group\": {\"name\": \"My Group\"}}");
-		//		kf5Support.updateGroup("13436", "{\"group\": {\"name\": \"Interesting123 Group\"}}");
-		//		kf5Support.deleteGroup("13434");
-		//		kf5Support.getOrganizationList();
-		//		kf5Support.getOrganizationByID("55");
-		//		kf5Support.createOrganization("{\"organization\": {\"name\": \"My Organization\"}}");
-		//		kf5Support.updateOrganization("16004","{\"organization\": {\"description\": \"呵呵，来修改一下\"}}");
-		//		kf5Support.deleteOrganization("19845");
-		//		kf5Support.getTopicList();
-		//		kf5Support.getTopicByID("11593");
-		//		kf5Support.createTopic("{\"topic\": {\"title\": \"this is topic title\",\"description\": \"description123465\"}}");
-		//		kf5Support.updateTopic("11784", "{\"topic\": {\"title\": \"新标题\"}}");
-		//		kf5Support.deleteTopic("11784");
-		//		kf5Support.getQuestionList();
-		//		kf5Support.getQuestionByID("2617");
-		//		kf5Support.createQuestion("{\"question\": {\"title\": \"我是你大爷\",\"topic_id\": 8881,\"content\": \"this is content\"}}");
-		//		kf5Support.updateQuestion("3301", "{\"question\": {\"title\": \"修改标题\"}}");
-		//		kf5Support.deleteQuestion("3292");
-		//		kf5Support.getQuestionCommentList("3207");
-		//		kf5Support.getQuestionCommentByID("3207", "2715");
-		//		kf5Support.replyQuestion("3207", "{\"request\": {\"comment\": {\"content\": \"我是你大爷\"}}}");
-		//		kf5Support.getCategoriesList();
-		//		kf5Support.getCategoryByID("12268");
-		//		kf5Support.createCategory("{\"category\": {\"title\": \"post category\",\"content\": \"this is content\"}}");
-		//		kf5Support.updateCategory("12268", "{\"category\": {\"title\": \"商户合作1\"}}");
-		//		kf5Support.deleteCategory("13546");
-		//		kf5Support.getForumList();
-		//		kf5Support.getForumByID("40537");
-		//		kf5Support.createForum("{\"forum\": {\"title\": \"this is forums title\",\"category_id\": \"10232\",\"content\": \"this is content\",\"role_view\": \"all\"}}");
-		//		kf5Support.updateForum("53112", "{\"forum\": {\"title\": \"呵呵\"}}");
-		//		kf5Support.deleteForum("53112");
-		//		kf5Support.getPostList();
-		//		kf5Support.getPostByID("75491");
-		//		kf5Support.getManyPosts("75491,70879,70873");
-		//		kf5Support.searchPost("7");
-		//		kf5Support.createPost("{\"post\": {\"title\": \"this is post title\",\"forum_id\":47630,\"content\": \"this is content\"}}");
-		//		kf5Support.updatePost("76180", "{\"post\": {\"title\": \"修改文档\"}}");
-		//		kf5Support.deletePost("75584");
-		//		kf5Support.getPostCommentList("70873");
-		//		kf5Support.getPostCommentByID("70873", "3896");
-		//		kf5Support.postReply("70873", "{\"post_comment\": {\"content\": \"this is api test content\"}}");
-//		kf5Support.uploadAttachment("D://456.jpg");
-		//		kf5Support.viewAttachment("225709");
-		//		kf5Support.deleteAttachment("223997");
-		//		kf5Support.importOrder("{\"ticket\": {\"requester_id\":586,\"title\": \"Help\", \"comments\": [{ \"author_id\": 563265, \"content\": \"This is a comment\"}]}}");
-		//		kf5Support.orderExport("");
+{
+	"error": 0,
+	"message": "",
+	"datas": {
+		"requester": {
+			"type": "text",
+			"maxlength": 99,
+			"size": 50,
+			"autocomplete": "off",
+			"label": "\u90ae\u7bb1\u5730\u5740",
+			"name": "requester"
+		},
+		"title": {
+			"type": "text",
+			"maxlength": 120,
+			"label": "\u6807\u9898",
+			"name": "title",
+			"required": true
+		},
+		"status": {
+			"type": "dropdownlist",
+			"items": [{
+				"key": 0,
+				"value": "\u5c1a\u672a\u53d7\u7406"
+			},
+			{
+				"key": 1,
+				"value": "\u53d7\u7406\u4e2d"
+			},
+			{
+				"key": 2,
+				"value": "\u7b49\u5f85\u56de\u590d"
+			},
+			{
+				"key": 3,
+				"value": "\u5df2\u89e3\u51b3"
+			}],
+			"label": "\u5de5\u5355\u72b6\u6001",
+			"name": "status"
+		},
+		"linked_id": {
+			"type": "dropdownlist",
+			"items": [{
+				"key": "",
+				"value": "-"
+			},
+			{
+				"key": 880,
+				"value": "#711 api test"
+			},
+			{
+				"key": 2498,
+				"value": "#2379 \u6d4b\u8bd53"
+			},
+			{
+				"key": 2507,
+				"value": "#2388 \u6d4b\u8bd5\u6570\u636e2"
+			},
+			{
+				"key": 2508,
+				"value": "#2389 test"
+			},
+			{
+				"key": 2511,
+				"value": "#2392 \u6d4b\u8bd54"
+			},
+			{
+				"key": 2514,
+				"value": "#2395 \u65b0\u5de5\u535515110"
+			}],
+			"label": "\u5173\u8054\u5230\u6545\u969c",
+			"name": "linked_id"
+		},
+		"due_date": {
+			"type": "due_date",
+			"label": "\u4efb\u52a1\u5230\u671f\u65f6\u95f4",
+			"name": "due_date"
+		},
+		"group_id": {
+			"type": "dropdownlist",
+			"items": [{
+				"key": "",
+				"value": "-"
+			},
+			{
+				"key": 165,
+				"value": "test\u652f\u6301\u7ec412"
+			},
+			{
+				"key": 200,
+				"value": "KCHAT\u5de5\u5355\u5ba2\u670d\u7ec4"
+			},
+			{
+				"key": 217,
+				"value": "\u6280\u672f\u7ec4"
+			},
+			{
+				"key": 219,
+				"value": "\u7535\u8bdd\u8bed\u97f3\u5ba2\u670d\u7ec4"
+			},
+			{
+				"key": 220,
+				"value": "\u55ef\u55ef\u55ef"
+			},
+			{
+				"key": 398,
+				"value": "\u4f60\u7785\u5565\u54e6\uff01"
+			},
+			{
+				"key": 401,
+				"value": "\u4f60\u7785\u5565\u554a"
+			},
+			{
+				"key": 423,
+				"value": "14hour group"
+			},
+			{
+				"key": 424,
+				"value": "14hour group"
+			},
+			{
+				"key": 425,
+				"value": "test111"
+			},
+			{
+				"key": 426,
+				"value": "test"
+			},
+			{
+				"key": 427,
+				"value": "\u5ba2\u670d\u5c0f\u7ec4\u4e00"
+			},
+			{
+				"key": 436,
+				"value": "test"
+			},
+			{
+				"key": 437,
+				"value": "\u4e91\u5ba2\u670d1"
+			},
+			{
+				"key": 449,
+				"value": "\u6240\u6709"
+			}],
+			"label": "\u53d7\u7406\u5ba2\u670d\u7ec4",
+			"name": "group_id"
+		},
+		"assignee_id": {
+			"type": "dropdownlist",
+			"items": [{
+				"key": "",
+				"value": "-"
+			}],
+			"label": "\u53d7\u7406\u5ba2\u670d",
+			"name": "assignee_id"
+		},
+		"content": {
+			"type": "textarea",
+			"rows": 5,
+			"cols": 100,
+			"label": "\u95ee\u9898\u63cf\u8ff0",
+			"name": "content",
+			"required": true
+		},
+		"form_custom": [{
+			"type": "multi_cascade",
+			"items": [{
+				"key": "",
+				"value": "-",
+				"sub_items": []
+			},
+			{
+				"key": "shuzi",
+				"value": "shuzi",
+				"sub_items": ["111",
+				"222"]
+			},
+			{
+				"key": "zimu",
+				"value": "zimu",
+				"sub_items": ["aaaa",
+				"bbb"]
+			},
+			{
+				"key": "23",
+				"value": "23",
+				"sub_items": ["23223",
+				"444444"]
+			}],
+			"cascade_id": null,
+			"cascade_value": null,
+			"label": "\u4e09\u7ea7\u7ea7\u8054",
+			"name": "field_709",
+			"subitems": [{
+				"title": "23\/23223",
+				"sub": [{
+					"type": "text",
+					"maxlength": 100,
+					"size": 50,
+					"is_time_field": true,
+					"cascade_id": "709",
+					"cascade_item": "23",
+					"cascade_subitem": "23223",
+					"label": "\u65f6\u95f4",
+					"name": "field_56",
+					"title": "23\/23223"
+				},
+				{
+					"type": "text",
+					"maxlength": 100,
+					"size": 50,
+					"cascade_id": "709",
+					"cascade_item": "23",
+					"cascade_subitem": "23223",
+					"label": "text",
+					"name": "field_726",
+					"title": "23\/23223"
+				},
+				{
+					"type": "text",
+					"maxlength": 32,
+					"size": 20,
+					"cascade_id": "709",
+					"cascade_item": "23",
+					"cascade_subitem": "23223",
+					"label": "\u6570\u5b57\u5b57\u6bb5",
+					"name": "field_601",
+					"title": "23\/23223"
+				}]
+			},
+			{
+				"title": "23\/444444",
+				"sub": [{
+					"type": "text",
+					"maxlength": 100,
+					"size": 50,
+					"is_date_field": true,
+					"cascade_id": "709",
+					"cascade_item": "23",
+					"cascade_subitem": "444444",
+					"label": "\u8d2d\u4e70\u65e5\u671f",
+					"name": "field_702",
+					"title": "23\/444444"
+				},
+				{
+					"type": "text",
+					"maxlength": 100,
+					"size": 50,
+					"is_date_field": true,
+					"cascade_id": "709",
+					"cascade_item": "23",
+					"cascade_subitem": "444444",
+					"label": "nice",
+					"name": "field_643",
+					"title": "23\/444444"
+				}]
+			}]
+		}]
 	}
-
 }
