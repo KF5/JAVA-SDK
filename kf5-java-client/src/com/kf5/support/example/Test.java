@@ -7,29 +7,29 @@ public class Test {
 	public static void main(String[] args) {
 
 		KF5Support kf5Support = new KF5Support();
-		
-		//		kf5Support.initWithApiToken("joxxxx", "384xxx99@qq.com", "7ea5b368d18axxxx1e7dd1b");
-		//		kf5Support.initWithPassword("tixxxng.kf5.com", "123xx@qq.com", "11x");
-//				kf5Support.getAgentOrderList();
+
+		kf5Support.initWithApiToken("xxx.kf5.com", "xxxxxxx@qq.com", "71662da0axxxxxxf0137a");
+		//		kf5Support.initWithPassword("xxxxxx.kf5.com", "1xxxxxxx9@qq.com", "11xxxx1");
+		//				kf5Support.getAgentOrderList();
 		//				kf5Support.getAgentOrderListWithID("258");
 		//		kf5Support.getAgentTicketDetail("32");
 		//		kf5Support.getAgentManyTickets("32,1");
-		//		kf5Support.createAgentOrder("{ticket:{title: \"Let's create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
+		//				kf5Support.createAgentOrder("{ticket:{title: \"Let's create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
 		//		kf5Support.updateAgentOrder("2279","{ticket:{title: \"你在哪里\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
 		//		kf5Support.updateManyAgentOrder("1", "{\"ticket\": {\"title\": \"我是你大爷\"}}");
-		//		kf5Support.deleteAgentOrder("2279");
+		//				kf5Support.deleteAgentOrder("3889");
 		//		kf5Support.deleteManyAgentOrders("2282,2280");
 		//		kf5Support.getAgentOrderCollaborators("1");
 		//		kf5Support.getAgentOrderIncidentList("32");
 		//		kf5Support.getAgentOrderProblemList();
-				kf5Support.getRequesterOrderList();	
+		//				kf5Support.getRequesterOrderList();	
 		//		kf5Support.getRequesterOrderListStatusOpen();
 		//		kf5Support.getRequesterOrderListStatusSolved();
 		//		kf5Support.getRequesterOrderListByID("586");
 		//		kf5Support.getOrganizationOrderList("17783");
 		//		kf5Support.searchOrderByEndUser("status=open");
 		//		kf5Support.getOrderDetailByEndUser("288");
-		//		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
+		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"create ticket\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
 		//		kf5Support.createOrderByEndUser("{\"request\":{\"title\": \"被雷焦的新工单标题\",\"comment\": {\"content\": \"大家好，我是一条新工单?\"}}}");
 		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"what are you waiting for?\"}}}");
 		//				kf5Support.replyOrderByEndUser("520", "{\"request\":{\"title\": \"你大爷\",\"comment\": {\"content\": \"反正很奇怪\",\"custom_fields\":[],\"description\":\"真的很奇怪\",\"title\":\"不吃药萌萌哒\",\"requester_id\":0,\"id\":0,\"group_id\":0}}}");
@@ -49,11 +49,11 @@ public class Test {
 		//		kf5Support.getManyTicketCountByTypeIds("284859,241284");
 		//		kf5Support.getUserList();
 		//		kf5Support.getUserInfo("123");
-		//		kf5Support.getMyInfo();
+		//				kf5Support.getMyInfo();
 		//		kf5Support.getManyUsersInfo("123,122");
 		//		kf5Support.createUserInfo("{\"user\": {\"name\": \"liuming\", \"email\": \"liuming135@qq.com\"}}");//测试创建已存在用户的bug
 		//		kf5Support.mergeUser("589280", "{\"user\": {\"id\": 123}}");
-		//		kf5Support.updateUserInfo("10556", "{\"user\": {\"name\": \"你大爷\"}}");
+		//				kf5Support.updateUserInfo("10556", "{\"user\": {\"name\": \"你大爷\"}}");
 		//		kf5Support.deleteUser("10961");
 		//		kf5Support.searchUser("123");
 		//		kf5Support.getUserFieldList();
@@ -103,7 +103,7 @@ public class Test {
 		//		kf5Support.getPostCommentList("70873");
 		//		kf5Support.getPostCommentByID("70873", "3896");
 		//		kf5Support.postReply("70873", "{\"post_comment\": {\"content\": \"this is api test content\"}}");
-//		kf5Support.uploadAttachment("D://456.jpg");
+		//		kf5Support.uploadAttachment("D://123456789012.jpg");
 		//		kf5Support.viewAttachment("225709");
 		//		kf5Support.deleteAttachment("223997");
 		//		kf5Support.importOrder("{\"ticket\": {\"requester_id\":586,\"title\": \"Help\", \"comments\": [{ \"author_id\": 563265, \"content\": \"This is a comment\"}]}}");

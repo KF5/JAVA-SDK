@@ -275,7 +275,7 @@ public class KF5Interface {
 	 * 导出接口
 	 */
 	
-	private final static String ORDER_EXPORT = SERVER +"/apiv2/exports/tickets.json";
+	private final static String ORDER_EXPORT = SERVER +"/apiv2/exports/tickets.json?";
 	
 	
 	

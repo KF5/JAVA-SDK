@@ -1,7 +1,6 @@
 package com.kf5.support.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.kf5.support.fastjson.JSONArray;
@@ -33,7 +32,8 @@ import com.kf5.support.model.View;
 import com.kf5.support.model.ViewCount;
 import com.kf5.support.model.builder.EntityBuilder;
 import com.kf5.support.model.builder.KF5EntityBuilder;
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import com.kf5.support.util.Base64Utils;
+
 
 
 /**
@@ -65,8 +65,7 @@ public class KF5Support{
 		this.username = username;
 		this.password = password;
 		String code = this.username+":"+this.password;
-//		this.baseToken =new String(Base64.getEncoder().encode(code.getBytes()));
-		this.baseToken = Base64.encode(code.getBytes());
+		this.baseToken =Base64Utils.encode(code);
 	}
 	/**
 	 * 使用邮箱和平台开放api的通信秘钥进行验证
@@ -80,8 +79,7 @@ public class KF5Support{
 		this.username = username;
 		this.token = apiToken;
 		String code = this.username+"/token:"+this.token;
-//		this.baseToken =new String(Base64.getEncoder().encode(code.getBytes()));
-		this.baseToken = Base64.encode(code.getBytes());
+		this.baseToken =Base64Utils.encode(code);
 	}
 
 
@@ -795,6 +793,7 @@ public class KF5Support{
 			JSONObject jsonObject = messageStatus.getJsonObject();
 			user = EntityBuilder.buildUser(KF5EntityBuilder.safeObject(jsonObject, KF5Fields.USER));
 		}
+		
 		return user;
 	}
 
@@ -1849,7 +1848,7 @@ public class KF5Support{
 			JSONObject jsonObject = KF5EntityBuilder.safeObject(result);
 			JSONObject object = KF5EntityBuilder.safeObject(jsonObject, KF5Fields.ATTACHMENT);
 			attachment = EntityBuilder.buildAttachment(object);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

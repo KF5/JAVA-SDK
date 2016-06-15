@@ -58,7 +58,7 @@ public class HttpRequest {
 				connection.disconnect();
 			}
 		}
-		
+
 		return messageStatus;
 	}
 
@@ -279,6 +279,7 @@ public class HttpRequest {
 		 */
 		if (file != null){
 			InputStream is = new FileInputStream(file);
+
 			byte[] buffer = new byte[1024];
 			int len = 0;
 			while ((len = is.read(buffer)) != -1) {
