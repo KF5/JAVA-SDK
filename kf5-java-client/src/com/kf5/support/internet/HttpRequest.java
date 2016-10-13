@@ -35,6 +35,8 @@ public class HttpRequest {
 	 */
 	public static MessageStatus sendGetRequest(String url, String baseToken) {
 
+//		System.out.println("请求地址" + url);
+
 		MessageStatus messageStatus = new MessageStatus();
 		HttpURLConnection connection = null;
 		try {
@@ -71,6 +73,7 @@ public class HttpRequest {
 				connection.disconnect();
 			}
 		}
+//		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString());
 		return messageStatus;
 	}
 
@@ -120,6 +123,63 @@ public class HttpRequest {
 			if (connection != null)
 				connection.disconnect();
 		}
+//		System.out.println("无参DELETE的返回值"+messageStatus.getJsonObject().toString());
+		return messageStatus;
+	}
+
+	/**
+	 * DELETE请求方式
+	 * 
+	 * @param url
+	 *            请求地址
+	 * @param baseToken
+	 *            basic验证码
+	 * @param params
+	 *            body参数
+	 * @return
+	 */
+	public static MessageStatus sendDeleteRequest(String url, String baseToken, String param) {
+//		System.out.println("====="+url);
+		MessageStatus messageStatus = new MessageStatus();
+		HttpURLConnection connection = null;
+		try {
+			URL realUrl = new URL(url);
+			// 打开和URL之间的连接
+			connection = (HttpURLConnection) realUrl.openConnection();
+			// 设置通用的请求属性
+			connection.setRequestMethod("DELETE");
+			connection.setRequestProperty("connection", "Keep-Alive");
+			connection.setRequestProperty("Content-Type", "application/json");
+			connection.setDoOutput(true);
+			connection.setUseCaches(false);
+			connection.setDoInput(true);
+			connection.setConnectTimeout(10 * 1000);
+			connection.setRequestProperty("Authorization", "Basic " + baseToken);
+			// 建立实际的连接
+			connection.connect();
+			DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+			out.write(param.getBytes("utf-8"));
+			out.flush();
+			out.close();
+			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				messageStatus.setStatus(StatusCode.OK);
+				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getInputStream())));
+			} else {
+				messageStatus.setStatus(connection.getResponseCode());
+				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getErrorStream())));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put(CODE, ERROR_CODE);
+			jsonObject.put(MESSAGE, e.getMessage());
+			messageStatus.setStatus(ERROR_CODE);
+			messageStatus.setJsonObject(jsonObject);
+		} finally {
+			if (connection != null)
+				connection.disconnect();
+		}
+//		System.out.println("带参数的delete请求返回值"+messageStatus.getJsonObject().toJSONString());
 		return messageStatus;
 	}
 
@@ -136,6 +196,8 @@ public class HttpRequest {
 	 */
 	public static MessageStatus sendPostRequest(String url, String baseToken, String param) {
 
+//		System.out.println("请求的url" + url);
+//		System.out.println("请求参数" + param);
 		MessageStatus messageStatus = new MessageStatus();
 		DataOutputStream out = null;
 		HttpURLConnection connection = null;
@@ -192,6 +254,7 @@ public class HttpRequest {
 
 			}
 		}
+//		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString());
 		return messageStatus;
 	}
 
@@ -262,6 +325,7 @@ public class HttpRequest {
 				messageStatus.setJsonObject(jsonObject);
 			}
 		}
+//		System.out.println("PUT请求返回值" + messageStatus.getJsonObject().toJSONString());
 		return messageStatus;
 	}
 
@@ -280,9 +344,9 @@ public class HttpRequest {
 	 */
 	public static String uploadAttachment(String url, File file, String baseToken) throws Exception {
 
-		String BOUNDARY = java.util.UUID.randomUUID().toString();
-		String PREFIX = "--", LINEND = "\r\n";
-
+		// String BOUNDARY = java.util.UUID.randomUUID().toString();
+		// String PREFIX = "--", LINEND = "\r\n";
+		// String CHARSET = "UTF-8";
 		URL uri = new URL(url);
 		HttpURLConnection conn = (HttpURLConnection) uri.openConnection();
 		conn.setReadTimeout(10 * 1000); // 缓存的最长时间
@@ -299,19 +363,28 @@ public class HttpRequest {
 		 * 写入附件数据
 		 */
 		if (file != null) {
+			// StringBuilder builder = new StringBuilder();
+			// builder.append(PREFIX);
+			// builder.append(BOUNDARY);
+			// builder.append(LINEND);
+			// builder.append("Content-Disposition: form-data; name=\"upload\";
+			// filename=\"" + file.getName() + "\"" + LINEND);
+			// builder.append("Content-Type: application/octet-stream; charset="
+			// + CHARSET + LINEND);
+			// builder.append(LINEND);
+			// outStream.write(builder.toString().getBytes());
 			InputStream is = new FileInputStream(file);
-
 			byte[] buffer = new byte[1024];
 			int len = 0;
 			while ((len = is.read(buffer)) != -1) {
 				outStream.write(buffer, 0, len);
 			}
 			is.close();
-			outStream.write(LINEND.getBytes());
+			// outStream.write(LINEND.getBytes());
 		}
 		// 请求结束标志
-		byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINEND).getBytes();
-		outStream.write(end_data);
+		// byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINEND).getBytes();
+		// outStream.write(end_data);
 		outStream.flush();
 		// 得到响应码
 		int res = conn.getResponseCode();
@@ -328,7 +401,7 @@ public class HttpRequest {
 
 	private static String getInputStream(InputStream stream) throws Exception {
 		if (stream == null) {
-			return null;
+			return "";
 		}
 		StringBuffer sb = new StringBuffer();
 		String line;

@@ -4,9 +4,9 @@ public class KF5PaginationEntity<T> extends KF5Entity<T> {
 
 	private int count ;
 	
-	private int nextPage;
+	private String nextPage;
 	
-	private int previousPage;
+	private String previousPage;
 
 	public int getCount() {
 		return count;
@@ -16,23 +16,20 @@ public class KF5PaginationEntity<T> extends KF5Entity<T> {
 		this.count = count;
 	}
 
-	public int getNextPage() {
+	public String getNextPage() {
 		return nextPage;
 	}
 
-	public void setNextPage(int nextPage) {
+	public void setNextPage(String nextPage) {
 		this.nextPage = nextPage;
 	}
 
-	public int getPreviousPage() {
+	public String getPreviousPage() {
 		return previousPage;
 	}
 
-	public void setPreviousPage(int previousPage) {
+	public void setPreviousPage(String previousPage) {
 		this.previousPage = previousPage;
 	}
-	
-	
-	
 	
 }

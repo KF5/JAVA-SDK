@@ -1,20 +1,25 @@
 package com.kf5.support.model.builder;
 
+import java.awt.event.MouseWheelEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.kf5.support.fastjson.JSONArray;
 import org.kf5.support.fastjson.JSONObject;
 
+import com.kf5.support.model.AICategory;
+import com.kf5.support.model.AIQuestionCategory;
 import com.kf5.support.model.Agent;
 import com.kf5.support.model.Attachment;
 import com.kf5.support.model.Category;
+import com.kf5.support.model.Chat;
 import com.kf5.support.model.Comment;
 import com.kf5.support.model.CustomField;
 import com.kf5.support.model.CustomFieldOption;
 import com.kf5.support.model.Forum;
 import com.kf5.support.model.Group;
 import com.kf5.support.model.KF5Fields;
+import com.kf5.support.model.Message;
 import com.kf5.support.model.Organization;
 import com.kf5.support.model.OrganizationField;
 import com.kf5.support.model.Post;
@@ -25,17 +30,16 @@ import com.kf5.support.model.Requester;
 import com.kf5.support.model.Ticket;
 import com.kf5.support.model.TicketField;
 import com.kf5.support.model.Topic;
+import com.kf5.support.model.Upload;
 import com.kf5.support.model.User;
 import com.kf5.support.model.UserField;
 import com.kf5.support.model.UserFiled;
 import com.kf5.support.model.View;
 import com.kf5.support.model.ViewCount;
 
+public class EntityBuilder extends KF5EntityBuilder {
 
-public class EntityBuilder extends KF5EntityBuilder{
-
-
-	public static Ticket buildTicket(JSONObject jsonObject){
+	public static Ticket buildTicket(JSONObject jsonObject) {
 
 		Ticket ticket = new Ticket();
 		ticket.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -72,15 +76,14 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return ticket;
 	}
 
-	public static CustomField buildCustomField(JSONObject jsonObject){
+	public static CustomField buildCustomField(JSONObject jsonObject) {
 		CustomField customField = new CustomField();
 		customField.setKey(safeGet(jsonObject, KF5Fields.NAME));
 		customField.setValue(safeGet(jsonObject, KF5Fields.VALUE));
 		return customField;
 	}
 
-
-	public static List<Ticket> buildTicketList(JSONArray jsonArray){
+	public static List<Ticket> buildTicketList(JSONArray jsonArray) {
 
 		List<Ticket> ticketList = new ArrayList<Ticket>();
 		if (jsonArray != null) {
@@ -95,8 +98,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return ticketList;
 	}
 
-
-	public static User buildUser(JSONObject jsonObject){
+	public static User buildUser(JSONObject jsonObject) {
 
 		User user = new User();
 		user.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -137,19 +139,17 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return user;
 	}
 
-
-	public static UserFiled buildUserFiled(JSONObject jsonObject){
+	public static UserFiled buildUserFiled(JSONObject jsonObject) {
 		UserFiled userFiled = new UserFiled();
 		userFiled.setKey(safeGet(jsonObject, KF5Fields.NAME));
 		userFiled.setValue(safeGet(jsonObject, KF5Fields.VALUE));
 		return userFiled;
 	}
 
-
-	public static List<User> buildUsers(JSONArray jsonArray){
+	public static List<User> buildUsers(JSONArray jsonArray) {
 
 		List<User> users = new ArrayList<User>();
-		if (jsonArray != null ) {
+		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
 				JSONObject itemObject = jsonArray.getJSONObject(i);
@@ -160,8 +160,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	}
 
-
-	public static Requester buildRequester(JSONObject jsonObject){
+	public static Requester buildRequester(JSONObject jsonObject) {
 		Requester requester = new Requester();
 		requester.setId(safeInt(jsonObject, KF5Fields.ID));
 		requester.setUrl(safeGet(jsonObject, KF5Fields.URL));
@@ -178,7 +177,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		requester.setCreated_at(safeGet(jsonObject, KF5Fields.CREATED_AT));
 		requester.setUpdated_at(safeGet(jsonObject, KF5Fields.UPDATED_AT));
 		JSONArray jsonArray = safeArray(jsonObject, KF5Fields.CUSTOM_FIELDS);
-		if (jsonArray != null ) {
+		if (jsonArray != null) {
 			List<CustomField> list = new ArrayList<CustomField>();
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
@@ -190,7 +189,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return requester;
 	}
 
-	public static List<Requester> buildRequesters(JSONArray jsonArray){
+	public static List<Requester> buildRequesters(JSONArray jsonArray) {
 
 		List<Requester> list = new ArrayList<Requester>();
 		if (jsonArray != null) {
@@ -203,8 +202,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-
-	public static Comment buildComment(JSONObject jsonObject){
+	public static Comment buildComment(JSONObject jsonObject) {
 
 		Comment comment = new Comment();
 		comment.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -226,10 +224,9 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 		return comment;
 
-
 	}
 
-	public static List<Comment> buildComments(JSONArray jsonArray){
+	public static List<Comment> buildComments(JSONArray jsonArray) {
 
 		List<Comment> comments = new ArrayList<Comment>();
 		if (jsonArray != null) {
@@ -242,8 +239,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return comments;
 	}
 
-
-	public static TicketField buildTicketField(JSONObject jsonObject){
+	public static TicketField buildTicketField(JSONObject jsonObject) {
 
 		TicketField ticketField = new TicketField();
 		ticketField.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -260,7 +256,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		ticketField.setActive(safeBoolean(jsonObject, KF5Fields.ACTIVE));
 		ticketField.setRegexp_for_validation(safeGet(jsonObject, KF5Fields.REGEXP_FOR_VALIDATION));
 		JSONArray optionArray = safeArray(jsonObject, KF5Fields.CUSTOM_FIELD_OPTIONS);
-		if (optionArray != null ) {
+		if (optionArray != null) {
 			int size = optionArray.size();
 			List<CustomFieldOption> list = new ArrayList<CustomFieldOption>();
 			for (int i = 0; i < size; i++) {
@@ -272,8 +268,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return ticketField;
 	}
 
-
-	public static CustomFieldOption buildCustomFieldOption(JSONObject jsonObject){
+	public static CustomFieldOption buildCustomFieldOption(JSONObject jsonObject) {
 
 		CustomFieldOption customFieldOption = new CustomFieldOption();
 		customFieldOption.setKey(safeGet(jsonObject, KF5Fields.KEY));
@@ -281,8 +276,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return customFieldOption;
 	}
 
-
-	public static List<TicketField> buildTicketFields(JSONArray jsonArray){
+	public static List<TicketField> buildTicketFields(JSONArray jsonArray) {
 
 		List<TicketField> list = new ArrayList<TicketField>();
 		if (jsonArray != null) {
@@ -295,7 +289,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-	public static View buildView(JSONObject jsonObject){
+	public static View buildView(JSONObject jsonObject) {
 
 		View view = new View();
 		view.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -308,7 +302,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return view;
 	}
 
-	public static List<View> buildViews(JSONArray jsonArray){
+	public static List<View> buildViews(JSONArray jsonArray) {
 		List<View> views = new ArrayList<View>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
@@ -320,8 +314,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return views;
 	}
 
-
-	public static ViewCount buildViewCount(JSONObject jsonObject){
+	public static ViewCount buildViewCount(JSONObject jsonObject) {
 
 		ViewCount viewCount = new ViewCount();
 		viewCount.setCount(safeInt(jsonObject, KF5Fields.COUNT));
@@ -330,7 +323,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return viewCount;
 	}
 
-	public static List<ViewCount> buildViewCounts(JSONArray jsonArray){
+	public static List<ViewCount> buildViewCounts(JSONArray jsonArray) {
 
 		List<ViewCount> viewCounts = new ArrayList<ViewCount>();
 		if (jsonArray != null) {
@@ -343,7 +336,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return viewCounts;
 	}
 
-	public static UserField buildUserField(JSONObject jsonObject){
+	public static UserField buildUserField(JSONObject jsonObject) {
 
 		UserField userFiled = new UserField();
 		userFiled.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -365,10 +358,10 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return userFiled;
 	}
 
-	public static List<UserField> buildUserFields(JSONArray jsonArray){
+	public static List<UserField> buildUserFields(JSONArray jsonArray) {
 
 		List<UserField> list = new ArrayList<UserField>();
-		if (jsonArray != null ) {
+		if (jsonArray != null) {
 			int size = jsonArray.size();
 			for (int i = 0; i < size; i++) {
 				JSONObject itemObject = jsonArray.getJSONObject(i);
@@ -378,8 +371,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-
-	public static Agent buildAgent(JSONObject jsonObject){
+	public static Agent buildAgent(JSONObject jsonObject) {
 		Agent agent = new Agent();
 		agent.setId(safeInt(jsonObject, KF5Fields.ID));
 		agent.setUrl(safeGet(jsonObject, KF5Fields.URL));
@@ -388,7 +380,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return agent;
 	}
 
-	public static List<Agent> buildAgents(JSONArray jsonArray){
+	public static List<Agent> buildAgents(JSONArray jsonArray) {
 
 		List<Agent> list = new ArrayList<Agent>();
 		if (jsonArray != null) {
@@ -401,7 +393,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-	public static Group buildGroup(JSONObject jsonObject){
+	public static Group buildGroup(JSONObject jsonObject) {
 
 		Group group = new Group();
 		group.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -413,7 +405,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return group;
 	}
 
-	public static List<Group> buildGroups(JSONArray jsonArray){
+	public static List<Group> buildGroups(JSONArray jsonArray) {
 
 		List<Group> list = new ArrayList<Group>();
 		if (jsonArray != null) {
@@ -426,7 +418,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-	public static Category buildCategory(JSONObject jsonObject){
+	public static Category buildCategory(JSONObject jsonObject) {
 		Category category = new Category();
 		category.setId(safeInt(jsonObject, KF5Fields.ID));
 		category.setUrl(safeGet(jsonObject, KF5Fields.URL));
@@ -437,7 +429,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return category;
 	}
 
-	public static List<Category> buildCategories(JSONArray jsonArray){
+	public static List<Category> buildCategories(JSONArray jsonArray) {
 
 		List<Category> list = new ArrayList<Category>();
 		if (jsonArray != null) {
@@ -450,8 +442,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-
-	public static Forum buildForum(JSONObject jsonObject){
+	public static Forum buildForum(JSONObject jsonObject) {
 
 		Forum forum = new Forum();
 		forum.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -466,7 +457,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	}
 
-	public static List<Forum> buildForums(JSONArray jsonArray){
+	public static List<Forum> buildForums(JSONArray jsonArray) {
 
 		List<Forum> list = new ArrayList<Forum>();
 
@@ -480,8 +471,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-
-	public static Attachment buildAttachment(JSONObject jsonObject){
+	public static Attachment buildAttachment(JSONObject jsonObject) {
 		Attachment attachment = new Attachment();
 		attachment.setId(safeInt(jsonObject, KF5Fields.ID));
 		attachment.setUrl(safeGet(jsonObject, KF5Fields.URL));
@@ -492,7 +482,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return attachment;
 	}
 
-	public static List<Attachment> buildAttachments(JSONArray jsonArray){
+	public static List<Attachment> buildAttachments(JSONArray jsonArray) {
 
 		List<Attachment> list = new ArrayList<Attachment>();
 
@@ -506,8 +496,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-
-	public static Post buildPost(JSONObject jsonObject){
+	public static Post buildPost(JSONObject jsonObject) {
 
 		Post post = new Post();
 		post.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -523,7 +512,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		post.setIs_draft(safeBoolean(jsonObject, KF5Fields.IS_DRAFT));
 		post.setCreated_at(safeGet(jsonObject, KF5Fields.CREATED_AT));
 		post.setUpdated_at(safeGet(jsonObject, KF5Fields.UPDATED_AT));
-		
+
 		JSONArray attachmentArray = safeArray(jsonObject, KF5Fields.ATTACHMENTS);
 		if (attachmentArray != null) {
 			int size = attachmentArray.size();
@@ -537,7 +526,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	}
 
-	public static List<Post> buildPosts(JSONArray jsonArray){
+	public static List<Post> buildPosts(JSONArray jsonArray) {
 
 		List<Post> list = new ArrayList<Post>();
 		if (jsonArray != null) {
@@ -551,7 +540,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	}
 
-	public static PostComment buildPostComment(JSONObject jsonObject){
+	public static PostComment buildPostComment(JSONObject jsonObject) {
 
 		PostComment comment = new PostComment();
 		comment.setAuthor_id(safeInt(jsonObject, KF5Fields.AUTHOR_ID));
@@ -563,7 +552,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	}
 
-	public static List<PostComment> buildPostComments(JSONArray jsonArray){
+	public static List<PostComment> buildPostComments(JSONArray jsonArray) {
 
 		List<PostComment> list = new ArrayList<PostComment>();
 		if (jsonArray != null) {
@@ -577,8 +566,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-
-	public static Organization buildOrganization(JSONObject jsonObject){
+	public static Organization buildOrganization(JSONObject jsonObject) {
 
 		Organization organization = new Organization();
 		organization.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -599,11 +587,10 @@ public class EntityBuilder extends KF5EntityBuilder{
 			organization.setOrganizationFields(organizationFields);
 		}
 
-		return organization ;
+		return organization;
 	}
 
-
-	public static List<Organization> buildOrganizations(JSONArray jsonArray){
+	public static List<Organization> buildOrganizations(JSONArray jsonArray) {
 
 		List<Organization> list = new ArrayList<Organization>();
 		if (jsonArray != null) {
@@ -616,9 +603,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-
-
-	public static OrganizationField buildOrganizationField(JSONObject jsonObject){
+	public static OrganizationField buildOrganizationField(JSONObject jsonObject) {
 
 		OrganizationField field = new OrganizationField();
 		field.setKey(safeGet(jsonObject, KF5Fields.NAME));
@@ -627,8 +612,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return field;
 	}
 
-
-	public static Topic buildTopic(JSONObject jsonObject){
+	public static Topic buildTopic(JSONObject jsonObject) {
 		Topic topic = new Topic();
 		topic.setId(safeInt(jsonObject, KF5Fields.ID));
 		topic.setUrl(safeGet(jsonObject, KF5Fields.URL));
@@ -640,8 +624,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return topic;
 	}
 
-
-	public static List<Topic> buildTopics(JSONArray jsonArray){
+	public static List<Topic> buildTopics(JSONArray jsonArray) {
 
 		List<Topic> list = new ArrayList<Topic>();
 		if (jsonArray != null) {
@@ -651,11 +634,10 @@ public class EntityBuilder extends KF5EntityBuilder{
 				list.add(buildTopic(itemObject));
 			}
 		}
-		return  list;
+		return list;
 	}
 
-
-	public static Question buildQuestion(JSONObject jsonObject){
+	public static Question buildQuestion(JSONObject jsonObject) {
 
 		Question question = new Question();
 
@@ -672,8 +654,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 
 	}
 
-
-	public static List<Question> buildQuestions(JSONArray jsonArray){
+	public static List<Question> buildQuestions(JSONArray jsonArray) {
 		List<Question> list = new ArrayList<Question>();
 		if (jsonArray != null) {
 			int size = jsonArray.size();
@@ -685,7 +666,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return list;
 	}
 
-	public static QuestionComment buildQuestionComment(JSONObject jsonObject){
+	public static QuestionComment buildQuestionComment(JSONObject jsonObject) {
 
 		QuestionComment questionComment = new QuestionComment();
 		questionComment.setId(safeInt(jsonObject, KF5Fields.ID));
@@ -696,7 +677,7 @@ public class EntityBuilder extends KF5EntityBuilder{
 		return questionComment;
 	}
 
-	public static List<QuestionComment> buildQuestionComments(JSONArray jsonArray){
+	public static List<QuestionComment> buildQuestionComments(JSONArray jsonArray) {
 
 		List<QuestionComment> list = new ArrayList<QuestionComment>();
 
@@ -709,6 +690,133 @@ public class EntityBuilder extends KF5EntityBuilder{
 		}
 		return list;
 	}
+	
+	public static List<Chat> buildChatList(JSONArray jsonArray){
+		
+		List<Chat> list = new ArrayList<>();
+		if (jsonArray != null) {
+			int size = jsonArray.size();
+			for (int i = 0; i < size; i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				list.add(buildChat(jsonObject));
+			}
+		}
+		return list;
+	}
+	
 
+	public static Chat buildChat(JSONObject jsonObject) {
 
+		Chat chat = new Chat();
+		if (jsonObject != null) {
+			chat.setEnd_at(safeGet(jsonObject, KF5Fields.END_AT));
+			chat.setAgent_id(safeInt(jsonObject, KF5Fields.AGENT_ID));
+			chat.setAssigned_at(safeGet(jsonObject, KF5Fields.ASSIGNED_AT));
+			chat.setVisitor_id(safeInt(jsonObject, KF5Fields.VISITOR_ID));
+			chat.setCreated_at(safeGet(jsonObject, KF5Fields.CREATED_AT));
+			chat.setId(safeInt(jsonObject, KF5Fields.ID));
+			chat.setType(safeGet(jsonObject, KF5Fields.TYPE));
+			chat.setStarted_by(safeGet(jsonObject, KF5Fields.STARTED_BY));
+			chat.setStatus(safeGet(jsonObject, KF5Fields.STATUS));
+			JSONArray messageArray = safeArray(jsonObject, KF5Fields.MESSAGES);
+			if (messageArray != null) {
+				List<Message> list = new ArrayList<>();
+				int size = messageArray.size();
+				for (int i = 0; i < size; i++) {
+					JSONObject itemObj = messageArray.getJSONObject(i);
+					list.add(buildMessage(itemObj));
+				}
+				chat.setList(list);
+			}
+		}
+		return chat;
+	}
+
+	public static Message buildMessage(JSONObject jsonObject) {
+
+		Message message = new Message();
+		if (jsonObject != null) {
+			message.setMsg(safeGet(jsonObject, KF5Fields.MSG));
+			message.setIs_read(safeBoolean(jsonObject, KF5Fields.IS_READ));
+			message.setUser_id(safeInt(jsonObject, KF5Fields.USER_ID));
+			message.setName(safeGet(jsonObject, KF5Fields.NAME));
+			message.setCreate_at(safeGet(jsonObject, KF5Fields.CREATED_AT));
+			message.setId(safeInt(jsonObject, KF5Fields.ID));
+			message.setType(safeGet(jsonObject, KF5Fields.TYPE));
+			message.setReply_timeout(safeBoolean(jsonObject, KF5Fields.REPLY_TIMEOUT));
+			message.setChat_id(safeInt(jsonObject, KF5Fields.CHAT_ID));
+			message.setUpload_id(safeInt(jsonObject, KF5Fields.UPLOAD_ID));
+			JSONObject uploadObj = safeObject(jsonObject, KF5Fields.UPLOAD);
+			if (uploadObj != null) {
+				message.setUpload(buildUpload(uploadObj));
+			}
+		}
+		return message;
+
+	}
+	
+	public static Upload buildUpload(JSONObject jsonObject){
+		Upload upload = new Upload();
+		upload.setSize(safeInt(jsonObject, KF5Fields.SIZE));
+		upload.setCreate(safeInt(jsonObject, KF5Fields.CREATED));
+		upload.setName(safeGet(jsonObject, KF5Fields.NAME));
+		upload.setId(safeInt(jsonObject, KF5Fields.ID));
+		upload.setType(safeGet(jsonObject, KF5Fields.TYPE));
+		upload.setUrl(safeGet(jsonObject, KF5Fields.URL));
+		return upload;
+		
+	}
+	
+	
+	public static AICategory buildAiCategory(JSONObject jsonObject){
+		AICategory aiCategory = new AICategory();
+		aiCategory.setActive(safeBoolean(jsonObject, KF5Fields.ACTIVE));
+		aiCategory.setCategory_id(safeInt(jsonObject, KF5Fields.CATEGORY_ID));
+		aiCategory.setAnswer(safeGet(jsonObject, KF5Fields.ANSWER));
+		aiCategory.setCreated_at(safeGet(jsonObject, KF5Fields.CREATED_AT));
+		aiCategory.setId(safeInt(jsonObject, KF5Fields.ID));
+		aiCategory.setTitle(safeGet(jsonObject, KF5Fields.TITLE));
+		JSONArray otherTitlesArray = safeArray(jsonObject, KF5Fields.OTHER_TITLES);
+		if (otherTitlesArray != null) 
+			aiCategory.setOther_titles(otherTitlesArray.toString());
+		JSONObject aiQuestionCategoryObj = safeObject(jsonObject, KF5Fields.QUESTION_CATEGORY);
+		if (aiQuestionCategoryObj != null) {
+			aiCategory.setAiQuestionCategory(buildAIQuestionCategory(aiQuestionCategoryObj));
+		}
+		return aiCategory;
+	}
+	
+	
+	public static AIQuestionCategory buildAIQuestionCategory(JSONObject jsonObject){
+		AIQuestionCategory aiQuestionCategory = new AIQuestionCategory();
+		aiQuestionCategory.setId(safeInt(jsonObject, KF5Fields.ID));
+		aiQuestionCategory.setTitle(safeGet(jsonObject, KF5Fields.TITLE));
+		return aiQuestionCategory;
+	}
+	
+	public static List<AIQuestionCategory> buildAIQuestionCategoryList(JSONArray jsonArray){
+		List<AIQuestionCategory> list = new ArrayList<>();
+		if (jsonArray != null) {
+			int size = jsonArray.size();
+			for (int i = 0; i < size; i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				list.add(buildAIQuestionCategory(jsonObject));
+			}
+		}
+		return list;
+	}
+	
+	
+	public static List<AICategory> buildAICategoryList(JSONArray jsonArray){
+		List<AICategory> list = new ArrayList<>();
+		if (jsonArray != null) {
+			int size = jsonArray.size();
+			for (int i = 0; i < size; i++) {
+				JSONObject jsonObject = jsonArray.getJSONObject(i);
+				list.add(buildAiCategory(jsonObject));
+			}
+		}
+		return list;
+	}
+	
 }
