@@ -35,7 +35,7 @@ public class HttpRequest {
 	 */
 	public static MessageStatus sendGetRequest(String url, String baseToken) {
 
-//		System.out.println("请求地址" + url);
+		System.out.println("请求地址" + url);
 
 		MessageStatus messageStatus = new MessageStatus();
 		HttpURLConnection connection = null;
@@ -73,7 +73,7 @@ public class HttpRequest {
 				connection.disconnect();
 			}
 		}
-//		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString());
+		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString()+"====="+messageStatus.getStatus());
 		return messageStatus;
 	}
 
@@ -254,7 +254,7 @@ public class HttpRequest {
 
 			}
 		}
-//		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString());
+		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString());
 		return messageStatus;
 	}
 

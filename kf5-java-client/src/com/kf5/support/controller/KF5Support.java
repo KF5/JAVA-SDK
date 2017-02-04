@@ -69,7 +69,7 @@ public class KF5Support extends BaseSupport {
 	 *            备注:分页返回所有工单，默认排序为按编号升序排列。按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请阅读http://developer.kf5.com/restapi/tickets/下工单列表文档
+	 *            详情请阅读http://developer.kf5.com/restfulapi/core/tickets/#tickets-list下工单列表文档
 	 * @return
 	 */
 	public KF5Entity<List<Ticket>> getAgentOrderListWithQuery(String query) {
@@ -115,7 +115,7 @@ public class KF5Support extends BaseSupport {
 	 *            备注:分页返回所有工单，默认排序为按编号升序排列。按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请阅读http://developer.kf5.com/restapi/tickets/下工单列表文档
+	 *            详情请阅读http://developer.kf5.com/restfulapi/core/tickets/#tickets-list下工单列表文档
 	 * @return
 	 */
 	public KF5Entity<List<Ticket>> getAgentOrderListWithID(String assignee_id, String query) {
@@ -165,8 +165,7 @@ public class KF5Support extends BaseSupport {
 	 * 创建工单 调用权限：客服
 	 * 
 	 * @param jsonString
-	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restapi/
-	 *            tickets/中创建工单参数示例
+	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/tickets/#tickets-create中创建工单参数示例
 	 * 
 	 */
 	public KF5Entity<Ticket> createAgentOrder(String jsonString) {
@@ -191,8 +190,8 @@ public class KF5Support extends BaseSupport {
 	 * @param order_id
 	 *            工单id
 	 * @param jsonString
-	 *            更新内容 参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restapi/
-	 *            tickets/中更新工单参数示例
+	 *            更新内容 参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/tickets/#tickets-update
+	 *            中更新工单参数示例
 	 * @return
 	 */
 	public KF5Entity<Ticket> updateAgentOrder(String order_id, String jsonString) {
@@ -216,8 +215,7 @@ public class KF5Support extends BaseSupport {
 	 * @param ids
 	 *            工单所对应的id，参数格式为1，2，3
 	 * @param jsonString
-	 *            更新内容，参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restapi/
-	 *            tickets/中更新多个工单参数示例
+	 *            更新内容，参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/tickets/#tickets-update-many中更新多个工单参数示例
 	 */
 	public KF5Entity<String> updateManyAgentOrder(String ids, String jsonString) {
 		checkHasId(ids);
@@ -308,7 +306,7 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restapi/requests/ 的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getRequesterOrderListWithQuery(String query) {
@@ -345,7 +343,7 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restapi/requests/ 的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getRequesterOrderListStatusOpenWithQuery(String query) {
@@ -382,7 +380,7 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restapi/requests/ 的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getRequesterOrderListStatusSolvedWithQuery(String query) {
@@ -424,7 +422,7 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restapi/requests/ 的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Ticket>> getRequesterOrderListByID(String user_id, String query) {
@@ -467,7 +465,7 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 ；page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restapi/requests/ 的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getOrganizationOrderList(String organization_id, String query) {
@@ -541,11 +539,11 @@ public class KF5Support extends BaseSupport {
 	 * 创建工单请求 调用权限：end_user
 	 * 
 	 * @param jsonString
-	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restapi/
-	 *            requests/中创建工单参数示例
+	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/requests/#requests-create中创建工单参数示例
 	 * @return
 	 */
 	public KF5Entity<Requester> createOrderByEndUser(String jsonString) {
+		System.out.println("提交的内容"+jsonString);
 		KF5Entity<Requester> kf5Entity = new KF5Entity<>();
 		try {
 			MessageStatus messageStatus = sendPostRequest(KF5Interface.createOrderByRequester(getDomain()),
@@ -566,8 +564,7 @@ public class KF5Support extends BaseSupport {
 	 * @param order_id
 	 *            工单id
 	 * @param jsonString
-	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restapi/
-	 *            requests/中回复工单参数示例
+	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/requests/#requests-comment中回复工单参数示例
 	 * @return
 	 */
 	public KF5Entity<Requester> replyOrderByEndUser(String order_id, String jsonString) {
@@ -603,7 +600,7 @@ public class KF5Support extends BaseSupport {
 	 * @param query
 	 *            page 页码，默认为 1; per_page 分页尺寸，默认为 100;
 	 *            sort_order：排序规则，可选值：asc,desc (默认为asc) 详情请阅读
-	 *            http://developer.kf5.com/restapi/requests/ 工单回复列表
+	 *           http://developer.kf5.com/restfulapi/core/requests/#requests-comment-list工单回复列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Comment>> getCommentListByEndUser(String order_id, String query) {
@@ -905,7 +902,7 @@ public class KF5Support extends BaseSupport {
 	 *            备注：按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请阅读http://developer.kf5.com/restapi/users/ 获取用户列表
+	 *            详情请阅读http://developer.kf5.com/restfulapi/core/users/#users-list 获取用户列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<User>> getUserListWithQuery(String query) {
@@ -962,7 +959,7 @@ public class KF5Support extends BaseSupport {
 	 * 创建用户信息 调用权限:agent
 	 * 
 	 * @param jsonString
-	 *            参数格式为json字符串，具体示例请参考http://developer.kf5.com/restapi/users/
+	 *            参数格式为json字符串，具体示例请参考http://developer.kf5.com/restfulapi/core/users/#users-create
 	 *            中的创建用户信息
 	 */
 	public KF5Entity<User> createUserInfo(String jsonString) {
@@ -1010,7 +1007,7 @@ public class KF5Support extends BaseSupport {
 	 *            用户id
 	 * @param jsonString
 	 *            修改内容
-	 *            参数格式为json字符串，具体示例详见：http://developer.kf5.com/restapi/users/
+	 *            参数格式为json字符串，具体示例详见：http://developer.kf5.com/restfulapi/core/users/#users-update
 	 *            修改用户信息
 	 */
 	public KF5Entity<User> updateUserInfo(String user_id, String jsonString) {
@@ -1252,7 +1249,7 @@ public class KF5Support extends BaseSupport {
 	 * @param group_id
 	 *            客服组id
 	 * @param jsonString
-	 *            修改内容,参数格式为json，详情请见http://developer.kf5.com/restapi/groups/
+	 *            修改内容,参数格式为json，详情请见http://developer.kf5.com/restfulapi/core/groups/#groups-update
 	 *            中修改客服组
 	 * @return
 	 */
@@ -1293,7 +1290,7 @@ public class KF5Support extends BaseSupport {
 	 *            备注：按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请浏览http://developer.kf5.com/restapi/organizations/ 下获取公司组织列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/organizations/#organizations-list下获取公司组织列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Organization>> getOrganizationListWithQuery(String query) {
@@ -1329,8 +1326,7 @@ public class KF5Support extends BaseSupport {
 	 * 创建公司组织 调用权限:admin
 	 * 
 	 * @param jsonString
-	 *            提交内容，参数格式为json格式，详情请见http://developer.kf5.com/restapi/
-	 *            organizations/中创建公司组织
+	 *            提交内容，参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/core/organizations/#organizations-create中创建公司组织
 	 * @return
 	 */
 	public KF5Entity<Organization> createOrganization(String jsonString) {
@@ -1345,8 +1341,7 @@ public class KF5Support extends BaseSupport {
 	 * @param organization_id
 	 *            公司组织id
 	 * @param jsonString
-	 *            修改的内容，参数格式为json。详情请见http://developer.kf5.com/restapi/
-	 *            organizations/中修改公司组织
+	 *            修改的内容，参数格式为json。详情请见http://developer.kf5.com/restfulapi/core/organizations/#organizations-update中修改公司组织
 	 * @return
 	 */
 	public KF5Entity<Organization> updateOrganization(String organization_id, String jsonString) {
@@ -1424,8 +1419,7 @@ public class KF5Support extends BaseSupport {
 	 * 创建社区话题 调用权限：admin
 	 * 
 	 * @param jsonString
-	 *            社区话题内容，参数格式为json格式，详情请见：http://developer.kf5.com/restapi/
-	 *            topics/中创建社区话题
+	 *            社区话题内容，参数格式为json格式，详情请见：http://developer.kf5.com/restfulapi/helpcenter/topics/#topics-create中创建社区话题
 	 * @return
 	 */
 	public KF5Entity<Topic> createTopic(String jsonString) {
@@ -1448,7 +1442,7 @@ public class KF5Support extends BaseSupport {
 	 * @param topic_id
 	 *            话题id
 	 * @param jsonString
-	 *            修改内容，内容格式为json格式，详情请见http://developer.kf5.com/restapi/topics/
+	 *            修改内容，内容格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/topics/#topics-update
 	 *            中修改社区话题
 	 * @return
 	 */
@@ -1527,8 +1521,7 @@ public class KF5Support extends BaseSupport {
 	 * 创建社区问题 调用权限:all 注意：话题id不能为空
 	 * 
 	 * @param jsonString
-	 *            创建问题内容，格式为json格式，详情请见http://developer.kf5.com/restapi/
-	 *            questions/中创建社区问题
+	 *            创建问题内容，格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/questions/#questions-create中创建社区问题
 	 * @return
 	 */
 	public KF5Entity<Question> createQuestion(String jsonString) {
@@ -1553,8 +1546,7 @@ public class KF5Support extends BaseSupport {
 	 * @param question_id
 	 *            社区问题id
 	 * @param jsonString
-	 *            修改内容，格式为json格式，详情请见http://developer.kf5.com/restapi/questions/
-	 *            中修改社区问题
+	 *            修改内容，格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/questions/#questions-update中修改社区问题
 	 * @return
 	 */
 	public KF5Entity<Question> updateQuestion(String question_id, String jsonString) {
@@ -1645,8 +1637,7 @@ public class KF5Support extends BaseSupport {
 	 * @param question_id
 	 *            社区问题id
 	 * @param jsonString
-	 *            回复内容，参数格式为json格式，详情请见http://developer.kf5.com/restapi/
-	 *            questions/中回复社区问题
+	 *            回复内容，参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/questions/#questions-comment-create中回复社区问题
 	 * @return
 	 */
 	public KF5PaginationEntity<List<QuestionComment>> replyQuestion(String question_id, String jsonString) {
@@ -1718,8 +1709,7 @@ public class KF5Support extends BaseSupport {
 	 * 创建文档分区 调用权限：admin
 	 * 
 	 * @param jsonString
-	 *            提交的内容;格式为json字符串格式,详情请见http://developer.kf5.com/restapi/
-	 *            categories/中创建文档分区
+	 *            提交的内容;格式为json字符串格式,详情请见http://developer.kf5.com/restfulapi/helpcenter/categories/#categories-create中创建文档分区
 	 * @return
 	 */
 	public KF5Entity<Category> createCategory(String jsonString) {
@@ -1743,8 +1733,7 @@ public class KF5Support extends BaseSupport {
 	 * @param category_id
 	 *            文档分区id
 	 * @param jsonString
-	 *            修改内容;参数格式为json格式;详情请见：http://developer.kf5.com/restapi/
-	 *            categories/修改文档分区
+	 *            修改内容;参数格式为json格式;详情请见：http://developer.kf5.com/restfulapi/helpcenter/categories/#categories-update修改文档分区
 	 * @return
 	 */
 	public KF5Entity<Category> updateCategory(String category_id, String jsonString) {
@@ -1826,7 +1815,7 @@ public class KF5Support extends BaseSupport {
 	 * 创建文档分类 调用权限：admin
 	 * 
 	 * @param jsonString
-	 *            参数格式为json格式，详情请见http://developer.kf5.com/restapi/forums/
+	 *            参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/forums/#forums-create
 	 *            中创建文档分类
 	 */
 	public KF5Entity<Forum> createForum(String jsonString) {
@@ -1851,7 +1840,7 @@ public class KF5Support extends BaseSupport {
 	 * @param forum_id
 	 *            文档分类id
 	 * @param jsonString
-	 *            参数格式为json格式，详情请见http://developer.kf5.com/restapi/forums/
+	 *            参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/forums/#forums-update
 	 *            中修改文档分类
 	 * @return
 	 */
@@ -1984,8 +1973,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建文档 调用权限:admin
 	 * 
 	 * @param jsonString
-	 *            创建文档的内容；格式为json，参数格式详情请见http://developer.kf5.com/restapi/posts
-	 *            /中创建文档
+	 *            创建文档的内容；格式为json，参数格式详情请见http://developer.kf5.com/restfulapi/helpcenter/posts/#posts-create
+	 *            中创建文档
 	 */
 
 	public KF5Entity<Post> createPost(String jsonString) {
@@ -2009,8 +1998,7 @@ public class KF5Support extends BaseSupport {
 	 * @param post_id
 	 *            文档id
 	 * @param jsonString
-	 *            修改文档的内容;格式为json，参数格式详情请见：http://developer.kf5.com/restapi/
-	 *            posts/中修改文档
+	 *            修改文档的内容;格式为json，参数格式详情请见：http://developer.kf5.com/restfulapi/helpcenter/posts/#posts-update中修改文档
 	 * @return
 	 */
 
@@ -2091,7 +2079,7 @@ public class KF5Support extends BaseSupport {
 	 * @param post_id
 	 *            文档id
 	 * @param jsonString
-	 *            回复内容;参数格式为json格式，详情请见：http://developer.kf5.com/restapi/posts/
+	 *            回复内容;参数格式为json格式，详情请见:http://developer.kf5.com/restfulapi/helpcenter/posts/#posts-comment-create
 	 *            中回复文档
 	 * @return
 	 */
@@ -2163,8 +2151,8 @@ public class KF5Support extends BaseSupport {
 	 * 工单(客服) 接口 Tickets API
 	 * 
 	 * @param jsonString
-	 *            提交的工单内容，参数格式为json，详情请见http://developer.kf5.com/restapi/imports
-	 *            /中工单导入
+	 *            提交的工单内容，参数格式为json，详情请见http://developer.kf5.com/restfulapi/others/imports/
+	 *            中工单导入
 	 */
 	public KF5Entity<Ticket> importOrder(String jsonString) {
 
@@ -2219,7 +2207,7 @@ public class KF5Support extends BaseSupport {
 	 *            按创建时间筛选，开始时间，如：2016-01-01 ; end 按结束时间筛选，结束时间，如：2016-01-01;
 	 *            user_id 工单系统用户ID（IM访客已关联工单系统用户）; page 页码，默认为 1 ; per_page
 	 *            分页尺寸，默认为 100
-	 *            详情请浏览http://developer.kf5.com/restapi/chats/下对话列表的Query参数
+	 *            详情请浏览http://developer.kf5.com/restfulapi/kchat/history/#chats-list下对话列表的Query参数
 	 */
 	public KF5PaginationEntity<List<Chat>> getChatListWithQueryParams(String query) {
 		return buildPaginationChatList(sendGetRequest(KF5Interface.getChatList(getDomain(), query)));
@@ -2246,7 +2234,7 @@ public class KF5Support extends BaseSupport {
 	 * @return 返回某个对话的详细内容
 	 */
 	public KF5Entity<Chat> getChatDetailByChatId(int chat_id) {
-
+		
 		return buildChat(sendGetRequest(KF5Interface.getChatDetailByID(getDomain(), chat_id)));
 	}
 
