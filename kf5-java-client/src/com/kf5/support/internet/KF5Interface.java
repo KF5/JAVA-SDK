@@ -1,5 +1,8 @@
 package com.kf5.support.internet;
 
+import java.net.URLEncoder;
+import java.util.Map;
+
 public class KF5Interface {
 
 	private static final String PAGE = "page";
@@ -311,6 +314,192 @@ public class KF5Interface {
 	// 删除分组
 	private static final String DELETE_QUESTION_CATEGORIES = SERVER + "/apiv2/robot/question_categories.json";
 
+	/*
+	 * ###########################################2017-8-21新增API################
+	 * ###########################
+	 */
+
+	/**
+	 * 工单（客服）
+	 */
+	// 搜索工单
+	private final static String AGENT_SEARCH_TICKET = SERVER + "/apiv2/tickets/search.json";
+
+	/**
+	 * 触发器相关接口
+	 */
+
+	// 获取触发器列表
+	private final static String TRIGGER_LIST = SERVER + "/apiv2/triggers.json";
+
+	// 查看指定ID的触发器
+	private static final String GET_TRIGGER_BY_ID = SERVER + "/apiv2/triggers/%2$s.json";
+
+	// 查看启用的触发器列表
+	private static final String GET_ACTIVE_TRIGGER_LIST = SERVER + "/apiv2/triggers/active.json";
+
+	/**
+	 * 自动化任务
+	 */
+
+	// 获取自动化任务列表
+	private static final String AUTOMATION_LIST = SERVER + "/apiv2/automations.json";
+
+	// 查看指定ID的自动化任务
+	private static final String GET_AUTOMATION_BY_ID = SERVER + "/apiv2/automations/%2$s.json";
+
+	// 查看启用的自动化任务列表
+	private static final String GET_ACTIVE_AUTOMATION_LIST = SERVER + "/apiv2/automations/active.json";
+
+	/**
+	 * IM历史对话
+	 */
+
+	// 对话列表
+	private static final String HISTORY_CHAT_LIST = SERVER + "/apiv2/kchat/history.json";
+
+	// 查看对话
+	private static final String HISTORY_CHAT_BY_ID = SERVER + "/apiv2/kchat/history/%2$s.json";
+
+	// 客服登录状态日志列表
+	private static final String AGENT_LOGIN_LOG = SERVER + "/apiv2/kchat/chats/AgentLog.json";
+
+	/**
+	 * 机器人题库标签
+	 */
+
+	// 获取标签列表
+	private static final String AI_TAG_LIST = SERVER + "/apiv2/robot/tags.json";
+
+	// 创建标签
+	private static final String CREATE_AI_TAG = AI_TAG_LIST;
+
+	// 修改标签
+	private static final String UPDATE_AI_TAG = SERVER + "/apiv2/robot/tags/%2$s.json";
+
+	// 删除标签
+	private static final String DELETE_AI_TAG = SERVER + "/apiv2/robot/tags/%2$s.json";
+
+	/**
+	 * IM监控
+	 */
+
+	// 坐席状态监控列表
+	private static final String AGNET_STATUS_LIST = SERVER + "/apiv2/kchat/monitor/agents.json";
+
+	// 正在对话监控列表
+	private static final String MONITOR_CHAT_STATUS = SERVER + "/apiv2/kchat/monitor/chats.json";
+
+	// 客服排队监控列表
+	private static final String MONITOR_VISITOR_QUEUE_LIST = SERVER + "/apiv2/kchat/monitor/visitors.json";
+
+	/**
+	 * 对话统计
+	 */
+
+	// 客服工作量统计
+	private static final String AGENT_WORK_STATUS = SERVER + "/apiv2/kchat/stats/agentworkstats.json";
+
+	// 客服对话量统计
+	private static final String AGENT_CONVERSATION = SERVER + "/apiv2/kchat/stats/conversationstats.json";
+
+	// 客服状态时长统计
+	private static final String AGENT_STATUS_TIME = SERVER + "/apiv2/kchat/stats/StateStats.json";
+
+	// 对话来源统计
+	private static final String CHAT_SOURCE = SERVER + "/apiv2/kchat/stats/sourcestats.json";
+
+	/**
+	 * 管理功能
+	 */
+	// 更新客服在线状态
+	private static final String UPDATE_AGNET_STATUS = SERVER + "/apiv2/kchat/agent/availabilities.json";
+
+	/**
+	 * 电话呼叫中心API
+	 */
+
+	// 通话明细列表
+	private static final String VOICE_HISTORY_LIST = SERVER + "/apiv2/voice/histories.json";
+
+	// 查看通话明细
+	private static final String VOICE_DETAIL = SERVER + "/apiv2/voice/histories/%2$s.json";
+
+	/**
+	 * 呼叫中心高级接口
+	 */
+	private static final String VOICE_ACCOUNT_LIST = SERVER + "/apiv2/voice/agents.json";
+
+	// 客服语音账号
+	private static final String VOICE_ACCOUNT_BY_ID = SERVER + "/apiv2/voice/agents/%2$s.json";
+
+	// 更新客服语音账号
+	private static final String UPDATE_VOICE_ACCOUNT = VOICE_ACCOUNT_BY_ID;
+
+	// 客服登录明细列表
+	private static final String VOICE_AGENT_LOGIN_STATE = SERVER + "/apiv2/voice/agent_state_logs.json";
+
+	// 未接通呼入明细列表
+	private static final String VOICE_CALL_UN_ANSWERED_LIST = SERVER + "/apiv2/voice/unanswereds.json";
+
+	// 呼出服务量
+	private static final String AGENT_OUTBOUND_STATE_LIST = SERVER + "/apiv2/voice/agent_outbound_stats.json";
+
+	// 呼入服务量
+	private static final String AGENT_INBOUNT_STATE_LIST = SERVER + "/apiv2/voice/agent_inbound_stats.json";
+
+	// 客服工作量
+	private static final String AGENT_VOICE_PERFORMANCE = SERVER + "/apiv2/voice/agent_performance_stats.json";
+
+	// 客服状态时长
+	private static final String AGENT_STATE_TIME = SERVER + "/apiv2/voice/agent_state_stats.json";
+
+	// 分时段呼入量
+	private static final String AGENT_SUBSECTION_INBOUND = SERVER + "/apiv2/voice/inbound_stats.json";
+
+	// 分时段呼出量
+	private static final String AGENT_SUBSECTION_OUTBOUND = SERVER + "/apiv2/voice/outbound_stats.json";
+
+	// 通话队列
+	private static final String VOICE_QUEUE_CALL = SERVER + "/apiv2/voice/queue_calls.json";
+
+	// 客服状态列表
+	private static final String VOICE_AGENT_STATUS = SERVER + "/apiv2/voice/availabilities.json";
+
+	// 查看客服状态
+	private static final String GET_AGENT_VOICE_STATUS = SERVER + "/apiv2/voice/availabilities/%2$s.json";
+
+	/**
+	 * 电话功能API
+	 */
+
+	// 客服在线
+	private static final String AGENT_VOICE_ONLINE = SERVER + "/voice/online";
+
+	//客服忙碌
+	private static final String AGENT_VOICE_BUSY = SERVER+"/voice/busy";
+	
+	//客服小休
+	private static final String AGENT_VOICE_BREAK = SERVER+"/voice/break";
+	
+	//客服离线
+	private static final String AGENT_VOICE_OFFLINE = SERVER+"/voice/offline";
+	
+	
+	// 操作日志列表
+	private static final String SYSTEM_LOG = SERVER + "/apiv2/system_log.json";
+	
+	
+	/**
+	 * 自定义IM消息来源
+	 */
+	
+	private static final String GET_IM_AGENT_LIST = "https://webapi.kf5.com/kchat/message";
+	
+	
+	//自定义IM上传附件
+	private static final String CUSTOM_IM_UPLOAD_ATTACHMENT = "https://webapi.kf5.com/kchat/upload";
+	
 	/**
 	 * 创建机器人题库问题 调用权限：admin
 	 * 
@@ -1719,6 +1908,787 @@ public class KF5Interface {
 			stringBuilder.append("?").append(query);
 		}
 		return stringBuilder.toString().replace(" ", "");
+	}
+
+	/*
+	 * ###########################################2017-8-21新增API################
+	 * ###########################
+	 */
+
+	/**
+	 * 搜索工单 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            请求参数 query:查询关键词，模糊查询多个字段; status: 查询筛选条件，例如：open,solved;
+	 *            fieldvalue:自定义字段条件; created_order：搜索结果按创建时间排序，可选值：asc,desc
+	 *            (默认为desc)
+	 * @return
+	 */
+	public static String searchTickets(String domain, Map<String, String> params) {
+		return String.format(AGENT_SEARCH_TICKET, domain) + getMapString(params);
+	}
+
+	/**
+	 * 触发器列表 ，调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @return 返回所有触发器，触发器按SORT倒序，ID正序排列
+	 */
+	public static String getTriggerList(String domain) {
+		return String.format(TRIGGER_LIST, domain);
+	}
+
+	/**
+	 * 查看指定的id触发器 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param id
+	 *            触发器id
+	 * @return
+	 */
+	public static String getTriggerById(String domain, int id) {
+		return String.format(GET_TRIGGER_BY_ID, domain, id);
+	}
+
+	/**
+	 * 查看启用的触发器列表 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @return
+	 */
+	public static String getActiveTriggerList(String domain) {
+		return String.format(GET_ACTIVE_TRIGGER_LIST, domain);
+	}
+
+	/**
+	 * 获取自动化任务列表 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @return
+	 */
+	public static String getAutomationList(String domain) {
+		return String.format(AUTOMATION_LIST, domain);
+	}
+
+	/**
+	 * 查看指定id的自动化任务 调用权限：admin
+	 * 
+	 * @param doamin
+	 *            平台地址
+	 * @param id
+	 *            任务id
+	 * @return
+	 */
+	public static String getAutomationById(String doamin, int id) {
+		return String.format(GET_AUTOMATION_BY_ID, doamin, id);
+	}
+
+	/**
+	 * 查看启用的自动化任务列表
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @return
+	 */
+	public static String getActiveAutomationList(String domain) {
+		return String.format(GET_ACTIVE_AUTOMATION_LIST, domain);
+	}
+
+	/**
+	 * 获取历史对话列表 调用权限：agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            query参数：
+	 *            </p>
+	 *            visitor_id(int):筛选指定访客的对话列表
+	 *            </p>
+	 *            start(String):按创建时间筛选，开始时间，如：2016-01-01
+	 *            </p>
+	 *            end(String):按创建时间筛选，结束时间，如：2016-01-01
+	 *            </P>
+	 *            user_id(int):工单系统用户ID（IM访客已关联工单系统用户）
+	 *            </p>
+	 *            page(int):页码，默认为 1
+	 *            </p>
+	 *            per_page(int):分页尺寸，默认为 100
+	 * @return
+	 */
+	public static String getHistoryChatList(String domain, Map<String, String> params) {
+		return String.format(HISTORY_CHAT_LIST, domain) + getMapString(params);
+	}
+
+	/**
+	 * 查看对话
+	 * </p>
+	 * 调用权限：agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param chat_id
+	 *            对话id
+	 * @return
+	 */
+	public static String getHistroyChatById(String domain, int chat_id) {
+		return String.format(HISTORY_CHAT_BY_ID, domain, chat_id);
+	}
+
+	/**
+	 * 获取客服登录状态日志列表
+	 * </p>
+	 * 调用权限 ：agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            Query参数集合
+	 *            </p>
+	 *            start :按创建时间筛选，开始时间，如：2016-01-01(必填)
+	 *            </p>
+	 *            end :按创建时间筛选，结束时间，如：2016-01-01(必填)
+	 *            </p>
+	 *            page :页码，默认为 1(非必填)
+	 *            </p>
+	 *            operate :默认空，全部状态(非必填)
+	 * @return
+	 */
+	public static String getAgentLoginLogList(String domain, Map<String, String> params) {
+		return String.format(AGENT_LOGIN_LOG, domain) + getMapString(params);
+	}
+
+	/**
+	 * 获取机器人题库标签列表
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            Query参数
+	 *            </p>
+	 *            page :页码，默认为 1(非必填)
+	 *            </p>
+	 *            per_page :分页尺寸，默认为 100(非必填)
+	 * @return
+	 */
+	public static String getAITagList(String domain, Map<String, String> params) {
+		return String.format(AI_TAG_LIST, domain) + getMapString(params);
+	}
+
+	/**
+	 * 创建机器人题库标签
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @return
+	 */
+	public static String createAITag(String domain) {
+		return String.format(CREATE_AI_TAG, domain);
+	}
+
+	/**
+	 * 修改标签
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param tagId
+	 *            标签id
+	 * @return
+	 */
+	public static String updateAITag(String domain, int tagId) {
+		return String.format(UPDATE_AI_TAG, domain, tagId);
+	}
+
+	/**
+	 * 删除标签
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param tagId
+	 *            标签id
+	 * @return
+	 */
+	public static String deleteAITag(String domain, int tagId) {
+		return String.format(DELETE_AI_TAG, domain, tagId);
+	}
+
+	/**
+	 * 坐席状态监控列表
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            agent_ids:查看的客服id,不同的客服id用英文逗号隔开（不传此参数默认查看全部客服）(非必填)
+	 * @return
+	 */
+	public static String getMonitorAgentList(String domain, Map<String, String> params) {
+		return String.format(AGNET_STATUS_LIST, domain) + getMapString(params);
+	}
+
+	/**
+	 * 正在对话监控列表
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @return
+	 */
+	public static String getMonitorChatList(String domain) {
+		return String.format(MONITOR_CHAT_STATUS, domain);
+	}
+
+	/**
+	 * 客户排队监控列表
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domian
+	 *            平台地址
+	 * @return
+	 */
+	public static String getMonitorVisitorQueueList(String domian) {
+		return String.format(MONITOR_VISITOR_QUEUE_LIST, domian);
+	}
+
+	/**
+	 * 客服工作量统计
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 * @return
+	 */
+	public static String getAgentWorkStatusList(String domain, Map<String, String> params) {
+		return String.format(AGENT_WORK_STATUS, domain) + getMapString(params);
+	}
+
+	/**
+	 * 客服对话量统计
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 * @return
+	 */
+	public static String getAgentConversation(String domain, Map<String, String> params) {
+		return String.format(AGENT_CONVERSATION, domain) + getMapString(params);
+	}
+
+	/**
+	 * 客服状态时长统计
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param params
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 * @return
+	 */
+	public static String getAgentStatusTime(String domain, Map<String, String> map) {
+		return String.format(AGENT_STATUS_TIME, domain) + getMapString(map);
+	}
+
+	/**
+	 * 
+	 * 对话来源统计
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 */
+	public static String getChatSource(String domain, Map<String, String> map) {
+		return String.format(CHAT_SOURCE, domain) + getMapString(map);
+	}
+
+	/**
+	 * GET请求 更新客服在线状态
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            agent_id:客服的id(必填)
+	 *            </p>
+	 *            status:更新的状态，online,offline,busy，三种状态(必填)
+	 * @return
+	 */
+	public static String updateAgentStatu(String domain, Map<String, String> map) {
+		return String.format(UPDATE_AGNET_STATUS, domain) + getMapString(map);
+	}
+
+	/**
+	 * GET请求 通话明细列表
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:按创建时间筛选，开始时间(非必填)
+	 *            </P>
+	 *            created_end:按创建时间筛选，结束时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            备注：按创建和更新时间进行筛选的参数
+	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
+	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
+	 * @return
+	 */
+	public static String getVoiceCallList(String domain, Map<String, String> map) {
+		return String.format(VOICE_HISTORY_LIST, domain) + getMapString(map);
+	}
+
+	/**
+	 * GET请求，查看通话明细
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param call_id
+	 *            通话id
+	 * @return
+	 */
+	public static String getVoiceCallById(String domain, int call_id) {
+		return String.format(VOICE_DETAIL, domain, call_id);
+	}
+
+	/**
+	 * GET请求，语音账号列表
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 * @return
+	 */
+	public static String getVoiceAccountList(String domain, Map<String, String> map) {
+		return String.format(VOICE_ACCOUNT_LIST, domain) + getMapString(map);
+	}
+
+	/**
+	 * 客服语音账号
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param voice_account_id
+	 *            资源id
+	 * @return
+	 */
+	public static String getVoiceAccountById(String domain, String voice_account_id) {
+		return String.format(VOICE_ACCOUNT_BY_ID, domain, voice_account_id);
+	}
+
+	/**
+	 * 更新客服语音账号
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param id
+	 *            资源id
+	 * @return
+	 */
+	public static String updateVoiceAccount(String domain, String id) {
+		return String.format(UPDATE_VOICE_ACCOUNT, domain, id);
+	}
+
+	/**
+	 * 客服登录明细列表
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domian
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(非必填)
+	 *            </P>
+	 *            created_end: 截止时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            agent_id:查看某坐席的明细(非必填)
+	 * @return
+	 */
+	public static String getVoiceAgentLoginStateList(String domian, Map<String, String> map) {
+		return String.format(VOICE_AGENT_LOGIN_STATE, domian) + getMapString(map);
+	}
+
+	/**
+	 * 未接通呼入明细列表
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(非必填)
+	 *            </P>
+	 *            created_end: 截止时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            agent_id:查看某坐席的明细(非必填)
+	 *            </P>
+	 *            reason:未接通原因(非必填)
+	 *            </P>
+	 *            sort:0：降序，1：升序(非必填)
+	 * @return
+	 */
+	public static String getVoiceCallUnAnsweredList(String domain, Map<String, String> map) {
+		return String.format(VOICE_CALL_UN_ANSWERED_LIST, domain) + getMapString(map);
+	}
+
+	/**
+	 * 呼出服务量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 * @return
+	 */
+	public static String getAgentVoiceCallOutboundList(String domain, Map<String, String> map) {
+		return String.format(AGENT_OUTBOUND_STATE_LIST, domain) + getMapString(map);
+	}
+
+	/**
+	 * 呼入服务量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 * @return
+	 */
+	public static String getAgentVoiceCallInboundList(String domain, Map<String, String> map) {
+		return String.format(AGENT_INBOUNT_STATE_LIST, domain) + getMapString(map);
+	}
+
+	/**
+	 * 
+	 * 客服工作量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 * @return
+	 */
+	public static String getAgentVoicePerformance(String domain, Map<String, String> map) {
+		return String.format(AGENT_VOICE_PERFORMANCE, domain) + getMapString(map);
+	}
+
+	/**
+	 * 
+	 * 客服状态时长
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 * @return
+	 */
+	public static String getAgentVoiceStateTime(String domain, Map<String, String> map) {
+		return String.format(AGENT_STATE_TIME, domain) + getMapString(map);
+	}
+
+	/**
+	 * 
+	 * 分时段呼入量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 * @return
+	 */
+	public static String getAgentVoiceCallSubsectionInbound(String domain, Map<String, String> map) {
+		return String.format(AGENT_SUBSECTION_INBOUND, domain) + getMapString(map);
+	}
+
+	/**
+	 * 
+	 * 分时段呼出量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 * @return
+	 */
+	public static String getAgentVoiceCallSubsectionOutbound(String domain, Map<String, String> map) {
+		return String.format(AGENT_SUBSECTION_OUTBOUND, domain) + getMapString(map);
+	}
+
+	/**
+	 * 通话队列
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @return
+	 */
+	public static String getVoiceQueueCall(String domain) {
+		return String.format(VOICE_QUEUE_CALL, domain);
+	}
+
+	/**
+	 * 客服状态列表
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 * @return
+	 */
+	public static String getVoiceAgentStatus(String domain) {
+		return String.format(VOICE_AGENT_STATUS, domain);
+	}
+
+	/**
+	 * 查看客服状态
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param user_id
+	 *            用户UID
+	 * @return
+	 */
+	public static String getAgentVoiceStatusById(String domain, String user_id) {
+		return String.format(GET_AGENT_VOICE_STATUS, domain, user_id);
+	}
+
+	/**
+	 * 客服在线接口
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domian
+	 *            平台地址
+	 * @return
+	 */
+	public static String setAgentVoiceOnline(String domian) {
+		return String.format(AGENT_VOICE_ONLINE, domian);
+	}
+	
+	
+	/**
+	 * 客服忙碌接口
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domian
+	 *            平台地址
+	 * @return
+	 */
+	public static String setAgentVoiceBusy(String domian) {
+		return String.format(AGENT_VOICE_BUSY, domian);
+	}
+	
+	/**
+	 * 客服忙碌接口
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domian
+	 *            平台地址
+	 * @return
+	 */
+	public static String setAgentVoiceBreak(String domian) {
+		return String.format(AGENT_VOICE_BREAK, domian);
+	}
+	
+	/**
+	 * 客服离线接口
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param domian
+	 *            平台地址
+	 * @return
+	 */
+	public static String setAgentVoiceOffline(String domian) {
+		return String.format(AGENT_VOICE_OFFLINE, domian);
+	}
+	
+	
+	
+
+	/**
+	 * 操作日志列表
+	 * </P>
+	 * 调用权限 : admin
+	 * 
+	 * @param domain
+	 * @param queryMap
+	 *            Query参数
+	 *            </P>
+	 *            type:操作日志的动作类型，可选值：login【登录】、edit【编辑】、del【删除】(非必填)
+	 *            </P>
+	 *            object: 操作日志的对象类型，可选值：user【用户】、ticket【工单】(非必填)
+	 *            </P>
+	 *            start:按创建时间筛选，开始时间(非必填)
+	 *            </P>
+	 *            end: 按创建时间筛选，结束时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page: 分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            备注：创建时间进行筛选的参数 start、end支持日期格式（如 2016-01-01
+	 *            00:00:00）和时间戳（秒级别的整型）。
+	 * @return
+	 */
+	public static String getSystemLog(String domain, Map<String, String> queryMap) {
+		return String.format(SYSTEM_LOG, domain) + getMapString(queryMap);
+	}
+
+	
+	/**
+	 * 拉取客服和客服组信息
+	 * @return
+	 */
+	public static String getIMAgentList(){
+		return GET_IM_AGENT_LIST;
+	}
+	
+	
+	/**
+	 * 上传附件
+	 * @return
+	 */
+	public static String uploadCustomIMAttachment(){
+		return CUSTOM_IM_UPLOAD_ATTACHMENT;
+	}
+	
+	private static String getMapString(Map<String, String> map) {
+		StringBuffer stringBuffer = new StringBuffer();
+		if (map != null && map.size() > 0) {
+			stringBuffer.append("?");
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				stringBuffer.append(entry.getKey()).append("=").append(URLEncoder.encode(entry.getValue())).append("&");
+			}
+		}
+		return stringBuffer.toString();
 	}
 
 }

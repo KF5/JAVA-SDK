@@ -85,9 +85,10 @@ public class KF5EntityBuilder {
 
 	protected static Float safeFloat(JSONObject object, String field)
 			throws JSONException {
-		if (object.containsKey(field)) {
+		JSONObject jsonObject = JSONObject.parseObject(object.toJSONString());
+		if (jsonObject.containsKey(field)) {
 			try {
-				return Float.parseFloat(object.getString(field));
+				return Float.parseFloat(jsonObject.getString(field));
 			} catch (NumberFormatException e) {
 				return Float.valueOf(0);
 			}
@@ -122,7 +123,7 @@ public class KF5EntityBuilder {
 		}
 	}
 
-	protected static Boolean safeBoolean(JSONObject object, String field)
+	public static Boolean safeBoolean(JSONObject object, String field)
 			throws JSONException {
 		if (object.containsKey(field)) {
 			return Boolean.parseBoolean(object.getString(field));

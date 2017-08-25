@@ -1,7 +1,9 @@
 package com.kf5.support.controller;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
 
 import org.kf5.support.fastjson.JSONArray;
 import org.kf5.support.fastjson.JSONException;
@@ -11,9 +13,25 @@ import com.kf5.support.internet.HttpRequest;
 import com.kf5.support.internet.KF5Interface;
 import com.kf5.support.model.AICategory;
 import com.kf5.support.model.AIQuestionCategory;
+import com.kf5.support.model.AITag;
+import com.kf5.support.model.AgentConversationStatistics;
+import com.kf5.support.model.AgentLog;
+import com.kf5.support.model.AgentStatistics;
+import com.kf5.support.model.AgentStatusTimeStatistics;
+import com.kf5.support.model.AgentVoiceCallInbound;
+import com.kf5.support.model.AgentVoiceCallOutbound;
+import com.kf5.support.model.AgentVoiceCallSubsectionInbound;
+import com.kf5.support.model.AgentVoiceCallSubsectionOutbound;
+import com.kf5.support.model.AgentVoicePerformance;
+import com.kf5.support.model.AgentVoiceStateTime;
+import com.kf5.support.model.AgentVoiceStatus;
+import com.kf5.support.model.AgentWorkStatusStatistics;
 import com.kf5.support.model.Attachment;
+import com.kf5.support.model.Automation;
 import com.kf5.support.model.Category;
 import com.kf5.support.model.Chat;
+import com.kf5.support.model.ChatInfo;
+import com.kf5.support.model.ChatSourceStatistics;
 import com.kf5.support.model.Comment;
 import com.kf5.support.model.Forum;
 import com.kf5.support.model.Group;
@@ -22,19 +40,28 @@ import com.kf5.support.model.KF5ExportTicketEntity;
 import com.kf5.support.model.KF5Fields;
 import com.kf5.support.model.KF5PaginationEntity;
 import com.kf5.support.model.MessageStatus;
+import com.kf5.support.model.MonitorAgent;
 import com.kf5.support.model.Organization;
 import com.kf5.support.model.Post;
 import com.kf5.support.model.PostComment;
 import com.kf5.support.model.Question;
 import com.kf5.support.model.QuestionComment;
+import com.kf5.support.model.QueueVisitorInfo;
 import com.kf5.support.model.Requester;
+import com.kf5.support.model.SystemLog;
 import com.kf5.support.model.Ticket;
 import com.kf5.support.model.TicketField;
 import com.kf5.support.model.Topic;
+import com.kf5.support.model.Trigger;
 import com.kf5.support.model.User;
 import com.kf5.support.model.UserField;
 import com.kf5.support.model.View;
 import com.kf5.support.model.ViewCount;
+import com.kf5.support.model.VoiceAccount;
+import com.kf5.support.model.VoiceAgentLoginState;
+import com.kf5.support.model.VoiceCall;
+import com.kf5.support.model.VoiceCallUnAnswered;
+import com.kf5.support.model.VoiceQueueCall;
 import com.kf5.support.model.builder.EntityBuilder;
 import com.kf5.support.model.builder.KF5EntityBuilder;
 
@@ -69,7 +96,8 @@ public class KF5Support extends BaseSupport {
 	 *            备注:分页返回所有工单，默认排序为按编号升序排列。按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请阅读http://developer.kf5.com/restfulapi/core/tickets/#tickets-list下工单列表文档
+	 *            详情请阅读http://developer.kf5.com/restfulapi/core/tickets/#tickets
+	 *            -list下工单列表文档
 	 * @return
 	 */
 	public KF5Entity<List<Ticket>> getAgentOrderListWithQuery(String query) {
@@ -115,7 +143,8 @@ public class KF5Support extends BaseSupport {
 	 *            备注:分页返回所有工单，默认排序为按编号升序排列。按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请阅读http://developer.kf5.com/restfulapi/core/tickets/#tickets-list下工单列表文档
+	 *            详情请阅读http://developer.kf5.com/restfulapi/core/tickets/#tickets
+	 *            -list下工单列表文档
 	 * @return
 	 */
 	public KF5Entity<List<Ticket>> getAgentOrderListWithID(String assignee_id, String query) {
@@ -165,7 +194,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建工单 调用权限：客服
 	 * 
 	 * @param jsonString
-	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/tickets/#tickets-create中创建工单参数示例
+	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/
+	 *            core/tickets/#tickets-create中创建工单参数示例
 	 * 
 	 */
 	public KF5Entity<Ticket> createAgentOrder(String jsonString) {
@@ -190,8 +220,9 @@ public class KF5Support extends BaseSupport {
 	 * @param order_id
 	 *            工单id
 	 * @param jsonString
-	 *            更新内容 参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/tickets/#tickets-update
-	 *            中更新工单参数示例
+	 *            更新内容
+	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/
+	 *            core/tickets/#tickets-update 中更新工单参数示例
 	 * @return
 	 */
 	public KF5Entity<Ticket> updateAgentOrder(String order_id, String jsonString) {
@@ -215,7 +246,8 @@ public class KF5Support extends BaseSupport {
 	 * @param ids
 	 *            工单所对应的id，参数格式为1，2，3
 	 * @param jsonString
-	 *            更新内容，参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/tickets/#tickets-update-many中更新多个工单参数示例
+	 *            更新内容，参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/
+	 *            restfulapi/core/tickets/#tickets-update-many中更新多个工单参数示例
 	 */
 	public KF5Entity<String> updateManyAgentOrder(String ids, String jsonString) {
 		checkHasId(ids);
@@ -306,7 +338,8 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#
+	 *            requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getRequesterOrderListWithQuery(String query) {
@@ -343,7 +376,8 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#
+	 *            requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getRequesterOrderListStatusOpenWithQuery(String query) {
@@ -380,7 +414,8 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#
+	 *            requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getRequesterOrderListStatusSolvedWithQuery(String query) {
@@ -422,7 +457,8 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#
+	 *            requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Ticket>> getRequesterOrderListByID(String user_id, String query) {
@@ -465,7 +501,8 @@ public class KF5Support extends BaseSupport {
 	 *            按自定义字段属性排序规则,参数格式：field_690_asc,或field_690_desc。
 	 *            其中field_690为该工单的自定义字段name，可以通过 工单自定义字段接口获得 ；page 页码，默认为 1;
 	 *            per_page 分页尺寸，默认为 100;
-	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#requests-list的工单请求列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/requests/#
+	 *            requests-list的工单请求列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Requester>> getOrganizationOrderList(String organization_id, String query) {
@@ -539,11 +576,11 @@ public class KF5Support extends BaseSupport {
 	 * 创建工单请求 调用权限：end_user
 	 * 
 	 * @param jsonString
-	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/requests/#requests-create中创建工单参数示例
+	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/
+	 *            core/requests/#requests-create中创建工单参数示例
 	 * @return
 	 */
 	public KF5Entity<Requester> createOrderByEndUser(String jsonString) {
-		System.out.println("提交的内容"+jsonString);
 		KF5Entity<Requester> kf5Entity = new KF5Entity<>();
 		try {
 			MessageStatus messageStatus = sendPostRequest(KF5Interface.createOrderByRequester(getDomain()),
@@ -564,7 +601,8 @@ public class KF5Support extends BaseSupport {
 	 * @param order_id
 	 *            工单id
 	 * @param jsonString
-	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/core/requests/#requests-comment中回复工单参数示例
+	 *            参数格式为json字符串格式，参数格式详情请见：http://developer.kf5.com/restfulapi/
+	 *            core/requests/#requests-comment中回复工单参数示例
 	 * @return
 	 */
 	public KF5Entity<Requester> replyOrderByEndUser(String order_id, String jsonString) {
@@ -600,7 +638,8 @@ public class KF5Support extends BaseSupport {
 	 * @param query
 	 *            page 页码，默认为 1; per_page 分页尺寸，默认为 100;
 	 *            sort_order：排序规则，可选值：asc,desc (默认为asc) 详情请阅读
-	 *           http://developer.kf5.com/restfulapi/core/requests/#requests-comment-list工单回复列表
+	 *            http://developer.kf5.com/restfulapi/core/requests/#requests-
+	 *            comment-list工单回复列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Comment>> getCommentListByEndUser(String order_id, String query) {
@@ -902,7 +941,8 @@ public class KF5Support extends BaseSupport {
 	 *            备注：按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请阅读http://developer.kf5.com/restfulapi/core/users/#users-list 获取用户列表
+	 *            详情请阅读http://developer.kf5.com/restfulapi/core/users/#users-
+	 *            list 获取用户列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<User>> getUserListWithQuery(String query) {
@@ -959,8 +999,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建用户信息 调用权限:agent
 	 * 
 	 * @param jsonString
-	 *            参数格式为json字符串，具体示例请参考http://developer.kf5.com/restfulapi/core/users/#users-create
-	 *            中的创建用户信息
+	 *            参数格式为json字符串，具体示例请参考http://developer.kf5.com/restfulapi/core/
+	 *            users/#users-create 中的创建用户信息
 	 */
 	public KF5Entity<User> createUserInfo(String jsonString) {
 		KF5Entity<User> kf5Entity = new KF5Entity<>();
@@ -1007,8 +1047,8 @@ public class KF5Support extends BaseSupport {
 	 *            用户id
 	 * @param jsonString
 	 *            修改内容
-	 *            参数格式为json字符串，具体示例详见：http://developer.kf5.com/restfulapi/core/users/#users-update
-	 *            修改用户信息
+	 *            参数格式为json字符串，具体示例详见：http://developer.kf5.com/restfulapi/core/
+	 *            users/#users-update 修改用户信息
 	 */
 	public KF5Entity<User> updateUserInfo(String user_id, String jsonString) {
 		checkHasId(user_id);
@@ -1249,8 +1289,8 @@ public class KF5Support extends BaseSupport {
 	 * @param group_id
 	 *            客服组id
 	 * @param jsonString
-	 *            修改内容,参数格式为json，详情请见http://developer.kf5.com/restfulapi/core/groups/#groups-update
-	 *            中修改客服组
+	 *            修改内容,参数格式为json，详情请见http://developer.kf5.com/restfulapi/core/
+	 *            groups/#groups-update 中修改客服组
 	 * @return
 	 */
 	public KF5Entity<Group> updateGroup(String group_id, String jsonString) {
@@ -1290,7 +1330,8 @@ public class KF5Support extends BaseSupport {
 	 *            备注：按创建和更新时间进行筛选的参数
 	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
 	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
-	 *            详情请浏览http://developer.kf5.com/restfulapi/core/organizations/#organizations-list下获取公司组织列表
+	 *            详情请浏览http://developer.kf5.com/restfulapi/core/organizations/#
+	 *            organizations-list下获取公司组织列表
 	 * @return
 	 */
 	public KF5PaginationEntity<List<Organization>> getOrganizationListWithQuery(String query) {
@@ -1326,7 +1367,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建公司组织 调用权限:admin
 	 * 
 	 * @param jsonString
-	 *            提交内容，参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/core/organizations/#organizations-create中创建公司组织
+	 *            提交内容，参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/core/
+	 *            organizations/#organizations-create中创建公司组织
 	 * @return
 	 */
 	public KF5Entity<Organization> createOrganization(String jsonString) {
@@ -1341,7 +1383,8 @@ public class KF5Support extends BaseSupport {
 	 * @param organization_id
 	 *            公司组织id
 	 * @param jsonString
-	 *            修改的内容，参数格式为json。详情请见http://developer.kf5.com/restfulapi/core/organizations/#organizations-update中修改公司组织
+	 *            修改的内容，参数格式为json。详情请见http://developer.kf5.com/restfulapi/core/
+	 *            organizations/#organizations-update中修改公司组织
 	 * @return
 	 */
 	public KF5Entity<Organization> updateOrganization(String organization_id, String jsonString) {
@@ -1419,7 +1462,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建社区话题 调用权限：admin
 	 * 
 	 * @param jsonString
-	 *            社区话题内容，参数格式为json格式，详情请见：http://developer.kf5.com/restfulapi/helpcenter/topics/#topics-create中创建社区话题
+	 *            社区话题内容，参数格式为json格式，详情请见：http://developer.kf5.com/restfulapi/
+	 *            helpcenter/topics/#topics-create中创建社区话题
 	 * @return
 	 */
 	public KF5Entity<Topic> createTopic(String jsonString) {
@@ -1442,8 +1486,8 @@ public class KF5Support extends BaseSupport {
 	 * @param topic_id
 	 *            话题id
 	 * @param jsonString
-	 *            修改内容，内容格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/topics/#topics-update
-	 *            中修改社区话题
+	 *            修改内容，内容格式为json格式，详情请见http://developer.kf5.com/restfulapi/
+	 *            helpcenter/topics/#topics-update 中修改社区话题
 	 * @return
 	 */
 	public KF5Entity<Topic> updateTopic(String topic_id, String jsonString) {
@@ -1521,7 +1565,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建社区问题 调用权限:all 注意：话题id不能为空
 	 * 
 	 * @param jsonString
-	 *            创建问题内容，格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/questions/#questions-create中创建社区问题
+	 *            创建问题内容，格式为json格式，详情请见http://developer.kf5.com/restfulapi/
+	 *            helpcenter/questions/#questions-create中创建社区问题
 	 * @return
 	 */
 	public KF5Entity<Question> createQuestion(String jsonString) {
@@ -1546,7 +1591,8 @@ public class KF5Support extends BaseSupport {
 	 * @param question_id
 	 *            社区问题id
 	 * @param jsonString
-	 *            修改内容，格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/questions/#questions-update中修改社区问题
+	 *            修改内容，格式为json格式，详情请见http://developer.kf5.com/restfulapi/
+	 *            helpcenter/questions/#questions-update中修改社区问题
 	 * @return
 	 */
 	public KF5Entity<Question> updateQuestion(String question_id, String jsonString) {
@@ -1637,7 +1683,8 @@ public class KF5Support extends BaseSupport {
 	 * @param question_id
 	 *            社区问题id
 	 * @param jsonString
-	 *            回复内容，参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/questions/#questions-comment-create中回复社区问题
+	 *            回复内容，参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/
+	 *            helpcenter/questions/#questions-comment-create中回复社区问题
 	 * @return
 	 */
 	public KF5PaginationEntity<List<QuestionComment>> replyQuestion(String question_id, String jsonString) {
@@ -1709,7 +1756,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建文档分区 调用权限：admin
 	 * 
 	 * @param jsonString
-	 *            提交的内容;格式为json字符串格式,详情请见http://developer.kf5.com/restfulapi/helpcenter/categories/#categories-create中创建文档分区
+	 *            提交的内容;格式为json字符串格式,详情请见http://developer.kf5.com/restfulapi/
+	 *            helpcenter/categories/#categories-create中创建文档分区
 	 * @return
 	 */
 	public KF5Entity<Category> createCategory(String jsonString) {
@@ -1733,7 +1781,8 @@ public class KF5Support extends BaseSupport {
 	 * @param category_id
 	 *            文档分区id
 	 * @param jsonString
-	 *            修改内容;参数格式为json格式;详情请见：http://developer.kf5.com/restfulapi/helpcenter/categories/#categories-update修改文档分区
+	 *            修改内容;参数格式为json格式;详情请见：http://developer.kf5.com/restfulapi/
+	 *            helpcenter/categories/#categories-update修改文档分区
 	 * @return
 	 */
 	public KF5Entity<Category> updateCategory(String category_id, String jsonString) {
@@ -1815,8 +1864,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建文档分类 调用权限：admin
 	 * 
 	 * @param jsonString
-	 *            参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/forums/#forums-create
-	 *            中创建文档分类
+	 *            参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter
+	 *            /forums/#forums-create 中创建文档分类
 	 */
 	public KF5Entity<Forum> createForum(String jsonString) {
 
@@ -1840,8 +1889,8 @@ public class KF5Support extends BaseSupport {
 	 * @param forum_id
 	 *            文档分类id
 	 * @param jsonString
-	 *            参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter/forums/#forums-update
-	 *            中修改文档分类
+	 *            参数格式为json格式，详情请见http://developer.kf5.com/restfulapi/helpcenter
+	 *            /forums/#forums-update 中修改文档分类
 	 * @return
 	 */
 
@@ -1973,8 +2022,8 @@ public class KF5Support extends BaseSupport {
 	 * 创建文档 调用权限:admin
 	 * 
 	 * @param jsonString
-	 *            创建文档的内容；格式为json，参数格式详情请见http://developer.kf5.com/restfulapi/helpcenter/posts/#posts-create
-	 *            中创建文档
+	 *            创建文档的内容；格式为json，参数格式详情请见http://developer.kf5.com/restfulapi/
+	 *            helpcenter/posts/#posts-create 中创建文档
 	 */
 
 	public KF5Entity<Post> createPost(String jsonString) {
@@ -1998,7 +2047,8 @@ public class KF5Support extends BaseSupport {
 	 * @param post_id
 	 *            文档id
 	 * @param jsonString
-	 *            修改文档的内容;格式为json，参数格式详情请见：http://developer.kf5.com/restfulapi/helpcenter/posts/#posts-update中修改文档
+	 *            修改文档的内容;格式为json，参数格式详情请见：http://developer.kf5.com/restfulapi/
+	 *            helpcenter/posts/#posts-update中修改文档
 	 * @return
 	 */
 
@@ -2079,8 +2129,8 @@ public class KF5Support extends BaseSupport {
 	 * @param post_id
 	 *            文档id
 	 * @param jsonString
-	 *            回复内容;参数格式为json格式，详情请见:http://developer.kf5.com/restfulapi/helpcenter/posts/#posts-comment-create
-	 *            中回复文档
+	 *            回复内容;参数格式为json格式，详情请见:http://developer.kf5.com/restfulapi/
+	 *            helpcenter/posts/#posts-comment-create 中回复文档
 	 * @return
 	 */
 
@@ -2151,8 +2201,8 @@ public class KF5Support extends BaseSupport {
 	 * 工单(客服) 接口 Tickets API
 	 * 
 	 * @param jsonString
-	 *            提交的工单内容，参数格式为json，详情请见http://developer.kf5.com/restfulapi/others/imports/
-	 *            中工单导入
+	 *            提交的工单内容，参数格式为json，详情请见http://developer.kf5.com/restfulapi/
+	 *            others/imports/ 中工单导入
 	 */
 	public KF5Entity<Ticket> importOrder(String jsonString) {
 
@@ -2203,11 +2253,22 @@ public class KF5Support extends BaseSupport {
 	 * @param domain
 	 *            平台地址
 	 * @param query
-	 *            附加筛选规则； visitor_id 筛选指定访客的对话列表; start
-	 *            按创建时间筛选，开始时间，如：2016-01-01 ; end 按结束时间筛选，结束时间，如：2016-01-01;
-	 *            user_id 工单系统用户ID（IM访客已关联工单系统用户）; page 页码，默认为 1 ; per_page
-	 *            分页尺寸，默认为 100
-	 *            详情请浏览http://developer.kf5.com/restfulapi/kchat/history/#chats-list下对话列表的Query参数
+	 *            附加筛选规则；
+	 *            </P>
+	 *            visitor_id: 筛选指定访客的对话列表;
+	 *            </p>
+	 *            start: 按创建时间筛选，开始时间，如：2016-01-01 ;
+	 *            </p>
+	 *            end :按结束时间筛选，结束时间，如：2016-01-01;
+	 *            </p>
+	 *            user_id: 工单系统用户ID（IM访客已关联工单系统用户）;
+	 *            </p>
+	 *            page: 页码，默认为 1 ;
+	 *            </p>
+	 *            per_page:分页尺寸，默认为 100
+	 *            详情请浏览http://developer.kf5.com/restfulapi/kchat/history/#chats-
+	 *            list下对话列表的Query参数
+	 * @see KF5Support#getHistoryChatList(Map)
 	 */
 	public KF5PaginationEntity<List<Chat>> getChatListWithQueryParams(String query) {
 		return buildPaginationChatList(sendGetRequest(KF5Interface.getChatList(getDomain(), query)));
@@ -2230,11 +2291,12 @@ public class KF5Support extends BaseSupport {
 	 * 查看某个对话的详情 GET请求 调用权限：Agent
 	 * 
 	 * @param chat_id
-	 *            会话id
+	 *            会话id {@link Chat#getId()}
+	 * @see KF5Support#getHistoryChatById(int)
 	 * @return 返回某个对话的详细内容
 	 */
 	public KF5Entity<Chat> getChatDetailByChatId(int chat_id) {
-		
+
 		return buildChat(sendGetRequest(KF5Interface.getChatDetailByID(getDomain(), chat_id)));
 	}
 
@@ -2292,7 +2354,8 @@ public class KF5Support extends BaseSupport {
 	 * @return
 	 */
 	public KF5PaginationEntity<List<AIQuestionCategory>> getQuestionCategoriesList(String query) {
-		return buildPaginationAIQuestionCategoryList(sendGetRequest(KF5Interface.getQuestionCategoriesList(getDomain(), query)));
+		return buildPaginationAIQuestionCategoryList(
+				sendGetRequest(KF5Interface.getQuestionCategoriesList(getDomain(), query)));
 	}
 
 	/**
@@ -2302,7 +2365,8 @@ public class KF5Support extends BaseSupport {
 	 * @return
 	 */
 	public KF5PaginationEntity<List<AIQuestionCategory>> createQuestionCategories(String params) {
-		return buildPaginationAIQuestionCategoryList(sendPostRequest(KF5Interface.createQuestionCategories(getDomain()), params));
+		return buildPaginationAIQuestionCategoryList(
+				sendPostRequest(KF5Interface.createQuestionCategories(getDomain()), params));
 	}
 
 	/**
@@ -2328,4 +2392,871 @@ public class KF5Support extends BaseSupport {
 		sendDeleteRequest(KF5Interface.deleteQuestionCategories(getDomain()), params);
 	}
 
+	/*
+	 * ###########################################2017-8-21新增API################
+	 * ###########################
+	 */
+
+	/**
+	 * 搜索工单 调用权限：admin or agent
+	 * 
+	 * @param params
+	 *            请求参数可包括 query:查询关键词，模糊查询多个字段; status: 查询筛选条件，例如：open,solved;
+	 *            fieldvalue:自定义字段条件;
+	 *            created_order：搜索结果按创建时间排序，可选值：asc,desc(默认为desc)
+	 *            更多请访问http://developer.kf5.com/restfulapi/core/tickets/#tickets
+	 *            -search
+	 * @return
+	 */
+	public KF5PaginationEntity<List<Ticket>> searchTickets(Map<String, String> params) {
+		return buildPaginationTicketList(sendGetRequest(KF5Interface.searchTickets(getDomain(), params)));
+	}
+
+	/**
+	 * 获取所有触发器列表 调用权限：admin
+	 * 更多请访问：http://developer.kf5.com/restfulapi/core/triggers/#triggers-list
+	 */
+	public KF5Entity<List<Trigger>> getTraggerList() {
+		return buildTriggerList(sendGetRequest(KF5Interface.getTriggerList(getDomain())));
+	}
+
+	/**
+	 * 查看指定的id触发器 调用权限：admin
+	 * 更多请访问：http://developer.kf5.com/restfulapi/core/triggers/#triggers-view
+	 * 
+	 * @param id
+	 *            触发器id
+	 * @return
+	 */
+	public KF5Entity<Trigger> getTriggerById(int id) {
+		return getTriggerByUrl(KF5Interface.getTriggerById(getDomain(), id));
+	}
+
+	/**
+	 * 查看指定的id触发器 调用权限：admin
+	 * 
+	 * @param url
+	 *            触发器url,{@link Trigger#getUrl()}
+	 * @return
+	 */
+	public KF5Entity<Trigger> getTriggerByUrl(String url) {
+		return buildTrigger(sendGetRequest(url));
+	}
+
+	/**
+	 * 查看启用的触发器列表 ，调用权限：admin
+	 * 更多请访问：http://developer.kf5.com/restfulapi/core/triggers/#triggers-active
+	 * 
+	 * @return
+	 */
+	public KF5Entity<List<Trigger>> getActiveTriggerList() {
+		return buildTriggerList(sendGetRequest(KF5Interface.getActiveTriggerList(getDomain())));
+	}
+
+	/**
+	 * 获取自动化任务列表 调用权限：admin
+	 * 更多请访问http://developer.kf5.com/restfulapi/core/automations/#automations-
+	 * list
+	 * 
+	 * @return 返回所有自动化任务，自动化任务按SORT倒序，ID正序排列
+	 */
+	public KF5Entity<List<Automation>> getAutomationList() {
+		return buildAutomationList(sendGetRequest(KF5Interface.getAutomationList(getDomain())));
+	}
+
+	/**
+	 * 查看指定id的自动化任务
+	 * 更多请访问：http://developer.kf5.com/restfulapi/core/automations/#automations-
+	 * view
+	 * 
+	 * @param id
+	 *            任务id
+	 * @return
+	 */
+	public KF5Entity<Automation> getAutomationById(int id) {
+		return getAutomationByUrl(KF5Interface.getAutomationById(getDomain(), id));
+	}
+
+	/**
+	 * 根据url查看自动化任务
+	 * 
+	 * @param url
+	 *            {@link Automation#getUrl()}
+	 * @return
+	 */
+	public KF5Entity<Automation> getAutomationByUrl(String url) {
+		return buildAutomation(sendGetRequest(url));
+	}
+
+	/**
+	 * 查看启用的自动化任务列表 调用权限 ：admin
+	 * 更多请访问http://developer.kf5.com/restfulapi/core/automations/#automations-
+	 * active
+	 * 
+	 * @return
+	 */
+	public KF5Entity<List<Automation>> getActiveAutomationList() {
+		return buildAutomationList(sendGetRequest(KF5Interface.getActiveAutomationList(getDomain())));
+	}
+
+	/**
+	 * 获取历史对话列表
+	 * </p>
+	 * 调用权限：agent
+	 * 
+	 * @param params
+	 *            query参数结合
+	 *            </p>
+	 *            visitor_id(int):筛选指定访客的对话列表
+	 *            </p>
+	 *            start(String):按创建时间筛选，开始时间，如：2016-01-01
+	 *            </p>
+	 *            end(String):按创建时间筛选，结束时间，如：2016-01-01
+	 *            </P>
+	 *            user_id(int):工单系统用户ID（IM访客已关联工单系统用户）
+	 *            </p>
+	 *            page(int):页码，默认为 1
+	 *            </p>
+	 *            per_page(int):分页尺寸，默认为 100
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/history/#chats
+	 *            -list
+	 * @see KF5Support#getChatListWithQueryParams(String)
+	 * @return 返回所有对话记录，默认按编号升序排列。
+	 */
+	public KF5PaginationEntity<List<Chat>> getHistoryChatList(Map<String, String> params) {
+		return buildPaginationChatList(sendGetRequest(KF5Interface.getHistoryChatList(getDomain(), params)));
+	}
+
+	/**
+	 * 根据url获取对话列表
+	 * 
+	 * @param url
+	 *            请求地址 {@link KF5PaginationEntity#getNextPage()}
+	 * @return
+	 */
+	public KF5PaginationEntity<List<Chat>> getHistoryChatByUrl(String url) {
+		return buildPaginationChatList(sendGetRequest(url));
+	}
+
+	/**
+	 * 查看对话
+	 * </p>
+	 * 调用权限：agent
+	 * 
+	 * @param chat_id
+	 *            对话id {@link Chat#getId()}
+	 * @see KF5Support#getChatDetailByChatId(int)
+	 */
+	public KF5Entity<Chat> getHistoryChatById(int chat_id) {
+		return buildChat(sendGetRequest(KF5Interface.getHistroyChatById(getDomain(), chat_id)));
+	}
+
+	/**
+	 * 获取客服登录状态日志列表
+	 * </p>
+	 * 调用权限 ：agent
+	 * 
+	 * @param params
+	 *            Query参数集合
+	 *            </p>
+	 *            start :按创建时间筛选，开始时间，如：2016-01-01(必填)
+	 *            </p>
+	 *            end :按创建时间筛选，结束时间，如：2016-01-01(必填)
+	 *            </p>
+	 *            page :页码，默认为 1(非必填)
+	 *            </p>
+	 *            operate :默认空，全部状态(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/history/#chats
+	 *            -agentlog
+	 */
+	public KF5Entity<List<AgentLog>> getAgentLoginLogList(Map<String, String> params) {
+		return buildAgentLogList(sendGetRequest(KF5Interface.getAgentLoginLogList(getDomain(), params)));
+	}
+
+	/**
+	 * 获取机器人题库标签列表
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param params
+	 *            Query参数
+	 *            </p>
+	 *            page :页码，默认为 1(非必填)
+	 *            </p>
+	 *            per_page :分页尺寸，默认为 100(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/robot_tags/#
+	 *            robot-tags-list
+	 */
+	public KF5Entity<List<AITag>> getAITagList(Map<String, String> params) {
+		return buildAITagList(sendGetRequest(KF5Interface.getAITagList(getDomain(), params)));
+	}
+
+	/**
+	 * 创建标签
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param jsonString
+	 *            创建的标签内容
+	 *            </p>
+	 *            data :array集合(必填)
+	 *            </p>
+	 *            data[i].name : 标签名称(必填)
+	 *            </p>
+	 *            data[i].type :标签类型：chat（IM会话标签）、question（机器人题库标签）(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/robot_tags/#
+	 *            robot-tags-create
+	 * 
+	 * @return
+	 */
+	public KF5Entity<List<AITag>> createAITag(String jsonString) {
+		return buildAITagList(sendPostRequest(KF5Interface.createAITag(getDomain()), jsonString));
+	}
+
+	/**
+	 * 修改标签
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param tagId
+	 *            标签id
+	 * @param jsonString
+	 *            body参数
+	 *            </p>
+	 *            data :标签信息Object(必填)
+	 *            </p>
+	 *            data.name : 标签名称(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/robot_tags/#
+	 *            robot-tags-update
+	 */
+	public void updateAITag(int tagId, String jsonString) {
+		sendPutRequest(KF5Interface.updateAITag(getDomain(), tagId), jsonString);
+	}
+
+	/**
+	 * 删除标签
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param tagId
+	 *            标签id
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/robot_tags/#
+	 *            robot-tags-delete
+	 */
+	public void deleteAITag(int tagId) {
+		sendDeleteRequest(KF5Interface.deleteAITag(getDomain(), tagId));
+	}
+
+	/**
+	 * 坐席状态监控列表
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            agent_ids:查看的客服id,不同的客服id用英文逗号隔开（不传此参数默认查看全部客服）(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/monitor/#
+	 *            monitor-agents
+	 */
+	public KF5Entity<MonitorAgent> getMonitorAgentList(Map<String, String> map) {
+		return buildMonitorAgent(sendGetRequest(KF5Interface.getMonitorAgentList(getDomain(), map)));
+	}
+
+	/**
+	 * 正在对话监控列表
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 更多请访问：http://developer.kf5.com/restfulapi/kchat/monitor/#monitor-chats
+	 * 
+	 * @return
+	 */
+	public KF5Entity<List<ChatInfo>> getMonitorChatList() {
+		return buildChatInfoList(sendGetRequest(KF5Interface.getMonitorChatList(getDomain())));
+	}
+
+	/**
+	 * 客户排队监控列表
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 更多请访问：http://developer.kf5.com/restfulapi/kchat/monitor/#monitor-visitors
+	 */
+	public KF5Entity<List<QueueVisitorInfo>> getMonitorVisitorQueueList() {
+		return buildQueueVisitorInfoList(sendGetRequest(KF5Interface.getMonitorVisitorQueueList(getDomain())));
+	}
+
+	/**
+	 * 客服工作量统计
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/stat/#stat-
+	 *            workstat
+	 */
+	public KF5Entity<AgentWorkStatusStatistics> getAgentWorkStatusStatistics(Map<String, String> map) {
+		return buildAgentWorkStatusStatistics(sendGetRequest(KF5Interface.getAgentWorkStatusList(getDomain(), map)));
+	}
+
+	/**
+	 * 客服对话量统计
+	 * </p>
+	 * 调用权限：agent or admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/stat/#stat-
+	 *            chatsstat
+	 */
+	public KF5Entity<AgentConversationStatistics> getAgentConverstationStatistics(Map<String, String> map) {
+		return buildAgentConversationStatistics(sendGetRequest(KF5Interface.getAgentConversation(getDomain(), map)));
+	}
+
+	/**
+	 *
+	 * 客服状态时长统计
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/stat/#stat-
+	 *            statestat
+	 * @return
+	 */
+	public KF5Entity<AgentStatusTimeStatistics> getAgentStatusTimeStatistics(Map<String, String> map) {
+		return buildAgentStatusTimeStatistics(sendGetRequest(KF5Interface.getAgentStatusTime(getDomain(), map)));
+	}
+
+	/**
+	 * 
+	 * 对话来源统计
+	 * </p>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            start:传递格式：2017-7-10(必填)
+	 *            </p>
+	 *            end:传递格式：2017-7-10(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/stat/#stat-
+	 *            sourcestat
+	 */
+	public KF5Entity<ChatSourceStatistics> getChatSourceStatistics(Map<String, String> map) {
+		return buildChatSourceStatistics(sendGetRequest(KF5Interface.getChatSource(getDomain(), map)));
+	}
+
+	/**
+	 * GET请求 更新客服在线状态
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </p>
+	 *            agent_id:客服的id(必填)
+	 *            </p>
+	 *            status:更新的状态，online,offline,busy，三种状态(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/kchat/agent/#agent-
+	 *            availabilities
+	 * @return
+	 */
+	public KF5Entity<AgentStatistics> updateAgentStatus(Map<String, String> map) {
+		return buildAgentStatistics(sendGetRequest(KF5Interface.updateAgentStatu(getDomain(), map)));
+	}
+
+	/**
+	 * GET请求 通话明细列表
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:按创建时间筛选，开始时间(非必填)
+	 *            </P>
+	 *            created_end:按创建时间筛选，结束时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            备注：按创建和更新时间进行筛选的参数
+	 *            created_start、created_end、updated_start、updated_end，支持日期格式（如
+	 *            2016-01-01 00:00:00）和时间戳（秒级别的整型）。
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/calls/#calls-
+	 *            list
+	 */
+	public KF5PaginationEntity<List<VoiceCall>> getVoiceCallList(Map<String, String> map) {
+		return buildVoiceCallList(sendGetRequest(KF5Interface.getVoiceCallList(getDomain(), map)));
+	}
+
+	/**
+	 * GET请求 通话明细列表
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param url
+	 *            {@link KF5PaginationEntity#getNextPage()}
+	 * @return
+	 */
+	public KF5PaginationEntity<List<VoiceCall>> getVoiceCallListByUrl(String url) {
+		return buildVoiceCallList(sendGetRequest(url));
+	}
+
+	/**
+	 * GET请求，查看通话明细
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param call_id
+	 *            通话id
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/calls/#calls-
+	 *            view
+	 * @return
+	 */
+	public KF5Entity<VoiceCall> getVoiceCallById(int call_id) {
+		return buildVoiceCall(sendGetRequest(KF5Interface.getVoiceCallById(getDomain(), call_id)));
+	}
+
+	/**
+	 * GET请求，语音账号列表
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agents
+	 * @return
+	 */
+	public KF5PaginationEntity<List<VoiceAccount>> getVoiceAccountList(Map<String, String> map) {
+		return buildVoiceAccountList(sendGetRequest(KF5Interface.getVoiceAccountList(getDomain(), map)));
+	}
+
+	/**
+	 * GET请求，语音账号列表
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param url
+	 *            {@link KF5PaginationEntity#getNextPage()}
+	 * @return
+	 */
+	public KF5PaginationEntity<List<VoiceAccount>> getVoiceAccountListByUrl(String url) {
+		return buildVoiceAccountList(sendGetRequest(url));
+	}
+
+	/**
+	 * GET请求，获取客服语音账号
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param id
+	 *            资源id {@link VoiceAccount#getId()}
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agent
+	 * @return
+	 */
+	public KF5Entity<VoiceAccount> getVoiceAccountById(String id) {
+		return buildVoiceAccount(sendGetRequest(KF5Interface.getVoiceAccountById(getDomain(), id)));
+	}
+
+	/**
+	 * 更新客服语音账号
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param id
+	 *            资源id {@link VoiceAccount#getId()}
+	 * @param jsonString
+	 *            body参数
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agent-update
+	 */
+	public KF5Entity<VoiceAccount> updateVoiceAccount(String id, String jsonString) {
+		return buildVoiceAccount(sendPutRequest(KF5Interface.updateVoiceAccount(getDomain(), id), jsonString));
+	}
+
+	/**
+	 * 客服登录明细列表
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(非必填)
+	 *            </P>
+	 *            created_end: 截止时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            agent_id:查看某坐席的明细(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agent-state-logs
+	 * @return
+	 */
+	public KF5PaginationEntity<List<VoiceAgentLoginState>> getVoiceAgentLoginStateList(Map<String, String> map) {
+		return buildVoiceAgentLoginStateList(
+				sendGetRequest(KF5Interface.getVoiceAgentLoginStateList(getDomain(), map)));
+	}
+
+	/**
+	 * 客服登录明细列表
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param url
+	 *            {@link KF5PaginationEntity#getNextPage()}
+	 * @return
+	 */
+	public KF5PaginationEntity<List<VoiceAgentLoginState>> getVoiceAgentLoginStateListByUrl(String url) {
+		return buildVoiceAgentLoginStateList(sendGetRequest(url));
+	}
+
+	/**
+	 * 未接通呼入明细列表
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(非必填)
+	 *            </P>
+	 *            created_end: 截止时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page:分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            agent_id:查看某坐席的明细(非必填)
+	 *            </P>
+	 *            reason:未接通原因(非必填)
+	 *            </P>
+	 *            sort:0：降序，1：升序(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-unanswereds
+	 */
+	public KF5PaginationEntity<List<VoiceCallUnAnswered>> getVoiceCallUnAnsweredList(Map<String, String> map) {
+		return buildVoiceCallUnAnsweredList(sendGetRequest(KF5Interface.getVoiceCallUnAnsweredList(getDomain(), map)));
+	}
+
+	/**
+	 * 未接通呼入明细列表
+	 * </P>
+	 * 调用权限：admin or agent
+	 * 
+	 * @param url
+	 *            {@link KF5PaginationEntity#getNextPage()}
+	 * @return
+	 */
+	public KF5PaginationEntity<List<VoiceCallUnAnswered>> getVoiceCallUnAnsweredListByUrl(String url) {
+		return buildVoiceCallUnAnsweredList(sendGetRequest(url));
+	}
+
+	/**
+	 * 呼出服务量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agent-outbound-stats
+	 * @return
+	 */
+	public KF5Entity<List<AgentVoiceCallOutbound>> getAgentVoiceCallOutboundList(Map<String, String> map) {
+		return buildAgentVoiceCallOutboundList(
+				sendGetRequest(KF5Interface.getAgentVoiceCallOutboundList(getDomain(), map)));
+	}
+
+	/**
+	 * 呼入服务量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 * @param map
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agent-inbound-stats
+	 */
+	public KF5Entity<List<AgentVoiceCallInbound>> getAgentVoiceCallInboundList(Map<String, String> map) {
+		return buildAgentVoiceCallInboundList(
+				sendGetRequest(KF5Interface.getAgentVoiceCallInboundList(getDomain(), map)));
+	}
+
+	/**
+	 * 客服工作量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agent-performance-stats
+	 * @return
+	 */
+	public KF5Entity<List<AgentVoicePerformance>> getAgentVoicePerformanceList(Map<String, String> map) {
+		return buildAgentVoicePerformanceList(sendGetRequest(KF5Interface.getAgentVoicePerformance(getDomain(), map)));
+	}
+
+	/**
+	 * 客服状态时长
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            </P>
+	 *            group_id:客服组ID(非必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-agent-state-stats
+	 */
+	public KF5Entity<List<AgentVoiceStateTime>> getAgentVoiceStateTimeList(Map<String, String> map) {
+		return buildAgentVoiceStateTimeList(sendGetRequest(KF5Interface.getAgentVoiceStateTime(getDomain(), map)));
+	}
+
+	/**
+	 * 
+	 * 分时段呼入量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-inbound-stats
+	 * @return
+	 */
+	public KF5Entity<List<AgentVoiceCallSubsectionInbound>> getAgentVoiceCallSubsectionInboundList(
+			Map<String, String> map) {
+		return buildAgentVoiceCallSubsectionInboundList(
+				sendGetRequest(KF5Interface.getAgentVoiceCallSubsectionInbound(getDomain(), map)));
+	}
+
+	/**
+	 * 
+	 * 分时段呼出量
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            created_start:起始时间(必填)
+	 *            </P>
+	 *            created_end: 截止时间(必填)
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-outbound-stats
+	 * @return
+	 */
+	public KF5Entity<List<AgentVoiceCallSubsectionOutbound>> getAgentVoiceCallSubsectionOutboundList(
+			Map<String, String> map) {
+		return buildAgentVoiceCallSubsectionOutboundList(
+				sendGetRequest(KF5Interface.getAgentVoiceCallSubsectionOutbound(getDomain(), map)));
+	}
+
+	/**
+	 * 通话队列
+	 * </P>
+	 * 调用权限：admin
+	 * 更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#advance-queue-
+	 * calls
+	 * 
+	 * @return
+	 */
+	public KF5Entity<List<VoiceQueueCall>> getVoiceQueueCallList() {
+		return buildVoiceQueueCallList(sendGetRequest(KF5Interface.getVoiceQueueCall(getDomain())));
+	}
+
+	/**
+	 * 客服状态列表
+	 * </P>
+	 * 调用权限：admin
+	 * 更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#advance-
+	 * availabilities
+	 * 
+	 * @return
+	 */
+	public KF5Entity<List<AgentVoiceStatus>> getAgentVoiceStatusList() {
+		return buildAgentVoiceStatusList(sendGetRequest(KF5Interface.getVoiceAgentStatus(getDomain())));
+	}
+
+	/**
+	 * 查看客服状态
+	 * </P>
+	 * 调用权限：admin
+	 * 
+	 * @param id
+	 *            {@link AgentVoiceStatus#getUser_id()}
+	 *            更多请访问：http://developer.kf5.com/restfulapi/voice/advance/#
+	 *            advance-availabilities-view
+	 * @return
+	 */
+	public KF5Entity<AgentVoiceStatus> getAgentVoiceStatusById(String id) {
+		return buildAgentVoiceStatus(sendGetRequest(KF5Interface.getAgentVoiceStatusById(getDomain(), id)));
+	}
+
+	/**
+	 * 设置电话客服在线
+	 * </P>
+	 * 调用权限：admin or agent
+	 * </p>
+	 * 备注：仅接受 {@link KF5Support#initWithPassword(String, String, String)}初始化
+	 * 更多请访问:http://developer.kf5.com/restfulapi/voice/online/
+	 */
+	public boolean setAgentVoiceOnline() {
+		return setAgentVoiceStatus(KF5Interface.setAgentVoiceOnline(getDomain()));
+	}
+
+	/**
+	 * 设置电话客服忙碌
+	 * </P>
+	 * 调用权限：admin or agent
+	 * </p>
+	 * 备注：仅接受 {@link KF5Support#initWithPassword(String, String, String)}初始化
+	 * 更多请访问：http://developer.kf5.com/restfulapi/voice/busy/
+	 */
+	public boolean setAgentVoiceBusy() {
+		return setAgentVoiceStatus(KF5Interface.setAgentVoiceBusy(getDomain()));
+	}
+
+	/**
+	 * 设置电话客服小休
+	 * </P>
+	 * 调用权限：admin or agent
+	 * </p>
+	 * 备注：仅接受 {@link KF5Support#initWithPassword(String, String, String)}初始化
+	 * 更多请访问：http://developer.kf5.com/restfulapi/voice/break/
+	 */
+	public boolean setAgentVoiceBreak() {
+		return setAgentVoiceStatus(KF5Interface.setAgentVoiceBreak(getDomain()));
+	}
+
+	/**
+	 * 设置电话客服离线
+	 * </P>
+	 * 调用权限：admin or agent
+	 * </p>
+	 * 备注：仅接受 {@link KF5Support#initWithPassword(String, String, String)}初始化
+	 * 更多请访问：http://developer.kf5.com/restfulapi/voice/offline/
+	 */
+	public boolean setAgentVoiceOffline() {
+		return setAgentVoiceStatus(KF5Interface.setAgentVoiceOffline(getDomain()));
+	}
+
+	private boolean setAgentVoiceStatus(String url) {
+		MessageStatus messageStatus = sendPostRequest(url, "");
+		if (messageStatus.getStatus() == RESULT_OK) {
+			return KF5EntityBuilder.safeBoolean(messageStatus.getJsonObject(), "success");
+		}
+		return false;
+	}
+
+	/**
+	 * 操作日志列表
+	 * </P>
+	 * 调用权限 : admin
+	 * 
+	 * @param map
+	 *            Query参数
+	 *            </P>
+	 *            type:操作日志的动作类型，可选值：login【登录】、edit【编辑】、del【删除】(非必填)
+	 *            </P>
+	 *            object: 操作日志的对象类型，可选值：user【用户】、ticket【工单】(非必填)
+	 *            </P>
+	 *            start:按创建时间筛选，开始时间(非必填)
+	 *            </P>
+	 *            end: 按创建时间筛选，结束时间(非必填)
+	 *            </P>
+	 *            page:页码，默认为 1(非必填)
+	 *            </P>
+	 *            per_page: 分页尺寸，默认为 100(非必填)
+	 *            </P>
+	 *            备注：创建时间进行筛选的参数 start、end支持日期格式（如 2016-01-01
+	 *            00:00:00）和时间戳（秒级别的整型）。
+	 *            更多请访问：http://developer.kf5.com/restfulapi/others/systemlog/
+	 */
+	public KF5PaginationEntity<List<SystemLog>> getSystemLogList(Map<String, String> map) {
+		return buildSystemLogList(sendGetRequest(KF5Interface.getSystemLog(getDomain(), map)));
+	}
+
+	/**
+	 * 操作日志列表
+	 * </P>
+	 * 调用权限 : admin
+	 * 
+	 * @param url
+	 *            {@link KF5PaginationEntity#getNextPage()}
+	 * @return
+	 */
+	public KF5PaginationEntity<List<SystemLog>> getSystemLogListByUrl(String url) {
+		return buildSystemLogList(sendGetRequest(url));
+	}
+	
+	
+	public void getIMAgentList(){
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("action", "get_agent_states");
+		sendPostRequest(KF5Interface.getIMAgentList(), jsonObject.toJSONString());
+	}
 }

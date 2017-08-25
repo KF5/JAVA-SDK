@@ -9,9 +9,25 @@ import org.kf5.support.fastjson.JSONObject;
 import com.kf5.support.internet.HttpRequest;
 import com.kf5.support.model.AICategory;
 import com.kf5.support.model.AIQuestionCategory;
+import com.kf5.support.model.AITag;
+import com.kf5.support.model.AgentConversationStatistics;
+import com.kf5.support.model.AgentLog;
+import com.kf5.support.model.AgentStatistics;
+import com.kf5.support.model.AgentStatusTimeStatistics;
+import com.kf5.support.model.AgentVoiceCallInbound;
+import com.kf5.support.model.AgentVoiceCallOutbound;
+import com.kf5.support.model.AgentVoiceCallSubsectionInbound;
+import com.kf5.support.model.AgentVoiceCallSubsectionOutbound;
+import com.kf5.support.model.AgentVoicePerformance;
+import com.kf5.support.model.AgentVoiceStateTime;
+import com.kf5.support.model.AgentVoiceStatus;
+import com.kf5.support.model.AgentWorkStatusStatistics;
 import com.kf5.support.model.Attachment;
+import com.kf5.support.model.Automation;
 import com.kf5.support.model.Category;
 import com.kf5.support.model.Chat;
+import com.kf5.support.model.ChatInfo;
+import com.kf5.support.model.ChatSourceStatistics;
 import com.kf5.support.model.Comment;
 import com.kf5.support.model.Forum;
 import com.kf5.support.model.Group;
@@ -19,25 +35,34 @@ import com.kf5.support.model.KF5Entity;
 import com.kf5.support.model.KF5Fields;
 import com.kf5.support.model.KF5PaginationEntity;
 import com.kf5.support.model.MessageStatus;
+import com.kf5.support.model.MonitorAgent;
 import com.kf5.support.model.Organization;
 import com.kf5.support.model.Post;
 import com.kf5.support.model.PostComment;
 import com.kf5.support.model.Question;
 import com.kf5.support.model.QuestionComment;
+import com.kf5.support.model.QueueVisitorInfo;
 import com.kf5.support.model.Requester;
 import com.kf5.support.model.StatusCode;
+import com.kf5.support.model.SystemLog;
 import com.kf5.support.model.Ticket;
 import com.kf5.support.model.TicketField;
 import com.kf5.support.model.Topic;
+import com.kf5.support.model.Trigger;
 import com.kf5.support.model.User;
 import com.kf5.support.model.UserField;
 import com.kf5.support.model.View;
 import com.kf5.support.model.ViewCount;
+import com.kf5.support.model.VoiceAccount;
+import com.kf5.support.model.VoiceAgentLoginState;
+import com.kf5.support.model.VoiceCall;
+import com.kf5.support.model.VoiceCallUnAnswered;
+import com.kf5.support.model.VoiceQueueCall;
 import com.kf5.support.model.builder.EntityBuilder;
 import com.kf5.support.model.builder.KF5EntityBuilder;
 import com.kf5.support.util.Base64Utils;
 
-class BaseSupport {
+class BaseSupport extends DataSupport{
 
 	protected static final int RESULT_OK = StatusCode.OK;
 
@@ -111,13 +136,13 @@ class BaseSupport {
 		}
 	}
 
-	protected <T> void setPagesAndCount(KF5PaginationEntity<T> kf5Entity, JSONObject jsonObject) {
-		if (kf5Entity == null || jsonObject == null)
-			return;
-		kf5Entity.setCount(KF5EntityBuilder.safeInt(jsonObject, KF5Fields.COUNT));
-		kf5Entity.setNextPage(KF5EntityBuilder.safeGet(jsonObject, KF5Fields.NEXT_PAGE));
-		kf5Entity.setPreviousPage(KF5EntityBuilder.safeGet(jsonObject, KF5Fields.PREVIOUS_PAGE));
-	}
+//	protected <T> void setPagesAndCount(KF5PaginationEntity<T> kf5Entity, JSONObject jsonObject) {
+//		if (kf5Entity == null || jsonObject == null)
+//			return;
+//		kf5Entity.setCount(KF5EntityBuilder.safeInt(jsonObject, KF5Fields.COUNT));
+//		kf5Entity.setNextPage(KF5EntityBuilder.safeGet(jsonObject, KF5Fields.NEXT_PAGE));
+//		kf5Entity.setPreviousPage(KF5EntityBuilder.safeGet(jsonObject, KF5Fields.PREVIOUS_PAGE));
+//	}
 
 	/**
 	 * Get请求
@@ -741,45 +766,349 @@ class BaseSupport {
 	protected KF5Entity<AIQuestionCategory> buildAIQuestionCategory(MessageStatus messageStatus) {
 
 		AIQuestionCategory aiQuestionCategory = null;
-		if (getResultCode(messageStatus) == RESULT_OK) 
+		if (getResultCode(messageStatus) == RESULT_OK)
 			aiQuestionCategory = EntityBuilder
 					.buildAIQuestionCategory(KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.DATA));
 		return dealData(new KF5Entity<AIQuestionCategory>(), aiQuestionCategory, getResultObj(messageStatus),
 				getResultCode(messageStatus));
 	}
 
-	private <T> KF5PaginationEntity<T> dealPaginationListData(KF5PaginationEntity<T> kf5Entity, T list,
-			JSONObject jsonObject, int resultCode) {
+//	private <T> KF5PaginationEntity<T> dealPaginationListData(KF5PaginationEntity<T> kf5Entity, T list,
+//			JSONObject jsonObject, int resultCode) {
+//
+//		kf5Entity.setResultCode(resultCode);
+//		if (resultCode == RESULT_OK) {
+//			kf5Entity.setData(list);
+//			setPagesAndCount(kf5Entity, jsonObject);
+//		} else {
+//			kf5Entity.setMessage(jsonObject.toString());
+//		}
+//		return kf5Entity;
+//	}
+//
+//	private <T> KF5Entity<T> dealData(KF5Entity<T> kf5Entity, T t, JSONObject jsonObject, int resultCode) {
+//
+//		kf5Entity.setResultCode(resultCode);
+//		if (resultCode == RESULT_OK) {
+//			kf5Entity.setData(t);
+//		} else {
+//			kf5Entity.setMessage(jsonObject.toString());
+//		}
+//		return kf5Entity;
+//	}
+//
+//	private int getResultCode(MessageStatus messageStatus) {
+//		return messageStatus.getStatus();
+//	}
+//
+//	private JSONObject getResultObj(MessageStatus messageStatus) {
+//		return messageStatus.getJsonObject();
+//	}
 
-		kf5Entity.setResultCode(resultCode);
-		if (resultCode == RESULT_OK) {
-			kf5Entity.setData(list);
-			setPagesAndCount(kf5Entity, jsonObject);
-		} else {
-			kf5Entity.setMessage(jsonObject.toString());
+	/*
+	 * ###########################################2017-8-21新增API################
+	 * ###########################
+	 */
+
+	protected KF5Entity<Trigger> buildTrigger(MessageStatus messageStatus) {
+		Trigger trigger = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			trigger = EntityBuilder
+					.buildTrigger(KF5EntityBuilder.getJsonObject(getResultObj(messageStatus), KF5Fields.TRIGGER));
 		}
-		return kf5Entity;
+		return dealData(new KF5Entity<Trigger>(), trigger, getResultObj(messageStatus), getResultCode(messageStatus));
 	}
 
-	private <T> KF5Entity<T> dealData(KF5Entity<T> kf5Entity, T t, JSONObject jsonObject, int resultCode) {
+	protected KF5Entity<List<Trigger>> buildTriggerList(MessageStatus messageStatus) {
 
-		kf5Entity.setResultCode(resultCode);
-		if (resultCode == RESULT_OK) {
-			kf5Entity.setData(t);
-		} else {
-			kf5Entity.setMessage(jsonObject.toString());
+		List<Trigger> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			JSONArray jsonArray = KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.TRIGGERS);
+			list.addAll(EntityBuilder.buildTriggerList(jsonArray));
 		}
-		return kf5Entity;
+		return dealData(new KF5Entity<List<Trigger>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
 	}
 
-	private int getResultCode(MessageStatus messageStatus) {
-		return messageStatus.getStatus();
+	protected KF5Entity<Automation> buildAutomation(MessageStatus messageStatus) {
+		Automation automation = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			automation = EntityBuilder
+					.buildAutomation(KF5EntityBuilder.getJsonObject(getResultObj(messageStatus), KF5Fields.AUTOMATION));
+		}
+		return dealData(new KF5Entity<Automation>(), automation, getResultObj(messageStatus),
+				getResultCode(messageStatus));
 	}
 
-	private JSONObject getResultObj(MessageStatus messageStatus) {
-		return messageStatus.getJsonObject();
+	protected KF5Entity<List<Automation>> buildAutomationList(MessageStatus messageStatus) {
+		List<Automation> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			JSONArray jsonArray = KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AUTOMATIONS);
+			list.addAll(EntityBuilder.buildAutomationList(jsonArray));
+		}
+		return dealData(new KF5Entity<List<Automation>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
 	}
-	
-	
+
+	protected KF5Entity<List<AgentLog>> buildAgentLogList(MessageStatus messageStatus) {
+		List<AgentLog> agentLogs = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			agentLogs.addAll(EntityBuilder
+					.buildAgentLogList(KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.LOGS)));
+		}
+		return dealData(new KF5Entity<List<AgentLog>>(), agentLogs, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AITag>> buildAITagList(MessageStatus messageStatus) {
+		List<AITag> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder
+					.buildAITagList(KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.ROWS)));
+		}
+		return dealData(new KF5Entity<List<AITag>>(), list, getResultObj(messageStatus), getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<MonitorAgent> buildMonitorAgent(MessageStatus messageStatus) {
+		MonitorAgent monitorAgent = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			monitorAgent = EntityBuilder
+					.buildMonitorAgent(KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.STATS));
+		}
+		return dealData(new KF5Entity<MonitorAgent>(), monitorAgent, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<ChatInfo>> buildChatInfoList(MessageStatus messageStatus) {
+		List<ChatInfo> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder
+					.buildChatInfoList(KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.CHATS)));
+		}
+		return dealData(new KF5Entity<List<ChatInfo>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<QueueVisitorInfo>> buildQueueVisitorInfoList(MessageStatus messageStatus) {
+		List<QueueVisitorInfo> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildQueueVisitorInfoList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.VISITORS)));
+		}
+		return dealData(new KF5Entity<List<QueueVisitorInfo>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<AgentWorkStatusStatistics> buildAgentWorkStatusStatistics(MessageStatus messageStatus) {
+		AgentWorkStatusStatistics statistics = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			statistics = EntityBuilder.buildAgentWorkStatusStatistics(
+					KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.STATS));
+		}
+		return dealData(new KF5Entity<AgentWorkStatusStatistics>(), statistics, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<AgentConversationStatistics> buildAgentConversationStatistics(MessageStatus messageStatus) {
+		AgentConversationStatistics statistics = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			statistics = EntityBuilder.buildAgentConversationStatistics(
+					KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.STATS));
+		}
+		return dealData(new KF5Entity<AgentConversationStatistics>(), statistics, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<AgentStatusTimeStatistics> buildAgentStatusTimeStatistics(MessageStatus messageStatus) {
+		AgentStatusTimeStatistics statistics = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			statistics = EntityBuilder.buildAgentStatusTimeStatistics(getResultObj(messageStatus));
+		}
+		return dealData(new KF5Entity<AgentStatusTimeStatistics>(), statistics, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<ChatSourceStatistics> buildChatSourceStatistics(MessageStatus messageStatus) {
+		ChatSourceStatistics statistics = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			statistics = EntityBuilder.buildChatSourceStatistics(
+					KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.STATS));
+		}
+		return dealData(new KF5Entity<ChatSourceStatistics>(), statistics, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<AgentStatistics> buildAgentStatistics(MessageStatus messageStatus) {
+		AgentStatistics statistics = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			statistics = EntityBuilder
+					.buildAgentStatistics(KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.AGENT));
+		}
+		return dealData(new KF5Entity<AgentStatistics>(), statistics, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5PaginationEntity<List<VoiceCall>> buildVoiceCallList(MessageStatus messageStatus) {
+		List<VoiceCall> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder
+					.buildVoiceCallList(KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.HISTORIES)));
+		}
+		return dealPaginationListData(new KF5PaginationEntity<List<VoiceCall>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<VoiceCall> buildVoiceCall(MessageStatus messageStatus) {
+		VoiceCall voiceCall = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			voiceCall = EntityBuilder
+					.buildVoiceCall(KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.HISTORY));
+		}
+		return dealData(new KF5Entity<VoiceCall>(), voiceCall, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5PaginationEntity<List<VoiceAccount>> buildVoiceAccountList(MessageStatus messageStatus) {
+		List<VoiceAccount> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder
+					.buildVoiceAccountList(KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AGENTS)));
+		}
+		return dealPaginationListData(new KF5PaginationEntity<List<VoiceAccount>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<VoiceAccount> buildVoiceAccount(MessageStatus messageStatus) {
+		VoiceAccount voiceAccount = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			voiceAccount = EntityBuilder
+					.buildVoiceAccount(KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.AGENT));
+		}
+		return dealData(new KF5Entity<VoiceAccount>(), voiceAccount, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5PaginationEntity<List<VoiceAgentLoginState>> buildVoiceAgentLoginStateList(
+			MessageStatus messageStatus) {
+		List<VoiceAgentLoginState> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildVoiceAgentLoginStateList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AGENT_STATE_LOGS)));
+		}
+		return dealPaginationListData(new KF5PaginationEntity<List<VoiceAgentLoginState>>(), list,
+				getResultObj(messageStatus), getResultCode(messageStatus));
+	}
+
+	protected KF5PaginationEntity<List<VoiceCallUnAnswered>> buildVoiceCallUnAnsweredList(MessageStatus messageStatus) {
+		List<VoiceCallUnAnswered> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildVoiceCallUnAnsweredList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.UNANSWERED)));
+		}
+		return dealPaginationListData(new KF5PaginationEntity<List<VoiceCallUnAnswered>>(), list,
+				getResultObj(messageStatus), getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AgentVoiceCallOutbound>> buildAgentVoiceCallOutboundList(MessageStatus messageStatus) {
+		List<AgentVoiceCallOutbound> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildAgentVoiceCallOutboundList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AGENT_OUTBOUND_STATS)));
+		}
+		return dealData(new KF5Entity<List<AgentVoiceCallOutbound>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AgentVoiceCallInbound>> buildAgentVoiceCallInboundList(MessageStatus messageStatus) {
+		List<AgentVoiceCallInbound> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildAgentVoiceCallInboundList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AGENT_INBOUND_STATS)));
+		}
+		return dealData(new KF5Entity<List<AgentVoiceCallInbound>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AgentVoicePerformance>> buildAgentVoicePerformanceList(MessageStatus messageStatus) {
+		List<AgentVoicePerformance> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildAgentVoicePerformanceList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AGENT_PERFORMANCE_STATS)));
+		}
+		return dealData(new KF5Entity<List<AgentVoicePerformance>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AgentVoiceStateTime>> buildAgentVoiceStateTimeList(MessageStatus messageStatus) {
+		List<AgentVoiceStateTime> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildAgentVoiceStateTimeList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AGENT_STATE_STATS)));
+		}
+		return dealData(new KF5Entity<List<AgentVoiceStateTime>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AgentVoiceCallSubsectionInbound>> buildAgentVoiceCallSubsectionInboundList(
+			MessageStatus messageStatus) {
+		List<AgentVoiceCallSubsectionInbound> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildAgentVoiceCallSubsectionInboundList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.INBOUND_STATS)));
+		}
+		return dealData(new KF5Entity<List<AgentVoiceCallSubsectionInbound>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AgentVoiceCallSubsectionOutbound>> buildAgentVoiceCallSubsectionOutboundList(
+			MessageStatus messageStatus) {
+		List<AgentVoiceCallSubsectionOutbound> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildAgentVoiceCallSubsectionOutboundList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.OUTBOUND_STATS)));
+		}
+		return dealData(new KF5Entity<List<AgentVoiceCallSubsectionOutbound>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<VoiceQueueCall>> buildVoiceQueueCallList(MessageStatus messageStatus) {
+		List<VoiceQueueCall> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildVoiceQueueCallList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.QUEUE_CALLS)));
+		}
+		return dealData(new KF5Entity<List<VoiceQueueCall>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<List<AgentVoiceStatus>> buildAgentVoiceStatusList(MessageStatus messageStatus) {
+		List<AgentVoiceStatus> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder.buildAgentVoiceStatusList(
+					KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.AVAILABILITIES)));
+		}
+		return dealData(new KF5Entity<List<AgentVoiceStatus>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5Entity<AgentVoiceStatus> buildAgentVoiceStatus(MessageStatus messageStatus) {
+		AgentVoiceStatus status = null;
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			status = EntityBuilder.buildAgentVoiceStatus(
+					KF5EntityBuilder.safeObject(getResultObj(messageStatus), KF5Fields.AVAILABILITY));
+		}
+		return dealData(new KF5Entity<AgentVoiceStatus>(), status, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
+
+	protected KF5PaginationEntity<List<SystemLog>> buildSystemLogList(MessageStatus messageStatus) {
+		List<SystemLog> list = new ArrayList<>();
+		if (getResultCode(messageStatus) == RESULT_OK) {
+			list.addAll(EntityBuilder
+					.buildSystemLogList(KF5EntityBuilder.safeArray(getResultObj(messageStatus), KF5Fields.SYSTEM_LOG)));
+		}
+		return dealPaginationListData(new KF5PaginationEntity<List<SystemLog>>(), list, getResultObj(messageStatus),
+				getResultCode(messageStatus));
+	}
 
 }

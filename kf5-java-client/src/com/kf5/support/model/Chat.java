@@ -104,5 +104,71 @@ public class Chat {
 	public void setList(List<Message> list) {
 		this.list = list;
 	}
+	
+	
+	/*
+	 * ###########################################2017-8-22新增API################
+	 * ###########################
+	 */
+	
+	private boolean qualified;
+	
+	private int message_count;
+	
+	private int duration;
+	
+	private int is_temp;
+	
+	private long assigned;
+	
+	private int cochat;
+
+	public boolean isQualified() {
+		return qualified;
+	}
+
+	public void setQualified(boolean qualified) {
+		this.qualified = qualified;
+	}
+
+	public int getMessage_count() {
+		return message_count;
+	}
+
+	public void setMessage_count(int message_count) {
+		this.message_count = message_count;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public int getIs_temp() {
+		return is_temp;
+	}
+
+	public void setIs_temp(int is_temp) {
+		this.is_temp = is_temp;
+	}
+
+	public long getAssigned() {
+		return assigned;
+	}
+
+	public void setAssigned(long assigned) {
+		this.assigned = assigned;
+	}
+
+	public int getCochat() {
+		return cochat;
+	}
+
+	public void setCochat(int cochat) {
+		this.cochat = cochat;
+	}
 
 }

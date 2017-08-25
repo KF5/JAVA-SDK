@@ -15,7 +15,7 @@ public class KF5Fields {
 	public static final String QUESTION_COMMENTS = "question_comments";
 
 	public static final String URL = "url";
-	
+
 	public static final String ROWS = "rows";
 
 	public static final String TOPIC_ID = "topic_id";
@@ -23,7 +23,7 @@ public class KF5Fields {
 	public static final String QUESTIONS = "questions";
 
 	public static final String POST = "post";
-	
+
 	public static final String CHAT = "chat";
 
 	public static final String ORGANIZATIONS = "organizations";
@@ -33,8 +33,8 @@ public class KF5Fields {
 	public static final String POST_COMMENT = "post_comment";
 
 	public static final String ATTACHMENT = "attachment";
-	
-	public static final  String DATA = "data";
+
+	public static final String DATA = "data";
 
 	public static final String FORUM_ID = "forum_id";
 
@@ -61,7 +61,7 @@ public class KF5Fields {
 	public static final String DESCRIPTION = "description";
 
 	public static final String TYPE = "type";
-	
+
 	public static final String STATUS = "status";
 
 	public static final String PRIORITY = "priority";
@@ -71,7 +71,7 @@ public class KF5Fields {
 	public static final String REQUESTER_ID = "requester_id";
 
 	public static final String ASSIGNEE_ID = "assignee_id";
-	
+
 	public static final String UPLOAD = "upload";
 
 	public static final String ORGANIZATION_ID = "organization_id";
@@ -269,18 +269,170 @@ public class KF5Fields {
 	public static final String REPLY_TIMEOUT = "reply_timeout";
 
 	public static final String CHAT_ID = "chat_id";
-	
+
 	public static final String UPLOAD_ID = "upload_id";
-	
+
 	public static final String CREATED = "created";
-	
+
 	public static final String CHATS = "chats";
-	
+
 	public static final String ANSWER = "answer";
-	
+
 	public static final String OTHER_TITLES = "other_titles";
-	
+
 	public static final String AI_TAGS = "Tags";
-	
+
 	public static final String QUESTION_CATEGORY = "question_category";
+
+	/*
+	 * ###########################################2017-8-21新增API################
+	 * ###########################
+	 */
+
+	public static final String COMPANY_ID = "company_id";
+	public static final String OPERATOR = "operator";
+	public static final String DELETED_AT = "deleted_at";
+	public static final String SUBJECT = "subject";
+	public static final String BODY = "body";
+	public static final String OVERFLOWABLE = "overflowable";
+	public static final String OVERFLOW_TYPE = "overflow_type";
+	public static final String CONDITIONS = "conditions";
+	public static final String ALL = "all";
+	public static final String ANY = "any";
+	public static final String ACTIONS = "actions";
+	public static final String TRIGGERS = "triggers";
+	public static final String TRIGGER = "trigger";
+	public static final String AUTOMATIONS = "automations";
+	public static final String AUTOMATION = "automation";
+	public static final String QUALIFIED = "qualified";
+	public static final String MESSAGE_COUNT = "message_count";
+	public static final String DURATION = "duration";
+	public static final String IS_TEMP = "is_temp";
+	public static final String ASSIGNED = "assigned";
+	public static final String COCHAT = "cochat";
+	public static final String WIDTH = "width";
+	public static final String OSS_TOKEN = "oss_token";
+	public static final String HEIGHT = "height";
+	public static final String LOG_ID = "log_id";
+	public static final String OPERATE = "operate";
+	public static final String MAX_SERVE = "max_serve";
+	public static final String USER_NAME = "user_name";
+	public static final String PLATFORM = "platform";
+	public static final String LOGS = "logs";
+	public static final String SERVECOUNT = "serveCount";
+	public static final String CHATNUM = "chatNum";
+	public static final String MESSAGENUM = "messageNum";
+	public static final String AGENTNAME = "agentName";
+	public static final String AGENTSTATUS = "agentStatus";
+	public static final String ENABLED = "enabled";
+	public static final String AVERAGERESPONSETIME = "averageResponseTime";
+	public static final String AVERAGESERVETIME = "averageServeTime";
+	public static final String SUMRESPONSETIME = "sumResponseTime";
+	public static final String SUMSERVETIME = "sumServeTime";
+	public static final String MONITOR_OVERVIEW = "monitor_overview";
+	public static final String MONITOR_TABLE = "monitor_table";
+	public static final String STATS = "stats";
+	public static final String AGENT_NAME = "agent_name";
+	public static final String VISITOR_NAME = "visitor_name";
+	public static final String CLOSED = "closed";
+	public static final String CHAT_FROM = "chat_from";
+	public static final String AGENT_IDS = "agent_ids";
+	public static final String SELECTEDAGENTIDS = "selectedAgentIds";
+	public static final String KF5_USER_ID = "kf5_user_id";
+	public static final String SESSION_ID = "session_id";
+	public static final String ASSIGNTYPE = "assignType";
+	public static final String ENQUEUETIME = "enqueueTime";
+	public static final String LANG = "lang";
+	public static final String VISITORS = "visitors";
+	public static final String RATINGNUM = "ratingNum";
+	public static final String SATISFACTION = "satisfaction";
+	public static final String RATINGRATE = "ratingRate";
+	public static final String AGENT_OVERVIEW = "agent_overview";
+	public static final String AGENT_TABLE = "agent_table";
+	public static final String TIMESTAMP = "timestamp";
+	public static final String TIME_OVERVIEW = "time_overview";
+	public static final String TIME_TABLE = "time_table";
+	public static final String ONLINEAVERAGE = "onlineAverage";
+	public static final String BUSYAVERAGE = "busyAverage";
+	public static final String ONLINETOTAL = "onlineTotal";
+	public static final String BUSYTOTAL = "busyTotal";
+	public static final String SUMMARY = "summary";
+	public static final String SOURCE_OVERVIEW = "source_overview";
+	public static final String SOURCE_TABLE = "source_table";
+	public static final String DISPLAY_NAME = "display_name";
+	public static final String APPSTATUS = "appStatus";
+	public static final String WEBSTATUS = "webStatus";
+	public static final String AGENT = "agent";
+	public static final String CALLSID = "callsid";
+	public static final String RECORDURL = "recordurl";
+	public static final String ALERTING_SECONDS = "alerting_seconds";
+	public static final String CALLDURATION = "callduration";
+	public static final String FROM = "from";
+	public static final String TO = "to";
+	public static final String IS_ANSWERED = "is_answered";
+	public static final String HISTORIES = "histories";
+	public static final String HISTORY = "history";
+	public static final String VOIP_ACCOUNT = "voip_account";
+	public static final String STATUS_UPDATED = "status_updated";
+	public static final String VOIP_PWD = "voip_pwd";
+	public static final String AGENT_STATE_LOGS = "agent_state_logs";
+	public static final String REASON = "reason";
+	public static final String UNANSWERED = "unanswered";
+	public static final String AGENTID = "agentid";
+	public static final String TOTAL = "total";
+	public static final String AVG_CALLDURATION = "avg_callduration";
+	public static final String ANSWER_RATE = "answer_rate";
+	public static final String AGENT_OUTBOUND_STATS = "agent_outbound_stats";
+	public static final String TICKET_NUM = "ticket_num";
+	public static final String SCORE_RATE = "score_rate";
+	public static final String SCORE_NUM = "score_num";
+	public static final String CANCEL_RATE = "cancel_rate";
+	public static final String USER_CANCEL = "user_cancel";
+	public static final String AVG_SCORE = "avg_score";
+	public static final String AGENT_INBOUND_STATS = "agent_inbound_stats";
+	public static final String ALERTING_TIMES = "alerting_times";
+	public static final String TRANSFERED_TIMES = "transfered_times";
+	public static final String TOTAL_HOLDING_DURATION = "total_holding_duration";
+	public static final String AVG_TRANSFER_DURATION = "avg_transfer_duration";
+	public static final String AVG_HOLDING_DURATION = "avg_holding_duration";
+	public static final String TRANSFER_TIMES = "transfer_times";
+	public static final String AVG_ALERTING_DURATION = "avg_alerting_duration";
+	public static final String AVG_TRANSFERED_DURATION = "avg_transfered_duration";
+	public static final String HOLDING_TIMES = "holding_times";
+	public static final String TOTAL_TRANSFER_DURATION = "total_transfer_duration";
+	public static final String TOTAL_ALERTING_DURATION = "total_alerting_duration";
+	public static final String TOTAL_TRANSFERED_DURATION = "total_transfered_duration";
+	public static final String AGENT_PERFORMANCE_STATS = "agent_performance_stats";
+	public static final String AVG_ONLINE_DURATION = "avg_online_duration";
+	public static final String AVG_BREAK_DURATION = "avg_break_duration";
+	public static final String AVG_BUSY_DURATION = "avg_busy_duration";
+	public static final String ONLINE_DURATION = "online_duration";
+	public static final String BREAK_DURATION = "break_duration";
+	public static final String BUSY_DURATION = "busy_duration";
+	public static final String AGENT_STATE_STATS = "agent_state_stats";
+	public static final String AVG_RESPONSE_DURATION = "avg_response_duration";
+	public static final String TIME = "time";
+	public static final String ACD_CANCEL= "acd_cancel";
+	public static final String AGENT_NUM = "agent_num";
+	public static final String IVR_CANCEL = "ivr_cancel";
+	public static final String AGENT_REJECT = "agent_reject";
+	public static final String INBOUND_STATS = "inbound_stats";
+	public static final String UNANSWER = "unanswer";
+	public static final String OUTBOUND_STATS = "outbound_stats";
+	public static final String NUMBER = "number";
+	public static final String QUEUETYPE = "queuetype";
+	public static final String FROMATTR = "fromattr";
+	public static final String ORGANIZATION_NAME = "organization_name";
+	public static final String ELASPE = "elaspe";
+	public static final String QUEUE_CALLS = "queue_calls";
+	public static final String AVAILABILITIES ="availabilities";
+	public static final String CALL_STATUS = "call_status";
+	public static final String AVAILABILITY = "availability";
+	public static final String OBJECT_TYPE = "object_type"; 
+	public static final String IP = "ip";
+	public static final String ACTION = "action";
+	public static final String OBJECT = "object";
+	public static final String SYSTEM_LOG = "system_log";
+	public static final String APP_STATUS = "app_status";
+	public static final String WEB_STATUS = "web_status";
 }

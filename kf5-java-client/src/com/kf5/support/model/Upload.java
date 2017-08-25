@@ -62,4 +62,50 @@ public class Upload {
 		this.url = url;
 	}
 
+	
+	/*
+	 * ###########################################2017-8-22新增API################
+	 * ###########################
+	 */
+	
+	private int width;
+	
+	private String oss_token;
+	
+	private int height;
+	
+	private String token;
+
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public String getOss_token() {
+		return oss_token;
+	}
+
+	public void setOss_token(String oss_token) {
+		this.oss_token = oss_token;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
 }
