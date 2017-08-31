@@ -321,63 +321,63 @@ public class AuthorizationUtil {
 		}
 	}
 
-	public static void main(String[] args) throws URISyntaxException, IOException, GeneralSecurityException {
-		String oauth_consumer_key = "10103";
-		String oauth_signature_method = "HMAC-SHA1";
-		long oauth_timestamp = System.currentTimeMillis()/1000;
-		String oauth_nonce = String.valueOf(oauth_timestamp + RAND.nextInt());
-		float oauth_version = 1.0f;
-		String oauth_token = null;
-		String oauth_verifier = null;
-		
-		String oauth_consumer_secret = "kingdee20150810";
-		String oauth_token_secret = null;
-		String url = "http://localhost:8000/openapi/v1/oauth/appToken.json";
-		Map<String, Object> parameters = null;
-		String requestType = "post";
-		
-//		logger.info(generateAuthorizationHeader(oauth_consumer_key, 
-//				oauth_consumer_secret, 
-//				oauth_signature_method, 
-//				oauth_timestamp, 
-//				oauth_nonce, 
-//				oauth_version, 
-//				oauth_token, 
-//				oauth_token_secret, 
-//				oauth_verifier, 
-//				url, 
-//				parameters, 
-//				requestType));
-		
-		oauth_consumer_key = "2AudaAEghEJGEHkw";
-		oauth_signature_method = "HMAC-SHA1";
-		oauth_timestamp = System.currentTimeMillis()/1000;
-		oauth_nonce = String.valueOf(oauth_timestamp + RAND.nextInt());
-		oauth_version = 1.0f;
-		oauth_token = "3f3f94d26637acc3f265c016ca471183";
-		oauth_verifier = "3f3f94d26637acc3f265c016ca471183";
-		
-		oauth_consumer_secret = "0QNOWUHsWcI9i8UyqBFKUarayqBDUsVnxJrumYHEUl";
-		oauth_token_secret = "9a392124d84d6bddd44f86c88bbeca4";
-		url = "http://localhost:8000/openapi/v1/ticket/acquire.json";
-		parameters = new HashMap<String, Object>();
-		parameters.put("openToken", "5fb27cf1b1929c27dade39bf9fcfc6a");
-		parameters.put("appid", "10103");
-		parameters.put("mid", "10109");
-		requestType = "post";
-		
-//		logger.info(generateAuthorizationHeader(oauth_consumer_key, 
-//				oauth_consumer_secret, 
-//				oauth_signature_method, 
-//				oauth_timestamp, 
-//				oauth_nonce, 
-//				oauth_version, 
-//				oauth_token, 
-//				oauth_token_secret, 
-//				oauth_verifier, 
-//				url, 
-//				parameters, 
-//				requestType));
-		
-	}
+//	public static void main(String[] args) throws URISyntaxException, IOException, GeneralSecurityException {
+//		String oauth_consumer_key = "10103";
+//		String oauth_signature_method = "HMAC-SHA1";
+//		long oauth_timestamp = System.currentTimeMillis()/1000;
+//		String oauth_nonce = String.valueOf(oauth_timestamp + RAND.nextInt());
+//		float oauth_version = 1.0f;
+//		String oauth_token = null;
+//		String oauth_verifier = null;
+//		
+//		String oauth_consumer_secret = "kingdee20150810";
+//		String oauth_token_secret = null;
+//		String url = "http://localhost:8000/openapi/v1/oauth/appToken.json";
+//		Map<String, Object> parameters = null;
+//		String requestType = "post";
+//		
+////		logger.info(generateAuthorizationHeader(oauth_consumer_key, 
+////				oauth_consumer_secret, 
+////				oauth_signature_method, 
+////				oauth_timestamp, 
+////				oauth_nonce, 
+////				oauth_version, 
+////				oauth_token, 
+////				oauth_token_secret, 
+////				oauth_verifier, 
+////				url, 
+////				parameters, 
+////				requestType));
+//		
+//		oauth_consumer_key = "2AudaAEghEJGEHkw";
+//		oauth_signature_method = "HMAC-SHA1";
+//		oauth_timestamp = System.currentTimeMillis()/1000;
+//		oauth_nonce = String.valueOf(oauth_timestamp + RAND.nextInt());
+//		oauth_version = 1.0f;
+//		oauth_token = "3f3f94d26637acc3f265c016ca471183";
+//		oauth_verifier = "3f3f94d26637acc3f265c016ca471183";
+//		
+//		oauth_consumer_secret = "0QNOWUHsWcI9i8UyqBFKUarayqBDUsVnxJrumYHEUl";
+//		oauth_token_secret = "9a392124d84d6bddd44f86c88bbeca4";
+//		url = "http://localhost:8000/openapi/v1/ticket/acquire.json";
+//		parameters = new HashMap<String, Object>();
+//		parameters.put("openToken", "5fb27cf1b1929c27dade39bf9fcfc6a");
+//		parameters.put("appid", "10103");
+//		parameters.put("mid", "10109");
+//		requestType = "post";
+//		
+////		logger.info(generateAuthorizationHeader(oauth_consumer_key, 
+////				oauth_consumer_secret, 
+////				oauth_signature_method, 
+////				oauth_timestamp, 
+////				oauth_nonce, 
+////				oauth_version, 
+////				oauth_token, 
+////				oauth_token_secret, 
+////				oauth_verifier, 
+////				url, 
+////				parameters, 
+////				requestType));
+//		
+//	}
 }

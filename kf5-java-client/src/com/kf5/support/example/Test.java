@@ -116,6 +116,9 @@ public class Test {
 		// System.out.println(kf5Support.getAgentVoiceStatusList().getData().size()+"长度");
 		// kf5Support.getAgentVoiceStatusById("5976779");
 		JSONObject jsonObject2 = new JSONObject();
+		Map<String, String> map3 = new HashMap<>();
+		map3.put("query", "哈哈");
+		System.out.println(kf5Support.searchPost(map3).getData().size()+"长度");;
 		// jsonObject.put("number", "384069799@qq.com");
 		// kf5Support.sendVoiceCallOutbound(jsonObject2.toJSONString());
 //		System.out.println(kf5Support.getSystemLogList(map).getNextPage() + "长度");

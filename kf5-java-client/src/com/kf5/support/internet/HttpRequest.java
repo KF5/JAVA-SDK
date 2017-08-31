@@ -416,7 +416,7 @@ public class HttpRequest {
 	 */
 	public static MessageStatus sendCustomIMPostRequest(String url, String baseToken, String domain, String param) {
 
-		System.out.println("请求的url" + url);
+//		System.out.println("请求的url" + url);
 		// System.out.println("请求参数" + param);
 		MessageStatus messageStatus = new MessageStatus();
 		DataOutputStream out = null;
@@ -475,8 +475,8 @@ public class HttpRequest {
 
 			}
 		}
-		System.out.println(messageStatus.getStatus() + "状态码");
-		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString());
+//		System.out.println(messageStatus.getStatus() + "状态码");
+//		System.out.println("返回值" + messageStatus.getJsonObject().toJSONString());
 		return messageStatus;
 	}
 
@@ -513,7 +513,7 @@ public class HttpRequest {
 		conn.setRequestProperty("Content-Type", "application/binary");
 		conn.setRequestProperty("Authorization", baseToken);
 		conn.setRequestProperty("KF5-Domain", domain);
-		System.out.println("domain    "+domain+"========"+baseToken);
+//		System.out.println("domain    "+domain+"========"+baseToken);
 		DataOutputStream outStream = new DataOutputStream(conn.getOutputStream());
 		/**
 		 * 写入附件数据
@@ -552,7 +552,7 @@ public class HttpRequest {
 		}
 		outStream.close();
 		conn.disconnect();
-		System.out.println("自定义消息上传附件返回值" + result);
+//		System.out.println("自定义消息上传附件返回值" + result);
 		return result;
 	}
 

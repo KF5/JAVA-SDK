@@ -476,30 +476,30 @@ public class KF5Interface {
 	// 客服在线
 	private static final String AGENT_VOICE_ONLINE = SERVER + "/voice/online";
 
-	//客服忙碌
-	private static final String AGENT_VOICE_BUSY = SERVER+"/voice/busy";
-	
-	//客服小休
-	private static final String AGENT_VOICE_BREAK = SERVER+"/voice/break";
-	
-	//客服离线
-	private static final String AGENT_VOICE_OFFLINE = SERVER+"/voice/offline";
-	
-	
+	// 客服忙碌
+	private static final String AGENT_VOICE_BUSY = SERVER + "/voice/busy";
+
+	// 客服小休
+	private static final String AGENT_VOICE_BREAK = SERVER + "/voice/break";
+
+	// 客服离线
+	private static final String AGENT_VOICE_OFFLINE = SERVER + "/voice/offline";
+
 	// 操作日志列表
 	private static final String SYSTEM_LOG = SERVER + "/apiv2/system_log.json";
-	
-	
+
 	/**
 	 * 自定义IM消息来源
 	 */
-	
+
 	private static final String GET_IM_AGENT_LIST = "https://webapi.kf5.com/kchat/message";
-	
-	
-	//自定义IM上传附件
+
+	// 自定义IM上传附件
 	private static final String CUSTOM_IM_UPLOAD_ATTACHMENT = "https://webapi.kf5.com/kchat/upload";
-	
+
+	// 搜索文档
+	private static final String SEARCH_POST_WITH_MAP = SERVER + "/apiv2/posts/search.json";
+
 	/**
 	 * 创建机器人题库问题 调用权限：admin
 	 * 
@@ -986,7 +986,33 @@ public class KF5Interface {
 			stringBuilder.append("&");
 			stringBuilder.append(PER_PAGE).append("=").append(per_page);
 		}
-		return String.format(SEARCH_POST, domain, key_word) + stringBuilder.toString();
+		return String.format(SEARCH_POST, domain, URLEncoder.encode(key_word)) + stringBuilder.toString();
+	}
+
+	/**
+	 * 搜索文档
+	 * </P>
+	 * 调用权限 ：all users
+	 * 
+	 * @param domain
+	 *            平台地址
+	 * @param query
+	 *            query参数：
+	 *            </p>
+	 *            query:搜索关键字，必填
+	 *            </p>
+	 *            sort:自定义搜索结果排序规则，可选，格式为：'排序字段:排序方式'，支持的排序字段：id(ID),
+	 *            created_at(创建时间), updated_at(更新时间), is_top(是否置顶),
+	 *            count_view(浏览数), count_comments(评论数),
+	 *            sort(排序序号)，支持的排序方式：asc(升序), desc(降序)
+	 *            </p>
+	 *            forum_id:文档分类, 可选
+	 *            </P>
+	 *            category_id :文档分区, 可选
+	 * @return
+	 */
+	public static String searchPost(String domain, Map<String, String> query) {
+		return String.format(SEARCH_POST_WITH_MAP, domain) + getMapString(query);
 	}
 
 	/**
@@ -1352,7 +1378,7 @@ public class KF5Interface {
 			stringBuilder.append("&");
 			stringBuilder.append(PER_PAGE).append("=").append(per_page);
 		}
-		return String.format(SEARCH_USER, domain, keys) + stringBuilder.toString();
+		return String.format(SEARCH_USER, domain, URLEncoder.encode(keys)) + stringBuilder.toString();
 	}
 
 	/**
@@ -1678,7 +1704,7 @@ public class KF5Interface {
 			stringBuilder.append("&");
 			stringBuilder.append(PER_PAGE).append("=").append(per_page);
 		}
-		return String.format(SERCH_ORDER, domain, keys) + stringBuilder.toString();
+		return String.format(SERCH_ORDER, domain, URLEncoder.encode(keys)) + stringBuilder.toString();
 	}
 
 	/**
@@ -2589,8 +2615,7 @@ public class KF5Interface {
 	public static String setAgentVoiceOnline(String domian) {
 		return String.format(AGENT_VOICE_ONLINE, domian);
 	}
-	
-	
+
 	/**
 	 * 客服忙碌接口
 	 * </P>
@@ -2603,7 +2628,7 @@ public class KF5Interface {
 	public static String setAgentVoiceBusy(String domian) {
 		return String.format(AGENT_VOICE_BUSY, domian);
 	}
-	
+
 	/**
 	 * 客服忙碌接口
 	 * </P>
@@ -2616,7 +2641,7 @@ public class KF5Interface {
 	public static String setAgentVoiceBreak(String domian) {
 		return String.format(AGENT_VOICE_BREAK, domian);
 	}
-	
+
 	/**
 	 * 客服离线接口
 	 * </P>
@@ -2629,9 +2654,6 @@ public class KF5Interface {
 	public static String setAgentVoiceOffline(String domian) {
 		return String.format(AGENT_VOICE_OFFLINE, domian);
 	}
-	
-	
-	
 
 	/**
 	 * 操作日志列表
@@ -2662,24 +2684,24 @@ public class KF5Interface {
 		return String.format(SYSTEM_LOG, domain) + getMapString(queryMap);
 	}
 
-	
 	/**
 	 * 拉取客服和客服组信息
+	 * 
 	 * @return
 	 */
-	public static String getIMAgentList(){
+	public static String getIMAgentList() {
 		return GET_IM_AGENT_LIST;
 	}
-	
-	
+
 	/**
 	 * 上传附件
+	 * 
 	 * @return
 	 */
-	public static String uploadCustomIMAttachment(){
+	public static String uploadCustomIMAttachment() {
 		return CUSTOM_IM_UPLOAD_ATTACHMENT;
 	}
-	
+
 	private static String getMapString(Map<String, String> map) {
 		StringBuffer stringBuffer = new StringBuffer();
 		if (map != null && map.size() > 0) {

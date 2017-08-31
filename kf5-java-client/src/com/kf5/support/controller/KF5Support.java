@@ -2007,6 +2007,29 @@ public class KF5Support extends BaseSupport {
 	}
 
 	/**
+	 * 搜索文档，调用权限：all
+	 * 
+	 * @param query
+	 *            query参数：
+	 *            </p>
+	 *            query:搜索关键字，必填
+	 *            </p>
+	 *            sort:自定义搜索结果排序规则，可选，格式为：'排序字段:排序方式'，支持的排序字段：id(ID),
+	 *            created_at(创建时间), updated_at(更新时间), is_top(是否置顶),
+	 *            count_view(浏览数), count_comments(评论数),
+	 *            sort(排序序号)，支持的排序方式：asc(升序), desc(降序)
+	 *            </p>
+	 *            forum_id:文档分类, 可选
+	 *            </P>
+	 *            category_id :文档分区, 可选
+	 * @return
+	 */
+	public KF5PaginationEntity<List<Post>> searchPost(Map<String, String> query) {
+
+		return searchPostByURL(KF5Interface.searchPost(getDomain(), query));
+	}
+
+	/**
 	 * 分页搜索文档，调用权限：all
 	 * 
 	 * @param url
@@ -3252,9 +3275,8 @@ public class KF5Support extends BaseSupport {
 	public KF5PaginationEntity<List<SystemLog>> getSystemLogListByUrl(String url) {
 		return buildSystemLogList(sendGetRequest(url));
 	}
-	
-	
-	public void getIMAgentList(){
+
+	public void getIMAgentList() {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("action", "get_agent_states");
 		sendPostRequest(KF5Interface.getIMAgentList(), jsonObject.toJSONString());
