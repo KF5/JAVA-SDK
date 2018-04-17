@@ -5,7 +5,7 @@ import java.util.List;
 
 public class User {
 
-	private int id;//用户id，有系统系统分配
+	private int id;//用户id，由系统分配
 	
 	private String url; // 资源url
 	
@@ -52,6 +52,17 @@ public class User {
 	private int customRoleId; //客服所属的自定义角色id，高级服务模式才有此功能。若值不为空，那么上面的客服权限字段不再起作用，权限按照custom_role里的设置生效
 	
 	private List<UserFiled> userFileds = new ArrayList<UserFiled>();//用户自定义字段
+	
+	private List<GroupInfo> groupInfos = new ArrayList<GroupInfo>();//
+	
+
+	public List<GroupInfo> getGroupInfos() {
+		return groupInfos;
+	}
+
+	public void setGroupInfos(List<GroupInfo> groupInfos) {
+		this.groupInfos = groupInfos;
+	}
 
 	public int getId() {
 		return id;

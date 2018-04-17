@@ -45,6 +45,7 @@ import com.kf5.support.model.CustomField;
 import com.kf5.support.model.CustomFieldOption;
 import com.kf5.support.model.Forum;
 import com.kf5.support.model.Group;
+import com.kf5.support.model.GroupInfo;
 import com.kf5.support.model.IMAgent;
 import com.kf5.support.model.IMAgentInfo;
 import com.kf5.support.model.IMGroup;
@@ -175,6 +176,17 @@ public class EntityBuilder extends KF5EntityBuilder {
 			}
 			user.setUserFileds(userFileds);
 		}
+
+		JSONArray groupInfosArray = safeArray(jsonObject, KF5Fields.GROUPS_INFO);
+		if (groupInfosArray != null) {
+			List<GroupInfo> groupInfos = new ArrayList<GroupInfo>();
+			int size = groupInfosArray.size();
+			for (int i = 0; i < size; i++) {
+				JSONObject itemObj = groupInfosArray.getJSONObject(i);
+				groupInfos.add(buildGroupInfo(itemObj));
+			}
+			user.setGroupInfos(groupInfos);
+		}
 		return user;
 	}
 
@@ -183,6 +195,14 @@ public class EntityBuilder extends KF5EntityBuilder {
 		userFiled.setKey(safeGet(jsonObject, KF5Fields.NAME));
 		userFiled.setValue(safeGet(jsonObject, KF5Fields.VALUE));
 		return userFiled;
+	}
+
+	private static GroupInfo buildGroupInfo(JSONObject jsonObject) {
+		GroupInfo groupInfo = new GroupInfo();
+		groupInfo.setName(safeGet(jsonObject, KF5Fields.NAME));
+		groupInfo.setId(safeGet(jsonObject, KF5Fields.ID));
+		groupInfo.setDisplayName(safeGet(jsonObject, KF5Fields.DISPLAY_NAME));
+		return groupInfo;
 	}
 
 	public static List<User> buildUsers(JSONArray jsonArray) {
@@ -1565,7 +1585,7 @@ public class EntityBuilder extends KF5EntityBuilder {
 	}
 
 	public static List<AgentVoiceCallSubsectionInbound> buildAgentVoiceCallSubsectionInboundList(JSONArray jsonArray) {
-		
+
 		List<AgentVoiceCallSubsectionInbound> list = new ArrayList<>();
 		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.size(); i++) {
@@ -1574,10 +1594,10 @@ public class EntityBuilder extends KF5EntityBuilder {
 		}
 		return list;
 	}
-	
-	private static AgentVoiceCallSubsectionOutbound buildAgentVoiceCallSubsectionOutbound(JSONObject jsonObject){
+
+	private static AgentVoiceCallSubsectionOutbound buildAgentVoiceCallSubsectionOutbound(JSONObject jsonObject) {
 		AgentVoiceCallSubsectionOutbound outbound = new AgentVoiceCallSubsectionOutbound();
-		if (jsonObject!= null) {
+		if (jsonObject != null) {
 			outbound.setAvg_callduration(safeInt(jsonObject, KF5Fields.AVG_CALLDURATION));
 			outbound.setTicket_num(safeInt(jsonObject, KF5Fields.TICKET_NUM));
 			outbound.setAnswer(safeInt(jsonObject, KF5Fields.ANSWER));
@@ -1586,25 +1606,24 @@ public class EntityBuilder extends KF5EntityBuilder {
 			outbound.setAnswer_rate(safeGet(jsonObject, KF5Fields.ANSWER_RATE));
 			outbound.setAgent_num(safeInt(jsonObject, KF5Fields.AGENT_NUM));
 		}
-		
+
 		return outbound;
 	}
 
-	
-	public static List<AgentVoiceCallSubsectionOutbound> buildAgentVoiceCallSubsectionOutboundList(JSONArray jsonArray){
+	public static List<AgentVoiceCallSubsectionOutbound> buildAgentVoiceCallSubsectionOutboundList(
+			JSONArray jsonArray) {
 		List<AgentVoiceCallSubsectionOutbound> list = new ArrayList<>();
-		if (jsonArray!= null) {
+		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.size(); i++) {
 				list.add(buildAgentVoiceCallSubsectionOutbound(jsonArray.getJSONObject(i)));
 			}
 		}
 		return list;
 	}
-	
-	
-	private static VoiceQueueCall buildVoiceQueueCall(JSONObject jsonObject){
+
+	private static VoiceQueueCall buildVoiceQueueCall(JSONObject jsonObject) {
 		VoiceQueueCall call = new VoiceQueueCall();
-		if (jsonObject!= null) {
+		if (jsonObject != null) {
 			call.setCallsid(safeGet(jsonObject, KF5Fields.CALLSID));
 			call.setNumber(safeGet(jsonObject, KF5Fields.NUMBER));
 			call.setSource(safeGet(jsonObject, KF5Fields.SOURCE));
@@ -1618,21 +1637,20 @@ public class EntityBuilder extends KF5EntityBuilder {
 		}
 		return call;
 	}
-	
-	public static List<VoiceQueueCall> buildVoiceQueueCallList(JSONArray jsonArray){
+
+	public static List<VoiceQueueCall> buildVoiceQueueCallList(JSONArray jsonArray) {
 		List<VoiceQueueCall> list = new ArrayList<>();
-		if (jsonArray!= null) {
+		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.size(); i++) {
 				list.add(buildVoiceQueueCall(jsonArray.getJSONObject(i)));
 			}
 		}
 		return list;
 	}
-	
-	
-	public static AgentVoiceStatus buildAgentVoiceStatus(JSONObject jsonObject){
+
+	public static AgentVoiceStatus buildAgentVoiceStatus(JSONObject jsonObject) {
 		AgentVoiceStatus status = new AgentVoiceStatus();
-		if (jsonObject!= null) {
+		if (jsonObject != null) {
 			status.setAgent_id(safeGet(jsonObject, KF5Fields.AGENT_ID));
 			status.setAgent_name(safeGet(jsonObject, KF5Fields.AGENT_NAME));
 			status.setUser_id(safeGet(jsonObject, KF5Fields.USER_ID));
@@ -1644,22 +1662,20 @@ public class EntityBuilder extends KF5EntityBuilder {
 		}
 		return status;
 	}
-	
-	
-	public static List<AgentVoiceStatus> buildAgentVoiceStatusList(JSONArray jsonArray){
+
+	public static List<AgentVoiceStatus> buildAgentVoiceStatusList(JSONArray jsonArray) {
 		List<AgentVoiceStatus> list = new ArrayList<>();
-		if (jsonArray!= null) {
+		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.size(); i++) {
 				list.add(buildAgentVoiceStatus(jsonArray.getJSONObject(i)));
 			}
 		}
 		return list;
 	}
-	
-	
-	private static SystemLog buildSystemLog(JSONObject jsonObject){
+
+	private static SystemLog buildSystemLog(JSONObject jsonObject) {
 		SystemLog log = new SystemLog();
-		if (jsonObject!= null) {
+		if (jsonObject != null) {
 			log.setUser_id(safeInt(jsonObject, KF5Fields.USER_ID));
 			log.setObject_type(safeGet(jsonObject, KF5Fields.OBJECT_TYPE));
 			log.setUser_name(safeGet(jsonObject, KF5Fields.USER_NAME));
@@ -1671,23 +1687,20 @@ public class EntityBuilder extends KF5EntityBuilder {
 		}
 		return log;
 	}
-	
-	
-	
-	public static List<SystemLog> buildSystemLogList(JSONArray jsonArray){
+
+	public static List<SystemLog> buildSystemLogList(JSONArray jsonArray) {
 		List<SystemLog> list = new ArrayList<>();
-		if (jsonArray!= null) {
+		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.size(); i++) {
 				list.add(buildSystemLog(jsonArray.getJSONObject(i)));
 			}
 		}
 		return list;
 	}
-	
-	
-	private static IMAgent buildIMAgent(JSONObject jsonObject){
+
+	private static IMAgent buildIMAgent(JSONObject jsonObject) {
 		IMAgent imAgent = new IMAgent();
-		if (jsonObject!= null) {
+		if (jsonObject != null) {
 			imAgent.setMax_serve(safeInt(jsonObject, KF5Fields.MAX_SERVE));
 			imAgent.setApp_status(safeGet(jsonObject, KF5Fields.APP_STATUS));
 			imAgent.setName(safeGet(jsonObject, KF5Fields.NAME));
@@ -1698,45 +1711,40 @@ public class EntityBuilder extends KF5EntityBuilder {
 		}
 		return imAgent;
 	}
-	
-	
-	private static  List<IMAgent> buildIMAgentList(JSONArray jsonArray){
+
+	private static List<IMAgent> buildIMAgentList(JSONArray jsonArray) {
 		List<IMAgent> list = new ArrayList<>();
-		if (jsonArray!= null) {
+		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.size(); i++) {
-				 list.add(buildIMAgent(jsonArray.getJSONObject(i)));
+				list.add(buildIMAgent(jsonArray.getJSONObject(i)));
 			}
 		}
 		return list;
 	}
-	
-	
-	
-	private static IMGroup buildIMGroup(JSONObject jsonObject){
+
+	private static IMGroup buildIMGroup(JSONObject jsonObject) {
 		IMGroup group = new IMGroup();
-		if (jsonObject!= null) {
+		if (jsonObject != null) {
 			group.setId(safeGet(jsonObject, KF5Fields.ID));
 			group.setName(safeGet(jsonObject, KF5Fields.NAME));
 			group.setAgents(safeArray(jsonObject, KF5Fields.AGENTS));
 		}
 		return group;
 	}
-	
-	
-	private static List<IMGroup> buildIMGroupList(JSONArray jsonArray){
+
+	private static List<IMGroup> buildIMGroupList(JSONArray jsonArray) {
 		List<IMGroup> list = new ArrayList<>();
-		if (jsonArray!= null) {
+		if (jsonArray != null) {
 			for (int i = 0; i < jsonArray.size(); i++) {
 				list.add(buildIMGroup(jsonArray.getJSONObject(i)));
 			}
 		}
 		return list;
 	}
-	
-	
-	public static IMAgentInfo buildIMAgentInfo(JSONObject jsonObject){
+
+	public static IMAgentInfo buildIMAgentInfo(JSONObject jsonObject) {
 		IMAgentInfo imAgentInfo = new IMAgentInfo();
-		if (jsonObject!= null) {
+		if (jsonObject != null) {
 			imAgentInfo.setImAgents(buildIMAgentList(safeArray(jsonObject, KF5Fields.AGENTS)));
 			imAgentInfo.setImGroups(buildIMGroupList(safeArray(jsonObject, KF5Fields.GROUPS)));
 		}

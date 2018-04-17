@@ -435,4 +435,5 @@ public class KF5Fields {
 	public static final String SYSTEM_LOG = "system_log";
 	public static final String APP_STATUS = "app_status";
 	public static final String WEB_STATUS = "web_status";
+	public static final String GROUPS_INFO = "groups_info";
 }

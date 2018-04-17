@@ -3,6 +3,7 @@ package com.kf5.support.example;
 import java.io.File;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,6 +15,8 @@ import com.kf5.support.controller.KF5CustomIMSupport;
 import com.kf5.support.controller.KF5Support;
 import com.kf5.support.model.IMAgentInfo;
 import com.kf5.support.model.KF5Entity;
+import com.kf5.support.model.KF5PaginationEntity;
+import com.kf5.support.model.User;
 
 public class Test {
 
@@ -23,6 +26,14 @@ public class Test {
 		// kf5Support.initWithApiToken("tianxiang.kf5.com", "lvgui@kf5.com",
 		// "71662da0ac6b3557a4e4b4d5f0137a");
 		kf5Support.initWithApiToken("tianxiang.kf5.com", "384069799@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
+//		kf5Support.getAgentOrderList();
+		
+//		kf5Support.initWithApiToken("chosen.kf5.com", "812219713@qq.com", "b357705fbeca368a3e8dea9de4f051");
+//		kf5Support.initWithApiToken("ximalaya.kf5.com", "maggie.yang@ximalaya.com", "01b6dee7c3946e1f4b6cc1bf1642bd");
+//		kf5Support.getAgentOrderList();
+//		Map<String, String> queryMap =new HashMap<>();
+//		queryMap.put("query", "1247693");
+//		kf5Support.searchTickets(queryMap);
 //		kf5Support.initWithPassword("tianxiang.kf5.com", "384069799@qq.com", "111111");
 		// kf5Support.initWithApiToken("keep.kf5.com", "mkt@gotokeep.com",
 		// "0446209095839261781ffdf45e9bbc");
@@ -118,7 +129,8 @@ public class Test {
 		JSONObject jsonObject2 = new JSONObject();
 		Map<String, String> map3 = new HashMap<>();
 		map3.put("query", "哈哈");
-		System.out.println(kf5Support.searchPost(map3).getData().size()+"长度");;
+//		System.out.println(kf5Support.searchPost(map3).getData().size()+"长度");;
+//		System.out.println(kf5Support.getUserList().getData().size()+"这里是长度");
 		// jsonObject.put("number", "384069799@qq.com");
 		// kf5Support.sendVoiceCallOutbound(jsonObject2.toJSONString());
 //		System.out.println(kf5Support.getSystemLogList(map).getNextPage() + "长度");
@@ -168,7 +180,7 @@ public class Test {
 		// kf5Support.getAgentOrderIncidentList("25");
 		// kf5Support.getAgentOrderProblemList();
 		// KF5PaginationEntity<List<Requester>> aEntity =
-		// kf5Support.getRequesterOrderList();
+//		 kf5Support.getRequesterOrderList();
 		// System.out.println("=====" + aEntity.getCount() + "===" +
 		// aEntity.getNextPage() + "===="
 		// + aEntity.getData().get(0).getTitle());
@@ -263,7 +275,7 @@ public class Test {
 		// kf5Support.mergeUser("589280", "{\"user\": {\"id\": 123}}");
 		// kf5Support.updateUserInfo("10556", "{\"user\": {\"name\":
 		// \"你大爷\"}}");
-		// kf5Support.deleteUser("10961");
+//		 kf5Support.deleteUser("49055402");
 		// kf5Support.searchUser("123");
 		// kf5Support.searchUser("123",1,1);
 		// kf5Support.searchUserByURL("https://wuruo.kf5.com/apiv2/users/search.json?query=123&per_page=1&page=2");
@@ -402,11 +414,11 @@ public class Test {
 		// jsonObject.put("ids", jsonArray);
 		// kf5Support.deleteQuestionCategories(jsonObject.toString());
 		
-		KF5CustomIMSupport support = new KF5CustomIMSupport("tianxiang.kf5.com","1000005","547fe99363ce8751b1c8ae3cd728c31d","POST");
+//		KF5CustomIMSupport support = new KF5CustomIMSupport("tianxiang.kf5.com","1000005","547fe99363ce8751b1c8ae3cd728c31d","POST");
 //		KF5Entity<IMAgentInfo> kf5Entity = support.getIMAgentInfo();
 //		System.out.println(kf5Entity.getResultCode()+"====="+kf5Entity.getMessage()+"===="+
 //		kf5Entity.getData().getImAgents().size()+"====="+kf5Entity.getData().getImGroups().size());
-		JSONObject chatObj = new JSONObject();
+//		JSONObject chatObj = new JSONObject();
 //		support.createIMChat("{\n" +
 //            "\t\"action\": \"create_chat\",\n" +
 //            "\t\"chat\": {\n" +
@@ -438,7 +450,10 @@ public class Test {
 //            "\t\t\"create_time\": 1480433249\n" +
 //            "\t}\n" +
 //            "}");
-		 support.uploadAttachment(new File("D://bug.jpg"));
+//		 support.uploadAttachment(new File("D://bug.jpg"));
+//		kf5Support.getUserInfo(19621613+"");
+		KF5PaginationEntity<List<User>> paginationEntity = kf5Support.getUserList();
+		
 	}
 	
 

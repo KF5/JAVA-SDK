@@ -51,7 +51,7 @@ public class HttpRequest {
 			connection.setDoInput(true);
 			connection.setConnectTimeout(10 * 1000);
 			connection.setRequestProperty("Authorization", "Basic " + baseToken);
-
+			System.out.println("Basic " + baseToken);
 			// 建立实际的连接
 			connection.connect();
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
@@ -108,7 +108,9 @@ public class HttpRequest {
 			if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
 				messageStatus.setStatus(StatusCode.OK);
 				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getInputStream())));
+				System.out.println("删除成功"+connection.getResponseCode());
 			} else {
+				System.out.println("删除失败"+connection.getResponseCode());
 				messageStatus.setStatus(connection.getResponseCode());
 				messageStatus.setJsonObject(KF5EntityBuilder.safeObject(getInputStream(connection.getErrorStream())));
 			}
@@ -123,7 +125,7 @@ public class HttpRequest {
 			if (connection != null)
 				connection.disconnect();
 		}
-		System.out.println("无参DELETE的返回值" + messageStatus.getJsonObject().toString());
+//		System.out.println("无参DELETE的返回值" + messageStatus.getJsonObject().toString());
 		return messageStatus;
 	}
 
