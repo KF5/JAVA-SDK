@@ -199,7 +199,7 @@ public class HttpRequest {
 	public static MessageStatus sendPostRequest(String url, String baseToken, String param) {
 
 		System.out.println("请求的url" + url);
-		// System.out.println("请求参数" + param);
+		 System.out.println("请求参数" + param);
 		MessageStatus messageStatus = new MessageStatus();
 		DataOutputStream out = null;
 		HttpURLConnection connection = null;

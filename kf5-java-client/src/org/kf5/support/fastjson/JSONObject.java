@@ -314,7 +314,7 @@ public class JSONObject extends JSON implements Map<String, Object>, Cloneable, 
         return map.values();
     }
 
-    public Set<Map.Entry<String, Object>> entrySet() {
+    public Set<Entry<String, Object>> entrySet() {
         return map.entrySet();
     }
 

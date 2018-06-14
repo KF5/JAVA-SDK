@@ -31,7 +31,7 @@ public class ASMUtils {
     public static String getDesc(Method method) {
         StringBuffer buf = new StringBuffer();
         buf.append("(");
-        java.lang.Class<?>[] types = method.getParameterTypes();
+        Class<?>[] types = method.getParameterTypes();
         for (int i = 0; i < types.length; ++i) {
             buf.append(getDesc(types[i]));
         }

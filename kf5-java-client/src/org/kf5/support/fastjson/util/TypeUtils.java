@@ -328,8 +328,8 @@ public class TypeUtils {
             return (java.sql.Date) value;
         }
 
-        if (value instanceof java.util.Date) {
-            return new java.sql.Date(((java.util.Date) value).getTime());
+        if (value instanceof Date) {
+            return new java.sql.Date(((Date) value).getTime());
         }
 
         long longValue = 0;
@@ -367,8 +367,8 @@ public class TypeUtils {
             return (java.sql.Timestamp) value;
         }
 
-        if (value instanceof java.util.Date) {
-            return new java.sql.Timestamp(((java.util.Date) value).getTime());
+        if (value instanceof Date) {
+            return new java.sql.Timestamp(((Date) value).getTime());
         }
 
         long longValue = 0;
