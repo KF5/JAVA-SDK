@@ -1,19 +1,12 @@
 package com.kf5.support.example;
 
-import java.io.File;
-import java.net.URLEncoder;
+import com.kf5.support.controller.KF5Support;
+import org.kf5.support.fastjson.JSONObject;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.kf5.support.model.*;
-import org.kf5.support.fastjson.JSONArray;
-import org.kf5.support.fastjson.JSONObject;
-
-import com.kf5.support.controller.KF5CustomIMSupport;
-import com.kf5.support.controller.KF5Support;
 
 public class Test {
 
@@ -481,6 +474,7 @@ public class Test {
 //        queryMap.put("query", "384069799@qq.com");
 //        KF5Entity<List<Ticket>> listKF5Entity = kf5Support.agentGetUserTicketListByIndication(queryMap);
 //        System.out.println("长度" + listKF5Entity.getResultCode() + "=====" + listKF5Entity.getMessage() + "=====" + listKF5Entity.getData().size());
+        kf5Support.getVoiceCallList(null);
     }
 
 

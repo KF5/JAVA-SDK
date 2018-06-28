@@ -1298,6 +1298,13 @@ public class EntityBuilder extends KF5EntityBuilder {
             voiceCall.setId(safeInt(jsonObject, KF5Fields.ID));
             voiceCall.setTo(safeGet(jsonObject, KF5Fields.TO));
             voiceCall.setIs_answered(safeInt(jsonObject, KF5Fields.IS_ANSWERED));
+
+            /*2018-6-28新增解析字段*/
+            voiceCall.setAgent_id(safeInt(jsonObject, KF5Fields.AGENT_ID));
+            voiceCall.setAgent_name(safeGet(jsonObject, KF5Fields.AGENT_NAME));
+            voiceCall.setSource(safeGet(jsonObject, KF5Fields.SOURCE));
+            voiceCall.setFromattr(safeGet(jsonObject, KF5Fields.FROMATTR));
+            voiceCall.setSatisfaction(safeGet(jsonObject, KF5Fields.SATISFACTION));
         }
         return voiceCall;
     }
