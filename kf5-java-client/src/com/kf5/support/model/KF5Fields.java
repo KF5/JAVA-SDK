@@ -445,9 +445,16 @@ public class KF5Fields {
     public static final String COUNT_VOTE = "count_vote";
     public static final String AUTHOR = "author";
     public static final String FORUMTITLE = "forumTitle";
-    public static final String COUNT_VIEW= "count_view";
+    public static final String COUNT_VIEW = "count_view";
     public static final String CREATEDTIME = "createdTime";
     public static final String POSTS_LIST = "posts_list";
     public static final String POST_ID = "post_id";
     public static final String POST_VOTE_USERS = "post_vote_users";
+
+
+    public static final String MULTI_OPTIONS = "multi_options";
+    public static final String TITLES= "titles";
+    public static final String LIST = "list";
+    public static final String LEVEL = "level";
+    public static final String PARENT ="parent";
 }

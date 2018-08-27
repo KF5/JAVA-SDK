@@ -15,12 +15,12 @@ public class Test {
         final KF5Support kf5Support = new KF5Support();
         // kf5Support.initWithApiToken("tianxiang.kf5.com", "lvgui@kf5.com",
         // "71662da0ac6b3557a4e4b4d5f0137a");
-        kf5Support.initWithApiToken("tianxiang.kf5.com", "384069799@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
+        //  kf5Support.initWithApiToken("tianxiang.kf5.com", "384069799@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
 //        kf5Support.initWithApiToken("tianxiang.kf5.com", "maxtdfx@ydcj.net", "71662da0ac6b3557a4e4b4d5f0137a");
 //
 //		kf5Support.getAgentOrderList();
 
-//		kf5Support.initWithApiToken("chosen.kf5.com", "812219713@qq.com", "b357705fbeca368a3e8dea9de4f051");
+        kf5Support.initWithApiToken("chosen.kf5.com", "812219713@qq.com", "b357705fbeca368a3e8dea9de4f051");
 //		kf5Support.initWithApiToken("ximalaya.kf5.com", "maggie.yang@ximalaya.com", "01b6dee7c3946e1f4b6cc1bf1642bd");
 //		kf5Support.getAgentOrderList();
 //		Map<String, String> queryMap =new HashMap<>();
@@ -474,7 +474,9 @@ public class Test {
 //        queryMap.put("query", "384069799@qq.com");
 //        KF5Entity<List<Ticket>> listKF5Entity = kf5Support.agentGetUserTicketListByIndication(queryMap);
 //        System.out.println("长度" + listKF5Entity.getResultCode() + "=====" + listKF5Entity.getMessage() + "=====" + listKF5Entity.getData().size());
-        kf5Support.getVoiceCallList(null);
+
+        //   kf5Support.getVoiceCallList(null);
+        kf5Support.getTicketFieldList();
     }
 
 

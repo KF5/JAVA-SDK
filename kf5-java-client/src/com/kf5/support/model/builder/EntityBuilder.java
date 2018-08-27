@@ -3,6 +3,7 @@ package com.kf5.support.model.builder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.TimeZone;
 
 import com.kf5.support.model.*;
 import org.kf5.support.fastjson.JSONArray;
@@ -230,8 +231,55 @@ public class EntityBuilder extends KF5EntityBuilder {
     }
 
     public static TicketField buildTicketField(JSONObject jsonObject) {
+        String type = safeGet(jsonObject, KF5Fields.TYPE);
+        //如果自定义字段的type是multi_options，则KF5Fields.CUSTOM_FIELD_OPTIONS字段对应的数据模型是json对象，否则就是json数组。
+        if (KF5Fields.MULTI_OPTIONS.equals(type)) {
+            TicketField<MultiCustomFieldOption> ticketField = new TicketField<>();
+            buildCommonCustomField(ticketField, jsonObject);
+            JSONObject multiObj = safeObject(jsonObject, KF5Fields.CUSTOM_FIELD_OPTIONS);
+            MultiCustomFieldOption option = new MultiCustomFieldOption();
+            if (multiObj != null) {
+                JSONArray jsonArray = safeArray(multiObj, KF5Fields.TITLES);
+                if (jsonArray != null) {
+                    option.setJsonArrayTitles(jsonArray.toJSONString());
+                }
+                JSONArray itemArray = safeArray(multiObj, KF5Fields.LIST);
+                if (itemArray != null) {
+                    List<MultiCustomFieldOption.MultiItem> list = new ArrayList<>();
+                    for (int i = 0; i < itemArray.size(); i++) {
+                        JSONObject itemObj = itemArray.getJSONObject(i);
+                        MultiCustomFieldOption.MultiItem item = new MultiCustomFieldOption.MultiItem();
+                        item.setId(safeInt(itemObj, KF5Fields.ID));
+                        item.setKey(safeGet(itemObj, KF5Fields.KEY));
+                        item.setLevel(safeInt(itemObj, KF5Fields.LEVEL));
+                        item.setParent(safeInt(itemObj, KF5Fields.PARENT));
+                        list.add(item);
+                    }
+                    option.setList(list);
+                }
+                ticketField.setCustomFieldOptions(option);
+            }
+            return ticketField;
+        } else {
+            TicketField<List<CustomFieldOption>> ticketField = new TicketField<>();
+            buildCommonCustomField(ticketField, jsonObject);
+            JSONArray optionArray = safeArray(jsonObject, KF5Fields.CUSTOM_FIELD_OPTIONS);
+            if (optionArray != null) {
+                int size = optionArray.size();
+                List<CustomFieldOption> list = new ArrayList<CustomFieldOption>();
+                for (int i = 0; i < size; i++) {
+                    JSONObject itemObject = optionArray.getJSONObject(i);
+                    list.add(buildCustomFieldOption(itemObject));
+                }
+                ticketField.setCustomFieldOptions(list);
+            }
+            return ticketField;
+        }
 
-        TicketField ticketField = new TicketField();
+    }
+
+    private static <T> void buildCommonCustomField(TicketField<T> ticketField, JSONObject jsonObject) {
+
         ticketField.setId(safeInt(jsonObject, KF5Fields.ID));
         ticketField.setUrl(safeGet(jsonObject, KF5Fields.URL));
         ticketField.setName(safeGet(jsonObject, KF5Fields.NAME));
@@ -245,17 +293,7 @@ public class EntityBuilder extends KF5EntityBuilder {
         ticketField.setEnduser_required(safeBoolean(jsonObject, KF5Fields.ENDUSER_REQUIRED));
         ticketField.setActive(safeBoolean(jsonObject, KF5Fields.ACTIVE));
         ticketField.setRegexp_for_validation(safeGet(jsonObject, KF5Fields.REGEXP_FOR_VALIDATION));
-        JSONArray optionArray = safeArray(jsonObject, KF5Fields.CUSTOM_FIELD_OPTIONS);
-        if (optionArray != null) {
-            int size = optionArray.size();
-            List<CustomFieldOption> list = new ArrayList<CustomFieldOption>();
-            for (int i = 0; i < size; i++) {
-                JSONObject itemObject = optionArray.getJSONObject(i);
-                list.add(buildCustomFieldOption(itemObject));
-            }
-            ticketField.setCustomFieldOptions(list);
-        }
-        return ticketField;
+
     }
 
     public static CustomFieldOption buildCustomFieldOption(JSONObject jsonObject) {
