@@ -31,6 +31,8 @@ public class VoiceCall {
     private String fromattr;
     private String satisfaction;
 
+    private int ticketId;
+
     public String getCallsid() {
         return callsid;
     }
@@ -173,5 +175,13 @@ public class VoiceCall {
 
     public void setSatisfaction(String satisfaction) {
         this.satisfaction = satisfaction;
+    }
+
+    public int getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
     }
 }

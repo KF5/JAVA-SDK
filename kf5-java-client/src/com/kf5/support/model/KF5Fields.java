@@ -457,4 +457,6 @@ public class KF5Fields {
     public static final String LIST = "list";
     public static final String LEVEL = "level";
     public static final String PARENT ="parent";
+
+    public static final String TICKET_ID = "ticket_id";
 }

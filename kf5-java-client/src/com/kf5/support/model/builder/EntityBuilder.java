@@ -1343,6 +1343,8 @@ public class EntityBuilder extends KF5EntityBuilder {
             voiceCall.setSource(safeGet(jsonObject, KF5Fields.SOURCE));
             voiceCall.setFromattr(safeGet(jsonObject, KF5Fields.FROMATTR));
             voiceCall.setSatisfaction(safeGet(jsonObject, KF5Fields.SATISFACTION));
+
+            voiceCall.setTicketId(safeInt(jsonObject, KF5Fields.TICKET_ID));
         }
         return voiceCall;
     }

@@ -15,12 +15,12 @@ public class Test {
         final KF5Support kf5Support = new KF5Support();
         // kf5Support.initWithApiToken("tianxiang.kf5.com", "lvgui@kf5.com",
         // "71662da0ac6b3557a4e4b4d5f0137a");
-        //  kf5Support.initWithApiToken("tianxiang.kf5.com", "384069799@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
+          kf5Support.initWithApiToken("tianxiang.kf5.com", "384069799@qq.com", "71662da0ac6b3557a4e4b4d5f0137a");
 //        kf5Support.initWithApiToken("tianxiang.kf5.com", "maxtdfx@ydcj.net", "71662da0ac6b3557a4e4b4d5f0137a");
 //
 //		kf5Support.getAgentOrderList();
 
-        kf5Support.initWithApiToken("chosen.kf5.com", "812219713@qq.com", "b357705fbeca368a3e8dea9de4f051");
+  //      kf5Support.initWithApiToken("chosen.kf5.com", "812219713@qq.com", "b357705fbeca368a3e8dea9de4f051");
 //		kf5Support.initWithApiToken("ximalaya.kf5.com", "maggie.yang@ximalaya.com", "01b6dee7c3946e1f4b6cc1bf1642bd");
 //		kf5Support.getAgentOrderList();
 //		Map<String, String> queryMap =new HashMap<>();
@@ -52,7 +52,7 @@ public class Test {
         // "这里是长度");
         // System.out.println(kf5Support.getAutomationById(452766).getData().getId()+"这里是id");
         // System.out.println(kf5Support.getActiveAutomationList().getData().size()+"这里是启用的自动化任务长度");
-        // System.out.println(kf5Support.getHistoryChatList(null).getNextPage()+"这里是解析历史对话的的长度");
+        // System.out.println(kf5Support.getHistoryChatList(null).getNextPage() + "这里是解析历史对话的的长度");
         // System.out.println(kf5Support.getHistoryChatByUrl("https://chosen.kf5.com/apiv2/kchat/history.json?page=2").getNextPage()+"这里是根据url请求对话列表");
         // kf5Support.getHistoryChatById(96248);
         Map<String, String> params = new HashMap<>();
@@ -91,8 +91,8 @@ public class Test {
         // System.out.println(kf5Support.updateAgentStatus(agentMap).getData().getDisplay_name());;
         // kf5Support.getGroupList();
         Map<String, String> map = new HashMap<>();
-        map.put("per_page", "1");
-        // kf5Support.getVoiceCallList(map);
+     //   map.put("per_page", "1");
+        kf5Support.getVoiceCallList(map);
         // kf5Support.getVoiceCallById(9194169);
         // System.out.println(kf5Support.getVoiceAccountList(map).getNextPage());
         // kf5Support.getVoiceAccountById("10");
